@@ -1,0 +1,5 @@
+PASS both storage options report their actual filesystem capacities
+PASS temporary VM created using the home filesystem
+PASS guest boots and disk is physically on the independent home device
+PASS temporary domain system disk and seed ISO removed
+PASS original VM states preserved and no acceptance disk files remain

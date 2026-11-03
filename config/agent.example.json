@@ -6,7 +6,8 @@
     "/var/lib/libvirt/images/templates"
   ],
   "disk_dirs": [
-    "/var/lib/libvirt/images/vms"
+    "/var/lib/libvirt/images/vms",
+    "/home/vm-disks"
   ],
   "storage_report_dir": "",
   "default_bridge": "br0",

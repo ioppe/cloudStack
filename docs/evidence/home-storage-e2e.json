@@ -1,0 +1,82 @@
+{
+  "checks": [
+    {
+      "check": "both storage options report their actual filesystem capacities",
+      "evidence": [
+        {
+          "path": "/var/lib/libvirt/images/vms",
+          "name": "/var/lib/libvirt/images/vms",
+          "total": 1964618686464,
+          "used": 9707302912,
+          "free": 1855038713856,
+          "free_human": "1.7 TB",
+          "exists": true
+        },
+        {
+          "path": "/home/vm-disks",
+          "name": "/home/vm-disks",
+          "total": 7937042345984,
+          "used": 335872,
+          "free": 7536960249856,
+          "free_human": "6.9 TB",
+          "exists": true
+        }
+      ]
+    },
+    {
+      "check": "temporary VM created using the home filesystem",
+      "evidence": {
+        "uuid": "80351183-20cf-497b-a5cb-fb1ff8483edd",
+        "name": "platform-storage-accept-20261103",
+        "summary": "已创建虚拟机 platform-storage-accept-20261103"
+      }
+    },
+    {
+      "check": "guest boots and disk is physically on the independent home device",
+      "evidence": {
+        "guest": {
+          "hostname": "platform-storage-accept-20261103",
+          "user": "storecheck",
+          "cloud_init_finished": true
+        },
+        "disk": {
+          "disk": "/home/vm-disks/platform-storage-accept-20261103.qcow2",
+          "same_device_as_home": true,
+          "different_device_from_root": true,
+          "allocated_bytes": 1887592448,
+          "file_mode": "0o600"
+        },
+        "config": {
+          "vcpus": 2,
+          "memory_gb": 2,
+          "primary_disk_target": "vda",
+          "primary_disk_path": "/home/vm-disks/platform-storage-accept-20261103.qcow2",
+          "primary_disk_gb": 8,
+          "primary_disk_human": "8.0 GB"
+        }
+      }
+    },
+    {
+      "check": "temporary domain system disk and seed ISO removed",
+      "evidence": {
+        "uuid": "80351183-20cf-497b-a5cb-fb1ff8483edd",
+        "name": "platform-storage-accept-20261103",
+        "action": "delete",
+        "state": "deleted",
+        "removed_count": 2,
+        "skipped_count": 0,
+        "skipped_reasons": [],
+        "summary": "已删除虚拟机 platform-storage-accept-20261103，移除 2 个磁盘文件，跳过 0 个"
+      }
+    },
+    {
+      "check": "original VM states preserved and no acceptance disk files remain",
+      "evidence": {
+        "original_vm_count": 0,
+        "remaining_temporary_files": []
+      }
+    }
+  ],
+  "time": 1793694616,
+  "passed": true
+}

@@ -1,0 +1,27 @@
+{
+  "directory": "/home/vm-disks",
+  "disk_dirs_before": [
+    "/var/lib/libvirt/images/vms"
+  ],
+  "disk_dirs_after": [
+    "/var/lib/libvirt/images/vms",
+    "/home/vm-disks"
+  ],
+  "home_is_independent_mount": true,
+  "mode": "0o755",
+  "qemu_can_traverse": true,
+  "total": 7937042345984,
+  "free": 7536960249856,
+  "backup": "/var/lib/vm-platform/backups/agent-before-home-storage.json",
+  "startup": {
+    "dropin": "/etc/systemd/system/vm-platform-agent.service.d/home-storage.conf",
+    "mount_dependency": {
+      "Requires": "sysinit.target home.mount libvirtd.service system.slice -.mount",
+      "After": "network-online.target tmp.mount systemd-journald.socket libvirtd.service -.mount home.mount system.slice systemd-tmpfiles-setup.service basic.target sysinit.target",
+      "RequiresMountsFor": "/var/tmp /run/vm-platform /home/vm-disks"
+    },
+    "home_mount": "active",
+    "agent_active": "active",
+    "agent_enabled": "enabled"
+  }
+}

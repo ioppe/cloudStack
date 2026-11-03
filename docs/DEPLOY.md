@@ -33,13 +33,15 @@
 ## 接入 Ubuntu 24.04 节点
 
 1. 在目标机安装 `qemu-system-x86 qemu-utils libvirt-daemon-system libvirt-clients virtinst genisoimage`，启用 libvirtd。当前 `.150` 软件源没有 qemu-kvm 包候选，使用 qemu-system-x86。
-2. 核对 `/dev/kvm` 与 `virsh -c qemu:///system list --all`。准备 `/var/lib/libvirt/images/templates`、`/var/lib/libvirt/images/vms`；QEMU 用户需有目录遍历和磁盘访问权限，镜像文件保持只读模板用途。优先使用 libvirt 标准 images 路径，适配 Ubuntu AppArmor。
+2. 核对 `/dev/kvm` 与 `virsh -c qemu:///system list --all`。准备 `/var/lib/libvirt/images/templates`、`/var/lib/libvirt/images/vms`；node150另有独立 `/home` 大盘，新增专用 `/home/vm-disks`。先确认 `/home` 持久挂载，再 `install -d -m 0755 /home/vm-disks`，QEMU用户需有目录遍历权限；不要将整个 `/home` 加入白名单或放宽无关用户目录权限。
 3. 首次接入先启用本机 libvirt `default` NAT 并 `virsh net-autostart default`，检查地址段无冲突。v1.1 的 node150 已按用户后续请求增加 br0（eno2np1为端口），管理IP／网关／DNS原值迁到br0；保留NAT，详细步骤与独立网络回退见 NETWORKS.md。不要对其他节点原样套用本节点专用迁移脚本。
-4. 复制 `worker.py`、`vmops.py`、`deploy/` 到 `/opt/vm-platform`；根据示例设置 `/etc/vm-platform/agent.json`，URI `qemu:///system`，`image_dirs:["/var/lib/libvirt/images/templates"]`、`disk_dirs:["/var/lib/libvirt/images/vms"]`，网络 `default`、类型 `network`；明确设 `allow_writes:true` 才能创建和管理新 VM，示例默认 false。
+4. 复制 `worker.py`、`vmops.py`、`deploy/` 到 `/opt/vm-platform`；根据示例设置 `/etc/vm-platform/agent.json`，URI `qemu:///system`，`image_dirs:["/var/lib/libvirt/images/templates"]`、`disk_dirs:["/var/lib/libvirt/images/vms","/home/vm-disks"]`。创建表单分别显示每个目录的真实剩余容量，node150的 `/home` 当前约6.9 TiB可用；原目录仍为默认，按需选择大盘。网络为 `default`、类型 `network`；明确设 `allow_writes:true` 才能创建和管理新VM，示例默认false。
 5. 执行端 `sh deploy/install-agent.sh`。从已信任管理通道安装受限公钥、核对主机 key；控制端的私钥始终留在控制端。
 6. 平台“主机 → 登记主机”填写唯一标识、名称、地址、root/已授权用户和 SSH 端口；检测通过后管理资源。此步骤只是登记，软件和网络初始化仍按上述步骤完成。
 
 node150 当前私有 agent 配置继续使用 `default_network_type:"network"`、`default_network:"default"`，同时设 `default_bridge:"br0"`。新建VM可在界面切换NAT或桥接，静态地址仅注入桥接guest，不修改宿主机。
+
+node150 使用独立 `/home` 存储时，安装挂载依赖：`install -d /etc/systemd/system/vm-platform-agent.service.d`，将 `deploy/node150-home-storage.conf` 安装为该目录的 `home-storage.conf`，再执行 `systemctl daemon-reload` 和 `systemctl restart vm-platform-agent.service`。此配置让 agent 依赖 `home.mount`，防止大盘未挂载时写入系统盘。已有镜像和磁盘不迁移；移除存储选项前确认无VM使用该目录，不删除目录中的业务磁盘。
 
 ## 运行与操作
 
