@@ -1,0 +1,55 @@
+{
+  "time": 1793713443,
+  "hosts": [
+    {
+      "updated_public_files_sha256": {
+        "README.md": "bdac088cb69adb34eaf63fa2e24fea9d41847de22a2d1c55c70319718758d48c",
+        "CHANGELOG.md": "15f5a868df08b13e2bf21da2993961467fbdde16ce837569551eaf9072291034",
+        "docs/AGENT.md": "77673ee3a58c9b43797daa7848d90ca363703bcc2c61518941e532ce14989ddc",
+        "docs/DEPLOY.md": "8f6072aa477a8348d3871f011807b7dedb2331414738a1065a9e3e7d2e73904d",
+        "docs/IMPLEMENTATION.md": "dcb133e678e782fa3c26820f2ebfbffcc2fba594e30b2f95cd543b89aa7f4d41",
+        "docs/NETWORKS.md": "85a4fe9a8c54662cc9a5f7ae0e94bf7d792654e75e6dcd1acc3147620321aeac",
+        "docs/UI.md": "0450161dd5da6490e9b1c3fdd7581ab7d8bfc3d731fb7b186d47acb1157f12a2",
+        "docs/ACCEPTANCE-1.1.1.md": "4ade8f7961ee4cbcc3d0e921d82120d4b6a7ef5746bcf9c5f3c638949bb1ba6f",
+        "docs/evidence/spec-sync.md": "94ffce9f0ec39615d366f198de6465a8c4afd54bb3d4fa8382419e71d4e57425",
+        "tests/e2e_static_internet.py": "b48ca0c75f3b9fbd5967daacb74f8403f1d3eb4dd94eaa12d260f1c6879e42aa",
+        "tests/e2e_static_network_form.py": "cfb387f02424fd944d6916e60882ca6101a5abab4a8b389c64a38b72014a1fc2"
+      },
+      "verified_runtime_unit_source_sha256": {
+        "vmops.py": "a3b14fc95fc839b01ea2e3ae2060a8098f0f9a73f7a1f9a9e6809090a186b993",
+        "controller.py": "20366ce08a231048e528924ff9094be96bc3b4b2ae0223fd62ca47112c106870",
+        "static/app.js": "d0287745357f373a66e7d266c0f58b4cbea4d7946c3665c32daf1be8a3727297",
+        "static/index.html": "2cad49b76c68f270f7011c87c4337086236d0936a1ffdd799cd25ca31de5a1fc",
+        "config/agent.example.json": "f7c305d49de4dd848b2a01f9ec1a0669b23dbb705410be57b4e04b4c1d7241dc",
+        "tests/test_network_config.py": "6714fde7795550ca4b6e68904ce38d88651ccb67955af207f96e04cf3c167920"
+      },
+      "service_restart_needed": false,
+      "host": "192.168.0.150"
+    },
+    {
+      "updated_public_files_sha256": {
+        "README.md": "bdac088cb69adb34eaf63fa2e24fea9d41847de22a2d1c55c70319718758d48c",
+        "CHANGELOG.md": "15f5a868df08b13e2bf21da2993961467fbdde16ce837569551eaf9072291034",
+        "docs/AGENT.md": "77673ee3a58c9b43797daa7848d90ca363703bcc2c61518941e532ce14989ddc",
+        "docs/DEPLOY.md": "8f6072aa477a8348d3871f011807b7dedb2331414738a1065a9e3e7d2e73904d",
+        "docs/IMPLEMENTATION.md": "dcb133e678e782fa3c26820f2ebfbffcc2fba594e30b2f95cd543b89aa7f4d41",
+        "docs/NETWORKS.md": "85a4fe9a8c54662cc9a5f7ae0e94bf7d792654e75e6dcd1acc3147620321aeac",
+        "docs/UI.md": "0450161dd5da6490e9b1c3fdd7581ab7d8bfc3d731fb7b186d47acb1157f12a2",
+        "docs/ACCEPTANCE-1.1.1.md": "4ade8f7961ee4cbcc3d0e921d82120d4b6a7ef5746bcf9c5f3c638949bb1ba6f",
+        "docs/evidence/spec-sync.md": "94ffce9f0ec39615d366f198de6465a8c4afd54bb3d4fa8382419e71d4e57425",
+        "tests/e2e_static_internet.py": "b48ca0c75f3b9fbd5967daacb74f8403f1d3eb4dd94eaa12d260f1c6879e42aa",
+        "tests/e2e_static_network_form.py": "cfb387f02424fd944d6916e60882ca6101a5abab4a8b389c64a38b72014a1fc2"
+      },
+      "verified_runtime_unit_source_sha256": {
+        "vmops.py": "a3b14fc95fc839b01ea2e3ae2060a8098f0f9a73f7a1f9a9e6809090a186b993",
+        "controller.py": "20366ce08a231048e528924ff9094be96bc3b4b2ae0223fd62ca47112c106870",
+        "static/app.js": "d0287745357f373a66e7d266c0f58b4cbea4d7946c3665c32daf1be8a3727297",
+        "static/index.html": "2cad49b76c68f270f7011c87c4337086236d0936a1ffdd799cd25ca31de5a1fc",
+        "config/agent.example.json": "f7c305d49de4dd848b2a01f9ec1a0669b23dbb705410be57b4e04b4c1d7241dc",
+        "tests/test_network_config.py": "6714fde7795550ca4b6e68904ce38d88651ccb67955af207f96e04cf3c167920"
+      },
+      "service_restart_needed": false,
+      "host": "192.168.0.30"
+    }
+  ]
+}

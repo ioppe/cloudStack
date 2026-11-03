@@ -69,6 +69,7 @@ DEFAULT_CONFIG = {
     "default_bridge": "br0",
     "default_network": "default",
     "default_network_type": "network",
+    "static_network_defaults": {},
     "default_timezone": "Asia/Shanghai",
     "socket_path": "/run/vm-platform/agent.sock",
     "virsh": "virsh",
@@ -368,6 +369,10 @@ def build_config(overrides=None):
     for key in ("default_bridge", "default_network", "default_network_type", "default_timezone",
                 "virsh", "virt_install", "qemu_img", "genisoimage"):
         config[key] = str(config.get(key) or DEFAULT_CONFIG[key])
+    profiles = config.get("static_network_defaults")
+    if not isinstance(profiles, dict):
+        profiles = {}
+    config["static_network_defaults"] = dict(profiles)
     return config
 
 
@@ -1156,6 +1161,11 @@ class Host(object):
         default_source = (
             self.config.get("default_bridge") if default_type == "bridge" else self.config.get("default_network")
         ) or ""
+        static_defaults = {}
+        for name in bridges:
+            profile = self._static_network_profile(name)
+            if profile:
+                static_defaults[name] = profile
         return {
             "bridges": bridges,
             "libvirt_networks": networks,
@@ -1163,6 +1173,7 @@ class Host(object):
             "default_network": self.config.get("default_network") or "",
             "default_type": default_type,
             "default_source": default_source,
+            "static_network_defaults": static_defaults,
         }
 
     def networks(self, payload=None):
@@ -1237,7 +1248,9 @@ class Host(object):
         network_type = str(payload.get("network_type") or self.config.get("default_network_type") or "network").lower()
         network_source = payload.get("network_source") or self._default_network_source(network_type)
         network = self._validate_network(network_type, network_source, mac)
-        static_network = self._validate_static_network(payload, kind, cloud_init, network_type)
+        static_network = self._validate_static_network(
+            payload, kind, cloud_init, network_type, network_source
+        )
         disk_base = self._disk_dir_base(payload.get("disk_dir"))
         disk_path = os.path.join(disk_base, "%s.qcow2" % name)
         if os.path.lexists(disk_path):
@@ -1340,6 +1353,61 @@ class Host(object):
             return "network=%s,model=virtio%s" % (source, mac_part)
         raise OpError("网络类型无效")
 
+    def _static_network_profile(self, bridge):
+        """返回该网桥经过校验的静态网络默认值；配置无效时返回 None。
+
+        只暴露执行端显式配置的 cidr/gateway/dns，绝不从 guest IP 推断网关或写死公共 DNS。
+        """
+        name = str(bridge or "").strip()
+        if not name:
+            return None
+        defaults = self.config.get("static_network_defaults")
+        if not isinstance(defaults, dict):
+            return None
+        raw = defaults.get(name)
+        if not isinstance(raw, dict):
+            return None
+        cidr = str(raw.get("cidr") or "").strip()
+        if not cidr:
+            return None
+        try:
+            network = ipaddress.IPv4Network(cidr)
+        except ValueError:
+            return None
+        if not 1 <= network.prefixlen <= 30:
+            return None
+        gateway_text = str(raw.get("gateway") or "").strip()
+        if not gateway_text:
+            return None
+        try:
+            gateway = ipaddress.IPv4Address(gateway_text)
+        except ValueError:
+            return None
+        if gateway.is_multicast or gateway.is_unspecified or gateway.is_loopback:
+            return None
+        if gateway not in network:
+            return None
+        if gateway == network.network_address or gateway == network.broadcast_address:
+            return None
+        try:
+            dns = self._static_dns(raw.get("dns"))
+        except OpError:
+            return None
+        if not dns:
+            return None
+        return {"cidr": str(network), "gateway": str(gateway), "dns": dns}
+
+    def _static_profile_for(self, bridge, iface):
+        """仅当 guest IP 落在 profile 网段、且 profile 网关也在 guest 网段时才套用。"""
+        profile = self._static_network_profile(bridge)
+        if not profile:
+            return None
+        if iface.ip not in ipaddress.IPv4Network(profile["cidr"]):
+            return None
+        if ipaddress.IPv4Address(profile["gateway"]) not in iface.network:
+            return None
+        return profile
+
     def _static_ipv4(self, value):
         """严格解析静态 IPv4/前缀，返回 IPv4Interface。"""
         text = str(value or "").strip()
@@ -1405,8 +1473,12 @@ class Host(object):
                 servers.append(text)
         return servers
 
-    def _validate_static_network(self, payload, kind, cloud_init, network_type):
-        """ci_dhcp=false 时校验静态 IPv4；缺省保持 DHCP，旧请求完全兼容。"""
+    def _validate_static_network(self, payload, kind, cloud_init, network_type, network_source=None):
+        """ci_dhcp=false 时校验静态 IPv4；缺省保持 DHCP，旧请求完全兼容。
+
+        network_source 为已解析的目标网桥；旧的四参数调用会按 payload/config 自行推导。
+        ci_isolated=true 表示显式仅同网段内网：不套用 profile、不生成默认路由和 DNS。
+        """
         raw_dhcp = payload.get("ci_dhcp", True)
         if raw_dhcp is None or bool_value(raw_dhcp):
             return None
@@ -1414,9 +1486,41 @@ class Host(object):
             raise OpError("静态 IP 仅支持启用 cloud-init 的磁盘镜像创建")
         if network_type != "bridge":
             raise OpError("静态 IP 仅支持桥接网络；NAT/libvirt 网络请使用 DHCP")
+        if network_source is None:
+            network_source = payload.get("network_source") or self._default_network_source(network_type)
+        bridge = str(network_source or "").strip()
+        isolated = bool_value(payload.get("ci_isolated"))
+        raw_gateway = str(payload.get("ci_gateway") or "").strip()
+        raw_dns = payload.get("ci_dns")
+        dns_items = raw_dns if isinstance(raw_dns, (list, tuple)) else [raw_dns]
+        has_dns = any(str(item or "").strip() for item in dns_items)
+        if isolated and (raw_gateway or has_dns):
+            raise OpError("仅同网段内网模式不能同时填写网关或 DNS：该模式不生成默认路由和 DNS，请清空后重试")
         iface = self._static_ipv4(payload.get("ci_ip"))
-        gateway = self._static_gateway(payload.get("ci_gateway"), iface)
-        dns = self._static_dns(payload.get("ci_dns"))
+        if isolated:
+            return {"address": str(iface), "gateway": "", "dns": []}
+        gateway = self._static_gateway(raw_gateway, iface)
+        dns = self._static_dns(raw_dns)
+        profile = None
+        if not gateway or not dns:
+            profile = self._static_profile_for(bridge, iface)
+        if not gateway and profile:
+            gateway = profile["gateway"]
+        if not dns and profile:
+            dns = list(profile["dns"])
+        # 补入的 profile 值也必须相对于 guest 子网完成全部校验。
+        gateway = self._static_gateway(gateway, iface)
+        dns = self._static_dns(dns)
+        if not gateway:
+            raise OpError(
+                "静态 IP 缺少默认网关：请填写网关，或在执行端为网桥 %s 配置 static_network_defaults；"
+                "仅同网段内网请显式使用仅内网模式" % (bridge or "当前网桥")
+            )
+        if not dns:
+            raise OpError(
+                "静态 IP 缺少 DNS：请填写 DNS，或在执行端为网桥 %s 配置 static_network_defaults；"
+                "仅同网段内网请显式使用仅内网模式" % (bridge or "当前网桥")
+            )
         return {"address": str(iface), "gateway": gateway, "dns": dns}
 
     def _validate_cloud_init_iface(self, value):

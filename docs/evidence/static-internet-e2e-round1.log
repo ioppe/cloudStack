@@ -1,0 +1,17 @@
+2026-11-03T13:27:43Z
+PASS existing VM baseline matches before testing
+PASS node150 exposes the explicit br0 static network profile
+PASS unmatched subnet is rejected before any disk seed or domain exists
+PASS temporary guest address passes three ARP conflict probes
+PASS static guest created with IP only and no gateway DNS payload
+PASS only the temporary domain disk and seed ISO are deleted
+PASS all existing VM states and inactive configurations remain unchanged
+Traceback (most recent call last):
+  File "/Users/sky/vm-platform/tests/e2e_static_internet.py", line 202, in <module>
+    main()
+    ~~~~^^
+  File "/Users/sky/vm-platform/tests/e2e_static_internet.py", line 182, in main
+    assert len(configured) == 1 and any(row['local'] == address and row['prefixlen'] == 24 for row in configured[0]['addr_info'])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError
+EXIT=1

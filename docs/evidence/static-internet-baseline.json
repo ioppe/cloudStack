@@ -1,0 +1,111 @@
+{
+  "192.168.0.30": {
+    "bridge_ipv4": "4: br0    inet 192.168.0.30/24 brd 192.168.0.255 scope global noprefixroute br0\\       valid_lft forever preferred_lft forever",
+    "default_route": "default via 192.168.0.1 dev br0 proto static metric 425",
+    "dns": [
+      "100.100.100.100"
+    ],
+    "existing_vms": [
+      {
+        "name": "centos",
+        "uuid": "92d1d752-4b47-4550-b470-fb1e96e6f927",
+        "state": "running",
+        "inactive_xml_sha256": "2fcfff1f99364fdd1257ddf6782785173687d45741acd9134c6f0a93795f4ee7"
+      },
+      {
+        "name": "ubuntu-100",
+        "uuid": "a66dd284-40cc-48a4-89b6-84a00843ede6",
+        "state": "running",
+        "inactive_xml_sha256": "9f7cd70d99c3a77c244461c76321a69e3f0e32f10d6538d6106cceff02ed361b"
+      },
+      {
+        "name": "ubuntu",
+        "uuid": "503a9548-ef36-49cd-b471-c9ebfe9ff534",
+        "state": "running",
+        "inactive_xml_sha256": "fc0979b594912e1413de5db9b9cfb2e34b52d46e35f9795d9b8b8f6ddeed73dd"
+      },
+      {
+        "name": "chatgpt",
+        "uuid": "4f39ecd4-9972-48ef-9761-4a60d80614a8",
+        "state": "shut off",
+        "inactive_xml_sha256": "379d20acde3111dd855a31232764e58ab172880e4dd0e7f6d285fb123bc9eedb"
+      },
+      {
+        "name": "euler",
+        "uuid": "24b56a05-54dd-4e8f-ab7b-fe0dfa71f0bc",
+        "state": "shut off",
+        "inactive_xml_sha256": "9f88831c75f3c84dc00cba217c224330abe33f22f64ccf66846feb4376456a02"
+      },
+      {
+        "name": "ubuntu-200",
+        "uuid": "70d81301-0711-45d2-8976-7bdd4988dd5d",
+        "state": "shut off",
+        "inactive_xml_sha256": "ab8015764461c0e4a37353945143b9420e74dc6dbcafda635261a4e7cda67efc"
+      },
+      {
+        "name": "ubuntu-300",
+        "uuid": "e654be19-7d5c-44ea-9fd2-13a03640bf18",
+        "state": "shut off",
+        "inactive_xml_sha256": "beb90f438fd4ad4f4d91648c237d5f7144b93c95e391741b2bb02e14c69ba055"
+      },
+      {
+        "name": "ubuntu-400",
+        "uuid": "684bc0cd-41cf-479c-9681-106f308a39bd",
+        "state": "shut off",
+        "inactive_xml_sha256": "f855928b233f89b9448ea4c5c979c4e28b25353c7cb9a85a092b5b4ed0b051e7"
+      },
+      {
+        "name": "ubuntu1",
+        "uuid": "e0fd39e0-b9c4-479b-ae50-b76243cd80e3",
+        "state": "shut off",
+        "inactive_xml_sha256": "87ac3c121411cd4484875eabef0a64717d77f1496b898624d3f65599f2a732f7"
+      },
+      {
+        "name": "ubuntu2",
+        "uuid": "d292d954-2ad2-4a93-81e9-ca993f6e1aea",
+        "state": "shut off",
+        "inactive_xml_sha256": "1db3f264c547480def35c402f9ebf46fdce93e40aad37992deae1cf170841316"
+      },
+      {
+        "name": "ubuntu2204",
+        "uuid": "287e5832-97e5-418b-aed6-099f4fe9dff5",
+        "state": "shut off",
+        "inactive_xml_sha256": "d2812502ada3c3a680b1e9378c4cc99d88e85e05b6263a22e6ff885b35f1b989"
+      },
+      {
+        "name": "ubuntu3",
+        "uuid": "964dd391-4597-424f-a5d6-1255d638ade5",
+        "state": "shut off",
+        "inactive_xml_sha256": "4bf3bc6804f40a69add86a65674c481cd370eb65f38904a22a0c04363207b062"
+      },
+      {
+        "name": "ubuntu4",
+        "uuid": "3d40f33b-1ca3-46fb-ba7f-4e6d6d8093c1",
+        "state": "shut off",
+        "inactive_xml_sha256": "02123e498b929024e5fb5bd0a37865ab685997d6cda01993aadf52ecc67e1471"
+      },
+      {
+        "name": "ubuntu5",
+        "uuid": "4b5401ef-1ec8-46f4-b966-45b0458fd7e6",
+        "state": "shut off",
+        "inactive_xml_sha256": "4ccafa39136695a578c92d5ae757f514d76cb0a7d801dbb302abc90d4a86382a"
+      }
+    ]
+  },
+  "192.168.0.150": {
+    "bridge_ipv4": "10: br0    inet 192.168.0.150/24 brd 192.168.0.255 scope global br0\\       valid_lft forever preferred_lft forever",
+    "default_route": "default via 192.168.0.1 dev br0 proto static",
+    "dns": [
+      "192.168.0.1",
+      "8.8.8.8"
+    ],
+    "existing_vms": [
+      {
+        "name": "ubutnu24.04",
+        "uuid": "5bf2a360-20d4-4c05-99de-499796069fef",
+        "state": "running",
+        "inactive_xml_sha256": "8bbb1b752ba688f89a1d17587304d7d5c58d161477a7fd9f297f8e786b4a42a6"
+      }
+    ]
+  }
+}

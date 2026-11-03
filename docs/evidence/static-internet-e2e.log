@@ -1,0 +1,11 @@
+2026-11-03T13:39:41Z
+PASS existing VM baseline matches before testing
+PASS node150 exposes the explicit br0 static network profile
+PASS unmatched subnet is rejected before any disk seed or domain exists
+PASS temporary guest address passes three ARP conflict probes
+PASS static guest created with IP only and no gateway DNS payload
+PASS guest MAC static IP default route and DNS match the bridge profile
+PASS guest resolves an external hostname and completes verified HTTPS
+PASS only the temporary domain disk and seed ISO are deleted
+PASS all existing VM states and inactive configurations remain unchanged
+EXIT=0

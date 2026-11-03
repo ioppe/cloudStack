@@ -1,0 +1,109 @@
+{
+  "version": "1.1.1",
+  "change": "static IPv4 network config defaults + pre-create validation",
+  "generated_at_local": "see logs; run by test-runner",
+  "method": "PYTHONDONTWRITEBYTECODE=1 <python> -m unittest discover -s tests -p 'test_*.py' -v (full mocked unit suite, no E2E, no guest ops, no deploy)",
+  "results": [
+    {
+      "target": "local",
+      "host": "dev-host",
+      "python": "3.13.7",
+      "path": "/usr/local/bin/python3",
+      "tests_run": 96,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "status": "pass",
+      "log": "docs/evidence/static-internet-unit-local.log"
+    },
+    {
+      "target": "node30",
+      "host": "192.168.0.30 (k8s-node03)",
+      "python": "3.6.8",
+      "path": "/usr/bin/python3",
+      "tests_run": 96,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "status": "pass",
+      "log": "docs/evidence/static-internet-unit-python36.log"
+    },
+    {
+      "target": "node150",
+      "host": "192.168.0.150 (sky)",
+      "python": "3.12.3",
+      "path": "/usr/bin/python3",
+      "tests_run": 96,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "status": "pass",
+      "log": "docs/evidence/static-internet-unit-python312.log"
+    }
+  ],
+  "static_checks": [
+    {
+      "check": "node --check static/app.js",
+      "node": "v24.18.0",
+      "status": "pass"
+    },
+    {
+      "check": "json parse config/agent.example.json",
+      "status": "pass"
+    }
+  ],
+  "suite_breakdown": {
+    "test_bridge_migration": 4,
+    "test_controller": 26,
+    "test_network_config": 29,
+    "test_transport": 5,
+    "test_worker": 32
+  },
+  "remote_layout": "new task-scoped /opt/vm-platform-static-net-check-only on both nodes; production /opt/vm-platform untouched; directory removed after run",
+  "secrets": "none copied; tests/e2e_*.py, .git, ADMIN-CREDENTIALS, releases, private configs excluded",
+  "syntax_checks_after_tdz_fix": {
+    "note": "Local syntax-only checks; no E2E executed, no SSH, no source edits. Node v24.18.0, local Python 3.13.7.",
+    "node_check": {
+      "file": "static/app.js",
+      "status": "pass"
+    },
+    "python_compile": [
+      {
+        "file": "tests/e2e_static_internet.py",
+        "status": "pass",
+        "error": null
+      },
+      {
+        "file": "tests/e2e_static_network_form.py",
+        "status": "pass",
+        "error": null
+      },
+      {
+        "file": "tests/e2e_static_internet.py:GUEST_PROBE",
+        "status": "pass",
+        "error": null,
+        "chars": 1907,
+        "lines": 29
+      }
+    ],
+    "app_js_tdz_fix": {
+      "declarations": [
+        "static/app.js:2288 let autoGateway",
+        "static/app.js:2289 let autoDns"
+      ],
+      "first_call": "static/app.js:2296 syncCiNetwork() via syncKind",
+      "function_body": "static/app.js:2432 syncCiNetwork assigns only, no redeclaration"
+    }
+  },
+  "source_sha256": {
+    "static/app.js": "d0287745357f373a66e7d266c0f58b4cbea4d7946c3665c32daf1be8a3727297",
+    "vmops.py": "a3b14fc95fc839b01ea2e3ae2060a8098f0f9a73f7a1f9a9e6809090a186b993"
+  },
+  "unit_suite_rerun": "not rerun by request: Python product logic unchanged since 96/96 on 3.13.7 / 3.6.8 / 3.12.3",
+  "source_sha256_note": {
+    "hashes_taken_at": "node run end, local host",
+    "vmops.py_mtime": "2026-11-03 08:20:28, 78055 bytes",
+    "static_app_js_mtime": "2026-11-03 08:16:02, 119127 bytes",
+    "caveat": "vmops.py was edited (77880 -> 78055 bytes) after the 96/96 unit run finished at 08:16; recorded SHA256 is the current content. Unit result therefore predates the latest vmops.py edit and was not rerun per instruction."
+  }
+}

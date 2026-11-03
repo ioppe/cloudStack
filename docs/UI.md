@@ -9,7 +9,7 @@
 
 创建弹窗捕获打开时的主机身份，镜像／磁盘目录保存在弹窗本地；切换主机清空页面旧资源并丢弃迟到响应。虚拟机操作按主机 ID 与 UUID 绑定，忙状态也使用两者组合。
 
-cloud-init 支持自定义用户名、密码或 SSH 公钥。v1.1 创建表单可选 libvirt/NAT 或桥接；NAT 使用 DHCP，disk+cloud-init+桥接可取消 DHCP 并填虚拟机 IPv4/CIDR、可选网关和 DNS。静态区在 ISO／关闭初始化／NAT 时隐藏，不修改宿主机网络。CPU／内存／磁盘变更要求关机，只增不减；原有 .30 的14台 VM 仍受 UUID 写保护。
+cloud-init 支持自定义用户名、密码或 SSH 公钥。创建表单可选 libvirt/NAT 或桥接；NAT 使用 DHCP，disk+cloud-init+桥接可取消 DHCP 并填虚拟机 IPv4/CIDR。v1.1.1 默认联网，表单层网关和 DNS 必填（API 可只传 IP，由执行端按 profile 补齐）；匹配当前网桥 profile 时自动填充，不覆盖手填，切换网段／网桥只清除失效的自动值。清空字段后提交会提示补齐，不在提交时回填。显式勾选“仅同网段内网（不配置网关和 DNS）”可禁用两字段，提示无法访问其他网段或互联网。静态区在 ISO／关闭初始化／NAT 时隐藏并恢复 DHCP，不修改宿主机或已有 VM 网络。CPU／内存／磁盘变更要求关机，只增不减；原有 .30 的14台 VM 仍受 UUID 写保护。
 
 控制台另开平台窗口，页面同时显示主机、VM 名称及 UUID。noVNC 从同源静态目录加载；连接通过登录会话、同源来源检查和执行端 UUID 核验，VNC 仅监听宿主机回环地址。
 
@@ -17,4 +17,4 @@ cloud-init 支持自定义用户名、密码或 SSH 公钥。v1.1 创建表单�
 
 管理员顶栏“修改密码”打开当前密码、新密码、确认密码对话框。新密码12–200字符，确认不一致或当前密码错误会留在对话框；成功清空字段并返回登录页，所有会话立即失效。管理员手动修改后须自行安全保存新口令，本地交付凭据文件不会被浏览器自动更新。
 
-可复用验收定位使用 `data-testid`：`login-*`、`nav-hosts/vms/images/tasks`、`topbar-host-select`、`vm-create-*`、`task-row-*`、`vm-console-*`、`password-*`、`btn-password`。最终线上截图与浏览器记录见 `docs/evidence/`，首版结论见 `ACCEPTANCE.md`，增量结论见 `ACCEPTANCE-1.1.md`。
+可复用验收定位使用 `data-testid`：`login-*`、`nav-hosts/vms/images/tasks`、`topbar-host-select`、`vm-create-*`（包括 `vm-create-ci-isolated`）、`task-row-*`、`vm-console-*`、`password-*`、`btn-password`。最终线上截图与浏览器记录见 `docs/evidence/`，首版结论见 `ACCEPTANCE.md`，历史增量结论见 `ACCEPTANCE-1.1.md`，静态联网修复见 `ACCEPTANCE-1.1.1.md`。

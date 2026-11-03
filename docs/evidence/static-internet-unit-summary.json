@@ -1,0 +1,100 @@
+{
+  "version": "1.1.1",
+  "change": "static IPv4 network config defaults + pre-create validation; final source round",
+  "final_source_sha256": {
+    "vmops.py": "a3b14fc95fc839b01ea2e3ae2060a8098f0f9a73f7a1f9a9e6809090a186b993",
+    "controller.py": "20366ce08a231048e528924ff9094be96bc3b4b2ae0223fd62ca47112c106870",
+    "static/app.js": "d0287745357f373a66e7d266c0f58b4cbea4d7946c3665c32daf1be8a3727297",
+    "static/index.html": "2cad49b76c68f270f7011c87c4337086236d0936a1ffdd799cd25ca31de5a1fc",
+    "config/agent.example.json": "f7c305d49de4dd848b2a01f9ec1a0669b23dbb705410be57b4e04b4c1d7241dc",
+    "tests/test_network_config.py": "6714fde7795550ca4b6e68904ce38d88651ccb67955af207f96e04cf3c167920"
+  },
+  "method": "PYTHONDONTWRITEBYTECODE=1 <python> -m unittest discover -s tests -p 'test_*.py' -v (full mocked unit suite; no E2E, no guest ops, no deploy, no restart)",
+  "results_final": [
+    {
+      "target": "local",
+      "python": "3.13.7",
+      "binary": "/usr/local/bin/python3",
+      "tests_run": 97,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "exit": 0,
+      "status": "pass",
+      "log": "docs/evidence/static-internet-unit-local.log"
+    },
+    {
+      "target": "node30",
+      "host": "192.168.0.30 (k8s-node03)",
+      "python": "3.6.8",
+      "binary": "/usr/bin/python3",
+      "dir": "/opt/vm-platform-static-net-check-only",
+      "tests_run": 97,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "exit": 0,
+      "status": "pass",
+      "log": "docs/evidence/static-internet-unit-python36.log"
+    },
+    {
+      "target": "node150",
+      "host": "192.168.0.150 (sky)",
+      "python": "3.12.3",
+      "binary": "/usr/bin/python3",
+      "dir": "/opt/vm-platform-static-net-check-only",
+      "tests_run": 97,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "exit": 0,
+      "status": "pass",
+      "log": "docs/evidence/static-internet-unit-python312.log"
+    }
+  ],
+  "nice": "all three versions 97/97 OK, exit 0, zero failures/errors/skips",
+  "static_checks_final": [
+    {
+      "check": "node --check static/app.js",
+      "node": "v24.18.0",
+      "status": "pass",
+      "logged_in": "docs/evidence/static-internet-unit-local.log (NODE_CHECK=pass)"
+    },
+    {
+      "check": "json parse config/agent.example.json",
+      "status": "pass"
+    }
+  ],
+  "suite_breakdown_final": {
+    "test_worker": 32,
+    "test_network_config": 30,
+    "test_controller": 26,
+    "test_transport": 5,
+    "test_bridge_migration": 4,
+    "total": 97
+  },
+  "new_test_final_round": {
+    "name": "test_network_config.StaticCreateTests.test_profile_gateway_is_revalidated_against_guest_before_writes",
+    "location": "tests/test_network_config.py:412-425",
+    "subtests": [
+      "gateway 192.168.0.1 == guest address (等于虚拟机)",
+      "gateway 192.168.0.31 == broadcast of 192.168.0.30/27 (广播地址)",
+      "gateway 192.168.0.16 == network of 192.168.0.17/28 (网络地址)"
+    ],
+    "asserts": "assertRaisesRegex(vmops.OpError, msg) + assert_no_writes() per subtest",
+    "status": "pass on 3.13.7 / 3.6.8 / 3.12.3"
+  },
+  "previous_round": {
+    "note": "superseded: 96 tests on vmops.py 77880 bytes (sha a8d1ab4c...); kept as evidence only",
+    "logs": [
+      "docs/evidence/static-internet-unit-local-round1.log",
+      "docs/evidence/static-internet-unit-python36-round1.log",
+      "docs/evidence/static-internet-unit-python312-round1.log"
+    ],
+    "summary": "docs/evidence/static-internet-unit-summary-round1.json"
+  },
+  "remote_layout": "fresh task-scoped /opt/vm-platform-static-net-check-only on both nodes (verified absent before create, removed after run); production /opt/vm-platform untouched (mtime unchanged: node30 11月3 16:32, node150 Nov 3 03:32)",
+  "transfer": "tar.gz in $PI_SCRATCH_DIR, excluded .git, __pycache__, *.pyc, tests/e2e_*.py, ADMIN-CREDENTIALS, releases, private configs; archive deleted after use",
+  "ssh": "BatchMode=yes StrictHostKeyChecking=yes; no passwords or private configs read",
+  "secrets": "none recorded; no payloads or keys in logs/summary"
+}

@@ -1,0 +1,77 @@
+[
+  {
+    "host": "192.168.0.150",
+    "code_backup": "/var/lib/vm-platform/backups/platform-code-before-static-internet-1.1.1.tar.gz",
+    "config_backup": "/var/lib/vm-platform/backups/agent-before-static-internet-1.1.1.json",
+    "other_config_fields_unchanged": true,
+    "services": {
+      "vm-platform-agent.service": {
+        "active": "active",
+        "enabled": "enabled"
+      }
+    },
+    "static_network_defaults": {
+      "br0": {
+        "cidr": "192.168.0.0/24",
+        "gateway": "192.168.0.1",
+        "dns": [
+          "192.168.0.1",
+          "8.8.8.8"
+        ]
+      }
+    },
+    "deployed_sha256": {
+      "vmops.py": "a3b14fc95fc839b01ea2e3ae2060a8098f0f9a73f7a1f9a9e6809090a186b993",
+      "controller.py": "20366ce08a231048e528924ff9094be96bc3b4b2ae0223fd62ca47112c106870",
+      "static/app.js": "d0287745357f373a66e7d266c0f58b4cbea4d7946c3665c32daf1be8a3727297",
+      "static/index.html": "2cad49b76c68f270f7011c87c4337086236d0936a1ffdd799cd25ca31de5a1fc",
+      "config/agent.example.json": "f7c305d49de4dd848b2a01f9ec1a0669b23dbb705410be57b4e04b4c1d7241dc",
+      "tests/test_network_config.py": "6714fde7795550ca4b6e68904ce38d88651ccb67955af207f96e04cf3c167920",
+      "tests/e2e_static_internet.py": "31890fbe0c71c620e30fe687531bb59ad01c04c67e91e978377d5eb95e94e7d8",
+      "tests/e2e_static_network_form.py": "382ba8e571093c3e29feb74e5a79e8bbefdb5a6d00ce890febe8e470cb7fe982",
+      "README.md": "98930637e184d3872b2c38401a727b1ac29d5aa55a03ee9d29da1693d30b2b4f",
+      "CHANGELOG.md": "15f5a868df08b13e2bf21da2993961467fbdde16ce837569551eaf9072291034",
+      "docs/NETWORKS.md": "8276fee01aedbaaa559c6bb1def7e442d78fcfff00a7cc13113d0a51bce30bb1",
+      "docs/DEPLOY.md": "8f6072aa477a8348d3871f011807b7dedb2331414738a1065a9e3e7d2e73904d",
+      "docs/AGENT.md": "11b61f100e215710bc1f379d917e55acae416e3d8fd287b86ead7ee6031f360f",
+      "docs/IMPLEMENTATION.md": "dcb133e678e782fa3c26820f2ebfbffcc2fba594e30b2f95cd543b89aa7f4d41",
+      "docs/UI.md": "cd1743ffefc89c4a4a0222a92fe697b7dd05fecbf7631d8a12b804697bf899cf"
+    },
+    "time": 1793712342
+  },
+  {
+    "host": "192.168.0.30",
+    "code_backup": "/var/lib/vm-platform/backups/platform-code-before-static-internet-1.1.1.tar.gz",
+    "config_backup": null,
+    "other_config_fields_unchanged": true,
+    "services": {
+      "vm-platform-agent.service": {
+        "active": "active",
+        "enabled": "enabled"
+      },
+      "vm-platform.service": {
+        "active": "active",
+        "enabled": "enabled"
+      }
+    },
+    "static_network_defaults": {},
+    "deployed_sha256": {
+      "vmops.py": "a3b14fc95fc839b01ea2e3ae2060a8098f0f9a73f7a1f9a9e6809090a186b993",
+      "controller.py": "20366ce08a231048e528924ff9094be96bc3b4b2ae0223fd62ca47112c106870",
+      "static/app.js": "d0287745357f373a66e7d266c0f58b4cbea4d7946c3665c32daf1be8a3727297",
+      "static/index.html": "2cad49b76c68f270f7011c87c4337086236d0936a1ffdd799cd25ca31de5a1fc",
+      "config/agent.example.json": "f7c305d49de4dd848b2a01f9ec1a0669b23dbb705410be57b4e04b4c1d7241dc",
+      "tests/test_network_config.py": "6714fde7795550ca4b6e68904ce38d88651ccb67955af207f96e04cf3c167920",
+      "tests/e2e_static_internet.py": "31890fbe0c71c620e30fe687531bb59ad01c04c67e91e978377d5eb95e94e7d8",
+      "tests/e2e_static_network_form.py": "382ba8e571093c3e29feb74e5a79e8bbefdb5a6d00ce890febe8e470cb7fe982",
+      "README.md": "98930637e184d3872b2c38401a727b1ac29d5aa55a03ee9d29da1693d30b2b4f",
+      "CHANGELOG.md": "15f5a868df08b13e2bf21da2993961467fbdde16ce837569551eaf9072291034",
+      "docs/NETWORKS.md": "8276fee01aedbaaa559c6bb1def7e442d78fcfff00a7cc13113d0a51bce30bb1",
+      "docs/DEPLOY.md": "8f6072aa477a8348d3871f011807b7dedb2331414738a1065a9e3e7d2e73904d",
+      "docs/AGENT.md": "11b61f100e215710bc1f379d917e55acae416e3d8fd287b86ead7ee6031f360f",
+      "docs/IMPLEMENTATION.md": "dcb133e678e782fa3c26820f2ebfbffcc2fba594e30b2f95cd543b89aa7f4d41",
+      "docs/UI.md": "cd1743ffefc89c4a4a0222a92fe697b7dd05fecbf7631d8a12b804697bf899cf"
+    },
+    "time": 1793712343
+  }
+]

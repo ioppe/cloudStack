@@ -1,0 +1,90 @@
+{
+  "passed": false,
+  "checks": [
+    {
+      "check": "existing VM baseline matches before testing",
+      "evidence": {
+        "192.168.0.30": {
+          "existing_vm_count": 14,
+          "states_and_inactive_xml_hashes_unchanged": true
+        },
+        "192.168.0.150": {
+          "existing_vm_count": 1,
+          "states_and_inactive_xml_hashes_unchanged": true
+        }
+      }
+    },
+    {
+      "check": "node150 exposes the explicit br0 static network profile",
+      "evidence": {
+        "br0": {
+          "cidr": "192.168.0.0/24",
+          "gateway": "192.168.0.1",
+          "dns": [
+            "192.168.0.1",
+            "8.8.8.8"
+          ]
+        }
+      }
+    },
+    {
+      "check": "unmatched subnet is rejected before any disk seed or domain exists",
+      "evidence": {
+        "error": "静态 IP 缺少默认网关：请填写网关，或在执行端为网桥 br0 配置 static_network_defaults；仅同网段内网请显式使用仅内网模式",
+        "remaining_files": []
+      }
+    },
+    {
+      "check": "temporary guest address passes three ARP conflict probes",
+      "evidence": {
+        "selected": "192.168.0.248",
+        "interface": "br0",
+        "probes": [
+          {
+            "address": "192.168.0.248",
+            "arp_probe_count": 3,
+            "conflicting_macs": []
+          }
+        ]
+      }
+    },
+    {
+      "check": "static guest created with IP only and no gateway DNS payload",
+      "evidence": {
+        "name": "platform-static-net-accept-20261103",
+        "uuid": "bf9e4bc4-6ed3-415d-bbf3-a0f355b2c822",
+        "ci_ip": "192.168.0.248/24",
+        "gateway_dns_omitted": true,
+        "summary": "已创建虚拟机 platform-static-net-accept-20261103"
+      }
+    },
+    {
+      "check": "only the temporary domain disk and seed ISO are deleted",
+      "evidence": {
+        "uuid": "bf9e4bc4-6ed3-415d-bbf3-a0f355b2c822",
+        "name": "platform-static-net-accept-20261103",
+        "action": "delete",
+        "state": "deleted",
+        "removed_count": 2,
+        "skipped_count": 0,
+        "skipped_reasons": [],
+        "summary": "已删除虚拟机 platform-static-net-accept-20261103，移除 2 个磁盘文件，跳过 0 个"
+      }
+    },
+    {
+      "check": "all existing VM states and inactive configurations remain unchanged",
+      "evidence": {
+        "192.168.0.30": {
+          "existing_vm_count": 14,
+          "states_and_inactive_xml_hashes_unchanged": true
+        },
+        "192.168.0.150": {
+          "existing_vm_count": 1,
+          "states_and_inactive_xml_hashes_unchanged": true
+        }
+      }
+    }
+  ],
+  "time": 1793712463,
+  "scope": "Dedicated temporary node150 VM only; no HTTP login/password changes"
+}

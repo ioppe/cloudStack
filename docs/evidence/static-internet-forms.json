@@ -1,0 +1,13 @@
+{
+  "passed": true,
+  "fixture_mode": "Explicit isolated demo UI; no real management operations or login changes",
+  "checks": [
+    "matching IP and br0 automatically fill configured gateway and DNS",
+    "changing subnets clears stale automatic values and preserves manual DNS",
+    "bridge changes only apply the matching bridge profile",
+    "cleared gateway or DNS blocks submission without secretly refilling",
+    "connected mode submits manually entered route and DNS unchanged",
+    "explicit isolated mode submits IP only with blank route DNS to the selected host",
+    "switching back to NAT retains DHCP and sends no static flags"
+  ]
+}

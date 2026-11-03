@@ -1,0 +1,22 @@
+{
+  "health": {
+    "ok": true,
+    "version": "1.1.1"
+  },
+  "services": {
+    "vm-platform.service": {
+      "active": "active",
+      "enabled": "enabled"
+    },
+    "vm-platform-agent.service": {
+      "active": "active",
+      "enabled": "enabled"
+    },
+    "vm-panel.service": {
+      "active": "active",
+      "enabled": "enabled"
+    }
+  },
+  "initial_health_probe": "HTTP connection refused immediately after restart; subsequent readiness probe succeeded",
+  "compatibility_note": "Used is-active/is-enabled; no NRestarts property on old systemd"
+}

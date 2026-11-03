@@ -1,0 +1,134 @@
+{
+  "scope": "Read-only verification of host network, legacy .30 panel and agent exposure; no credentials, no guest access, no host writes",
+  "checks": [
+    {
+      "check": "existing VM metadata (name state inactive XML hash) identical to acceptance baseline",
+      "evidence": {
+        "192.168.0.30": {
+          "existing_vm_count": 14,
+          "uuids_names_states_xml_hashes_unchanged": true
+        },
+        "192.168.0.150": {
+          "existing_vm_count": 1,
+          "uuids_names_states_xml_hashes_unchanged": true
+        }
+      }
+    },
+    {
+      "check": "host br0 address and default route identical to baseline (no host network change)",
+      "evidence": {
+        "192.168.0.30": {
+          "br0_ipv4": "4: br0    inet 192.168.0.30/24 brd 192.168.0.255 scope global noprefixroute br0\\       valid_lft forever preferred_lft forever",
+          "default_route": "default via 192.168.0.1 dev br0 proto static metric 425"
+        },
+        "192.168.0.150": {
+          "br0_ipv4": "10: br0    inet 192.168.0.150/24 brd 192.168.0.255 scope global br0\\       valid_lft forever preferred_lft forever",
+          "default_route": "default via 192.168.0.1 dev br0 proto static"
+        }
+      }
+    },
+    {
+      "check": "node150 br0 resolvectl DNS equals the static profile",
+      "evidence": {
+        "raw": "Link 10 (br0): 192.168.0.1 8.8.8.8",
+        "servers": [
+          "192.168.0.1",
+          "8.8.8.8"
+        ]
+      }
+    },
+    {
+      "check": "legacy node30 /etc/resolv.conf still starts with 100.100.100.100",
+      "evidence": {
+        "nameservers": [
+          "100.100.100.100",
+          "fd7a:115c:a1e0::53"
+        ]
+      }
+    },
+    {
+      "check": "legacy node30 compute hashes match old-baseline.txt",
+      "evidence": {
+        "files": {
+          "server.py": "e4027995a691c9ef420a637a5b6fb73e079f3bdbb44eb1deb9ae6d20e9e7942f",
+          "config.json": "a0e01be27f87d541cbf7762b3953d9cbfaf07426e230257c2b0612725d32ae48",
+          "vm-panel.db": "d07aeea64ffd46c502b3d7b0b0dd60f7a9fd5a2036293b5356c470886f57844c"
+        }
+      }
+    },
+    {
+      "check": "legacy 8088 answers HTTP 200 with vm-panel active and enabled",
+      "evidence": {
+        "http_8088": "200",
+        "vm-panel": [
+          "active",
+          "enabled"
+        ]
+      }
+    },
+    {
+      "check": "new stack health endpoint reports 1.1.1 and the running controller matches local source",
+      "evidence": {
+        "health": {
+          "ok": true,
+          "version": "1.1.1"
+        },
+        "health_http": "200",
+        "exec_start": "/usr/bin/python3 /opt/vm-platform/controller.py",
+        "version_line": "VERSION = \"1.1.1\"",
+        "controller_sha256": "20366ce08a231048e528924ff9094be96bc3b4b2ae0223fd62ca47112c106870",
+        "matches_local_source": true
+      }
+    },
+    {
+      "check": "node150 agent active+enabled and still requires /home/vm-disks",
+      "evidence": {
+        "service": [
+          "active",
+          "enabled"
+        ],
+        "unit_lines": [
+          "User=root",
+          "ExecStart=/usr/bin/python3 /opt/vm-platform/worker.py --serve",
+          "RequiresMountsFor=/home/vm-disks"
+        ]
+      }
+    },
+    {
+      "check": "agent unix socket root-only 0600 uid 0, no agent TCP listener, VNC sockets unchanged",
+      "evidence": {
+        "192.168.0.150": {
+          "agent_socket": "600 0 /run/vm-platform/agent.sock",
+          "agent_tcp_listeners": [],
+          "vnc_listeners": [
+            "127.0.0.1:5900"
+          ],
+          "listener_count": 6
+        },
+        "192.168.0.30": {
+          "agent_socket": "600 0 /run/vm-platform/agent.sock",
+          "agent_tcp_listeners": [],
+          "vnc_listeners": [
+            "*:5900",
+            "*:5901",
+            "*:5925"
+          ],
+          "listener_count": 21
+        }
+      }
+    }
+  ],
+  "time": 1793713285,
+  "passed": true,
+  "summary": {
+    "existing_vms": {
+      "192.168.0.30": 14,
+      "192.168.0.150": 1
+    },
+    "host_network": "br0 address and default route unchanged on both hosts",
+    "legacy_node30": "panel files hashes unchanged, 8088 HTTP 200, vm-panel active+enabled",
+    "new_stack": "1.1.1 controller on 8089, unchanged source hash",
+    "agent": ".150 active+enabled with /home/vm-disks, socket 0600 root, no TCP listener",
+    "guests_touched": "none (metadata only)"
+  }
+}

@@ -47,6 +47,7 @@ worker.py --vnc <UUID> [--config PATH]              # 原始字节双向转发
 | `default_bridge` | `br0` | 桥接默认值 |
 | `default_network` | `default` | libvirt 网络默认值 |
 | `default_network_type` | `network` | `network` 或 `bridge` |
+| `static_network_defaults` | `{}` | 按网桥配置 `{cidr,gateway,dns:[IPv4]}`，用于静态联网缺项补齐；CIDR 须为规范网络地址且前缀 1–30，网关须在网段内且非网络／广播，DNS 非空；无效配置或非实际网桥不套用 |
 | `default_timezone` | `Asia/Shanghai` | cloud-init 时区 |
 | `socket_path` | `/run/vm-platform/agent.sock` | `--serve` 监听路径 |
 | `virsh` / `virt_install` / `qemu_img` / `genisoimage` | 同名命令 | 可执行文件路径覆盖；`genisoimage` 为空时自动找 genisoimage/mkisofs |
@@ -111,20 +112,20 @@ worker.py --vnc <UUID> [--config PATH]              # 原始字节双向转发
 
 ### 3.4 `networks` → `data`
 
-`{bridges:[…], libvirt_networks:[{name,state}], default_bridge, default_network, default_type, default_source}`。桥接与libvirt网络分别保留独立默认源。
+`{bridges:[…], libvirt_networks:[{name,state}], default_bridge, default_network, default_type, default_source, static_network_defaults:{bridge:{cidr,gateway,dns:[IPv4]}}}`。桥接与 libvirt 网络分别保留独立默认源；仅返回实际存在网桥的有效静态 profile，未配置时为空对象。
 
 ### 3.5 `create` payload
 
 ```
 {kind:"disk"|"iso", name, source, disk_dir, memory_gb, vcpus, disk_gb,
  network_type:"network"|"bridge", network_source,
- cloud_init_enabled, ci_username, ci_password, ci_ssh_key, ci_dhcp, ci_ip, ci_gateway, ci_dns}
+ cloud_init_enabled, ci_username, ci_password, ci_ssh_key, ci_dhcp, ci_isolated, ci_ip, ci_gateway, ci_dns}
 ```
 
 - `kind=disk`：`source` 为 `image_dirs` 内的 qcow2/img/raw 云镜像，执行 `qemu-img convert -O qcow2` 到
   `<disk_dir>/<name>.qcow2`，再按 `disk_gb` 扩容（小于镜像虚拟容量直接拒绝）。
 - `kind=iso`：`source` 为 `image_dirs` 内的 ISO，`disk_gb` 必填，新盘由 virt-install 创建。
-- `cloud_init_enabled` 仅支持 `kind=disk`，生成 `<name>-seed.iso`。默认 DHCP；v1.1 桥接模式可设 `ci_dhcp:false`，`ci_ip` 必须是可用 IPv4/CIDR（前缀1–30），`ci_gateway` 可空或同子网的另一合法主机地址，`ci_dns` 可空、IPv4 数组或逗号／空白分隔字符串。仅 disk+cloud-init+bridge 接受静态配置；校验在磁盘目录创建、qemu-img 和 seed 写入之前完成。使用同一 MAC 匹配 guest 网卡，注入地址、默认路由及 DNS。
+- `cloud_init_enabled` 仅支持 `kind=disk`，生成 `<name>-seed.iso`。默认 DHCP；`ci_dhcp:false` 仅在 disk+cloud-init+bridge 可用，`ci_ip` 必须为可用 IPv4/CIDR（前缀 1–30）。v1.1.1 默认联网：`ci_gateway` 须为同子网另一合法主机地址，`ci_dns` 为非空 IPv4 数组或逗号／空白分隔字符串；缺项仅从目标网桥、guest 地址与网关均匹配的 `static_network_defaults` 补齐，仍缺项则在写盘前拒绝。`ci_isolated:true` 显式仅同网段模式允许省略两者，不应用 profile、不生成路由／DNS，传非空网关或 DNS 则拒绝。全部校验在磁盘目录创建、qemu-img 和 seed 写入前完成；使用同一 MAC 匹配 guest 网卡。已有 VM 不自动重写。
 - 新建 VNC 一律 `listen=127.0.0.1`，并带 QEMU Guest Agent channel。
 - OS 参数按 `virt-install --version` 分流：`< 4`（如 .30 的 1.5）用 `--os-type linux`；
   `>= 4`（如 .150 的 4.1）用 `--osinfo detect=on,require=off`；版本无法识别时按新版处理（不猜测旧参数）。
@@ -189,7 +190,7 @@ worker.py --vnc <UUID> [--config PATH]              # 原始字节双向转发
 3. 旧面板允许 `is_allowed_path` 走 `image_dirs + disk_dirs`，新执行端把模板（`image_dirs`）与可变磁盘
    （`disk_dirs`）分开，写操作只认后者。
 4. 旧 `delete` 先 undefine 再删文件；新流程先预检、后 undefine、最后逐个再校验删除。
-5. 首版为 DHCP；v1.1 已增加桥接 cloud-init 静态 IPv4、可选网关和 DNS，不支持通过创建接口修改宿主机地址。
+5. 首版为 DHCP；v1.1 增加桥接 cloud-init 静态 IPv4；v1.1.1 将联网所需网关与 DNS 设为必需，并提供经配置的网桥默认值与显式仅同网段模式。不支持通过创建接口修改宿主机地址。
 6. 旧代码 `create_from_iso` 用 `--os-type linux`；新代码按 virt-install 版本分流（见 3.5）。
 
 ## 6. 部署（.150，Ubuntu 24.04 / Python 3.12）

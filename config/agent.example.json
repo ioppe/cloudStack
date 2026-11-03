@@ -13,6 +13,13 @@
   "default_bridge": "br0",
   "default_network": "default",
   "default_network_type": "network",
+  "static_network_defaults": {
+    "br0": {
+      "cidr": "192.168.0.0/24",
+      "gateway": "192.168.0.1",
+      "dns": ["192.168.0.1", "8.8.8.8"]
+    }
+  },
   "default_timezone": "Asia/Shanghai",
   "socket_path": "/run/vm-platform/agent.sock",
   "virsh": "virsh",

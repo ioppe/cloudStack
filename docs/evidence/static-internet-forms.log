@@ -1,0 +1,9 @@
+2026-11-03T13:40:51Z
+PASS matching IP and br0 automatically fill configured gateway and DNS
+PASS changing subnets clears stale automatic values and preserves manual DNS
+PASS bridge changes only apply the matching bridge profile
+PASS cleared gateway or DNS blocks submission without secretly refilling
+PASS connected mode submits manually entered route and DNS unchanged
+PASS explicit isolated mode submits IP only with blank route DNS to the selected host
+PASS switching back to NAT retains DHCP and sends no static flags
+EXIT=0

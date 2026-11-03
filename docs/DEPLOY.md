@@ -41,6 +41,10 @@
 
 node150 当前私有 agent 配置继续使用 `default_network_type:"network"`、`default_network:"default"`，同时设 `default_bridge:"br0"`。新建VM可在界面切换NAT或桥接，静态地址仅注入桥接guest，不修改宿主机。
 
+v1.1.1 仅在 node150 的私有配置添加 `static_network_defaults:{"br0":{"cidr":"192.168.0.0/24","gateway":"192.168.0.1","dns":["192.168.0.1","8.8.8.8"]}}`。配置应合并到已有 JSON，保留存储、保护 UUID 与其他私有字段；不要用示例覆盖已有配置。其他主机默认 `{}`，按实际网络规划填写，不复制 node30 的 Tailscale DNS。静态联网缺项会在写盘前拒绝，显式仅同网段模式见 NETWORKS.md；不更新已有 guest 的 Netplan。
+
+更新代码前确认没有运行中的平台任务；备份新平台代码及待更新的 agent 配置，更新 `/opt/vm-platform` 后只重启 `vm-platform-agent.service` 和控制端 `vm-platform.service`。保留私有配置、SQLite、原面板、libvirt、网桥与所有已有 VM；不要重复运行网络迁移脚本。
+
 node150 使用独立 `/home` 存储时，安装挂载依赖：`install -d /etc/systemd/system/vm-platform-agent.service.d`，将 `deploy/node150-home-storage.conf` 安装为该目录的 `home-storage.conf`，再执行 `systemctl daemon-reload` 和 `systemctl restart vm-platform-agent.service`。此配置让 agent 依赖 `home.mount`，防止大盘未挂载时写入系统盘。已有镜像和磁盘不迁移；移除存储选项前确认无VM使用该目录，不删除目录中的业务磁盘。
 
 ## 运行与操作

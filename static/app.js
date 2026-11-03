@@ -2173,22 +2173,31 @@ function openCreateDialog() {
   const ciKey = h('textarea', { class: 'textarea', id: 'new-ci-key', 'data-testid': 'vm-create-ci-key', placeholder: 'ssh-ed25519 AAAA… 可选' });
   const ciDhcp = h('input', { type: 'checkbox', checked: true, id: 'new-ci-dhcp', 'data-testid': 'vm-create-ci-dhcp' });
   const ciEnabled = h('input', { type: 'checkbox', checked: true, id: 'new-ci-enabled', 'data-testid': 'vm-create-ci-enabled' });
+  const ciIsolated = h('input', { type: 'checkbox', checked: false, id: 'new-ci-isolated', 'data-testid': 'vm-create-ci-isolated' });
   const ciIp = h('input', {
     class: 'input', id: 'new-ci-ip', type: 'text', spellcheck: 'false',
     'data-testid': 'vm-create-ci-ip', placeholder: '192.168.0.201/24'
   });
   const ciGateway = h('input', {
     class: 'input', id: 'new-ci-gateway', type: 'text', spellcheck: 'false',
-    'data-testid': 'vm-create-ci-gateway', placeholder: '192.168.0.1（可选）'
+    'data-testid': 'vm-create-ci-gateway', placeholder: '192.168.0.1'
   });
   const ciDns = h('input', {
     class: 'input', id: 'new-ci-dns', type: 'text', spellcheck: 'false',
-    'data-testid': 'vm-create-ci-dns', placeholder: '1.1.1.1, 8.8.8.8（可选）'
+    'data-testid': 'vm-create-ci-dns', placeholder: '192.168.0.1, 8.8.8.8'
   });
+  const ciStaticHint = h('span', { class: 'field__hint', 'data-testid': 'vm-create-ci-static-hint' }, '');
   const ciStaticBox = h('div', { class: 'form-grid span-2', 'data-testid': 'vm-create-ci-static', style: { display: 'none' } },
     fieldRow({ id: 'new-ci-ip', label: 'IP 地址／前缀', required: true, hint: '虚拟机地址，勿填宿主机 IP', control: ciIp }),
-    fieldRow({ id: 'new-ci-gateway', label: '网关（可选）', control: ciGateway }),
-    fieldRow({ id: 'new-ci-dns', label: 'DNS（可选）', span2: true, hint: 'IPv4，多个用逗号或空格分隔', control: ciDns })
+    h('div', { class: 'field span-2' },
+      h('label', { class: 'check', for: 'new-ci-isolated' }, ciIsolated,
+        h('span', { class: 'check__text' },
+          h('span', null, '仅同网段内网（不配置网关和 DNS）'),
+          h('span', { class: 'check__hint' }, '勾选后不写入默认路由和 DNS，虚拟机只能访问同网段，无法访问其他网段或互联网。')
+        ))),
+    fieldRow({ id: 'new-ci-gateway', label: '网关（必填）', required: true, control: ciGateway }),
+    fieldRow({ id: 'new-ci-dns', label: 'DNS（必填）', span2: true, required: true, hint: 'IPv4，多个用逗号或空格分隔', control: ciDns }),
+    h('div', { class: 'field span-2' }, ciStaticHint)
   );
 
   const ciBlock = h('div', { class: 'form-section' },
@@ -2276,6 +2285,8 @@ function openCreateDialog() {
   let netData = null;
   let imagesData = [];
   let diskDirsData = [];
+  let autoGateway = '';
+  let autoDns = '';
 
   function syncKind() {
     kindDiskBtn.setAttribute('aria-pressed', String(kindState.kind === 'disk'));
@@ -2288,6 +2299,9 @@ function openCreateDialog() {
   kindIsoBtn.addEventListener('click', () => { kindState.kind = 'iso'; syncKind(); });
   ciEnabled.addEventListener('change', () => syncKind());
   ciDhcp.addEventListener('change', () => syncCiNetwork());
+  ciIsolated.addEventListener('change', () => syncCiNetwork());
+  ciIp.addEventListener('input', () => fillStaticDefaults());
+  netSourceSel.addEventListener('change', () => syncCiNetwork());
   netTypeSel.addEventListener('change', () => renderNetworkSources(netTypeSel.value));
   syncCiNetwork();
 
@@ -2317,7 +2331,7 @@ function openCreateDialog() {
 
   function renderNetworkSources(type) {
     if (!netSourceSel.isConnected) return;
-    const nets = netData || { bridges: [], libvirt_networks: [], default_bridge: '', default_type: 'network', default_source: '' };
+    const nets = netData || { bridges: [], libvirt_networks: [], default_bridge: '', default_type: 'network', default_source: '', static_network_defaults: {} };
     const mode = type === 'bridge' ? 'bridge' : 'network';
     const opts = [];
     if (mode === 'bridge') {
@@ -2351,20 +2365,92 @@ function openCreateDialog() {
 
   function fillNetworks() {
     if (!netSourceSel.isConnected) return;
-    const nets = netData || { bridges: [], libvirt_networks: [], default_bridge: '', default_type: 'network', default_source: '' };
+    const nets = netData || { bridges: [], libvirt_networks: [], default_bridge: '', default_type: 'network', default_source: '', static_network_defaults: {} };
     const defaultType = nets.default_type === 'bridge' ? 'bridge' : 'network';
     netTypeSel.value = defaultType;
     renderNetworkSources(defaultType);
   }
 
+  // 自动默认值只在「当前网桥 profile 覆盖该 IP，且 profile 网关落在 guest 网段」时带入；
+  // 记住上次自动填入的内容，从而不覆盖用户手填的值。
+
+  function ipv4ToInt(text) {
+    let value = 0;
+    for (const part of String(text || '').split('.')) value = ((value << 8) + Number(part)) >>> 0;
+    return value;
+  }
+
+  function parseIpv4Cidr(text) {
+    const parts = String(text || '').trim().split('/');
+    if (parts.length !== 2 || !isIpv4(parts[0]) || !/^\d{1,2}$/.test(parts[1])) return null;
+    const prefix = Number(parts[1]);
+    if (prefix < 1 || prefix > 30) return null;
+    const mask = (0xFFFFFFFF << (32 - prefix)) >>> 0;
+    return { base: (ipv4ToInt(parts[0]) & mask) >>> 0, mask: mask };
+  }
+
+  function ipInCidr(cidr, ip) {
+    return !!cidr && ((ip & cidr.mask) >>> 0) === cidr.base;
+  }
+
+  function currentProfile() {
+    if (netTypeSel.value !== 'bridge') return null;
+    const map = (netData && netData.static_network_defaults) || {};
+    const name = netSourceSel.value;
+    return (name && Object.prototype.hasOwnProperty.call(map, name)) ? map[name] : null;
+  }
+
+  function fillStaticDefaults() {
+    const guest = parseIpv4Cidr(ciIp.value);
+    if (!guest) return;   // IP 未填成合法 CIDR：保持现状，不做任何猜测
+    const profile = currentProfile();
+    const profileNet = profile ? parseIpv4Cidr(profile.cidr) : null;
+    const gatewayIp = profile && isIpv4(profile.gateway) ? ipv4ToInt(profile.gateway) : -1;
+    const matched = !!profileNet && ipInCidr(profileNet, ipv4ToInt(String(ciIp.value).split('/')[0]))
+      && gatewayIp >= 0 && ipInCidr(guest, gatewayIp);
+    const gatewayValue = ciGateway.value.trim();
+    const dnsValue = ciDns.value.trim();
+    if (!matched) {
+      // 切换 IP / 网桥后不再匹配：只清掉上次自动填的值，手填值原样保留
+      if (autoGateway && gatewayValue === autoGateway) ciGateway.value = '';
+      if (autoDns && dnsValue === autoDns) ciDns.value = '';
+      autoGateway = '';
+      autoDns = '';
+      return;
+    }
+    if (!gatewayValue || gatewayValue === autoGateway) {
+      ciGateway.value = profile.gateway;
+      autoGateway = profile.gateway;
+    }
+    const dnsText = Array.isArray(profile.dns) ? profile.dns.join(', ') : '';
+    if (dnsText && (!dnsValue || dnsValue === autoDns)) {
+      ciDns.value = dnsText;
+      autoDns = dnsText;
+    }
+  }
+
   function syncCiNetwork() {
-    // 静态 IP 仅在 disk + cloud-init + 桥接时可选；其余组合固定 DHCP。
+    // 静态 IP 仅在 disk + cloud-init + 桥接时可用；其余组合固定 DHCP，且不发送静态 flag。
     const allowed = kindState.kind === 'disk' && ciEnabled.checked && netTypeSel.value === 'bridge';
     ciDhcp.disabled = !allowed;
     if (!allowed) ciDhcp.checked = true;
     const staticMode = allowed && !ciDhcp.checked;
+    if (!staticMode) ciIsolated.checked = false;
     ciStaticBox.style.display = staticMode ? '' : 'none';
-    [ciIp, ciGateway, ciDns].forEach(function (inp) { inp.disabled = !staticMode; });
+    ciIsolated.disabled = !staticMode;
+    const isolated = staticMode && ciIsolated.checked;
+    ciIp.disabled = !staticMode;
+    ciGateway.disabled = !staticMode || isolated;
+    ciDns.disabled = !staticMode || isolated;
+    ciStaticHint.textContent = isolated
+      ? '仅同网段内网：只写入 IP 与掩码，不生成默认路由和 DNS，无法访问其他网段或互联网。'
+      : '默认联网：网关与 DNS 必填；选择网桥并填入同网段 IP 后会自动带入该网桥的默认值。';
+    if (!staticMode) {
+      autoGateway = '';
+      autoDns = '';
+      return;
+    }
+    fillStaticDefaults();
   }
 
   function fillDiskDirs() {
@@ -2463,13 +2549,16 @@ function openCreateDialog() {
     }
 
     const staticMode = netType === 'bridge' && ciOn && kindState.kind === 'disk' && !ciDhcp.checked;
+    const isolated = staticMode && ciIsolated.checked;
     if (staticMode) {
       if (!ciIp.value.trim()) return fail('请填写虚拟机静态 IP（IPv4/前缀）', ciIp);
       if (!isIpv4Cidr(ciIp.value)) return fail('静态 IP 须为 IPv4/前缀 且前缀 1-30，例如 192.168.0.201/24', ciIp);
-      const gateway = ciGateway.value.trim();
-      if (gateway && !isIpv4(gateway)) return fail('网关必须是合法的 IPv4 地址', ciGateway);
-      const dnsText = ciDns.value.trim();
-      if (dnsText) {
+      if (!isolated) {
+        const gateway = ciGateway.value.trim();
+        if (!gateway) return fail('联网的静态 IP 必须填写网关；仅同网段内网请勾选「仅同网段内网」', ciGateway);
+        if (!isIpv4(gateway)) return fail('网关必须是合法的 IPv4 地址', ciGateway);
+        const dnsText = ciDns.value.trim();
+        if (!dnsText) return fail('联网的静态 IP 必须填写 DNS；仅同网段内网请勾选「仅同网段内网」', ciDns);
         const badDns = dnsText.split(/[\s,]+/).filter(Boolean).filter(item => !isIpv4(item));
         if (badDns.length) return fail('DNS 必须是合法的 IPv4 地址，多个地址用逗号或空格分隔', ciDns);
       }
@@ -2490,9 +2579,10 @@ function openCreateDialog() {
       ci_password: ciOn ? ciPass.value : '',
       ci_ssh_key: ciOn ? ciKey.value.trim() : '',
       ci_dhcp: !staticMode,
+      ci_isolated: isolated,
       ci_ip: staticMode ? ciIp.value.trim() : '',
-      ci_gateway: staticMode ? ciGateway.value.trim() : '',
-      ci_dns: staticMode ? ciDns.value.trim() : ''
+      ci_gateway: staticMode && !isolated ? ciGateway.value.trim() : '',
+      ci_dns: staticMode && !isolated ? ciDns.value.trim() : ''
     };
 
     dlg.busy = true;
@@ -2711,9 +2801,25 @@ const DEMO_DISK_DIRS = [
 ];
 
 const DEMO_NETWORKS = {
-  local: { bridges: ['br0'], libvirt_networks: [{ name: 'default', state: 'active' }], default_bridge: 'br0', default_type: 'network', default_source: 'default' },
-  vm150: { bridges: ['br0', 'br1'], libvirt_networks: [{ name: 'default', state: 'active' }, { name: 'lab', state: 'inactive' }], default_bridge: 'br0', default_type: 'bridge', default_source: 'br0' },
-  edge151: { bridges: [], libvirt_networks: [], default_bridge: '', default_type: 'network', default_source: '' }
+  local: {
+    bridges: ['br0'], libvirt_networks: [{ name: 'default', state: 'active' }],
+    default_bridge: 'br0', default_type: 'network', default_source: 'default',
+    static_network_defaults: {
+      br0: { cidr: '192.168.0.0/24', gateway: '192.168.0.1', dns: ['192.168.0.1', '8.8.8.8'] }
+    }
+  },
+  vm150: {
+    bridges: ['br0', 'br1'], libvirt_networks: [{ name: 'default', state: 'active' }, { name: 'lab', state: 'inactive' }],
+    default_bridge: 'br0', default_type: 'bridge', default_source: 'br0',
+    static_network_defaults: {
+      br0: { cidr: '192.168.0.0/24', gateway: '192.168.0.1', dns: ['192.168.0.1', '8.8.8.8'] },
+      br1: { cidr: '192.168.10.0/24', gateway: '192.168.10.1', dns: ['192.168.10.1', '8.8.8.8'] }
+    }
+  },
+  edge151: {
+    bridges: [], libvirt_networks: [], default_bridge: '', default_type: 'network', default_source: '',
+    static_network_defaults: {}
+  }
 };
 
 const DEMO_TASKS = [
@@ -2756,7 +2862,7 @@ async function demoApi(method, path, body) {
   if (url === '/api/login') return { username: 'demo', csrf_token: 'demo-csrf-token' };
   if (url === '/api/logout') return { ok: true };
   if (url === '/api/password' && method === 'POST') return { ok: true };
-  if (url === '/health') return { ok: true, version: '1.1.0' };
+  if (url === '/health') return { ok: true, version: '1.1.1' };
   if (url === '/api/hosts' && method === 'GET') return { hosts: demoHosts };
   if (url === '/api/tasks') return { tasks: demoTaskList };
 
@@ -2845,7 +2951,7 @@ async function demoApi(method, path, body) {
   m = url.match(/^\/api\/hosts\/([^/]+)\/networks$/);
   if (m) {
     const id = decodeURIComponent(m[1]);
-    return DEMO_NETWORKS[id] || { bridges: [], libvirt_networks: [], default_bridge: '', default_type: 'network', default_source: '' };
+    return DEMO_NETWORKS[id] || { bridges: [], libvirt_networks: [], default_bridge: '', default_type: 'network', default_source: '', static_network_defaults: {} };
   }
 
   if (url === '/api/hosts' && method === 'POST') {

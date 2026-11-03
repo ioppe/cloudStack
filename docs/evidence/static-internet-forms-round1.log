@@ -1,0 +1,10 @@
+2026-11-03T13:31:46Z
+Traceback (most recent call last):
+  File "/Users/sky/vm-platform/tests/e2e_static_network_form.py", line 132, in <module>
+    main()
+    ~~~~^^
+  File "/Users/sky/vm-platform/tests/e2e_static_network_form.py", line 64, in main
+    assert fields()['gateway'] == '192.168.0.1'
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError
+EXIT=1

@@ -15,15 +15,15 @@
 - GET /api/hosts/{id}/status -> {host:Host,online:true,status:Status}，失败 502 {error,...}。
 - GET /api/hosts/{id}/vms -> {vms:[VM]}。
 - GET /api/hosts/{id}/images -> {images:[Image],dirs:[path],disk_dirs:[{path,free_human,total,used,free}]}。
-- GET /api/hosts/{id}/networks -> {bridges:[name],libvirt_networks:[{name,state}],default_bridge,default_network,default_type,default_source}；切换模式使用独立默认源。
-- POST /api/hosts/{id}/vms {kind:"disk"|"iso",name,source,disk_dir,memory_gb,vcpus,disk_gb,network_type:"network"|"bridge",network_source,cloud_init_enabled,ci_username,ci_password,ci_ssh_key,ci_dhcp:true|false,ci_ip,ci_gateway,ci_dns} -> 202 {task:Task}。
-  ci_dhcp 缺省／true 为 DHCP；false 仅接受 disk + cloud-init + bridge，ci_ip 为显式 IPv4/CIDR（前缀 1–30，可用主机地址），可选 ci_gateway 必须同子网且不等于 guest，ci_dns 为 IPv4 数组或逗号／空白分隔字符串。所有静态参数在写盘前校验；DHCP 模式忽略静态字段。
+- GET /api/hosts/{id}/networks -> {bridges:[name],libvirt_networks:[{name,state}],default_bridge,default_network,default_type,default_source,static_network_defaults:{bridge:{cidr,gateway,dns:[IPv4]}}}；切换模式使用独立默认源，只返回实际网桥的有效 profile。
+- POST /api/hosts/{id}/vms {kind:"disk"|"iso",name,source,disk_dir,memory_gb,vcpus,disk_gb,network_type:"network"|"bridge",network_source,cloud_init_enabled,ci_username,ci_password,ci_ssh_key,ci_dhcp:true|false,ci_isolated:false|true,ci_ip,ci_gateway,ci_dns} -> 202 {task:Task}。
+  ci_dhcp 缺省／true 为 DHCP，忽略静态字段；false 仅接受 disk + cloud-init + bridge，ci_ip 为 IPv4/CIDR（前缀 1–30，可用主机地址）。默认联网需要同子网另一合法网关及非空 IPv4 DNS；缺项仅从同网桥且 guest IP/profile CIDR、profile 网关/guest CIDR 均匹配的静态 profile 补齐，不覆盖手填。仍缺项在写盘前拒绝。ci_isolated:true 不套用默认值、不生成路由或 DNS，同时传非空网关/DNS 拒绝。该接口不重写已有 VM。
 - POST /api/hosts/{id}/vms/{uuid}/action {action:"start"|"shutdown"|"stop"|"reboot"|"suspend"|"resume"|"delete",remove_disks:false|true,force:false|true} -> 202 {task:Task}。
 - POST /api/hosts/{id}/vms/{uuid}/config {vcpus,memory_gb,disk_gb,resize_guest:false} -> 202 {task:Task}。停机配置，禁止磁盘缩小。
 - GET /api/tasks -> {tasks:[Task]}，host_id 可 query 过滤。
 - GET /console?host={id}&uuid={uuid} -> 控制台页面（登录必要）。
 - WebSocket /api/hosts/{id}/vms/{uuid}/vnc -> binary raw VNC，认证并检查 Origin，先核验 host/UUID。
-- GET /health -> {ok:true,version:"1.1.0"}。
+- GET /health -> {ok:true,version:"1.1.1"}。
 
 Host: {id,name,address,transport:"local"|"ssh",ssh_user,ssh_port}（不包含私钥或密码）。
 Status: {hostname,os,cpu_count,memory_total,memory_available,disk_total,disk_free,vm_count,running_count,kvm:true} 字节单位。

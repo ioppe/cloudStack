@@ -306,6 +306,188 @@ class StaticCreateTests(HostTestCase):
                 self.assertTrue(os.path.isfile(seed))
                 self.assertEqual(os.listdir(os.path.join(self.disk_dir, ".vm-platform-cloudinit")), [])
 
+    # -- static_network_defaults：静态 IP 默认联网（有界修复） -----------------
+
+    PROFILES = {
+        "br0": {"cidr": "192.168.0.0/24", "gateway": "192.168.0.1", "dns": ["192.168.0.1", "8.8.8.8"]},
+        "br1": {"cidr": "10.20.30.0/24", "gateway": "10.20.30.1", "dns": ["10.20.30.1"]},
+    }
+
+    def profile_host(self, profiles=None, **overrides):
+        data = self.PROFILES if profiles is None else profiles
+        return self.validation_host(static_network_defaults=data, **overrides)
+
+    def test_profile_fills_route_and_dns_when_only_ip_is_sent(self):
+        capture = []
+        host = self.make_seed_host(overrides={"static_network_defaults": self.PROFILES}, capture=capture)
+        source = self.write_file(self.image_dir, "base.qcow2", "img")
+
+        result = host.create(self.payload(source=source, ci_gateway="", ci_dns=""))
+
+        self.assertEqual(VM_UUID, result["uuid"])
+        install = self.commands.called("virt-install --connect")[0]
+        self.assertIn("bridge=br0", install)
+        mac = re.search(r"mac=([0-9a-f]{2}(?::[0-9a-f]{2}){5})", install).group(1)
+        config = capture[0]
+        self.assertIn('macaddress: "%s"' % mac, config)
+        self.assertIn("      dhcp4: false", config)
+        self.assertIn('        - "192.168.0.201/24"', config)
+        self.assertIn("      routes:\n        - to: default\n          via: \"192.168.0.1\"", config)
+        self.assertIn(
+            "      nameservers:\n        addresses:\n          - \"192.168.0.1\"\n          - \"8.8.8.8\"",
+            config,
+        )
+
+    def test_four_argument_call_derives_bridge_from_payload_and_config(self):
+        host = self.profile_host()
+        static = host._validate_static_network(self.payload(ci_gateway="", ci_dns=""), "disk", True, "bridge")
+        self.assertEqual("192.168.0.1", static["gateway"])
+        self.assertEqual(["192.168.0.1", "8.8.8.8"], static["dns"])
+
+    def test_manual_gateway_is_kept_while_missing_dns_is_filled(self):
+        host = self.profile_host()
+        static = host._validate_static_network(
+            self.payload(ci_gateway="192.168.0.254", ci_dns=""), "disk", True, "bridge", "br0"
+        )
+        self.assertEqual("192.168.0.254", static["gateway"])
+        self.assertEqual(["192.168.0.1", "8.8.8.8"], static["dns"])
+
+        static = host._validate_static_network(
+            self.payload(ci_gateway="", ci_dns=["9.9.9.9"]), "disk", True, "bridge", "br0"
+        )
+        self.assertEqual("192.168.0.1", static["gateway"])
+        self.assertEqual(["9.9.9.9"], static["dns"])
+
+    def test_complete_manual_values_are_not_overwritten_by_profile(self):
+        host = self.profile_host()
+        static = host._validate_static_network(
+            self.payload(ci_gateway="192.168.0.2", ci_dns=["1.1.1.1"]), "disk", True, "bridge", "br0"
+        )
+        self.assertEqual(
+            {"address": "192.168.0.201/24", "gateway": "192.168.0.2", "dns": ["1.1.1.1"]}, static
+        )
+
+    def test_missing_gateway_or_dns_without_profile_is_rejected_before_writes(self):
+        cases = (
+            ({"ci_gateway": "", "ci_dns": ""}, "网关"),
+            ({"ci_gateway": "192.168.0.1", "ci_dns": ""}, "DNS"),
+            ({"ci_gateway": "", "ci_dns": ["1.1.1.1"]}, "网关"),
+        )
+        for extra, expected in cases:
+            with self.subTest(**extra):
+                host = self.validation_host()
+                with self.assertRaisesRegex(vmops.OpError, expected):
+                    host.create(self.payload(**extra))
+                self.assert_no_writes()
+
+    def test_profile_from_another_bridge_or_subnet_is_not_applied(self):
+        cases = (
+            # 只有 br1 的 profile，请求落在 br0
+            ({"static_network_defaults": {"br1": self.PROFILES["br1"]}}, {}),
+            # br0 的 profile 网段与 guest IP 不同
+            ({"static_network_defaults": {"br0": {
+                "cidr": "10.20.30.0/24", "gateway": "10.20.30.1", "dns": ["10.20.30.1"]}}}, {}),
+            # profile 缺 DNS 视为无效
+            ({"static_network_defaults": {"br0": {
+                "cidr": "192.168.0.0/24", "gateway": "192.168.0.1"}}}, {}),
+            # guest 在 br1 上，profile 只在 br0
+            ({"static_network_defaults": {"br0": self.PROFILES["br0"]}},
+             {"network_source": "br1", "ci_ip": "10.20.30.201/24"}),
+        )
+        for config, extra in cases:
+            with self.subTest(config=config, extra=extra):
+                host = self.validation_host(**config)
+                payload = self.payload(ci_gateway="", ci_dns="")
+                payload.update(extra)
+                with self.assertRaisesRegex(vmops.OpError, "网关"):
+                    host.create(payload)
+                self.assert_no_writes()
+
+    def test_default_gateway_outside_guest_subnet_is_not_used(self):
+        host = self.profile_host()
+        with self.assertRaisesRegex(vmops.OpError, "网关"):
+            host.create(self.payload(ci_ip="192.168.0.201/28", ci_gateway="", ci_dns=""))
+        self.assert_no_writes()
+
+    def test_profile_gateway_is_revalidated_against_guest_before_writes(self):
+        cases = (
+            ("192.168.0.1/24", "192.168.0.1", "等于虚拟机"),
+            ("192.168.0.30/27", "192.168.0.31", "广播地址"),
+            ("192.168.0.17/28", "192.168.0.16", "网络地址"),
+        )
+        for address, gateway, error in cases:
+            with self.subTest(address=address, gateway=gateway):
+                host = self.profile_host(profiles={"br0": {
+                    "cidr": "192.168.0.0/24", "gateway": gateway, "dns": ["8.8.8.8"]
+                }})
+                with self.assertRaisesRegex(vmops.OpError, error):
+                    host.create(self.payload(ci_ip=address, ci_gateway="", ci_dns=""))
+                self.assert_no_writes()
+
+    def test_isolated_validation_output_has_empty_gateway_and_dns(self):
+        host = self.profile_host()
+        static = host._validate_static_network(
+            self.payload(ci_isolated=True, ci_gateway="", ci_dns=""), "disk", True, "bridge", "br0"
+        )
+        self.assertEqual({"address": "192.168.0.201/24", "gateway": "", "dns": []}, static)
+
+    def test_isolated_create_writes_no_route_or_dns(self):
+        capture = []
+        host = self.make_seed_host(capture=capture)
+        source = self.write_file(self.image_dir, "base.qcow2", "img")
+
+        host.create(self.payload(source=source, ci_isolated=True, ci_gateway="", ci_dns=""))
+
+        config = capture[0]
+        self.assertIn("      dhcp4: false", config)
+        self.assertIn('        - "192.168.0.201/24"', config)
+        self.assertNotIn("routes:", config)
+        self.assertNotIn("nameservers:", config)
+
+    def test_isolated_with_gateway_or_dns_is_rejected(self):
+        cases = (
+            {"ci_gateway": "192.168.0.1", "ci_dns": ""},
+            {"ci_gateway": "", "ci_dns": ["1.1.1.1"]},
+            {},
+        )
+        for extra in cases:
+            with self.subTest(**extra):
+                host = self.profile_host()
+                with self.assertRaisesRegex(vmops.OpError, "内网"):
+                    host.create(self.payload(ci_isolated=True, **extra))
+                self.assert_no_writes()
+
+    def test_profiles_do_not_change_dhcp_mode(self):
+        host = self.profile_host()
+        self.assertIsNone(
+            host._validate_static_network({"ci_dhcp": True, "ci_ip": "bad"}, "disk", True, "bridge", "br0")
+        )
+        self.assertIsNone(
+            host._validate_static_network({"ci_isolated": True}, "disk", True, "bridge", "br0")
+        )
+        text = vmops.build_cloud_init_network_config("aa:bb:cc:dd:ee:05", "ens3")
+        self.assertIn("      dhcp4: true", text)
+        self.assertNotIn("routes:", text)
+        self.assertNotIn("nameservers:", text)
+
+    def test_networks_returns_only_valid_profiles_for_real_bridges(self):
+        host = self.validation_host(static_network_defaults={
+            "br0": {"cidr": "192.168.0.0/24", "gateway": "192.168.0.1", "dns": ["192.168.0.1", "8.8.8.8"]},
+            "br1": {"cidr": "192.168.0.0/24", "gateway": "10.9.9.1", "dns": ["1.1.1.1"]},
+            "br2": {"cidr": "172.16.0.0/24", "gateway": "172.16.0.1", "dns": ["172.16.0.1"]},
+            "br3": "not-a-dict",
+        })
+        data = host.networks()
+        self.assertEqual(["br0"], list(data["static_network_defaults"]))
+        self.assertEqual(
+            {"cidr": "192.168.0.0/24", "gateway": "192.168.0.1", "dns": ["192.168.0.1", "8.8.8.8"]},
+            data["static_network_defaults"]["br0"],
+        )
+
+    def test_networks_defaults_are_empty_without_config(self):
+        host = self.validation_host()
+        self.assertEqual({}, host.networks()["static_network_defaults"])
+
 
 if __name__ == "__main__":
     unittest.main()
