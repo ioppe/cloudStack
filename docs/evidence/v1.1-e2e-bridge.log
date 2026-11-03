@@ -1,0 +1,18 @@
+PASS bridge static-address creation submitted through UI
+PASS bridge VM task and actual libvirt interface match
+PASS dedicated bridge guest and two disk files cleaned
+Traceback (most recent call last):
+  File "/Users/sky/vm-platform/tests/e2e_bridge_password.py", line 233, in <module>
+    main()
+    ~~~~^^
+  File "/Users/sky/vm-platform/tests/e2e_bridge_password.py", line 208, in main
+    assert any(link.get('address') == item.get('mac') for link in guest['addresses'] for item in vm['interfaces'])
+           ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError
+
+===== ROUND2 started 2026-11-03T02:54:27 (fix: ip -j address keeps link MAC; record before assert; per-UUID known_hosts) =====
+PASS bridge static-address creation submitted through UI
+PASS bridge VM task and actual libvirt interface match
+PASS guest network identity read before comparison
+PASS guest actually uses configured static IP gateway DNS and matching MAC
+PASS dedicated bridge guest and two disk files cleaned

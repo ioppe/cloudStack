@@ -1,0 +1,174 @@
+########## v1.1 bridge preflight 2026-11-03T07:01:59Z ##########
+作用域: 仅验证 deploy/prepare-node150-bridge.py 的 bridge_document 分支。
+未执行 --apply / --confirm / --rollback，未运行 netplan apply 或 netplan try，未改动真实 /etc/netplan、服务、网络与 VM。
+未读取任何凭据或私钥。
+
+--- 环境 ---
+local  : macOS, python3 3.13.7, worktree /Users/sky/vm-platform
+remote : root@192.168.0.150 (hostname=sky), Ubuntu 24.04.5 LTS, kernel 6.8.0-147-generic
+remote : netplan.io 1.1.2-8ubuntu1~24.04.2, PyYAML 6.0.1, python3 3.12.3
+script sha256 (local)  : 2ba42b33807909ca4c621e3c3ea61456dd5b1fa270b376d5eb9ffed1895a273a  deploy/prepare-node150-bridge.py
+script sha256 (remote) : 2ba42b33807909ca4c621e3c3ea61456dd5b1fa270b376d5eb9ffed1895a273a  (copied copy, identical to local)
+test   sha256          : f48dc71f78ce8bd792793726253765add80804c9f8c513ce999f05be0a7a7d54  tests/test_bridge_migration.py
+
+--- 门禁 1: python3 -m unittest discover -s tests -p test_bridge_migration.py -v ---
+test_preserves_address_gateway_dns_and_mac_on_real_bridge (test_bridge_migration.BridgeMigrationTests.test_preserves_address_gateway_dns_and_mac_on_real_bridge) ... ok
+test_rejects_different_gateway_or_dns (test_bridge_migration.BridgeMigrationTests.test_rejects_different_gateway_or_dns) ... ok
+test_rejects_different_management_address (test_bridge_migration.BridgeMigrationTests.test_rejects_different_management_address) ... ok
+test_rejects_existing_bridge (test_bridge_migration.BridgeMigrationTests.test_rejects_existing_bridge) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.000s
+
+OK
+unittest_exit=0
+
+--- 门禁 2: python3 -m py_compile deploy/prepare-node150-bridge.py ---
+compile_exit=0
+
+--- 远端 dry run (只读源文件 + 临时 root-dir) ---
+invocation: ssh -o BatchMode=yes root@192.168.0.150 'bash -s' < remote.sh
+remote.sh 仅使用: mktemp -d /var/lib/vm-platform/bridge-netplan-check-XXXXXX, base64 -d, sha256sum, stat, find, cat, netplan generate --root-dir, rm -rf(自身临时目录)
+driver.py 通过 importlib 加载脚本副本 (__name__=bridge_migration)，不触发 main()。
+
+TMP=/var/lib/vm-platform/bridge-netplan-check-nItQr5
+REMOTE_SCRIPT_SHA256 2ba42b33807909ca4c621e3c3ea61456dd5b1fa270b376d5eb9ffed1895a273a
+REAL_NETPLAN_SHA_BEFORE 970708daf1c44e6adfe1d2df7ae25e8b9bdb3787bad36d87da8bdbaf2be7a4ea mtime=1793682249
+SOURCE_SHA256 970708daf1c44e6adfe1d2df7ae25e8b9bdb3787bad36d87da8bdbaf2be7a4ea
+BASELINE_MATCH True
+MAIN_NOT_CALLED bridge_migration
+INPUT_UNMUTATED True
+GENERATED_PATH /var/lib/vm-platform/bridge-netplan-check-nItQr5/etc/netplan/01-netcfg.yaml
+GENERATED_SHA256 09c06b014120749aa411eaa6a26521998eeb913cc57b17d3baf29faacdff104e
+--- BEGIN GENERATED YAML ---
+{
+  "network": {
+    "version": 2,
+    "ethernets": {
+      "eno2np1": {
+        "dhcp4": false,
+        "dhcp6": false,
+        "link-local": []
+      }
+    },
+    "bridges": {
+      "br0": {
+        "interfaces": [
+          "eno2np1"
+        ],
+        "dhcp4": false,
+        "dhcp6": false,
+        "macaddress": "ac:1f:6b:eb:a7:b1",
+        "parameters": {
+          "stp": false,
+          "forward-delay": 0
+        },
+        "addresses": [
+          "192.168.0.150/24"
+        ],
+        "routes": [
+          {
+            "to": "default",
+            "via": "192.168.0.1"
+          }
+        ],
+        "nameservers": {
+          "addresses": [
+            "192.168.0.1",
+            "8.8.8.8"
+          ]
+        }
+      }
+    }
+  }
+}
+--- END GENERATED YAML ---
+DRIVER_EXIT=0
+--- TREE BEFORE GENERATE ---
+/var/lib/vm-platform/bridge-netplan-check-nItQr5
+/var/lib/vm-platform/bridge-netplan-check-nItQr5/driver.py
+/var/lib/vm-platform/bridge-netplan-check-nItQr5/etc
+/var/lib/vm-platform/bridge-netplan-check-nItQr5/etc/netplan
+/var/lib/vm-platform/bridge-netplan-check-nItQr5/etc/netplan/01-netcfg.yaml
+/var/lib/vm-platform/bridge-netplan-check-nItQr5/prepare-node150-bridge.py
+/var/lib/vm-platform/bridge-netplan-check-nItQr5/__pycache__
+/var/lib/vm-platform/bridge-netplan-check-nItQr5/__pycache__/prepare-node150-bridge.cpython-312.pyc
+GENERATE_EXIT=0
+--- TREE AFTER GENERATE ---
+/var/lib/vm-platform/bridge-netplan-check-nItQr5
+/var/lib/vm-platform/bridge-netplan-check-nItQr5/driver.py
+/var/lib/vm-platform/bridge-netplan-check-nItQr5/etc
+/var/lib/vm-platform/bridge-netplan-check-nItQr5/etc/netplan
+/var/lib/vm-platform/bridge-netplan-check-nItQr5/etc/netplan/01-netcfg.yaml
+/var/lib/vm-platform/bridge-netplan-check-nItQr5/prepare-node150-bridge.py
+/var/lib/vm-platform/bridge-netplan-check-nItQr5/__pycache__
+/var/lib/vm-platform/bridge-netplan-check-nItQr5/__pycache__/prepare-node150-bridge.cpython-312.pyc
+/var/lib/vm-platform/bridge-netplan-check-nItQr5/run
+/var/lib/vm-platform/bridge-netplan-check-nItQr5/run/systemd
+/var/lib/vm-platform/bridge-netplan-check-nItQr5/run/systemd/network
+/var/lib/vm-platform/bridge-netplan-check-nItQr5/run/systemd/network/10-netplan-br0.netdev
+/var/lib/vm-platform/bridge-netplan-check-nItQr5/run/systemd/network/10-netplan-br0.network
+/var/lib/vm-platform/bridge-netplan-check-nItQr5/run/systemd/network/10-netplan-eno2np1.network
+/var/lib/vm-platform/bridge-netplan-check-nItQr5/run/systemd/system
+/var/lib/vm-platform/bridge-netplan-check-nItQr5/run/systemd/system/netplan-ovs-cleanup.service
+/var/lib/vm-platform/bridge-netplan-check-nItQr5/run/systemd/system/systemd-networkd.service.wants
+/var/lib/vm-platform/bridge-netplan-check-nItQr5/run/systemd/system/systemd-networkd.service.wants/netplan-ovs-cleanup.service
+/var/lib/vm-platform/bridge-netplan-check-nItQr5/run/systemd/system/systemd-networkd-wait-online.service.d
+/var/lib/vm-platform/bridge-netplan-check-nItQr5/run/systemd/system/systemd-networkd-wait-online.service.d/10-netplan.conf
+/var/lib/vm-platform/bridge-netplan-check-nItQr5/run/udev
+/var/lib/vm-platform/bridge-netplan-check-nItQr5/run/udev/rules.d
+/var/lib/vm-platform/bridge-netplan-check-nItQr5/run/udev/rules.d/90-netplan.rules
+===== /var/lib/vm-platform/bridge-netplan-check-nItQr5/run/systemd/network/10-netplan-br0.netdev =====
+[NetDev]
+Name=br0
+MACAddress=ac:1f:6b:eb:a7:b1
+Kind=bridge
+
+[Bridge]
+ForwardDelaySec=0
+STP=false
+===== /var/lib/vm-platform/bridge-netplan-check-nItQr5/run/systemd/network/10-netplan-br0.network =====
+[Match]
+Name=br0
+
+[Link]
+MACAddress=ac:1f:6b:eb:a7:b1
+
+[Network]
+LinkLocalAddressing=ipv6
+Address=192.168.0.150/24
+DNS=192.168.0.1
+DNS=8.8.8.8
+ConfigureWithoutCarrier=yes
+
+[Route]
+Destination=0.0.0.0/0
+Gateway=192.168.0.1
+===== /var/lib/vm-platform/bridge-netplan-check-nItQr5/run/systemd/network/10-netplan-eno2np1.network =====
+[Match]
+Name=eno2np1
+
+[Network]
+LinkLocalAddressing=no
+Bridge=br0
+REAL_NETPLAN_SHA_AFTER 970708daf1c44e6adfe1d2df7ae25e8b9bdb3787bad36d87da8bdbaf2be7a4ea mtime=1793682249
+CLEANUP_OK=/var/lib/vm-platform/bridge-netplan-check-nItQr5
+
+--- 生成结果核对 (run/systemd/network) ---
+10-netplan-br0.netdev     : [NetDev] Name=br0 Kind=bridge MACAddress=ac:1f:6b:eb:a7:b1 ; [Bridge] ForwardDelaySec=0 STP=false
+10-netplan-br0.network    : Address=192.168.0.150/24 ; [Route] Destination=0.0.0.0/0 Gateway=192.168.0.1 ; DNS=192.168.0.1 DNS=8.8.8.8 ; [Link] MACAddress=ac:1f:6b:eb:a7:b1
+10-netplan-eno2np1.network: [Network] Bridge=br0 ; LinkLocalAddressing=no ; 无 Address/DNS/Gateway (端口不再持有 L3)
+verdict: 地址/网关/DNS/桥接/端口归属全部与基线一致，无 virbr0、无 gateway4、无 IPv6 默认路由。
+
+--- 安全 / 未变更证据 ---
+真实 /etc/netplan/01-netcfg.yaml sha256 运行前=运行后=970708daf1c44e6adfe1d2df7ae25e8b9bdb3787bad36d87da8bdbaf2be7a4ea, mtime=1793682249 未变, 权限 600 / 232B
+ip -brief addr show br0 -> Device "br0" does not exist
+systemctl list-units --all "vm-platform-node150*" -> 无匹配单元 (未 arm 回滚 timer)
+netplan generate --root-dir 退出码 0；未执行 netplan apply / netplan try
+临时目录 /var/lib/vm-platform/bridge-netplan-check-nItQr5 已由 trap 删除: CLEANUP_OK；/var/lib/vm-platform 现为空 (仅目录 mtime 因 mkdir/rmdir 变化)
+
+--- 观察 (非失败) ---
+1. 迁移后 IPv6 链路本地地址载体改变: bridge_document 将 eno2np1 置 link-local: []，br0 未设置，故生成 br0 LinkLocalAddressing=ipv6 与 eno2np1 LinkLocalAddressing=no；基线 eno2np1 的 fe80::ae1f:6bff:feeb:a7b1/64 将由 br0 承接。IPv4 L3 未变。
+2. YAML 中 dhcp4: no 经 PyYAML 解析为 False，生成端显式写出 dhcp4=false/dhcp6=false，端口与桥均未启用 DHCP。
+3. 生成配置为 JSON 序列化 (与 apply() 第 111 行的落盘格式相同)，单次运行 sha256=09c06b014120749aa411eaa6a26521998eeb913cc57b17d3baf29faacdff104e。
+4. bridge_document 纯函数特性已确认: 输入 dict 前后相等 (INPUT_UNMUTATED True)。

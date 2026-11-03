@@ -1,0 +1,171 @@
+{
+  "stage": "bridge",
+  "time": 1793692468,
+  "checks": [
+    {
+      "check": "bridge static-address creation submitted through UI",
+      "evidence": {
+        "host": "node150",
+        "name": "platform-bridge-accept-20261103",
+        "network_type": "bridge",
+        "source": "br0",
+        "address": "192.168.0.248/24",
+        "gateway": "192.168.0.1",
+        "dns": [
+          "192.168.0.1",
+          "8.8.8.8"
+        ]
+      }
+    },
+    {
+      "check": "bridge VM task and actual libvirt interface match",
+      "evidence": {
+        "uuid": "10cd51f6-d6e5-486b-b07d-0227ff05bee9",
+        "host_id": "node150",
+        "interfaces": [
+          {
+            "interface": "vnet0",
+            "type": "bridge",
+            "source": "br0",
+            "model": "virtio",
+            "mac": "52:54:00:d3:32:69",
+            "ips": []
+          }
+        ]
+      }
+    },
+    {
+      "check": "guest network identity read before comparison",
+      "evidence": {
+        "hostname": "platform-bridge-accept-20261103",
+        "user": "vmcheck",
+        "addresses": [
+          {
+            "ifindex": 2,
+            "ifname": "ens3",
+            "flags": [
+              "BROADCAST",
+              "MULTICAST",
+              "UP",
+              "LOWER_UP"
+            ],
+            "mtu": 1500,
+            "qdisc": "fq_codel",
+            "operstate": "UP",
+            "group": "default",
+            "txqlen": 1000,
+            "link_type": "ether",
+            "address": "52:54:00:d3:32:69",
+            "broadcast": "ff:ff:ff:ff:ff:ff",
+            "altnames": [
+              "enp0s3"
+            ],
+            "addr_info": [
+              {
+                "family": "inet",
+                "local": "192.168.0.248",
+                "prefixlen": 24,
+                "broadcast": "192.168.0.255",
+                "scope": "global",
+                "label": "ens3",
+                "valid_life_time": 4294967295,
+                "preferred_life_time": 4294967295
+              },
+              {
+                "family": "inet6",
+                "local": "fe80::5054:ff:fed3:3269",
+                "prefixlen": 64,
+                "scope": "link",
+                "valid_life_time": 4294967295,
+                "preferred_life_time": 4294967295
+              }
+            ]
+          }
+        ],
+        "routes": [
+          {
+            "dst": "default",
+            "gateway": "192.168.0.1",
+            "dev": "ens3",
+            "protocol": "static",
+            "flags": []
+          }
+        ],
+        "dns": "Link 2 (ens3): 192.168.0.1 8.8.8.8\n",
+        "cloud_init_finished": true
+      }
+    },
+    {
+      "check": "guest actually uses configured static IP gateway DNS and matching MAC",
+      "evidence": {
+        "hostname": "platform-bridge-accept-20261103",
+        "user": "vmcheck",
+        "addresses": [
+          {
+            "ifindex": 2,
+            "ifname": "ens3",
+            "flags": [
+              "BROADCAST",
+              "MULTICAST",
+              "UP",
+              "LOWER_UP"
+            ],
+            "mtu": 1500,
+            "qdisc": "fq_codel",
+            "operstate": "UP",
+            "group": "default",
+            "txqlen": 1000,
+            "link_type": "ether",
+            "address": "52:54:00:d3:32:69",
+            "broadcast": "ff:ff:ff:ff:ff:ff",
+            "altnames": [
+              "enp0s3"
+            ],
+            "addr_info": [
+              {
+                "family": "inet",
+                "local": "192.168.0.248",
+                "prefixlen": 24,
+                "broadcast": "192.168.0.255",
+                "scope": "global",
+                "label": "ens3",
+                "valid_life_time": 4294967295,
+                "preferred_life_time": 4294967295
+              },
+              {
+                "family": "inet6",
+                "local": "fe80::5054:ff:fed3:3269",
+                "prefixlen": 64,
+                "scope": "link",
+                "valid_life_time": 4294967295,
+                "preferred_life_time": 4294967295
+              }
+            ]
+          }
+        ],
+        "routes": [
+          {
+            "dst": "default",
+            "gateway": "192.168.0.1",
+            "dev": "ens3",
+            "protocol": "static",
+            "flags": []
+          }
+        ],
+        "dns": "Link 2 (ens3): 192.168.0.1 8.8.8.8\n",
+        "cloud_init_finished": true
+      }
+    },
+    {
+      "check": "dedicated bridge guest and two disk files cleaned",
+      "evidence": {
+        "summary": "已删除虚拟机 platform-bridge-accept-20261103，移除 2 个磁盘文件，跳过 0 个",
+        "name": "platform-bridge-accept-20261103",
+        "uuid": "10cd51f6-d6e5-486b-b07d-0227ff05bee9",
+        "removed_count": 2,
+        "skipped_count": 0
+      }
+    }
+  ],
+  "passed": true
+}

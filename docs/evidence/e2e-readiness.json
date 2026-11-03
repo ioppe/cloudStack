@@ -1,0 +1,77 @@
+{
+  "stage": "readiness",
+  "time": 1793686228,
+  "checks": [
+    {
+      "check": "health",
+      "evidence": {
+        "ok": true,
+        "version": "1.0.0"
+      }
+    },
+    {
+      "check": "unauthenticated writes and wrong password rejected",
+      "evidence": {
+        "unauthenticated": 401,
+        "wrong_password": 401
+      }
+    },
+    {
+      "check": "online node150",
+      "evidence": {
+        "hostname": "sky",
+        "os": "Ubuntu 24.04.5 LTS",
+        "cpu_count": 80,
+        "memory_total": 134776745984,
+        "memory_available": 129123106816,
+        "disk_total": 1964618686464,
+        "disk_free": 1855042400256,
+        "vm_count": 0,
+        "running_count": 0,
+        "kvm": true
+      }
+    },
+    {
+      "check": "online node30",
+      "evidence": {
+        "hostname": "k8s-node03",
+        "os": "CentOS Linux 7 (Core)",
+        "cpu_count": 80,
+        "memory_total": 134623551488,
+        "memory_available": 85823279104,
+        "disk_total": 11322836123648,
+        "disk_free": 8610472124416,
+        "vm_count": 14,
+        "running_count": 3,
+        "kvm": true
+      }
+    },
+    {
+      "check": "host CRUD and unknown-host isolation",
+      "evidence": {
+        "registered_and_removed": "accept-registration",
+        "old_vms_unchanged": {
+          "92d1d752-4b47-4550-b470-fb1e96e6f927": "running",
+          "a66dd284-40cc-48a4-89b6-84a00843ede6": "running",
+          "503a9548-ef36-49cd-b471-c9ebfe9ff534": "running",
+          "4f39ecd4-9972-48ef-9761-4a60d80614a8": "shut off",
+          "24b56a05-54dd-4e8f-ab7b-fe0dfa71f0bc": "shut off",
+          "70d81301-0711-45d2-8976-7bdd4988dd5d": "saved",
+          "e654be19-7d5c-44ea-9fd2-13a03640bf18": "shut off",
+          "684bc0cd-41cf-479c-9681-106f308a39bd": "shut off",
+          "e0fd39e0-b9c4-479b-ae50-b76243cd80e3": "saved",
+          "d292d954-2ad2-4a93-81e9-ca993f6e1aea": "shut off",
+          "287e5832-97e5-418b-aed6-099f4fe9dff5": "saved",
+          "964dd391-4597-424f-a5d6-1255d638ade5": "shut off",
+          "3d40f33b-1ca3-46fb-ba7f-4e6d6d8093c1": "shut off",
+          "4b5401ef-1ec8-46f4-b966-45b0458fd7e6": "shut off"
+        }
+      }
+    },
+    {
+      "check": "logout invalidates cookie",
+      "evidence": 401
+    }
+  ],
+  "passed": true
+}

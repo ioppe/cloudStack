@@ -1,0 +1,4 @@
+### stage=security started_utc=2026-11-03T06:28:47Z python=Python 3.13.7 scope=readonly-metadata+counter
+PASS current credential/private keys absent from frontend and service logs; private files/socket mode 0600
+PASS restricted SSH rejects arbitrary command; original 14 UUIDs protected; new VNC listens only on 127.0.0.1
+### stage=security EXIT=0 finished_utc=2026-11-03T06:28:50Z

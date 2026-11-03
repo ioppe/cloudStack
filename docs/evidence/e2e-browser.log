@@ -1,0 +1,9 @@
+### stage=browser started_utc=2026-11-03T06:17:33Z python=Python 3.13.7 session=vm-platform-acceptance base=http://192.168.0.30:8089
+PASS browser administrator login and both hosts visible
+PASS local host name editable with original address preserved
+PASS host switching and node150 image isolation
+PASS VM creation submitted through target-host form
+PASS browser task shows success with host and VM
+PASS console opened from VM row
+PASS authenticated VNC connected to node150 UUID and canvas
+### stage=browser EXIT=0 finished_utc=2026-11-03T06:18:07Z

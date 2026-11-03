@@ -1,0 +1,279 @@
+{
+  "192.168.0.30": {
+    "hostname": "k8s-node03",
+    "services": {
+      "vm-platform-agent.service": {
+        "active": "active",
+        "enabled": "enabled"
+      },
+      "vm-platform.service": {
+        "active": "active",
+        "enabled": "enabled"
+      },
+      "vm-panel.service": {
+        "active": "active",
+        "enabled": "enabled"
+      }
+    },
+    "listeners": "State      Recv-Q Send-Q Local Address:Port               Peer Address:Port              \nLISTEN     0      128    100.96.0.2:62238                    *:*                   users:((\"tailscaled\",pid=162397,fd=28))\nLISTEN     0      128    192.168.0.30:3011                     *:*                   users:((\"docker-proxy\",pid=119151,fd=4))\nLISTEN     0      5      192.168.0.30:3012                     *:*                   users:((\"python3\",pid=2169,fd=3))\nLISTEN     0      1            *:5925                     *:*                   users:((\"qemu-kvm\",pid=42093,fd=25))\nLISTEN     0      128    127.0.0.1:7400                     *:*                   users:((\"frpc\",pid=2160,fd=5))\nLISTEN     0      5            *:9993                     *:*                   users:((\"zerotier-one\",pid=2168,fd=7))\nLISTEN     0      1            *:5900                     *:*                   users:((\"qemu-kvm\",pid=32492,fd=20))\nLISTEN     0      1            *:5901                     *:*                   users:((\"qemu-kvm\",pid=115128,fd=23))\nLISTEN     0      128          *:2222                     *:*                   users:((\"docker-proxy\",pid=119116,fd=4))\nLISTEN     0      128          *:111                      *:*                   users:((\"rpcbind\",pid=1653,fd=8))\nLISTEN     0      5      192.168.122.1:53                       *:*                   users:((\"dnsmasq\",pid=3015,fd=6))\nLISTEN     0      128          *:22                       *:*                   users:((\"sshd\",pid=2158,fd=3))\nLISTEN     0      128    127.0.0.1:631                      *:*                   users:((\"cupsd\",pid=2163,fd=10))\nLISTEN     0      128          *:3000                     *:*                   users:((\"docker-proxy\",pid=119093,fd=4))\nLISTEN     0      5            *:8088                     *:*                   users:((\"python3\",pid=2249,fd=3))\nLISTEN     0      5            *:8089                     *:*                   users:((\"python3\",pid=169240,fd=3))\nLISTEN     0      128       [::]:9090                  [::]:*                   users:((\"mihomo\",pid=2166,fd=3))\nLISTEN     0      5         [::]:9993                  [::]:*                   users:((\"zerotier-one\",pid=2168,fd=8))\nLISTEN     0      128       [::]:111                   [::]:*                   users:((\"rpcbind\",pid=1653,fd=11))\nLISTEN     0      128       [::]:7890                  [::]:*                   users:((\"mihomo\",pid=2166,fd=6))\nLISTEN     0      128       [::]:22                    [::]:*                   users:((\"sshd\",pid=2158,fd=4))",
+    "socket_mode": "0o600",
+    "vms": [
+      {
+        "name": "centos",
+        "uuid": "92d1d752-4b47-4550-b470-fb1e96e6f927",
+        "state": "running",
+        "inactive_xml_sha256": "2fcfff1f99364fdd1257ddf6782785173687d45741acd9134c6f0a93795f4ee7"
+      },
+      {
+        "name": "ubuntu-100",
+        "uuid": "a66dd284-40cc-48a4-89b6-84a00843ede6",
+        "state": "running",
+        "inactive_xml_sha256": "9f7cd70d99c3a77c244461c76321a69e3f0e32f10d6538d6106cceff02ed361b"
+      },
+      {
+        "name": "ubuntu",
+        "uuid": "503a9548-ef36-49cd-b471-c9ebfe9ff534",
+        "state": "running",
+        "inactive_xml_sha256": "fc0979b594912e1413de5db9b9cfb2e34b52d46e35f9795d9b8b8f6ddeed73dd"
+      },
+      {
+        "name": "chatgpt",
+        "uuid": "4f39ecd4-9972-48ef-9761-4a60d80614a8",
+        "state": "shut off",
+        "inactive_xml_sha256": "379d20acde3111dd855a31232764e58ab172880e4dd0e7f6d285fb123bc9eedb"
+      },
+      {
+        "name": "euler",
+        "uuid": "24b56a05-54dd-4e8f-ab7b-fe0dfa71f0bc",
+        "state": "shut off",
+        "inactive_xml_sha256": "9f88831c75f3c84dc00cba217c224330abe33f22f64ccf66846feb4376456a02"
+      },
+      {
+        "name": "ubuntu-200",
+        "uuid": "70d81301-0711-45d2-8976-7bdd4988dd5d",
+        "state": "shut off",
+        "inactive_xml_sha256": "ab8015764461c0e4a37353945143b9420e74dc6dbcafda635261a4e7cda67efc"
+      },
+      {
+        "name": "ubuntu-300",
+        "uuid": "e654be19-7d5c-44ea-9fd2-13a03640bf18",
+        "state": "shut off",
+        "inactive_xml_sha256": "beb90f438fd4ad4f4d91648c237d5f7144b93c95e391741b2bb02e14c69ba055"
+      },
+      {
+        "name": "ubuntu-400",
+        "uuid": "684bc0cd-41cf-479c-9681-106f308a39bd",
+        "state": "shut off",
+        "inactive_xml_sha256": "f855928b233f89b9448ea4c5c979c4e28b25353c7cb9a85a092b5b4ed0b051e7"
+      },
+      {
+        "name": "ubuntu1",
+        "uuid": "e0fd39e0-b9c4-479b-ae50-b76243cd80e3",
+        "state": "shut off",
+        "inactive_xml_sha256": "87ac3c121411cd4484875eabef0a64717d77f1496b898624d3f65599f2a732f7"
+      },
+      {
+        "name": "ubuntu2",
+        "uuid": "d292d954-2ad2-4a93-81e9-ca993f6e1aea",
+        "state": "shut off",
+        "inactive_xml_sha256": "1db3f264c547480def35c402f9ebf46fdce93e40aad37992deae1cf170841316"
+      },
+      {
+        "name": "ubuntu2204",
+        "uuid": "287e5832-97e5-418b-aed6-099f4fe9dff5",
+        "state": "shut off",
+        "inactive_xml_sha256": "d2812502ada3c3a680b1e9378c4cc99d88e85e05b6263a22e6ff885b35f1b989"
+      },
+      {
+        "name": "ubuntu3",
+        "uuid": "964dd391-4597-424f-a5d6-1255d638ade5",
+        "state": "shut off",
+        "inactive_xml_sha256": "4bf3bc6804f40a69add86a65674c481cd370eb65f38904a22a0c04363207b062"
+      },
+      {
+        "name": "ubuntu4",
+        "uuid": "3d40f33b-1ca3-46fb-ba7f-4e6d6d8093c1",
+        "state": "shut off",
+        "inactive_xml_sha256": "02123e498b929024e5fb5bd0a37865ab685997d6cda01993aadf52ecc67e1471"
+      },
+      {
+        "name": "ubuntu5",
+        "uuid": "4b5401ef-1ec8-46f4-b966-45b0458fd7e6",
+        "state": "shut off",
+        "inactive_xml_sha256": "4ccafa39136695a578c92d5ae757f514d76cb0a7d801dbb302abc90d4a86382a"
+      }
+    ],
+    "old_files": {
+      "server.py": "e4027995a691c9ef420a637a5b6fb73e079f3bdbb44eb1deb9ae6d20e9e7942f",
+      "config.json": "a0e01be27f87d541cbf7762b3953d9cbfaf07426e230257c2b0612725d32ae48",
+      "vm-panel.db": "d07aeea64ffd46c502b3d7b0b0dd60f7a9fd5a2036293b5356c470886f57844c"
+    },
+    "old_http": 200
+  },
+  "192.168.0.150": {
+    "hostname": "sky",
+    "services": {
+      "vm-platform-agent.service": {
+        "active": "active",
+        "enabled": "enabled"
+      }
+    },
+    "listeners": "State  Recv-Q Send-Q Local Address:Port Peer Address:PortProcess                                                  \nLISTEN 0      32     192.168.122.1:53        0.0.0.0:*    users:((\"dnsmasq\",pid=125209,fd=6))                     \nLISTEN 0      4096      127.0.0.54:53        0.0.0.0:*    users:((\"systemd-resolve\",pid=1845,fd=17))              \nLISTEN 0      4096   127.0.0.53%lo:53        0.0.0.0:*    users:((\"systemd-resolve\",pid=1845,fd=15))              \nLISTEN 0      4096         0.0.0.0:22        0.0.0.0:*    users:((\"sshd\",pid=24796,fd=3),(\"systemd\",pid=1,fd=258))\nLISTEN 0      4096            [::]:22           [::]:*    users:((\"sshd\",pid=24796,fd=4),(\"systemd\",pid=1,fd=260))",
+    "socket_mode": "0o600",
+    "vms": [],
+    "netplan_sha256": "09c06b014120749aa411eaa6a26521998eeb913cc57b17d3baf29faacdff104e",
+    "physical_ipv4": "",
+    "default_route": "default via 192.168.0.1 dev br0 proto static",
+    "links": [
+      {
+        "ifindex": 1,
+        "ifname": "lo",
+        "flags": [
+          "LOOPBACK",
+          "UP",
+          "LOWER_UP"
+        ],
+        "mtu": 65536,
+        "qdisc": "noqueue",
+        "operstate": "UNKNOWN",
+        "linkmode": "DEFAULT",
+        "group": "default",
+        "txqlen": 1000,
+        "link_type": "loopback",
+        "address": "00:00:00:00:00:00",
+        "broadcast": "00:00:00:00:00:00"
+      },
+      {
+        "ifindex": 2,
+        "ifname": "eno1np0",
+        "flags": [
+          "BROADCAST",
+          "MULTICAST"
+        ],
+        "mtu": 1500,
+        "qdisc": "noop",
+        "operstate": "DOWN",
+        "linkmode": "DEFAULT",
+        "group": "default",
+        "txqlen": 1000,
+        "link_type": "ether",
+        "address": "ac:1f:6b:eb:a7:b0",
+        "broadcast": "ff:ff:ff:ff:ff:ff",
+        "vfinfo_list": [],
+        "altnames": [
+          "enp96s0f0np0"
+        ]
+      },
+      {
+        "ifindex": 3,
+        "ifname": "eno2np1",
+        "flags": [
+          "BROADCAST",
+          "MULTICAST",
+          "UP",
+          "LOWER_UP"
+        ],
+        "mtu": 1500,
+        "qdisc": "mq",
+        "master": "br0",
+        "operstate": "UP",
+        "linkmode": "DEFAULT",
+        "group": "default",
+        "txqlen": 1000,
+        "link_type": "ether",
+        "address": "ac:1f:6b:eb:a7:b1",
+        "broadcast": "ff:ff:ff:ff:ff:ff",
+        "vfinfo_list": [],
+        "altnames": [
+          "enp96s0f1np1"
+        ]
+      },
+      {
+        "ifindex": 6,
+        "ifname": "virbr0",
+        "flags": [
+          "NO-CARRIER",
+          "BROADCAST",
+          "MULTICAST",
+          "UP"
+        ],
+        "mtu": 1500,
+        "qdisc": "noqueue",
+        "operstate": "DOWN",
+        "linkmode": "DEFAULT",
+        "group": "default",
+        "txqlen": 1000,
+        "link_type": "ether",
+        "address": "52:54:00:7b:b6:c8",
+        "broadcast": "ff:ff:ff:ff:ff:ff"
+      },
+      {
+        "ifindex": 10,
+        "ifname": "br0",
+        "flags": [
+          "BROADCAST",
+          "MULTICAST",
+          "UP",
+          "LOWER_UP"
+        ],
+        "mtu": 1500,
+        "qdisc": "noqueue",
+        "operstate": "UP",
+        "linkmode": "DEFAULT",
+        "group": "default",
+        "txqlen": 1000,
+        "link_type": "ether",
+        "address": "ac:1f:6b:eb:a7:b1",
+        "broadcast": "ff:ff:ff:ff:ff:ff"
+      }
+    ],
+    "bridge_ipv4": "10: br0    inet 192.168.0.150/24 brd 192.168.0.255 scope global br0\\       valid_lft forever preferred_lft forever",
+    "dns": "Link 10 (br0): 192.168.0.1 8.8.8.8",
+    "netplan": {
+      "network": {
+        "version": 2,
+        "ethernets": {
+          "eno2np1": {
+            "dhcp4": false,
+            "dhcp6": false,
+            "link-local": []
+          }
+        },
+        "bridges": {
+          "br0": {
+            "interfaces": [
+              "eno2np1"
+            ],
+            "dhcp4": false,
+            "dhcp6": false,
+            "macaddress": "ac:1f:6b:eb:a7:b1",
+            "parameters": {
+              "stp": false,
+              "forward-delay": 0
+            },
+            "addresses": [
+              "192.168.0.150/24"
+            ],
+            "routes": [
+              {
+                "to": "default",
+                "via": "192.168.0.1"
+              }
+            ],
+            "nameservers": {
+              "addresses": [
+                "192.168.0.1",
+                "8.8.8.8"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "nat": "Name:           default\nUUID:           d17e1f94-f903-4cbd-a1f4-3f8d6e749afa\nActive:         yes\nPersistent:     yes\nAutostart:      yes\nBridge:         virbr0",
+    "nat_xml": "<network>\n  <name>default</name>\n  <uuid>d17e1f94-f903-4cbd-a1f4-3f8d6e749afa</uuid>\n  <forward mode='nat'>\n    <nat>\n      <port start='1024' end='65535'/>\n    </nat>\n  </forward>\n  <bridge name='virbr0' stp='on' delay='0'/>\n  <mac address='52:54:00:7b:b6:c8'/>\n  <ip address='192.168.122.1' netmask='255.255.255.0'>\n    <dhcp>\n      <range start='192.168.122.2' end='192.168.122.254'/>\n    </dhcp>\n  </ip>\n</network>",
+    "template_sha256": "04e8f2461a16a44e78a370284471f29616cdd9baf1893df25807b71f985b6c94",
+    "remaining_temporary_files": []
+  },
+  "passed": true
+}

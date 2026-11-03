@@ -1,0 +1,94 @@
+{
+  "time": 1793686654,
+  "checks": [
+    {
+      "check": "browser administrator login and both hosts visible",
+      "evidence": {
+        "url": "http://192.168.0.30:8089",
+        "hosts": [
+          "node30",
+          "node150"
+        ]
+      }
+    },
+    {
+      "check": "local host name editable with original address preserved",
+      "evidence": {
+        "id": "node30",
+        "name": "主机 30",
+        "address": "192.168.0.30",
+        "transport": "local",
+        "ssh_user": "root",
+        "ssh_port": 22
+      }
+    },
+    {
+      "check": "host switching and node150 image isolation",
+      "evidence": {
+        "node30_vm_count": 14,
+        "node150_vm_count": 0,
+        "image": "ubuntu-24.04-server-cloudimg-amd64.img"
+      }
+    },
+    {
+      "check": "VM creation submitted through target-host form",
+      "evidence": {
+        "host_id": "node150",
+        "name": "platform-accept-20261103",
+        "cpu": 2,
+        "memory_gib": 2,
+        "disk_gib": 12,
+        "network": "default",
+        "user": "vmcheck"
+      }
+    },
+    {
+      "check": "browser task shows success with host and VM",
+      "evidence": {
+        "id": "f6eb85b85a38459ca743c09330992097",
+        "host_id": "node150",
+        "host_name": "Ubuntu 150",
+        "vm_uuid": "506cc484-fdda-494e-9681-5da8331b7e27",
+        "vm_name": "platform-accept-20261103",
+        "title": "创建虚拟机",
+        "status": "success",
+        "created_at": 1793686667,
+        "finished_at": 1793686680,
+        "error": "",
+        "result": {
+          "summary": "已创建虚拟机 platform-accept-20261103",
+          "name": "platform-accept-20261103",
+          "uuid": "506cc484-fdda-494e-9681-5da8331b7e27"
+        }
+      }
+    },
+    {
+      "check": "console opened from VM row",
+      "evidence": {
+        "host_id": "node150",
+        "uuid": "506cc484-fdda-494e-9681-5da8331b7e27",
+        "tabs": {
+          "tabs": [
+            {
+              "active": true,
+              "index": 0,
+              "title": "云栈 · 虚拟机平台",
+              "type": "page",
+              "url": "http://192.168.0.30:8089/"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "check": "authenticated VNC connected to node150 UUID and canvas",
+      "evidence": {
+        "host_id": "node150",
+        "uuid": "506cc484-fdda-494e-9681-5da8331b7e27",
+        "name": "platform-accept-20261103",
+        "status": "已连接"
+      }
+    }
+  ],
+  "passed": true
+}

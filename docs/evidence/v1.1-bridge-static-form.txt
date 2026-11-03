@@ -1,0 +1,248 @@
+- generic
+  - complementary
+    - StaticText "云栈"
+      - InlineTextBox "云栈"
+    - StaticText "虚拟机平台"
+      - InlineTextBox "虚拟机平台"
+    - navigation "主导航" [ref=e1]
+      - button "主机 2" [ref=e10]
+        - StaticText "主机"
+          - InlineTextBox "主机"
+        - StaticText "2"
+          - InlineTextBox "2"
+      - button "虚拟机" [ref=e11]
+        - StaticText "虚拟机"
+          - InlineTextBox "虚拟机"
+      - button "镜像" [ref=e12]
+        - StaticText "镜像"
+          - InlineTextBox "镜像"
+      - button "任务" [ref=e13]
+        - StaticText "任务"
+          - InlineTextBox "任务"
+    - generic
+      - StaticText "admin"
+        - InlineTextBox "admin"
+    - StaticText "原有虚拟机受保护 · 新建资源按主机隔离"
+      - InlineTextBox "原有虚拟机受保护 · 新建资源按主"
+      - InlineTextBox "机隔离"
+  - banner
+    - LabelText
+      - StaticText "目标主机"
+        - InlineTextBox "目标主机"
+    - combobox "目标主机" [expanded=false, ref=e2]: Ubuntu 150 · node150
+      - MenuListPopup
+        - option "Ubuntu 150 · node150" [selected, ref=e19]
+        - option "主机 30 · node30" [ref=e20]
+    - generic
+      - generic
+        - StaticText "在线"
+          - InlineTextBox "在线"
+    - button "刷新" [ref=e3]
+      - StaticText "刷新"
+        - InlineTextBox "刷新"
+    - generic
+      - StaticText "admin"
+        - InlineTextBox "admin"
+    - button "修改密码" [ref=e4]
+      - StaticText "修改密码"
+        - InlineTextBox "修改密码"
+    - button "退出" [ref=e5]
+      - StaticText "退出"
+        - InlineTextBox "退出"
+  - main
+    - heading "虚拟机" [level=1, ref=e6]
+      - StaticText "虚拟机"
+        - InlineTextBox "虚拟机"
+    - paragraph
+      - StaticText "列表与操作都绑定在顶栏选定的目标主机上；所有动作提交后返回任务，结果在任务页收敛。"
+        - InlineTextBox "列表与操作都绑定在顶栏选定的目标主机上；所有动作提交后返回任务，结果在任务页收"
+        - InlineTextBox "敛。"
+    - button "刷新列表" [ref=e7]
+      - StaticText "刷新列表"
+        - InlineTextBox "刷新列表"
+    - button "创建虚拟机" [ref=e8]
+      - StaticText "创建虚拟机"
+        - InlineTextBox "创建虚拟机"
+    - StaticText "目标主机"
+      - InlineTextBox "目标主机"
+    - combobox "目标主机" [expanded=false, ref=e9]: Ubuntu 150 · node150
+      - MenuListPopup
+        - option "Ubuntu 150 · node150" [selected, ref=e21]
+        - option "主机 30 · node30" [ref=e22]
+    - StaticText "在线"
+      - InlineTextBox "在线"
+    - StaticText "sky"
+      - InlineTextBox "sky"
+    - StaticText "·"
+      - InlineTextBox "·"
+    - StaticText "CPU"
+      - InlineTextBox "CPU"
+    - StaticText "80 核"
+      - InlineTextBox "80 核"
+    - StaticText "内存"
+      - InlineTextBox "内存"
+    - StaticText "5.3 GiB / 125.5 GiB"
+      - InlineTextBox "5.3 GiB / 125.5 GiB"
+    - generic
+      - StaticText "该主机上没有虚拟机"
+        - InlineTextBox "该主机上没有虚拟机"
+      - StaticText "可以选择 cloud image 或 ISO 创建一台临时虚拟机；创建任务完成后列表自动刷新。"
+        - InlineTextBox "可以选择 cloud image 或 ISO 创建一台临时虚拟机；创建任务完"
+        - InlineTextBox "成后列表自动刷新。"
+      - button "创建虚拟机" [ref=e14]
+        - StaticText "创建虚拟机"
+          - InlineTextBox "创建虚拟机"
+- generic
+  - generic
+    - generic
+    - dialog "创建虚拟机"
+      - heading "创建虚拟机" [level=2, ref=e15]
+        - StaticText "创建虚拟机"
+          - InlineTextBox "创建虚拟机"
+      - paragraph
+        - StaticText "目标主机：Ubuntu 150（node150）；创建进度将在任务页显示。"
+          - InlineTextBox "目标主机：Ubuntu 150（node150）；创建进度将在任务页显示。"
+      - button "关闭" [ref=e16]
+      - generic
+        - generic
+          - StaticText "来源"
+            - InlineTextBox "来源"
+          - group "虚拟机来源类型"
+            - button "磁盘镜像" [ref=e37]
+              - StaticText "磁盘镜像"
+                - InlineTextBox "磁盘镜像"
+            - button "ISO 安装" [ref=e38]
+              - StaticText "ISO 安装"
+                - InlineTextBox "ISO 安装"
+          - LabelText
+            - StaticText "名称"
+              - InlineTextBox "名称"
+          - textbox "名称" [ref=e23]: platform-bridge-accept-20261103
+            - generic
+              - StaticText "platform-bridge-accept-20261103"
+                - InlineTextBox "platform-bridge-accept-20261103"
+          - LabelText
+            - StaticText "镜像"
+              - InlineTextBox "镜像"
+          - combobox "镜像" [expanded=false, ref=e24]: ubuntu-24.04-server-cloudimg-amd64.img · Ubuntu 24.04 · 592.5 MB
+            - MenuListPopup
+              - option "ubuntu-24.04-server-cloudimg-amd64.img · Ubuntu 24.04 · 592.5 MB" [selected, ref=e41]
+          - StaticText "磁盘镜像：复制模板为磁盘并可直接启动；可配合 cloud-init 初始化账户。"
+            - InlineTextBox "磁盘镜像：复制模板为磁盘并可直接启动；可配合 cloud-init 初始化账户。"
+          - StaticText "资源"
+            - InlineTextBox "资源"
+          - LabelText
+            - StaticText "vCPU"
+              - InlineTextBox "vCPU"
+          - spinbutton "vCPU" [ref=e25]: 2
+            - generic
+              - StaticText "2"
+                - InlineTextBox "2"
+          - LabelText
+            - StaticText "内存（GiB）"
+              - InlineTextBox "内存（GiB）"
+          - spinbutton "内存（GiB）" [ref=e26]: 2
+            - generic
+              - StaticText "2"
+                - InlineTextBox "2"
+          - LabelText
+            - StaticText "磁盘（GiB）"
+              - InlineTextBox "磁盘（GiB）"
+          - spinbutton "磁盘（GiB）" [ref=e27]: 12
+            - generic
+              - StaticText "12"
+                - InlineTextBox "12"
+          - LabelText
+            - StaticText "磁盘目录"
+              - InlineTextBox "磁盘目录"
+          - combobox "磁盘目录" [expanded=false, ref=e28]: /var/lib/libvirt/images/vms（剩余 1.7 TB）
+            - MenuListPopup
+              - option "/var/lib/libvirt/images/vms（剩余 1.7 TB）" [selected, ref=e42]
+          - StaticText "网络"
+            - InlineTextBox "网络"
+          - LabelText
+            - StaticText "网络模式"
+              - InlineTextBox "网络模式"
+          - combobox "网络模式" [expanded=false, ref=e29]: 桥接网卡
+            - MenuListPopup
+              - option "NAT / libvirt 网络" [ref=e43]
+              - option "桥接网卡" [selected, ref=e44]
+          - LabelText
+            - StaticText "网络来源"
+              - InlineTextBox "网络来源"
+          - combobox "网络来源" [expanded=false, ref=e30]: 网桥 br0
+            - MenuListPopup
+              - option "网桥 virbr0" [ref=e45]
+              - option "网桥 br0" [selected, ref=e46]
+          - StaticText "桥接：虚拟机直接接入物理网桥；可关闭 DHCP 并指定静态 IPv4。"
+            - InlineTextBox "桥接：虚拟机直接接入物理网桥；可关闭 DHCP 并指定静态 IPv4。"
+          - StaticText "Cloud-init"
+            - InlineTextBox "Cloud-init"
+          - StaticText "仅 disk 类型生效"
+            - InlineTextBox "仅 disk 类型生效"
+          - LabelText
+            - checkbox "启用 cloud-init 初始化 注入用户名、密码或 SSH 公钥；不启用则使用镜像内既有账户。" [checked=true, ref=e39]
+            - StaticText "启用 cloud-init 初始化"
+              - InlineTextBox "启用 cloud-init 初始化"
+            - StaticText "注入用户名、密码或 SSH 公钥；不启用则使用镜像内既有账户。"
+              - InlineTextBox "注入用户名、密码或 SSH 公钥；不启用则使用镜像内既有账户。"
+          - LabelText
+            - StaticText "用户名"
+              - InlineTextBox "用户名"
+          - textbox "用户名" [ref=e31]: vmcheck
+            - generic
+              - StaticText "vmcheck"
+                - InlineTextBox "vmcheck"
+          - LabelText
+            - StaticText "密码"
+              - InlineTextBox "密码"
+          - textbox "密码" [ref=e32]
+            - generic
+          - LabelText
+            - StaticText "SSH 公钥"
+              - InlineTextBox "SSH 公钥"
+          - textbox "SSH 公钥" [ref=e33]: ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFrzfoZSS7kVyHbJG9Qh0ZUPcbyzQh8eYjI279gAQYsa vm-platform-v11-accept-only
+            - generic
+              - StaticText "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFrzfoZSS7kVyHbJG9Qh0ZUPcbyzQh8eYjI279gAQYsa vm-platform-v11-accept-only"
+                - InlineTextBox "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFrzfoZSS7kVyHbJG9Qh0ZUPcbyzQh8eYjI279gAQYsa vm-"
+                - InlineTextBox "platform-v11-accept-only"
+          - LabelText
+            - checkbox "使用 DHCP 自动获取地址 仅桥接网络可关闭 DHCP 并手工指定静态 IPv4；NAT / libvirt 网络固定使用 DHCP。" [checked=false, ref=e40]
+            - StaticText "使用 DHCP 自动获取地址"
+              - InlineTextBox "使用 DHCP 自动获取地址"
+            - StaticText "仅桥接网络可关闭 DHCP 并手工指定静态 IPv4；NAT / libvirt 网络固定使用 DHCP。"
+              - InlineTextBox "仅桥接网络可关闭 DHCP 并手工指定静态 IPv4；NAT / libvirt 网络固定使用 DHCP。"
+          - LabelText
+            - StaticText "IP 地址／前缀"
+              - InlineTextBox "IP 地址／前缀"
+            - StaticText "虚拟机地址，勿填宿主机 IP"
+              - InlineTextBox "虚拟机地址，勿填宿主机 IP"
+          - textbox "IP 地址／前缀 虚拟机地址，勿填宿主机 IP" [ref=e34]: 192.168.0.248/24
+            - generic
+              - StaticText "192.168.0.248/24"
+                - InlineTextBox "192.168.0.248/24"
+          - LabelText
+            - StaticText "网关（可选）"
+              - InlineTextBox "网关（可选）"
+          - textbox "网关（可选）" [ref=e35]: 192.168.0.1
+            - generic
+              - StaticText "192.168.0.1"
+                - InlineTextBox "192.168.0.1"
+          - LabelText
+            - StaticText "DNS（可选）"
+              - InlineTextBox "DNS（可选）"
+            - StaticText "IPv4，多个用逗号或空格分隔"
+              - InlineTextBox "IPv4，多个用逗号或空格分隔"
+          - textbox "DNS（可选） IPv4，多个用逗号或空格分隔" [ref=e36]: 192.168.0.1, 8.8.8.8
+            - generic
+              - StaticText "192.168.0.1, 8.8.8.8"
+                - InlineTextBox "192.168.0.1, 8.8.8.8"
+      - StaticText "磁盘与 ISO 只允许执行端白名单目录"
+        - InlineTextBox "磁盘与 ISO 只允许执行端白名单目录"
+      - button "取消" [ref=e17]
+        - StaticText "取消"
+          - InlineTextBox "取消"
+      - button "创建并提交任务" [ref=e18]
+        - StaticText "创建并提交任务"
+          - InlineTextBox "创建并提交任务"
+- status

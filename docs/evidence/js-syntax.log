@@ -1,0 +1,19 @@
+=== 前端 JS 语法检查 2026-11-03 01:09:58 ===
+node v24.18.0
+--- sha256 ---
+eb5415da3967d7bebc60a0d566d7e66832882152d9872af55c8a85417d20900f  static/app.js
+da60668bd624d49db2a6deaa13b3db3f59f12ff276961685159c38c312a17f9a  static/console.js
+
+[1] node --check static/app.js (script 模式)
+EXIT=0
+
+[2] node --check console.js (module 模式, 复制为 .mjs)
+EXIT=0
+
+=== 复查轮 2026-11-03 01:16:30 · node v24.18.0 ===
+# 复查项: setLoginBusy (static/app.js:335-341) 使用 replaceChildren(...[...].filter(Boolean)) 避免 null 文本节点
+--- sha256 ---
+19db925cb1d6183b444a54b959e042921024d9f907610af0a81d2efdb518ea0f  static/app.js
+da60668bd624d49db2a6deaa13b3db3f59f12ff276961685159c38c312a17f9a  static/console.js
+--- node --check static/app.js ---
+EXIT=0

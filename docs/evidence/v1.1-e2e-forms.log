@@ -1,0 +1,46 @@
+Traceback (most recent call last):
+  File "/Users/sky/vm-platform/tests/e2e_form_regressions.py", line 69, in <module>
+    main()
+    ~~~~^^
+  File "/Users/sky/vm-platform/tests/e2e_form_regressions.py", line 38, in main
+    wait('!document.querySelector("#app").hidden && document.querySelector("#host-select option[value=local]")')
+    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/sky/vm-platform/tests/e2e_form_regressions.py", line 30, in wait
+    raise AssertionError('UI fixture state did not become ready')
+AssertionError: UI fixture state did not become ready
+
+===== ROUND2 rerun 2026-11-03T02:57:25 (identical command; first attempt failed waiting #host-select option[value=local]) =====
+Traceback (most recent call last):
+  File "/Users/sky/vm-platform/tests/e2e_form_regressions.py", line 69, in <module>
+    main()
+    ~~~~^^
+  File "/Users/sky/vm-platform/tests/e2e_form_regressions.py", line 38, in main
+    wait('!document.querySelector("#app").hidden && !!document.querySelector("#host-select option[value=local]")')
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/sky/vm-platform/tests/e2e_form_regressions.py", line 30, in wait
+    raise AssertionError('UI fixture state did not become ready')
+AssertionError: UI fixture state did not become ready
+
+===== ROUND3 clean rerun 2026-11-03T02:59:47 =====
+Traceback (most recent call last):
+  File "/Users/sky/vm-platform/tests/e2e_form_regressions.py", line 69, in <module>
+    main()
+    ~~~~^^
+  File "/Users/sky/vm-platform/tests/e2e_form_regressions.py", line 44, in main
+    wait('!!document.querySelector("#new-source option[value=\"/opt/vm-platform/images/debian-12-genericcloud-amd64.qcow2\"]")')
+    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/sky/vm-platform/tests/e2e_form_regressions.py", line 27, in wait
+    if evaluate(code):
+       ~~~~~~~~^^^^^^
+  File "/Users/sky/vm-platform/tests/e2e_form_regressions.py", line 22, in evaluate
+    return browser('eval', code).get('result')
+           ~~~~~~~^^^^^^^^^^^^^^
+  File "/Users/sky/vm-platform/tests/e2e_form_regressions.py", line 18, in browser
+    assert proc.returncode == 0 and data.get('success'), 'Regression browser action failed: ' + parts[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Regression browser action failed: eval
+=== ROUND4 2026-11-03T08:02:35Z commit=NONE(no-commits) cmd=tests/e2e_form_regressions.py ===
+PASS cloud-init toggle preserves selected non-first image
+PASS bridge-default host selects its independent configured NAT source
+PASS logout button invokes its handler exactly once
+EXIT=0

@@ -1,0 +1,127 @@
+{
+  "stage": "lifecycle",
+  "time": 1793686940,
+  "checks": [
+    {
+      "check": "created via browser",
+      "evidence": {
+        "uuid": "506cc484-fdda-494e-9681-5da8331b7e27",
+        "name": "platform-accept-20261103",
+        "host_id": "node150",
+        "state": "running"
+      }
+    },
+    {
+      "check": "NAT address obtained",
+      "evidence": [
+        "192.168.122.29"
+      ]
+    },
+    {
+      "check": "cloud-init custom user SSH and guest identity",
+      "evidence": {
+        "username": "vmcheck",
+        "hostname": "platform-accept-20261103",
+        "boot_id": "6dfb04dc-c99e-4eaa-9f05-0d03ed2e69fe",
+        "cpu_count": 2,
+        "cloud_init_finished": true,
+        "host_id": "node150",
+        "uuid": "506cc484-fdda-494e-9681-5da8331b7e27",
+        "ip": "192.168.122.29"
+      }
+    },
+    {
+      "check": "lifecycle suspend",
+      "evidence": {
+        "task": "457fb824364d4a0bbf34daf10226d78e",
+        "state": "paused"
+      }
+    },
+    {
+      "check": "lifecycle resume",
+      "evidence": {
+        "task": "0a8b55625aab4d3d949493dc92bb4a3e",
+        "state": "running"
+      }
+    },
+    {
+      "check": "guest reboot boot ID changed",
+      "evidence": {
+        "before": "6dfb04dc-c99e-4eaa-9f05-0d03ed2e69fe",
+        "after": "9ba8b3eb-ed62-49d5-9c5f-d1bd3c43aa25",
+        "uuid": "506cc484-fdda-494e-9681-5da8331b7e27"
+      }
+    },
+    {
+      "check": "lifecycle reboot",
+      "evidence": {
+        "task": "f81f082b554e4e7e90242d1bfbb7be86",
+        "state": "running"
+      }
+    },
+    {
+      "check": "lifecycle shutdown",
+      "evidence": {
+        "task": "70d72e7a2b354b7ab61a1acfaec6ec51",
+        "state": "shut off"
+      }
+    },
+    {
+      "check": "offline CPU memory disk growth",
+      "evidence": {
+        "task": "1e5c2dfb21844335b1190c5f603df08e",
+        "before": {
+          "vcpus": 2,
+          "memory_gb": 2,
+          "primary_disk_target": "vda",
+          "primary_disk_path": "/var/lib/libvirt/images/vms/platform-accept-20261103.qcow2",
+          "primary_disk_gb": 12,
+          "primary_disk_human": "12.0 GB"
+        },
+        "after": {
+          "vcpus": 3,
+          "memory_gb": 4,
+          "primary_disk_target": "vda",
+          "primary_disk_path": "/var/lib/libvirt/images/vms/platform-accept-20261103.qcow2",
+          "primary_disk_gb": 16,
+          "primary_disk_human": "16.0 GB"
+        }
+      }
+    },
+    {
+      "check": "lifecycle start",
+      "evidence": {
+        "task": "b2d0ccdcaa9a4c94876515d751cf55bd",
+        "state": "running"
+      }
+    },
+    {
+      "check": "lifecycle stop",
+      "evidence": {
+        "task": "940fb0fbe0214234b31e020037c1c79c",
+        "state": "shut off"
+      }
+    },
+    {
+      "check": "lifecycle start",
+      "evidence": {
+        "task": "542bdbb045474245b9836276fbcc4832",
+        "state": "running"
+      }
+    },
+    {
+      "check": "configured guest booted with three vCPUs",
+      "evidence": {
+        "username": "vmcheck",
+        "hostname": "platform-accept-20261103",
+        "boot_id": "7a0ea085-ca21-45a2-a613-4cc20f7d398b",
+        "cpu_count": 3,
+        "cloud_init_finished": true,
+        "host_id": "node150",
+        "uuid": "506cc484-fdda-494e-9681-5da8331b7e27",
+        "ip": "192.168.122.29"
+      }
+    }
+  ],
+  "passed": true
+}

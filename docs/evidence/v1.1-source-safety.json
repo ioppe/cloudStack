@@ -1,0 +1,19 @@
+{
+  "candidate_file_count": 185,
+  "current_credential_hits": 0,
+  "private_key_headers": 0,
+  "runtime_paths_excluded": true,
+  "service_logs": {
+    "192.168.0.30": {
+      "current_password_hits": 0,
+      "private_key_headers": 0
+    },
+    "192.168.0.150": {
+      "current_password_hits": 0,
+      "private_key_headers": 0
+    }
+  },
+  "remote": "https://github.com/ioppe/cloudStack.git",
+  "passed": true,
+  "forbidden_runtime_paths": 0
+}

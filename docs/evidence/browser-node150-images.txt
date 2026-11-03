@@ -1,0 +1,147 @@
+- generic
+  - complementary
+    - StaticText "云栈"
+      - InlineTextBox "云栈"
+    - StaticText "虚拟机平台"
+      - InlineTextBox "虚拟机平台"
+    - navigation "主导航" [ref=e3]
+      - button "主机 2" [ref=e9]
+        - StaticText "主机"
+          - InlineTextBox "主机"
+        - StaticText "2"
+          - InlineTextBox "2"
+      - button "虚拟机" [ref=e10]
+        - StaticText "虚拟机"
+          - InlineTextBox "虚拟机"
+      - button "镜像 1" [ref=e11]
+        - StaticText "镜像"
+          - InlineTextBox "镜像"
+        - StaticText "1"
+          - InlineTextBox "1"
+      - button "任务" [ref=e12]
+        - StaticText "任务"
+          - InlineTextBox "任务"
+    - generic
+      - StaticText "admin"
+        - InlineTextBox "admin"
+    - StaticText "原有虚拟机受保护 · 新建资源按主机隔离"
+      - InlineTextBox "原有虚拟机受保护 · 新建资源按主"
+      - InlineTextBox "机隔离"
+  - banner
+    - LabelText
+      - StaticText "目标主机"
+        - InlineTextBox "目标主机"
+    - combobox "目标主机" [expanded=false, ref=e4]: Ubuntu 150 · node150
+      - MenuListPopup
+        - option "Ubuntu 150 · node150" [selected, ref=e15]
+        - option "主机 30 · node30" [ref=e16]
+    - generic
+      - generic
+        - StaticText "在线"
+          - InlineTextBox "在线"
+    - button "刷新" [ref=e5]
+      - StaticText "刷新"
+        - InlineTextBox "刷新"
+    - generic
+      - StaticText "admin"
+        - InlineTextBox "admin"
+    - button "退出" [ref=e6]
+      - StaticText "退出"
+        - InlineTextBox "退出"
+  - main
+    - heading "镜像与存储 1" [level=1, ref=e7]
+      - StaticText "镜像与存储"
+        - InlineTextBox "镜像与存储"
+      - StaticText "1"
+        - InlineTextBox "1"
+    - paragraph
+      - StaticText "只读列出执行端可用的 ISO / 磁盘模板与磁盘目录剩余空间；模板不被修改。"
+        - InlineTextBox "只读列出执行端可用的 ISO / 磁盘模板与磁盘目录剩余空间；模板不被修改。"
+    - button "刷新" [ref=e8]
+      - StaticText "刷新"
+        - InlineTextBox "刷新"
+    - generic
+      - heading "镜像" [level=2, ref=e13]
+        - StaticText "镜像"
+          - InlineTextBox "镜像"
+      - StaticText "ISO 与磁盘模板只读"
+        - InlineTextBox "ISO 与磁盘模板只读"
+      - table
+        - rowgroup
+          - row
+            - columnheader "镜像" [ref=e25]
+              - StaticText "镜像"
+                - InlineTextBox "镜像"
+            - columnheader "类型" [ref=e26]
+              - StaticText "类型"
+                - InlineTextBox "类型"
+            - columnheader "大小" [ref=e27]
+              - StaticText "大小"
+                - InlineTextBox "大小"
+            - columnheader "格式" [ref=e28]
+              - StaticText "格式"
+                - InlineTextBox "格式"
+            - columnheader "系统" [ref=e29]
+              - StaticText "系统"
+                - InlineTextBox "系统"
+        - row
+          - cell "ubuntu-24.04-server-cloudimg-amd64.img /var/lib/libvirt/images/templates/ubuntu-24.04-server-cloudimg-amd64.img" [ref=e17]
+            - StaticText "ubuntu-24.04-server-cloudimg-amd64.img"
+              - InlineTextBox "ubuntu-24.04-server-cloudimg-amd64.img"
+            - generic
+              - StaticText "/var/lib/libvirt/images/templates/ubuntu-24.04-server-cloudimg-amd64.img"
+                - InlineTextBox "/var/lib/libvirt/images/templates/ubuntu-24.04-server-cloudimg"
+                - InlineTextBox "-amd64.img"
+          - cell "磁盘" [ref=e18]
+            - StaticText "磁盘"
+              - InlineTextBox "磁盘"
+          - cell "592.5 MB" [ref=e19]
+            - StaticText "592.5 MB"
+              - InlineTextBox "592.5 MB"
+          - cell "qcow2" [ref=e20]
+            - StaticText "qcow2"
+              - InlineTextBox "qcow2"
+          - cell "Ubuntu 24.04 - ubuntu-24.04-server-cloudimg-amd64.img · Ubuntu · 24.04" [ref=e21]
+            - StaticText "Ubuntu 24.04 - ubuntu-24.04-server-cloudimg-amd64.img · Ubuntu · 24.04"
+              - InlineTextBox "Ubuntu 24.04 - ubuntu-24.04-server-cloudimg-"
+              - InlineTextBox "amd64.img · Ubuntu · 24.04"
+    - generic
+      - heading "存储目录" [level=2, ref=e14]
+        - StaticText "存储目录"
+          - InlineTextBox "存储目录"
+      - StaticText "Ubuntu 150"
+        - InlineTextBox "Ubuntu 150"
+      - table
+        - rowgroup
+          - row
+            - columnheader "磁盘目录" [ref=e30]
+              - StaticText "磁盘目录"
+                - InlineTextBox "磁盘目录"
+            - columnheader "剩余" [ref=e31]
+              - StaticText "剩余"
+                - InlineTextBox "剩余"
+            - columnheader "容量" [ref=e32]
+              - StaticText "容量"
+                - InlineTextBox "容量"
+        - row
+          - cell "/var/lib/libvirt/images/vms" [ref=e22]
+            - StaticText "/var/lib/libvirt/images/vms"
+              - InlineTextBox "/var/lib/libvirt/images/vms"
+          - cell "已用 1.7 TB 可用" [ref=e23]
+            - StaticText "已用"
+              - InlineTextBox "已用"
+            - StaticText "1.7 TB 可用"
+              - InlineTextBox "1.7 TB 可用"
+          - cell "1829.7 GiB" [ref=e24]
+            - StaticText "1829.7 GiB"
+              - InlineTextBox "1829.7 GiB"
+    - StaticText "镜像目录：/var/lib/libvirt/images/templates"
+      - InlineTextBox "镜像目录：/var/lib/libvirt/images/templates"
+- generic
+- status
+  - StaticText "已保存主机登记"
+    - InlineTextBox "已保存主机登记"
+  - button "关闭通知" [ref=e1]
+  - StaticText "已保存主机登记"
+    - InlineTextBox "已保存主机登记"
+  - button "关闭通知" [ref=e2]

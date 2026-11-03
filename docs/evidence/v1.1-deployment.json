@@ -1,0 +1,65 @@
+{
+  "core_hashes": {
+    "controller.py": "6e2d835eefc0239cbb0e3fa1d690a54428fbc7e0d56cc8c44b372e30a5b16877",
+    "worker.py": "a552980fd14e11819581bec376e9e0b16c2c26922315f27dd5d2c1170b4afe11",
+    "vmops.py": "5bbf7747870ac3e129b850cb43ba476952fbc114c3848376bd45599e7a24f930",
+    "static/app.js": "5581d153e6140e2fc18ffc7df5a41341d6a7a2ab243b216c65f91f24b62788e8",
+    "static/index.html": "ad8f6c129af2e1f95b8c72cef7a11ec07d0cada30e196ed35c990e09bea0ee12"
+  },
+  "networks": {
+    "node150": {
+      "bridges": [
+        "virbr0",
+        "br0"
+      ],
+      "libvirt_networks": [
+        {
+          "name": "default",
+          "state": "active"
+        }
+      ],
+      "default_bridge": "br0",
+      "default_network": "default",
+      "default_type": "network",
+      "default_source": "default"
+    },
+    "node30": {
+      "bridges": [
+        "br0",
+        "virbr0",
+        "docker0",
+        "br-612f7b10ae83",
+        "br-84114bedb4ee",
+        "br-a705b617c7fb"
+      ],
+      "libvirt_networks": [
+        {
+          "name": "default",
+          "state": "active"
+        }
+      ],
+      "default_bridge": "br0",
+      "default_network": "default",
+      "default_type": "bridge",
+      "default_source": "br0"
+    }
+  },
+  "test_round": "83 tests in all three Python runtimes",
+  "hosts": {
+    "192.168.0.150": {
+      "core_hashes_match": true,
+      "new_services": "active/enabled",
+      "backup": "/var/lib/vm-platform/backups/platform-code-1.0.tar.gz"
+    },
+    "192.168.0.30": {
+      "core_hashes_match": true,
+      "new_services": "active/enabled",
+      "backup": "/var/lib/vm-platform/backups/platform-code-1.0.tar.gz"
+    }
+  },
+  "health": {
+    "ok": true,
+    "version": "1.1.0"
+  },
+  "passed": true
+}

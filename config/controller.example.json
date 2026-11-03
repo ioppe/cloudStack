@@ -1,0 +1,14 @@
+{
+  "bind": "0.0.0.0",
+  "port": 8089,
+  "username": "admin",
+  "password_hash": "GENERATE_WITH_tools/bootstrap.py",
+  "db_path": "/var/lib/vm-platform/platform.db",
+  "ssh_key": "/etc/vm-platform/id_ed25519",
+  "known_hosts": "/etc/vm-platform/known_hosts",
+  "agent_config": "/etc/vm-platform/agent.json",
+  "hosts": [
+    {"id": "node30", "name": "主机 30", "address": "192.168.0.30", "transport": "local", "ssh_user": "root", "ssh_port": 22},
+    {"id": "node150", "name": "Ubuntu 150", "address": "192.168.0.150", "transport": "ssh", "ssh_user": "root", "ssh_port": 22}
+  ]
+}

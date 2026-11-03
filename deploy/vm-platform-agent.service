@@ -1,0 +1,27 @@
+[Unit]
+Description=VM Platform Agent (local libvirt execution endpoint)
+Documentation=file:/opt/vm-platform/docs/AGENT.md
+After=network-online.target libvirtd.service
+Wants=network-online.target libvirtd.service
+Requires=libvirtd.service
+
+[Service]
+Type=simple
+User=root
+Group=root
+Environment=VM_PLATFORM_AGENT_CONFIG=/etc/vm-platform/agent.json
+Environment=PYTHONUNBUFFERED=1
+ExecStart=/usr/bin/python3 /opt/vm-platform/worker.py --serve
+Restart=on-failure
+RestartSec=3
+TimeoutStopSec=20
+KillMode=mixed
+# /run/vm-platform 由 systemd 以 0700 创建；worker 在该目录内放 0600 的 agent.sock。
+RuntimeDirectory=vm-platform
+RuntimeDirectoryMode=0700
+UMask=0077
+PrivateTmp=yes
+LimitNOFILE=65536
+
+[Install]
+WantedBy=multi-user.target

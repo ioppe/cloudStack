@@ -1,0 +1,41 @@
+test_failed_remote_task_has_error_without_local_fallback (test_controller.HTTPTests.test_failed_remote_task_has_error_without_local_fallback) ... ok
+test_host_arguments_reject_shell_and_local_override (test_controller.HTTPTests.test_host_arguments_reject_shell_and_local_override) ... ok
+test_host_edit_remove_does_not_touch_worker_or_vms (test_controller.HTTPTests.test_host_edit_remove_does_not_touch_worker_or_vms) ... ok
+test_http_auth_and_csrf (test_controller.HTTPTests.test_http_auth_and_csrf) ... 127.0.0.1 "GET /api/hosts HTTP/1.1" 401 -
+127.0.0.1 "POST /api/hosts/node150/vms HTTP/1.1" 401 -
+127.0.0.1 "POST /api/login HTTP/1.1" 200 -
+127.0.0.1 "GET /api/hosts HTTP/1.1" 200 -
+127.0.0.1 "DELETE /api/hosts/node150 HTTP/1.1" 403 -
+127.0.0.1 "POST /api/logout HTTP/1.1" 403 -
+127.0.0.1 "POST /api/logout HTTP/1.1" 200 -
+127.0.0.1 "GET /api/hosts HTTP/1.1" 401 -
+ok
+test_password_hash_and_rejection (test_controller.HTTPTests.test_password_hash_and_rejection) ... ok
+test_restart_marks_uncertain_task_failed (test_controller.HTTPTests.test_restart_marks_uncertain_task_failed) ... ok
+test_running_task_prevents_retarget_or_unregister (test_controller.HTTPTests.test_running_task_prevents_retarget_or_unregister) ... ok
+test_selected_host_failure_does_not_break_other_host (test_controller.HTTPTests.test_selected_host_failure_does_not_break_other_host) ... 127.0.0.1 "POST /api/login HTTP/1.1" 200 -
+127.0.0.1 "GET /api/hosts/node150/status HTTP/1.1" 502 -
+127.0.0.1 "GET /api/hosts/node30/status HTTP/1.1" 200 -
+127.0.0.1 "GET /api/hosts/missing/status HTTP/1.1" 404 -
+ok
+test_sessions_persist_then_logout_invalidates (test_controller.HTTPTests.test_sessions_persist_then_logout_invalidates) ... ok
+test_static_path_cannot_expose_source_or_secrets (test_controller.HTTPTests.test_static_path_cannot_expose_source_or_secrets) ... 127.0.0.1 "GET /static/../controller.py HTTP/1.1" 404 -
+ok
+test_task_result_does_not_store_password_or_commands (test_controller.HTTPTests.test_task_result_does_not_store_password_or_commands) ... ok
+test_unknown_host_never_falls_back (test_controller.HTTPTests.test_unknown_host_never_falls_back) ... ok
+test_vnc_uses_selected_host_and_uuid (test_controller.HTTPTests.test_vnc_uses_selected_host_and_uuid) ... ok
+test_failed_remote_task_has_error_without_local_fallback (test_controller.PlatformTests.test_failed_remote_task_has_error_without_local_fallback) ... ok
+test_host_arguments_reject_shell_and_local_override (test_controller.PlatformTests.test_host_arguments_reject_shell_and_local_override) ... ok
+test_host_edit_remove_does_not_touch_worker_or_vms (test_controller.PlatformTests.test_host_edit_remove_does_not_touch_worker_or_vms) ... ok
+test_password_hash_and_rejection (test_controller.PlatformTests.test_password_hash_and_rejection) ... ok
+test_restart_marks_uncertain_task_failed (test_controller.PlatformTests.test_restart_marks_uncertain_task_failed) ... ok
+test_running_task_prevents_retarget_or_unregister (test_controller.PlatformTests.test_running_task_prevents_retarget_or_unregister) ... ok
+test_sessions_persist_then_logout_invalidates (test_controller.PlatformTests.test_sessions_persist_then_logout_invalidates) ... ok
+test_task_result_does_not_store_password_or_commands (test_controller.PlatformTests.test_task_result_does_not_store_password_or_commands) ... ok
+test_unknown_host_never_falls_back (test_controller.PlatformTests.test_unknown_host_never_falls_back) ... ok
+test_vnc_uses_selected_host_and_uuid (test_controller.PlatformTests.test_vnc_uses_selected_host_and_uuid) ... ok
+
+----------------------------------------------------------------------
+Ran 23 tests in 7.126s
+
+OK

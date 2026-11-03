@@ -1,0 +1,543 @@
+########## BASELINE 2026-11-03T05:36:01Z ##########
+--- local ---
+scratch=/Users/sky/.pi-desktop/scratch/import-codex-01a083f2-2ab3-7fc3-9172-db4835ca6d56
+=== HOSTBASELINE 2026-11-03T05:36:01Z ===
+hostname: sky
+kernel: 6.8.0-147-generic
+PRETTY_NAME="Ubuntu 24.04.5 LTS"
+--- netplan files ---
+total 12
+drwxr-xr-x   2 root root 4096 Nov  3 00:04 .
+drwxr-xr-x 108 root root 4096 Nov  3 00:05 ..
+-rw-------   1 root root  232 Nov  3 00:04 01-netcfg.yaml
+--- netplan sha256 ---
+970708daf1c44e6adfe1d2df7ae25e8b9bdb3787bad36d87da8bdbaf2be7a4ea  /etc/netplan/01-netcfg.yaml
+--- aggregate netplan hash ---
+2bf665a29df4b34ecc51260c20eea48e5805df52bc59c41f6a55a7761fc9b71e  -
+--- ip -brief addr ---
+lo               UNKNOWN        127.0.0.1/8 ::1/128 
+eno1np0          DOWN           
+eno2np1          UP             192.168.0.150/24 fe80::ae1f:6bff:feeb:a7b1/64 
+--- ip route ---
+default via 192.168.0.1 dev eno2np1 proto static 
+192.168.0.0/24 dev eno2np1 proto kernel scope link src 192.168.0.150 
+--- ip -6 route ---
+fe80::/64 dev eno2np1 proto kernel metric 256 pref medium
+--- resolv.conf ---
+# This is /run/systemd/resolve/stub-resolv.conf managed by man:systemd-resolved(8).
+# Do not edit.
+#
+# This file might be symlinked as /etc/resolv.conf. If you're looking at
+# /etc/resolv.conf and seeing this text, you have followed the symlink.
+#
+# This is a dynamic resolv.conf file for connecting local clients to the
+# internal DNS stub resolver of systemd-resolved. This file lists all
+# configured search domains.
+#
+# Run "resolvectl status" to see details about the uplink DNS servers
+# currently in use.
+#
+# Third party programs should typically not access this file directly, but only
+# through the symlink at /etc/resolv.conf. To manage man:resolv.conf(5) in a
+# different way, replace this symlink by a static file or a different symlink.
+#
+# See man:systemd-resolved.service(8) for details about the supported modes of
+# operation for /etc/resolv.conf.
+
+nameserver 127.0.0.53
+options edns0 trust-ad
+search .
+--- interfaces (proc) ---
+eno1np0 ac:1f:6b:eb:a7:b0 mtu=1500 state=down
+eno2np1 ac:1f:6b:eb:a7:b1 mtu=1500 state=up
+lo 00:00:00:00:00:00 mtu=65536 state=unknown
+--- virt support ---
+crw-rw----+ 1 root kvm 10, 232 Nov  2 23:57 /dev/kvm
+160
+nproc=80 mem=125GiB
+Filesystem                         Size  Used Avail Use% Mounted on
+/dev/mapper/ubuntu--vg-ubuntu--lv  1.8T  8.4G  1.7T   1% /
+/dev/mapper/ubuntu--vg-ubuntu--lv  1.8T  8.4G  1.7T   1% /
+--- existing libvirt binaries ---
+virsh -> MISSING
+virt-install -> MISSING
+qemu-system-x86_64 -> MISSING
+qemu-img -> MISSING
+genisoimage -> MISSING
+libvirtd -> MISSING
+--- dpkg virt pkgs ---
+--- libvirt service state ---
+inactive
+not-found
+--- existing libvirt networks ---
+bash: line 34: virsh: command not found
+--- ports 192.168.122 usage (conflict check base) ---
+192.168.122.1 via 192.168.0.1 dev eno2np1 src 192.168.0.150 uid 0 
+    cache 
+=== BASELINE END ===
+=== CONFLICT-CHECK 2026-11-03T05:36:21Z ===
+--- routes matching 192.168.122 ---
+none
+--- any iface in 192.168.122.0/24 ---
+eno2np1          UP             192.168.0.150/24 
+--- bridges ---
+no virbr/docker/br ifaces
+--- docker/podman ---
+docker: absent
+podman: absent
+--- listening 53/67 ---
+UNCONN 0      0         127.0.0.54:53        0.0.0.0:*    users:(("systemd-resolve",pid=1845,fd=16))
+UNCONN 0      0      127.0.0.53%lo:53        0.0.0.0:*    users:(("systemd-resolve",pid=1845,fd=14))
+--- proxy env ---
+no proxy env
+--- apt sources ---
+URIs: http://archive.ubuntu.com/ubuntu/
+Suites: noble noble-updates noble-backports
+URIs: http://security.ubuntu.com/ubuntu/
+Suites: noble-security
+URIs: http://cn.archive.ubuntu.com/ubuntu/
+Suites: noble noble-updates noble-backports
+URIs: http://security.ubuntu.com/ubuntu/
+Suites: noble-security
+--- apt proxy conf ---
+--- default route to internet (tcp 443 to ports.ubuntu/archive) ---
+archive.ubuntu.com:443 OK
+cloud-images.ubuntu.com:443 OK
+--- apparmor status ---
+apparmor enabled
+no libvirt apparmor profile yet
+=== CONFLICT-CHECK END ===
+rc_update=0
+--- candidate check ---
+qemu-kvm:
+  Candidate: (none)
+qemu-system-x86:
+  Candidate: 1:8.2.2+ds-0ubuntu1.18
+libvirt-daemon-system:
+  Candidate: 10.0.0-2ubuntu8.19
+virtinst:
+  Candidate: 1:4.1.0-3ubuntu0.1
+genisoimage:
+  Candidate: 9:1.1.11-3.5
+--- install ---
+Setting up libvirt-daemon dnsmasq configuration.
+Setting up gsettings-desktop-schemas (46.1-0ubuntu1) ...
+Processing triggers for libc-bin (2.39-0ubuntu8.9) ...
+Processing triggers for man-db (2.12.0-4build2) ...
+Processing triggers for libglib2.0-0t64:amd64 (2.80.0-6ubuntu3.9) ...
+Processing triggers for dbus (1.14.10-4ubuntu4.1) ...
+Setting up glib-networking:amd64 (2.80.0-1build1) ...
+Processing triggers for install-info (7.1-3build2) ...
+Setting up libsoup-3.0-0:amd64 (3.4.4-5ubuntu0.9) ...
+Setting up libosinfo-1.0-0:amd64 (1.11.0-2build3) ...
+Setting up gir1.2-libosinfo-1.0:amd64 (1.11.0-2build3) ...
+Setting up virtinst (1:4.1.0-3ubuntu0.1) ...
+Processing triggers for libc-bin (2.39-0ubuntu8.9) ...
+
+Running kernel seems to be up-to-date.
+
+The processor microcode seems to be up-to-date.
+
+No services need to be restarted.
+
+No containers need to be restarted.
+
+No user sessions are running outdated binaries.
+
+No VM guests are running outdated hypervisor (qemu) binaries on this host.
+rc_install=0
+=== APT END ===
+=== LIBVIRTD 2026-11-03T05:36:59Z ===
+rc=0
+libvirtd             active=active enabled=enabled
+libvirtd.socket      active=active enabled=enabled
+virtqemud            active=inactive enabled=not-found
+virtqemud.socket     active=inactive enabled=not-found
+virtnetworkd         active=inactive enabled=not-found
+--- versions ---
+QEMU emulator version 8.2.2 (Debian 1:8.2.2+ds-0ubuntu1.18)
+qemu-img version 8.2.2 (Debian 1:8.2.2+ds-0ubuntu1.18)
+10.0.0
+4.1.0
+genisoimage 1.1.11 (Linux)
+libvirtd (libvirt) 10.0.0
+--- virsh connectivity ---
+Compiled against library: libvirt 10.0.0
+Using library: libvirt 10.0.0
+Using API: QEMU 10.0.0
+Running hypervisor: QEMU 8.2.2
+
+CPU model:           x86_64
+CPU(s):              80
+CPU frequency:       800 MHz
+CPU socket(s):       1
+Core(s) per socket:  20
+Thread(s) per core:  2
+NUMA cell(s):        2
+Memory size:         131617916 KiB
+
+--- groups ---
+kvm:x:994:
+libvirt:x:110:sky
+uid=64055(libvirt-qemu) gid=994(kvm) groups=994(kvm),64055(libvirt-qemu)
+=== END ===
+=== DIRS+NET 2026-11-03T05:37:25Z ===
+--- pre-existing images dir ---
+total 8
+drwx--x--x 2 root root 4096 Sep 25 09:30 .
+drwxr-xr-x 7 root root 4096 Nov  3 00:36 ..
+drwx--x--x root:root /var/lib/libvirt/images
+--- create dirs ---
+drwx--x--x 4 root root 4096 Nov  3 00:37 /var/lib/libvirt/images
+drwxr-xr-x 2 root root 4096 Nov  3 00:37 /var/lib/libvirt/images/templates
+drwxr-xr-x 2 root root 4096 Nov  3 00:37 /var/lib/libvirt/images/vms
+--- libvirt-qemu readability ---
+templates: r-x OK
+--- default network state ---
+ Name      State      Autostart   Persistent
+----------------------------------------------
+ default   inactive   yes         yes
+
+--- default network XML summary ---
+<network>
+  <forward mode='nat'/>
+  <bridge name='virbr0' stp='on' delay='0'/>
+  <mac address='52:54:00:7b:b6:c8'/>
+  <ip address='192.168.122.1' netmask='255.255.255.0'>
+--- net-autostart + start ---
+Network default marked as autostarted
+
+error: Failed to start network default
+error: Unable to find 'dnsmasq' binary in $PATH: No such file or directory
+
+ Name      State      Autostart   Persistent
+----------------------------------------------
+ default   inactive   yes         yes
+
+Name:           default
+UUID:           d17e1f94-f903-4cbd-a1f4-3f8d6e749afa
+Active:         no
+Persistent:     yes
+Autostart:      yes
+Bridge:         virbr0
+
+--- virbr0 ---
+Device "virbr0" does not exist.
+no 192.168.122 route
+--- dnsmasq/iptables NAT ---
+inactive
+=== END ===
+=== DNSMASQ-FIX 2026-11-03T05:37:45Z ===
+dnsmasq-base:
+  Installed: (none)
+  Candidate: 2.91-0ubuntu0.24.04.2
+--- iptables present? ---
+/usr/sbin/iptables
+/usr/sbin/nft
+
+No services need to be restarted.
+
+No containers need to be restarted.
+
+No user sessions are running outdated binaries.
+
+No VM guests are running outdated hypervisor (qemu) binaries on this host.
+rc=0
+/usr/sbin/dnsmasq
+Dnsmasq version 2.91  Copyright (c) 2000-2025 Simon Kelley
+--- retry net-start ---
+Network default started
+
+ Name      State    Autostart   Persistent
+--------------------------------------------
+ default   active   yes         yes
+
+Active:         yes
+Persistent:     yes
+Autostart:      yes
+Bridge:         virbr0
+--- virbr0 + route ---
+virbr0           DOWN           192.168.122.1/24 
+192.168.122.0/24 dev virbr0 proto kernel scope link src 192.168.122.1 linkdown 
+--- dnsmasq listening on 192.168.122.1 ---
+UNCONN 0      0       192.168.122.1:53        0.0.0.0:*    users:(("dnsmasq",pid=125209,fd=5))       
+--- iptables nat ---
+-A LIBVIRT_PRT -s 192.168.122.0/24 -d 224.0.0.0/24 -j RETURN
+-A LIBVIRT_PRT -s 192.168.122.0/24 -d 255.255.255.255/32 -j RETURN
+-A LIBVIRT_PRT -s 192.168.122.0/24 ! -d 192.168.122.0/24 -p tcp -j MASQUERADE --to-ports 1024-65535
+-A LIBVIRT_PRT -s 192.168.122.0/24 ! -d 192.168.122.0/24 -p udp -j MASQUERADE --to-ports 1024-65535
+-A LIBVIRT_PRT -s 192.168.122.0/24 ! -d 192.168.122.0/24 -j MASQUERADE
+--- libvirt dnsmasq unit/pid ---
+ Expiry Time   MAC address   Protocol   IP address   Hostname   Client ID or DUID
+-----------------------------------------------------------------------------------
+
+=== END ===
+=== FORWARD/SYSCTL 2026-11-03T05:38:06Z ===
+net.ipv4.ip_forward = 1
+-A FORWARD -j LIBVIRT_FWX
+-A FORWARD -j LIBVIRT_FWI
+-A FORWARD -j LIBVIRT_FWO
+--- fetch SHA256SUMS (noble) ---
+SHA256SUMS OK
+66 SHA256SUMS.noble
+--- start background download ---
+pid=126490
+total 8
+-rw-r--r-- 1 root root 7843 Nov  3 00:38 SHA256SUMS.noble
+=== DL-DIAG 2026-11-03T05:38:23Z ===
+--- SHA256SUMS lines with amd64 img ---
+00b9709d33192c8cfb987fd9522e9a035c73fd125c5a479b125b5d26ffafec67 *ubuntu-24.04-server-cloudimg-amd64.squashfs
+04e8f2461a16a44e78a370284471f29616cdd9baf1893df25807b71f985b6c94 *ubuntu-24.04-server-cloudimg-amd64.img
+2ce4f170f87f3b8e175dbacbde5c82ee9abcac5f2005060b68b698330586204c *ubuntu-24.04-server-cloudimg-amd64.release.20260926.20261017.image_changelog.json
+68444fae3ee6e566917b9f4aec6bf94154d532cd3bd51ed63e308a56ece7d60a *ubuntu-24.04-server-cloudimg-amd64-azure.vhd.manifest
+78d7da6ab1556daa6c0f685bf4e0e3da36395f170e8fad411d7ba032f14d08c2 *ubuntu-24.04-server-cloudimg-amd64.manifest
+9a1e3959c9f4ad9d4752101fd4ff9a43191fb7d72e61fa20e033f9fd235ce794 *ubuntu-24.04-server-cloudimg-amd64.vmdk
+c68ae48bfaa09f4340fdaaeb1fb896ee1a621820eeef0f99e4197fb775483545 *ubuntu-24.04-server-cloudimg-amd64.daily.20260926.20261017.image_changelog.json
+cde3ca6a5aabe89702456cc5af69e2336600ce13c18898aba27e7212e3474e3f *ubuntu-24.04-server-cloudimg-amd64-azure.vhd.tar.gz
+ce599f89777c6eaa1a3156698f004b7938dcc16680132d5f10da1269770e74a2 *ubuntu-24.04-server-cloudimg-amd64.ova
+d97a0d4090578cb4d2e3bcd332aa4393486e0b522da51347789a64b3fc9ce7dd *ubuntu-24.04-server-cloudimg-amd64-root.manifest
+--- dl log ---
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0   286    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+curl: (22) The requested URL returned error: 404
+--- files ---
+total 8
+-rw-r--r-- 1 root root 7843 Nov  3 00:38 SHA256SUMS.noble
+--- curl process ---
+no curl running
+=== DL-START 2026-11-03T05:38:30Z ===
+pid=127966
+-rw-r--r-- 1 root root 60440576 Nov  3 00:38 ubuntu-24.04-server-cloudimg-amd64.img.part
+9k      0  0:01:48  0:00:08  0:01:40 9305k  8  592M    8 51.1M    0     0  5238k      0  0:01:55  0:00:10  0:01:45 8007k  9  592M    9 54.0M    0     0  4965k      0  0:02:02  0:00:11  0:01:51 5916k=== VERIFY 2026-11-03T05:41:38Z ===
+expected: 
+actual  : 04e8f2461a16a44e78a370284471f29616cdd9baf1893df25807b71f985b6c94
+check: sha256sum: /var/tmp/expect.sum: no properly formatted checksum lines found
+HASH MISMATCH - keeping .part
+--- qemu-img info ---
+--- ls ---
+qemu-img: Could not open 'ubuntu-24.04-server-cloudimg-amd64.img': Could not open 'ubuntu-24.04-server-cloudimg-amd64.img': No such file or directory
+total 606736
+-rw-r--r-- 1 root root      7843 Nov  3 00:38 SHA256SUMS.noble
+-rw-r--r-- 1 root root 621284352 Nov  3 00:41 ubuntu-24.04-server-cloudimg-amd64.img.part
+--- libvirt-qemu read test on final image ---
+head: cannot open '/var/lib/libvirt/images/templates/ubuntu-24.04-server-cloudimg-amd64.img' for reading: No such file or directory
+--- apparmor canonical path coverage ---
+=== END ===
+=== VERIFY2 2026-11-03T05:41:50Z ===
+expected: 04e8f2461a16a44e78a370284471f29616cdd9baf1893df25807b71f985b6c94
+actual  : 04e8f2461a16a44e78a370284471f29616cdd9baf1893df25807b71f985b6c94
+HASH MATCH -> promote
+--- qemu-img info ---
+image: ubuntu-24.04-server-cloudimg-amd64.img
+file format: qcow2
+virtual size: 3.5 GiB (3758096384 bytes)
+disk size: 593 MiB
+cluster_size: 65536
+Format specific information:
+    compat: 1.1
+    compression type: zlib
+    lazy refcounts: false
+    refcount bits: 16
+    corrupt: false
+    extended l2: false
+Child node '/file':
+    filename: ubuntu-24.04-server-cloudimg-amd64.img
+    protocol type: file
+    file length: 593 MiB (621284352 bytes)
+    disk size: 593 MiB
+--- ls -l templates ---
+total 606736
+-rw-r--r-- 1 root root      7843 Nov  3 00:38 SHA256SUMS.noble
+-r--r--r-- 1 root root 621284352 Nov  3 00:41 ubuntu-24.04-server-cloudimg-amd64.img
+--- libvirt-qemu read magic ---
+   Q   F   I 373
+--- apparmor libvirt profiles ---
+abstractions
+libvirt
+usr.lib.libvirt.virt-aa-helper
+usr.sbin.libvirtd
+/etc/apparmor.d/usr.lib.libvirt.virt-aa-helper:58:  /var/lib/libvirt/images/ r,
+/etc/apparmor.d/usr.lib.libvirt.virt-aa-helper:59:  /var/lib/libvirt/images/** r,
+=== END ===
+=== CLOSURE 2026-11-03T05:42:13Z ===
+--- netplan hash (baseline 970708da...a4ea / agg 2bf665a2...b71e) ---
+970708daf1c44e6adfe1d2df7ae25e8b9bdb3787bad36d87da8bdbaf2be7a4ea  /etc/netplan/01-netcfg.yaml
+2bf665a29df4b34ecc51260c20eea48e5805df52bc59c41f6a55a7761fc9b71e  -
+--- ip route / addr ---
+lo               UNKNOWN        127.0.0.1/8 ::1/128 
+eno1np0          DOWN           
+eno2np1          UP             192.168.0.150/24 fe80::ae1f:6bff:feeb:a7b1/64 
+virbr0           DOWN           192.168.122.1/24 
+default via 192.168.0.1 dev eno2np1 proto static 
+192.168.0.0/24 dev eno2np1 proto kernel scope link src 192.168.0.150 
+192.168.122.0/24 dev virbr0 proto kernel scope link src 192.168.122.1 linkdown 
+fe80::/64 dev eno2np1 proto kernel metric 256 pref medium
+--- apparmor abstraction for images ---
+306:  owner /var/lib/libvirt/qemu/nvram/*_VARS.fd rwk,
+307:  owner /var/lib/libvirt/qemu/nvram/*_VARS.ms.fd rwk,
+total 16
+drwxr-xr-x  2 root root 4096 Nov  3 00:36 .
+drwxr-xr-x 10 root root 4096 Nov  3 00:36 ..
+-rw-r--r--  1 root root  342 Jan 15  2024 TEMPLATE.lxc
+-rw-r--r--  1 root root  192 Jan 15  2024 TEMPLATE.qemu
+--- ip_forward persistence ---
+net.ipv4.ip_forward = 1
+/etc/sysctl.conf
+--- qemu.conf runtime identity/security ---
+swtpm_user = "swtpm"
+swtpm_group = "swtpm"
+--- KVM domain capability ---
+  <domain>kvm</domain>
+  <machine>pc-i440fx-noble-v2</machine>
+  <arch>x86_64</arch>
+      <model usable='yes' vendor='unknown'>kvm64</model>
+      <model usable='yes' vendor='unknown'>kvm32</model>
+--- networks/vms final ---
+ Name      State    Autostart   Persistent
+--------------------------------------------
+ default   active   yes         yes
+
+ Id   Name   State
+--------------------
+
+--- external listening TCP (top) ---
+State  Recv-Q Send-Q Local Address:Port Peer Address:PortProcess                                                  
+LISTEN 0      4096         0.0.0.0:22        0.0.0.0:*    users:(("sshd",pid=24796,fd=3),("systemd",pid=1,fd=242))
+LISTEN 0      4096            [::]:22           [::]:*    users:(("sshd",pid=24796,fd=4),("systemd",pid=1,fd=243))
+--- package versions ---
+dnsmasq-base 2.91-0ubuntu0.24.04.2
+genisoimage 9:1.1.11-3.5
+libvirt-clients 10.0.0-2ubuntu8.19
+libvirt-daemon 10.0.0-2ubuntu8.19
+libvirt-daemon-system 10.0.0-2ubuntu8.19
+qemu-system-x86 1:8.2.2+ds-0ubuntu1.18
+qemu-utils 1:8.2.2+ds-0ubuntu1.18
+virtinst 1:4.1.0-3ubuntu0.1
+--- services ---
+libvirtd           active/enabled
+libvirtd.socket    active/enabled
+libvirt-guests     active/enabled
+=== END ===
+=== QEMU-ID-APPARMOR 2026-11-03T05:42:26Z ===
+--- qemu.conf user/group/security ---
+486:#       security_driver = [ "selinux", "apparmor" ]
+493:#security_driver = "selinux"
+498:#security_default_confined = 1
+526:#       user = "qemu"   # A user named "qemu"
+527:#       user = "+0"     # Super user (uid=0)
+528:#       user = "100"    # A user named "100" or a user with uid=100
+530:#user = "libvirt-qemu"
+534:#group = "kvm"
+539:#dynamic_ownership = 1
+544:#remember_owner = 1
+--- libvirtd.conf security ---
+183:auth_unix_rw = "none"
+--- TEMPLATE.qemu ---
+#
+# This profile is for the domain whose UUID matches this file.
+#
+
+#include <tunables/global>
+
+profile LIBVIRT_TEMPLATE flags=(attach_disconnected) {
+  #include <abstractions/libvirt-qemu>
+}
+--- virt-aa-helper cache allowlist ---
+  # as storage pools
+  audit deny @{HOME}/.* mrwkl,
+  audit deny @{HOME}/.*/ rw,
+  audit deny @{HOME}/.*/** mrwkl,
+  audit deny @{HOME}/bin/ rw,
+  audit deny @{HOME}/bin/** mrwkl,
+  @{HOME}/ r,
+  @{HOME}/** r,
+  /var/lib/libvirt/images/ r,
+  /var/lib/libvirt/images/** r,
+  # nova base images (LP: #907269)
+  /var/lib/nova/images/** r,
+  /var/lib/nova/instances/_base/** r,
+  # nova snapshots (LP: #1244694)
+  /var/lib/nova/instances/snapshots/** r,
+  # nova base/snapshot files in snapped nova (LP: #1644507)
+  /var/snap/nova-hypervisor/common/instances/_base/** r,
+  /var/snap/nova-hypervisor/common/instances/snapshots/** r,
+  # eucalyptus (LP: #564914)
+  /var/lib/eucalyptus/instances/**/disk* r,
+  # eucalyptus loader (LP: #637544)
+--- virt-aa-helper binary ---
+=== END ===
+=== AA-HELPER 2026-11-03T05:42:41Z ===
+ls: cannot access '/usr/libexec/virt-aa-helper': No such file or directory
+-rwxr-xr-x 1 root root 35696 Sep 25 09:30 /usr/lib/libvirt/virt-aa-helper
+/usr/lib/libvirt/virt-aa-helper
+ii apparmor 4.0.1really4.0.1-0ubuntu0.24.04.7
+ii libapparmor1:amd64 4.0.1really4.0.1-0ubuntu0.24.04.7
+--- libvirtd apparmor profile loaded ---
+   libvirtd
+   libvirtd//qemu_bridge_helper
+   /usr/sbin/libvirtd (140581) libvirtd
+--- virt-aa-helper invocation path used by libvirt ---
+=== END ===
+=== NET-DETAIL 2026-11-03T05:42:51Z ===
+<network>
+  <name>default</name>
+  <uuid>d17e1f94-f903-4cbd-a1f4-3f8d6e749afa</uuid>
+  <forward mode='nat'>
+    <nat>
+      <port start='1024' end='65535'/>
+    </nat>
+  </forward>
+  <bridge name='virbr0' stp='on' delay='0'/>
+  <mac address='52:54:00:7b:b6:c8'/>
+  <ip address='192.168.122.1' netmask='255.255.255.0'>
+    <dhcp>
+      <range start='192.168.122.2' end='192.168.122.254'/>
+    </dhcp>
+  </ip>
+</network>
+
+--- forward chain details ---
+--- sysctl ip_forward origin ---
+/etc/sysctl.conf:28:#net.ipv4.ip_forward=1
+/etc/sysctl.d/99-sysctl.conf:28:#net.ipv4.ip_forward=1
+--- disk free ---
+/dev/mapper/ubuntu--vg-ubuntu--lv  1.8T  9.1G  1.7T   1% /
+=== END ===
+=== FINAL-READINESS 2026-11-03T05:43:20Z ===
+netplan: 970708daf1c44e6adfe1d2df7ae25e8b9bdb3787bad36d87da8bdbaf2be7a4ea
+netplan_agg: 2bf665a29df4b34ecc51260c20eea48e5805df52bc59c41f6a55a7761fc9b71e
+services:
+  libvirtd         active/enabled
+  libvirtd.socket  active/enabled
+  libvirt-guests   active/enabled
+network:
+   Name      State    Autostart   Persistent
+  --------------------------------------------
+   default   active   yes         yes
+  
+vms:
+   Id   Name   State
+  --------------------
+  
+images:
+  total 606736
+  -rw-r--r-- 1 root root      7843 Nov  3 00:38 SHA256SUMS.noble
+  -r--r--r-- 1 root root 621284352 Nov  3 00:41 ubuntu-24.04-server-cloudimg-amd64.img
+dirs:
+  drwx--x--x 4 root root 4096 Nov  3 00:37 /var/lib/libvirt/images
+  drwxr-xr-x 2 root root 4096 Nov  3 00:41 /var/lib/libvirt/images/templates
+  drwxr-xr-x 2 root root 4096 Nov  3 00:37 /var/lib/libvirt/images/vms
+qemu-img:
+  file format: qcow2
+  virtual size: 3.5 GiB (3758096384 bytes)
+  disk size: 593 MiB
+  Format specific information:
+      disk size: 593 MiB
+external TCP:
+  0.0.0.0:22
+  [::]:22
+cleanup:
+  no .part leftovers
+  no curl running
+=== END ===

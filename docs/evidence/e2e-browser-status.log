@@ -1,0 +1,3 @@
+### stage=browser-status started_utc=2026-11-03T06:29:40Z session=vm-platform-acceptance reuse_login=yes
+PASS both host rows show real online resources/counts after cleanup; task page shows success/failure reasons
+### stage=browser-status EXIT=0 finished_utc=2026-11-03T06:29:44Z

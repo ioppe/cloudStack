@@ -1,0 +1,59 @@
+e4027995a691c9ef420a637a5b6fb73e079f3bdbb44eb1deb9ae6d20e9e7942f  server.py
+a0e01be27f87d541cbf7762b3953d9cbfaf07426e230257c2b0612725d32ae48  config.json
+d07aeea64ffd46c502b3d7b0b0dd60f7a9fd5a2036293b5356c470886f57844c  vm-panel.db
+active
+ Id    名称                         状态
+----------------------------------------------------
+ 1     centos                         running
+ 2     ubuntu-100                     running
+ 5     ubuntu                         running
+ -     chatgpt                        关闭
+ -     euler                          关闭
+ -     ubuntu-200                     关闭
+ -     ubuntu-300                     关闭
+ -     ubuntu-400                     关闭
+ -     ubuntu1                        关闭
+ -     ubuntu2                        关闭
+ -     ubuntu2204                     关闭
+ -     ubuntu3                        关闭
+ -     ubuntu4                        关闭
+ -     ubuntu5                        关闭
+
+92d1d752-4b47-4550-b470-fb1e96e6f927
+
+a66dd284-40cc-48a4-89b6-84a00843ede6
+
+503a9548-ef36-49cd-b471-c9ebfe9ff534
+
+4f39ecd4-9972-48ef-9761-4a60d80614a8
+
+24b56a05-54dd-4e8f-ab7b-fe0dfa71f0bc
+
+70d81301-0711-45d2-8976-7bdd4988dd5d
+
+e654be19-7d5c-44ea-9fd2-13a03640bf18
+
+684bc0cd-41cf-479c-9681-106f308a39bd
+
+e0fd39e0-b9c4-479b-ae50-b76243cd80e3
+
+d292d954-2ad2-4a93-81e9-ca993f6e1aea
+
+287e5832-97e5-418b-aed6-099f4fe9dff5
+
+964dd391-4597-424f-a5d6-1255d638ade5
+
+3d40f33b-1ca3-46fb-ba7f-4e6d6d8093c1
+
+4b5401ef-1ec8-46f4-b966-45b0458fd7e6
+
+/opt/vm-panel/static/novnc/core/ra2.js
+/opt/vm-panel/static/novnc/core/display.js
+/opt/vm-panel/static/novnc/core/inflator.js
+/opt/vm-panel/static/novnc/core/deflator.js
+/opt/vm-panel/static/novnc/core/encodings.js
+/opt/vm-panel/static/novnc/core/base64.js
+/opt/vm-panel/static/novnc/core/websock.js
+/opt/vm-panel/static/novnc/core/rfb.js
+/opt/vm-panel/static/novnc/package.json
+/opt/vm-panel/static/novnc/LICENSE.txt

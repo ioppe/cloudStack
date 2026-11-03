@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>控制台 · 云栈 虚拟机平台</title>
+  <link rel="stylesheet" href="/static/app.css">
+</head>
+<body class="console-body">
+  <header class="console-bar">
+    <span class="console-bar__brand">云栈 · 控制台</span>
+
+    <div class="console-bar__id">
+      <span class="console-bar__vm" id="vm-name" data-testid="console-vm-name">读取中…</span>
+      <span class="console-bar__meta" id="vm-meta" data-testid="console-vm-meta">—</span>
+    </div>
+
+    <span class="console-bar__spacer"></span>
+
+    <span class="pill pill--busy" id="console-status" data-testid="console-status">
+      <span class="pill__dot" aria-hidden="true"></span>
+      <span id="console-status-text">连接中…</span>
+    </span>
+
+    <button class="btn btn--sm" type="button" id="btn-cad" data-testid="console-ctrl-alt-del"
+            title="向 guest 发送 Ctrl+Alt+Del" disabled>
+      Ctrl+Alt+Del
+    </button>
+    <button class="btn btn--sm" type="button" id="btn-scale" data-testid="console-scale"
+            aria-pressed="true" title="在适应窗口与原始尺寸间切换">
+      适应窗口
+    </button>
+    <button class="btn btn--sm" type="button" id="btn-reconnect" data-testid="console-reconnect">
+      重新连接
+    </button>
+    <button class="btn btn--sm btn--primary" type="button" id="btn-close" data-testid="console-close">
+      关闭窗口
+    </button>
+  </header>
+
+  <main class="console-stage" data-testid="console-stage">
+    <div class="console-stage__screen" id="screen" data-testid="console-screen"></div>
+
+    <div class="console-overlay" id="overlay" data-testid="console-overlay">
+      <div class="console-overlay__card">
+        <span class="empty__icon" id="overlay-icon" aria-hidden="true"></span>
+        <span class="console-overlay__title" id="overlay-title" data-testid="console-overlay-title">正在连接</span>
+        <span class="console-overlay__msg" id="overlay-msg" data-testid="console-overlay-msg">正在校验会话与虚拟机身份…</span>
+        <div class="empty__actions" id="overlay-actions"></div>
+        <form class="field" id="vnc-password-form" hidden data-testid="console-password-form" style="width:100%;max-width:260px">
+          <label class="field__label" for="vnc-password">VNC 密码</label>
+          <input class="input" id="vnc-password" type="password" autocomplete="off" data-testid="console-password">
+          <button class="btn btn--primary btn--sm" type="submit" data-testid="console-password-submit">发送</button>
+        </form>
+      </div>
+    </div>
+  </main>
+
+  <footer class="console-foot">
+    <span id="foot-source" data-testid="console-source">—</span>
+    <span class="spacer"></span>
+    <span>键盘输入直接送入 guest；如被浏览器截获，点击画面后重试。</span>
+  </footer>
+
+  <script type="module" src="/static/console.js"></script>
+  <script>
+    /* 仅纯静态预览（file://）时生效：控制器部署下资源始终来自 /static/ */
+    if (location.protocol === 'file:') {
+      document.querySelectorAll('link[href^="/static/"], script[src^="/static/"]').forEach(function (n) {
+        var attr = n.tagName === 'LINK' ? 'href' : 'src';
+        n.setAttribute(attr, n.getAttribute(attr).slice('/static/'.length));
+      });
+    }
+  </script>
+</body>
+</html>

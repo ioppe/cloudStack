@@ -1,0 +1,534 @@
+- generic
+  - complementary
+    - StaticText "云栈"
+      - InlineTextBox "云栈"
+    - StaticText "虚拟机平台"
+      - InlineTextBox "虚拟机平台"
+    - navigation "主导航" [ref=e1]
+      - button "主机 2" [ref=e8]
+        - StaticText "主机"
+          - InlineTextBox "主机"
+        - StaticText "2"
+          - InlineTextBox "2"
+      - button "虚拟机 1" [ref=e9]
+        - StaticText "虚拟机"
+          - InlineTextBox "虚拟机"
+        - StaticText "1"
+          - InlineTextBox "1"
+      - button "镜像" [ref=e10]
+        - StaticText "镜像"
+          - InlineTextBox "镜像"
+      - button "任务" [ref=e11]
+        - StaticText "任务"
+          - InlineTextBox "任务"
+    - generic
+      - StaticText "admin"
+        - InlineTextBox "admin"
+    - StaticText "原有虚拟机受保护 · 新建资源按主机隔离"
+      - InlineTextBox "原有虚拟机受保护 · 新建资源按主"
+      - InlineTextBox "机隔离"
+  - banner
+    - LabelText
+      - StaticText "目标主机"
+        - InlineTextBox "目标主机"
+    - combobox "目标主机" [expanded=false, ref=e2]: Ubuntu 150 · node150
+      - MenuListPopup
+        - option "Ubuntu 150 · node150" [selected, ref=e12]
+        - option "主机 30 · node30" [ref=e13]
+    - generic
+      - generic
+        - StaticText "在线"
+          - InlineTextBox "在线"
+    - button "刷新" [ref=e3]
+      - StaticText "刷新"
+        - InlineTextBox "刷新"
+    - generic
+      - StaticText "admin"
+        - InlineTextBox "admin"
+    - button "修改密码" [ref=e4]
+      - StaticText "修改密码"
+        - InlineTextBox "修改密码"
+    - button "退出" [ref=e5]
+      - StaticText "退出"
+        - InlineTextBox "退出"
+  - main
+    - heading "任务 15" [level=1, ref=e6]
+      - StaticText "任务"
+        - InlineTextBox "任务"
+      - StaticText "15"
+        - InlineTextBox "15"
+    - paragraph
+      - StaticText "创建、生命周期与配置都以后台任务执行；页面打开时每 3 秒自动轮询。"
+        - InlineTextBox "创建、生命周期与配置都以后台任务执行；页面打开时每 3 秒自动轮询。"
+    - button "立即刷新" [ref=e7]
+      - StaticText "立即刷新"
+        - InlineTextBox "立即刷新"
+    - StaticText "自动轮询 3s"
+      - InlineTextBox "自动轮询 3s"
+    - StaticText "最近更新 02:55:05"
+      - InlineTextBox "最近更新 02:55:05"
+    - StaticText "0 个执行中"
+      - InlineTextBox "0 个执行中"
+    - generic
+      - table
+        - rowgroup
+          - row
+            - columnheader "状态" [ref=e104]
+              - StaticText "状态"
+                - InlineTextBox "状态"
+            - columnheader "任务" [ref=e105]
+              - StaticText "任务"
+                - InlineTextBox "任务"
+            - columnheader "主机" [ref=e106]
+              - StaticText "主机"
+                - InlineTextBox "主机"
+            - columnheader "虚拟机" [ref=e107]
+              - StaticText "虚拟机"
+                - InlineTextBox "虚拟机"
+            - columnheader "时间" [ref=e108]
+              - StaticText "时间"
+                - InlineTextBox "时间"
+            - columnheader "错误" [ref=e109]
+              - StaticText "错误"
+                - InlineTextBox "错误"
+        - row
+          - cell "成功" [ref=e14]
+            - StaticText "成功"
+              - InlineTextBox "成功"
+          - cell "创建虚拟机 49f629afa7f142a88e94f6ab4835551b" [ref=e15]
+            - StaticText "创建虚拟机"
+              - InlineTextBox "创建虚拟机"
+            - StaticText "49f629afa7f142a88e94f6ab4835551b"
+              - InlineTextBox "49f629afa7f142a88e94f6ab4835551b"
+          - cell "Ubuntu 150 node150" [ref=e16]
+            - StaticText "Ubuntu 150"
+              - InlineTextBox "Ubuntu 150"
+            - StaticText "node150"
+              - InlineTextBox "node150"
+          - cell "platform-bridge-accept-20261103 10cd51f6-d6e5-486b-b07d-0227ff05bee9" [ref=e17]
+            - StaticText "platform-bridge-accept-20261103"
+              - InlineTextBox "platform-bridge-accept-"
+              - InlineTextBox "20261103"
+            - StaticText "10cd51f6-d6e5-486b-b07d-0227ff05bee9"
+              - InlineTextBox "10cd51f6-d6e5-486b-b07d-02"
+              - InlineTextBox "27ff05bee9"
+          - cell "11-03 02:54:33完成 11-03 02:54:46" [ref=e18]
+            - StaticText "11-03 02:54:33"
+              - InlineTextBox "11-03 02:54:33"
+            - StaticText "完成 11-03 02:54:46"
+              - InlineTextBox "完"
+              - InlineTextBox "成 11-03 02:54:46"
+          - cell "—" [ref=e19]
+            - StaticText "—"
+              - InlineTextBox "—"
+        - row
+          - cell "成功" [ref=e20]
+            - StaticText "成功"
+              - InlineTextBox "成功"
+          - cell "删除虚拟机 7e634ea36191406392c69abafd1fa721" [ref=e21]
+            - StaticText "删除虚拟机"
+              - InlineTextBox "删除虚拟机"
+            - StaticText "7e634ea36191406392c69abafd1fa721"
+              - InlineTextBox "7e634ea36191406392c69abafd1fa721"
+          - cell "Ubuntu 150 node150" [ref=e22]
+            - StaticText "Ubuntu 150"
+              - InlineTextBox "Ubuntu 150"
+            - StaticText "node150"
+              - InlineTextBox "node150"
+          - cell "platform-bridge-accept-20261103 9988b343-b518-462b-b4d7-8c43ca5afe51" [ref=e23]
+            - StaticText "platform-bridge-accept-20261103"
+              - InlineTextBox "platform-bridge-accept-"
+              - InlineTextBox "20261103"
+            - StaticText "9988b343-b518-462b-b4d7-8c43ca5afe51"
+              - InlineTextBox "9988b343-b518-462b-b4d7-8c"
+              - InlineTextBox "43ca5afe51"
+          - cell "11-03 02:48:40完成 11-03 02:48:43" [ref=e24]
+            - StaticText "11-03 02:48:40"
+              - InlineTextBox "11-03 02:48:40"
+            - StaticText "完成 11-03 02:48:43"
+              - InlineTextBox "完"
+              - InlineTextBox "成 11-03 02:48:43"
+          - cell "—" [ref=e25]
+            - StaticText "—"
+              - InlineTextBox "—"
+        - row
+          - cell "成功" [ref=e26]
+            - StaticText "成功"
+              - InlineTextBox "成功"
+          - cell "创建虚拟机 bc9caccdec614362b29809dfe6637806" [ref=e27]
+            - StaticText "创建虚拟机"
+              - InlineTextBox "创建虚拟机"
+            - StaticText "bc9caccdec614362b29809dfe6637806"
+              - InlineTextBox "bc9caccdec614362b29809dfe6637806"
+          - cell "Ubuntu 150 node150" [ref=e28]
+            - StaticText "Ubuntu 150"
+              - InlineTextBox "Ubuntu 150"
+            - StaticText "node150"
+              - InlineTextBox "node150"
+          - cell "platform-bridge-accept-20261103 9988b343-b518-462b-b4d7-8c43ca5afe51" [ref=e29]
+            - StaticText "platform-bridge-accept-20261103"
+              - InlineTextBox "platform-bridge-accept-"
+              - InlineTextBox "20261103"
+            - StaticText "9988b343-b518-462b-b4d7-8c43ca5afe51"
+              - InlineTextBox "9988b343-b518-462b-b4d7-8c"
+              - InlineTextBox "43ca5afe51"
+          - cell "11-03 02:47:58完成 11-03 02:48:11" [ref=e30]
+            - StaticText "11-03 02:47:58"
+              - InlineTextBox "11-03 02:47:58"
+            - StaticText "完成 11-03 02:48:11"
+              - InlineTextBox "完"
+              - InlineTextBox "成 11-03 02:48:11"
+          - cell "—" [ref=e31]
+            - StaticText "—"
+              - InlineTextBox "—"
+        - row
+          - cell "成功" [ref=e32]
+            - StaticText "成功"
+              - InlineTextBox "成功"
+          - cell "删除虚拟机 ce7c5881c1bf49119faaaf6ae0284828" [ref=e33]
+            - StaticText "删除虚拟机"
+              - InlineTextBox "删除虚拟机"
+            - StaticText "ce7c5881c1bf49119faaaf6ae0284828"
+              - InlineTextBox "ce7c5881c1bf49119faaaf6ae0284828"
+          - cell "Ubuntu 150 node150" [ref=e34]
+            - StaticText "Ubuntu 150"
+              - InlineTextBox "Ubuntu 150"
+            - StaticText "node150"
+              - InlineTextBox "node150"
+          - cell "platform-accept-20261103 506cc484-fdda-494e-9681-5da8331b7e27" [ref=e35]
+            - StaticText "platform-accept-20261103"
+              - InlineTextBox "platform-accept-20261103"
+            - StaticText "506cc484-fdda-494e-9681-5da8331b7e27"
+              - InlineTextBox "506cc484-fdda-494e-9681-5d"
+              - InlineTextBox "a8331b7e27"
+          - cell "11-03 01:29:05完成 11-03 01:29:06" [ref=e36]
+            - StaticText "11-03 01:29:05"
+              - InlineTextBox "11-03 01:29:05"
+            - StaticText "完成 11-03 01:29:06"
+              - InlineTextBox "完"
+              - InlineTextBox "成 11-03 01:29:06"
+          - cell "—" [ref=e37]
+            - StaticText "—"
+              - InlineTextBox "—"
+        - row
+          - cell "失败" [ref=e38]
+            - StaticText "失败"
+              - InlineTextBox "失败"
+          - cell "暂停 1496dbbc40a342b79119af656a91cc28" [ref=e39]
+            - StaticText "暂停"
+              - InlineTextBox "暂停"
+            - StaticText "1496dbbc40a342b79119af656a91cc28"
+              - InlineTextBox "1496dbbc40a342b79119af656a91cc28"
+          - cell "Ubuntu 150 node150" [ref=e40]
+            - StaticText "Ubuntu 150"
+              - InlineTextBox "Ubuntu 150"
+            - StaticText "node150"
+              - InlineTextBox "node150"
+          - cell "platform-accept-20261103 506cc484-fdda-494e-9681-5da8331b7e27" [ref=e41]
+            - StaticText "platform-accept-20261103"
+              - InlineTextBox "platform-accept-20261103"
+            - StaticText "506cc484-fdda-494e-9681-5da8331b7e27"
+              - InlineTextBox "506cc484-fdda-494e-9681-5d"
+              - InlineTextBox "a8331b7e27"
+          - cell "11-03 01:23:34完成 11-03 01:23:34" [ref=e42]
+            - StaticText "11-03 01:23:34"
+              - InlineTextBox "11-03 01:23:34"
+            - StaticText "完成 11-03 01:23:34"
+              - InlineTextBox "完"
+              - InlineTextBox "成 11-03 01:23:34"
+          - cell "无法连接宿主机执行端：服务未启动或连接中断，请检查执行端服务" [ref=e43]
+            - StaticText "无法连接宿主机执行端：服务未启动或连接中断，请检查执行端服务"
+              - InlineTextBox "无法连接宿主机执行端：服务"
+              - InlineTextBox "未启动或连接中断，请检查执"
+              - InlineTextBox "行端服务"
+        - row
+          - cell "成功" [ref=e44]
+            - StaticText "成功"
+              - InlineTextBox "成功"
+          - cell "启动 542bdbb045474245b9836276fbcc4832" [ref=e45]
+            - StaticText "启动"
+              - InlineTextBox "启动"
+            - StaticText "542bdbb045474245b9836276fbcc4832"
+              - InlineTextBox "542bdbb045474245b9836276fbcc4832"
+          - cell "Ubuntu 150 node150" [ref=e46]
+            - StaticText "Ubuntu 150"
+              - InlineTextBox "Ubuntu 150"
+            - StaticText "node150"
+              - InlineTextBox "node150"
+          - cell "platform-accept-20261103 506cc484-fdda-494e-9681-5da8331b7e27" [ref=e47]
+            - StaticText "platform-accept-20261103"
+              - InlineTextBox "platform-accept-20261103"
+            - StaticText "506cc484-fdda-494e-9681-5da8331b7e27"
+              - InlineTextBox "506cc484-fdda-494e-9681-5d"
+              - InlineTextBox "a8331b7e27"
+          - cell "11-03 01:22:57完成 11-03 01:22:59" [ref=e48]
+            - StaticText "11-03 01:22:57"
+              - InlineTextBox "11-03 01:22:57"
+            - StaticText "完成 11-03 01:22:59"
+              - InlineTextBox "完"
+              - InlineTextBox "成 11-03 01:22:59"
+          - cell "—" [ref=e49]
+            - StaticText "—"
+              - InlineTextBox "—"
+        - row
+          - cell "成功" [ref=e50]
+            - StaticText "成功"
+              - InlineTextBox "成功"
+          - cell "强制停止 940fb0fbe0214234b31e020037c1c79c" [ref=e51]
+            - StaticText "强制停止"
+              - InlineTextBox "强制停止"
+            - StaticText "940fb0fbe0214234b31e020037c1c79c"
+              - InlineTextBox "940fb0fbe0214234b31e020037c1c79c"
+          - cell "Ubuntu 150 node150" [ref=e52]
+            - StaticText "Ubuntu 150"
+              - InlineTextBox "Ubuntu 150"
+            - StaticText "node150"
+              - InlineTextBox "node150"
+          - cell "platform-accept-20261103 506cc484-fdda-494e-9681-5da8331b7e27" [ref=e53]
+            - StaticText "platform-accept-20261103"
+              - InlineTextBox "platform-accept-20261103"
+            - StaticText "506cc484-fdda-494e-9681-5da8331b7e27"
+              - InlineTextBox "506cc484-fdda-494e-9681-5d"
+              - InlineTextBox "a8331b7e27"
+          - cell "11-03 01:22:56完成 11-03 01:22:56" [ref=e54]
+            - StaticText "11-03 01:22:56"
+              - InlineTextBox "11-03 01:22:56"
+            - StaticText "完成 11-03 01:22:56"
+              - InlineTextBox "完"
+              - InlineTextBox "成 11-03 01:22:56"
+          - cell "—" [ref=e55]
+            - StaticText "—"
+              - InlineTextBox "—"
+        - row
+          - cell "成功" [ref=e56]
+            - StaticText "成功"
+              - InlineTextBox "成功"
+          - cell "启动 b2d0ccdcaa9a4c94876515d751cf55bd" [ref=e57]
+            - StaticText "启动"
+              - InlineTextBox "启动"
+            - StaticText "b2d0ccdcaa9a4c94876515d751cf55bd"
+              - InlineTextBox "b2d0ccdcaa9a4c94876515d751cf55bd"
+          - cell "Ubuntu 150 node150" [ref=e58]
+            - StaticText "Ubuntu 150"
+              - InlineTextBox "Ubuntu 150"
+            - StaticText "node150"
+              - InlineTextBox "node150"
+          - cell "platform-accept-20261103 506cc484-fdda-494e-9681-5da8331b7e27" [ref=e59]
+            - StaticText "platform-accept-20261103"
+              - InlineTextBox "platform-accept-20261103"
+            - StaticText "506cc484-fdda-494e-9681-5da8331b7e27"
+              - InlineTextBox "506cc484-fdda-494e-9681-5d"
+              - InlineTextBox "a8331b7e27"
+          - cell "11-03 01:22:53完成 11-03 01:22:54" [ref=e60]
+            - StaticText "11-03 01:22:53"
+              - InlineTextBox "11-03 01:22:53"
+            - StaticText "完成 11-03 01:22:54"
+              - InlineTextBox "完"
+              - InlineTextBox "成 11-03 01:22:54"
+          - cell "—" [ref=e61]
+            - StaticText "—"
+              - InlineTextBox "—"
+        - row
+          - cell "成功" [ref=e62]
+            - StaticText "成功"
+              - InlineTextBox "成功"
+          - cell "修改虚拟机配置 1e5c2dfb21844335b1190c5f603df08e" [ref=e63]
+            - StaticText "修改虚拟机配置"
+              - InlineTextBox "修改虚拟机配置"
+            - StaticText "1e5c2dfb21844335b1190c5f603df08e"
+              - InlineTextBox "1e5c2dfb21844335b1190c5f603df08e"
+          - cell "Ubuntu 150 node150" [ref=e64]
+            - StaticText "Ubuntu 150"
+              - InlineTextBox "Ubuntu 150"
+            - StaticText "node150"
+              - InlineTextBox "node150"
+          - cell "platform-accept-20261103 506cc484-fdda-494e-9681-5da8331b7e27" [ref=e65]
+            - StaticText "platform-accept-20261103"
+              - InlineTextBox "platform-accept-20261103"
+            - StaticText "506cc484-fdda-494e-9681-5da8331b7e27"
+              - InlineTextBox "506cc484-fdda-494e-9681-5d"
+              - InlineTextBox "a8331b7e27"
+          - cell "11-03 01:22:52完成 11-03 01:22:52" [ref=e66]
+            - StaticText "11-03 01:22:52"
+              - InlineTextBox "11-03 01:22:52"
+            - StaticText "完成 11-03 01:22:52"
+              - InlineTextBox "完"
+              - InlineTextBox "成 11-03 01:22:52"
+          - cell "—" [ref=e67]
+            - StaticText "—"
+              - InlineTextBox "—"
+        - row
+          - cell "成功" [ref=e68]
+            - StaticText "成功"
+              - InlineTextBox "成功"
+          - cell "正常关机 70d72e7a2b354b7ab61a1acfaec6ec51" [ref=e69]
+            - StaticText "正常关机"
+              - InlineTextBox "正常关机"
+            - StaticText "70d72e7a2b354b7ab61a1acfaec6ec51"
+              - InlineTextBox "70d72e7a2b354b7ab61a1acfaec6ec51"
+          - cell "Ubuntu 150 node150" [ref=e70]
+            - StaticText "Ubuntu 150"
+              - InlineTextBox "Ubuntu 150"
+            - StaticText "node150"
+              - InlineTextBox "node150"
+          - cell "platform-accept-20261103 506cc484-fdda-494e-9681-5da8331b7e27" [ref=e71]
+            - StaticText "platform-accept-20261103"
+              - InlineTextBox "platform-accept-20261103"
+            - StaticText "506cc484-fdda-494e-9681-5da8331b7e27"
+              - InlineTextBox "506cc484-fdda-494e-9681-5d"
+              - InlineTextBox "a8331b7e27"
+          - cell "11-03 01:22:44完成 11-03 01:22:45" [ref=e72]
+            - StaticText "11-03 01:22:44"
+              - InlineTextBox "11-03 01:22:44"
+            - StaticText "完成 11-03 01:22:45"
+              - InlineTextBox "完"
+              - InlineTextBox "成 11-03 01:22:45"
+          - cell "—" [ref=e73]
+            - StaticText "—"
+              - InlineTextBox "—"
+        - row
+          - cell "成功" [ref=e74]
+            - StaticText "成功"
+              - InlineTextBox "成功"
+          - cell "重启 f81f082b554e4e7e90242d1bfbb7be86" [ref=e75]
+            - StaticText "重启"
+              - InlineTextBox "重启"
+            - StaticText "f81f082b554e4e7e90242d1bfbb7be86"
+              - InlineTextBox "f81f082b554e4e7e90242d1bfbb7be86"
+          - cell "Ubuntu 150 node150" [ref=e76]
+            - StaticText "Ubuntu 150"
+              - InlineTextBox "Ubuntu 150"
+            - StaticText "node150"
+              - InlineTextBox "node150"
+          - cell "platform-accept-20261103 506cc484-fdda-494e-9681-5da8331b7e27" [ref=e77]
+            - StaticText "platform-accept-20261103"
+              - InlineTextBox "platform-accept-20261103"
+            - StaticText "506cc484-fdda-494e-9681-5da8331b7e27"
+              - InlineTextBox "506cc484-fdda-494e-9681-5d"
+              - InlineTextBox "a8331b7e27"
+          - cell "11-03 01:22:27完成 11-03 01:22:27" [ref=e78]
+            - StaticText "11-03 01:22:27"
+              - InlineTextBox "11-03 01:22:27"
+            - StaticText "完成 11-03 01:22:27"
+              - InlineTextBox "完"
+              - InlineTextBox "成 11-03 01:22:27"
+          - cell "—" [ref=e79]
+            - StaticText "—"
+              - InlineTextBox "—"
+        - row
+          - cell "成功" [ref=e80]
+            - StaticText "成功"
+              - InlineTextBox "成功"
+          - cell "恢复 0a8b55625aab4d3d949493dc92bb4a3e" [ref=e81]
+            - StaticText "恢复"
+              - InlineTextBox "恢复"
+            - StaticText "0a8b55625aab4d3d949493dc92bb4a3e"
+              - InlineTextBox "0a8b55625aab4d3d949493dc92bb4a3e"
+          - cell "Ubuntu 150 node150" [ref=e82]
+            - StaticText "Ubuntu 150"
+              - InlineTextBox "Ubuntu 150"
+            - StaticText "node150"
+              - InlineTextBox "node150"
+          - cell "platform-accept-20261103 506cc484-fdda-494e-9681-5da8331b7e27" [ref=e83]
+            - StaticText "platform-accept-20261103"
+              - InlineTextBox "platform-accept-20261103"
+            - StaticText "506cc484-fdda-494e-9681-5da8331b7e27"
+              - InlineTextBox "506cc484-fdda-494e-9681-5d"
+              - InlineTextBox "a8331b7e27"
+          - cell "11-03 01:22:25完成 11-03 01:22:26" [ref=e84]
+            - StaticText "11-03 01:22:25"
+              - InlineTextBox "11-03 01:22:25"
+            - StaticText "完成 11-03 01:22:26"
+              - InlineTextBox "完"
+              - InlineTextBox "成 11-03 01:22:26"
+          - cell "—" [ref=e85]
+            - StaticText "—"
+              - InlineTextBox "—"
+        - row
+          - cell "成功" [ref=e86]
+            - StaticText "成功"
+              - InlineTextBox "成功"
+          - cell "暂停 457fb824364d4a0bbf34daf10226d78e" [ref=e87]
+            - StaticText "暂停"
+              - InlineTextBox "暂停"
+            - StaticText "457fb824364d4a0bbf34daf10226d78e"
+              - InlineTextBox "457fb824364d4a0bbf34daf10226d78e"
+          - cell "Ubuntu 150 node150" [ref=e88]
+            - StaticText "Ubuntu 150"
+              - InlineTextBox "Ubuntu 150"
+            - StaticText "node150"
+              - InlineTextBox "node150"
+          - cell "platform-accept-20261103 506cc484-fdda-494e-9681-5da8331b7e27" [ref=e89]
+            - StaticText "platform-accept-20261103"
+              - InlineTextBox "platform-accept-20261103"
+            - StaticText "506cc484-fdda-494e-9681-5da8331b7e27"
+              - InlineTextBox "506cc484-fdda-494e-9681-5d"
+              - InlineTextBox "a8331b7e27"
+          - cell "11-03 01:22:24完成 11-03 01:22:24" [ref=e90]
+            - StaticText "11-03 01:22:24"
+              - InlineTextBox "11-03 01:22:24"
+            - StaticText "完成 11-03 01:22:24"
+              - InlineTextBox "完"
+              - InlineTextBox "成 11-03 01:22:24"
+          - cell "—" [ref=e91]
+            - StaticText "—"
+              - InlineTextBox "—"
+        - row
+          - cell "成功" [ref=e92]
+            - StaticText "成功"
+              - InlineTextBox "成功"
+          - cell "创建虚拟机 f6eb85b85a38459ca743c09330992097" [ref=e93]
+            - StaticText "创建虚拟机"
+              - InlineTextBox "创建虚拟机"
+            - StaticText "f6eb85b85a38459ca743c09330992097"
+              - InlineTextBox "f6eb85b85a38459ca743c09330992097"
+          - cell "Ubuntu 150 node150" [ref=e94]
+            - StaticText "Ubuntu 150"
+              - InlineTextBox "Ubuntu 150"
+            - StaticText "node150"
+              - InlineTextBox "node150"
+          - cell "platform-accept-20261103 506cc484-fdda-494e-9681-5da8331b7e27" [ref=e95]
+            - StaticText "platform-accept-20261103"
+              - InlineTextBox "platform-accept-20261103"
+            - StaticText "506cc484-fdda-494e-9681-5da8331b7e27"
+              - InlineTextBox "506cc484-fdda-494e-9681-5d"
+              - InlineTextBox "a8331b7e27"
+          - cell "11-03 01:17:47完成 11-03 01:18:00" [ref=e96]
+            - StaticText "11-03 01:17:47"
+              - InlineTextBox "11-03 01:17:47"
+            - StaticText "完成 11-03 01:18:00"
+              - InlineTextBox "完"
+              - InlineTextBox "成 11-03 01:18:00"
+          - cell "—" [ref=e97]
+            - StaticText "—"
+              - InlineTextBox "—"
+        - row
+          - cell "失败" [ref=e98]
+            - StaticText "失败"
+              - InlineTextBox "失败"
+          - cell "创建虚拟机 a57413a09c8049098b7974500df2898e" [ref=e99]
+            - StaticText "创建虚拟机"
+              - InlineTextBox "创建虚拟机"
+            - StaticText "a57413a09c8049098b7974500df2898e"
+              - InlineTextBox "a57413a09c8049098b7974500df2898e"
+          - cell "Ubuntu 150 node150" [ref=e100]
+            - StaticText "Ubuntu 150"
+              - InlineTextBox "Ubuntu 150"
+            - StaticText "node150"
+              - InlineTextBox "node150"
+          - cell "platform-accept-20261103-denied" [ref=e101]
+            - StaticText "platform-accept-20261103-denied"
+              - InlineTextBox "platform-accept-20261103-"
+              - InlineTextBox "denied"
+          - cell "11-03 01:10:41完成 11-03 01:10:41" [ref=e102]
+            - StaticText "11-03 01:10:41"
+              - InlineTextBox "11-03 01:10:41"
+            - StaticText "完成 11-03 01:10:41"
+              - InlineTextBox "完"
+              - InlineTextBox "成 11-03 01:10:41"
+          - cell "镜像文件必须位于执行端配置的目录内" [ref=e103]
+            - StaticText "镜像文件必须位于执行端配置的目录内"
+              - InlineTextBox "镜像文件必须位于执行端配置"
+              - InlineTextBox "的目录内"
+- generic
+- status

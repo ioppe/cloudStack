@@ -1,0 +1,5 @@
+### stage=agent-fault started_utc=2026-11-03T06:23:32Z python=Python 3.13.7 scope=root@192.168.0.150:vm-platform-agent.service only
+PASS node150 offline returns 502 and node30 stays independently readable
+PASS offline VM operation failed with target host/UUID and explicit reason
+PASS node150 agent restored
+### stage=agent-fault EXIT=0 finished_utc=2026-11-03T06:23:36Z

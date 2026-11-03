@@ -1,0 +1,34 @@
+# v1.1 JS syntax + python compile checks
+generated_utc: 2026-11-03T07:45:16Z
+host: skydeMacBook-Pro.local
+node: v24.18.0
+python: Python 3.13.7
+
+=== node --check static/app.js ===
+exit: 0
+
+=== static/console.js (ES module) ===
+note: console.js is loaded as an ES module (console.html type=module); checked via a .mjs copy in the session scratch dir, path unchanged on disk
+exit: 0
+cross-check node --check static/console.js (CommonJS parse):
+exit: 0
+
+=== python3 -m py_compile (syntax only, no execution) ===
+tests/e2e_bridge_password.py: exit 0
+tests/e2e_environment.py: exit 0
+deploy/prepare-node150-bridge.py: exit 0
+
+=== hashes (sha256) ===
+01fe482fc12eb88880719af3bcc0f3feeddf810f6ff0a0bd1f3c0dffc17827df  static/app.js
+da60668bd624d49db2a6deaa13b3db3f59f12ff276961685159c38c312a17f9a  static/console.js
+65607d6665da124b62d1fedebdd66551fd69357a8ba98e55dc4cc15f91dbbeff  tests/e2e_bridge_password.py
+fdb8e010d10fc2758a5498ca05749fbfa390df4abf69b8b4d6323a5e827212fc  tests/e2e_environment.py
+ed70eae3544941411eeaa6aa285dc3f5a1cfe472ae600dcf8e883f4c2042bb48  deploy/prepare-node150-bridge.py
+
+==================================================================
+=== ROUND 2 (post code-review fixes): node --check static/app.js, utc 2026-11-03T07:52:28Z ===
+changed: fillSources keeps previousSource (app.js:2296,2311-2312); btn-password moved into bindChrome (app.js:2570, single binding); btn-logout single binding (app.js:2571); NAT default uses default_network (app.js:2338)
+expectation: only syntax, no e2e
+exit: 0
+hash: 5581d153e6140e2fc18ffc7df5a41341d6a7a2ab243b216c65f91f24b62788e8  static/app.js
+node: v24.18.0; node --check exit 0, no diagnostics emitted (see nothing between the hash line above and this line)

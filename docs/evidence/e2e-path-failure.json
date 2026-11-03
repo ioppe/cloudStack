@@ -1,0 +1,16 @@
+{
+  "stage": "failure",
+  "time": 1793686241,
+  "checks": [
+    {
+      "check": "out-of-directory image rejected with failed task",
+      "evidence": {
+        "id": "a57413a09c8049098b7974500df2898e",
+        "host_id": "node150",
+        "status": "failed",
+        "error": "镜像文件必须位于执行端配置的目录内"
+      }
+    }
+  ],
+  "passed": true
+}

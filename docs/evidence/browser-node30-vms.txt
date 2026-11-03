@@ -1,0 +1,766 @@
+- generic
+  - complementary
+    - StaticText "云栈"
+      - InlineTextBox "云栈"
+    - StaticText "虚拟机平台"
+      - InlineTextBox "虚拟机平台"
+    - navigation "主导航" [ref=e3]
+      - button "主机 2" [ref=e11]
+        - StaticText "主机"
+          - InlineTextBox "主机"
+        - StaticText "2"
+          - InlineTextBox "2"
+      - button "虚拟机 14" [ref=e12]
+        - StaticText "虚拟机"
+          - InlineTextBox "虚拟机"
+        - StaticText "14"
+          - InlineTextBox "14"
+      - button "镜像" [ref=e13]
+        - StaticText "镜像"
+          - InlineTextBox "镜像"
+      - button "任务" [ref=e14]
+        - StaticText "任务"
+          - InlineTextBox "任务"
+    - generic
+      - StaticText "admin"
+        - InlineTextBox "admin"
+    - StaticText "原有虚拟机受保护 · 新建资源按主机隔离"
+      - InlineTextBox "原有虚拟机受保护 · 新建资源按主"
+      - InlineTextBox "机隔离"
+  - banner
+    - LabelText
+      - StaticText "目标主机"
+        - InlineTextBox "目标主机"
+    - combobox "目标主机" [expanded=false, ref=e4]: 主机 30 · node30
+      - MenuListPopup
+        - option "Ubuntu 150 · node150" [ref=e15]
+        - option "主机 30 · node30" [selected, ref=e16]
+    - generic
+      - generic
+        - StaticText "在线"
+          - InlineTextBox "在线"
+    - button "刷新" [ref=e5]
+      - StaticText "刷新"
+        - InlineTextBox "刷新"
+    - generic
+      - StaticText "admin"
+        - InlineTextBox "admin"
+    - button "退出" [ref=e6]
+      - StaticText "退出"
+        - InlineTextBox "退出"
+  - main
+    - heading "虚拟机 14" [level=1, ref=e7]
+      - StaticText "虚拟机"
+        - InlineTextBox "虚拟机"
+      - StaticText "14"
+        - InlineTextBox "14"
+    - paragraph
+      - StaticText "列表与操作都绑定在顶栏选定的目标主机上；所有动作提交后返回任务，结果在任务页收敛。"
+        - InlineTextBox "列表与操作都绑定在顶栏选定的目标主机上；所有动作提交后返回任务，结果在任务页收"
+        - InlineTextBox "敛。"
+    - button "刷新列表" [ref=e8]
+      - StaticText "刷新列表"
+        - InlineTextBox "刷新列表"
+    - button "创建虚拟机" [ref=e9]
+      - StaticText "创建虚拟机"
+        - InlineTextBox "创建虚拟机"
+    - StaticText "目标主机"
+      - InlineTextBox "目标主机"
+    - combobox "目标主机" [expanded=false, ref=e10]: 主机 30 · node30
+      - MenuListPopup
+        - option "Ubuntu 150 · node150" [ref=e17]
+        - option "主机 30 · node30" [selected, ref=e18]
+    - StaticText "在线"
+      - InlineTextBox "在线"
+    - StaticText "k8s-node03"
+      - InlineTextBox "k8s-node03"
+    - StaticText "·"
+      - InlineTextBox "·"
+    - StaticText "CPU"
+      - InlineTextBox "CPU"
+    - StaticText "80 核"
+      - InlineTextBox "80 核"
+    - StaticText "内存"
+      - InlineTextBox "内存"
+    - StaticText "45.5 GiB / 125.4 GiB"
+      - InlineTextBox "45.5 GiB / 125.4 GiB"
+    - generic
+      - table
+        - rowgroup
+          - row
+            - columnheader "虚拟机" [ref=e89]
+              - StaticText "虚拟机"
+                - InlineTextBox "虚拟机"
+            - columnheader "状态" [ref=e90]
+              - StaticText "状态"
+                - InlineTextBox "状态"
+            - columnheader "规格" [ref=e91]
+              - StaticText "规格"
+                - InlineTextBox "规格"
+            - columnheader "IP" [ref=e92]
+              - StaticText "IP"
+                - InlineTextBox "IP"
+            - columnheader "操作" [ref=e93]
+              - StaticText "操作"
+                - InlineTextBox "操作"
+        - row
+          - cell "centos 92d1d752-4b47-4550-b470-fb1e96e6f927" [ref=e19]
+            - StaticText "centos"
+              - InlineTextBox "centos"
+            - generic
+              - StaticText "92d1d752-4b47-4550-b470-fb1e96e6f927"
+                - InlineTextBox "92d1d752-4b47-4550-b470-fb1e96e6f927"
+          - cell "运行中 CPU 6.9% · 内存 1.8%" [ref=e20]
+            - StaticText "运行中"
+              - InlineTextBox "运行中"
+            - StaticText "CPU 6.9% · 内存 1.8%"
+              - InlineTextBox "CPU 6.9% · 内存 1.8%"
+          - cell "8 vCPU · 16 GiB 磁盘 512 GiB" [ref=e21]
+            - StaticText "8 vCPU · 16 GiB"
+              - InlineTextBox "8 vCPU · 16 GiB"
+            - StaticText "磁盘 512 GiB"
+              - InlineTextBox "磁盘 512 GiB"
+          - cell "192.168.122.24" [ref=e22]
+            - generic
+              - StaticText "192.168.122.24"
+                - InlineTextBox "192.168.122.24"
+          - cell "启动 关机 强制停止 重启 挂起 恢复 配置 控制台 删除" [ref=e23]
+            - button "启动" [disabled, ref=e94]
+              - StaticText "启动"
+                - InlineTextBox "启动"
+            - button "关机" [ref=e95]
+              - StaticText "关机"
+                - InlineTextBox "关机"
+            - button "强制停止" [ref=e96]
+              - StaticText "强制停止"
+                - InlineTextBox "强制停止"
+            - button "重启" [ref=e97]
+              - StaticText "重启"
+                - InlineTextBox "重启"
+            - button "挂起" [ref=e98]
+              - StaticText "挂起"
+                - InlineTextBox "挂起"
+            - button "恢复" [disabled, ref=e99]
+              - StaticText "恢复"
+                - InlineTextBox "恢复"
+            - button "配置" [disabled, ref=e100]
+              - StaticText "配置"
+                - InlineTextBox "配置"
+            - button "控制台" [ref=e101]
+              - StaticText "控制台"
+                - InlineTextBox "控制台"
+            - button "删除" [disabled, ref=e102]
+              - StaticText "删除"
+                - InlineTextBox "删除"
+        - row
+          - cell "ubuntu-100 a66dd284-40cc-48a4-89b6-84a00843ede6" [ref=e24]
+            - StaticText "ubuntu-100"
+              - InlineTextBox "ubuntu-100"
+            - generic
+              - StaticText "a66dd284-40cc-48a4-89b6-84a00843ede6"
+                - InlineTextBox "a66dd284-40cc-48a4-89b6-84a00843ede6"
+          - cell "运行中 CPU 9.7% · 内存 0.7%" [ref=e25]
+            - StaticText "运行中"
+              - InlineTextBox "运行中"
+            - StaticText "CPU 9.7% · 内存 0.7%"
+              - InlineTextBox "CPU 9.7% · 内存 0.7%"
+          - cell "4 vCPU · 8 GiB 磁盘 200 GiB" [ref=e26]
+            - StaticText "4 vCPU · 8 GiB"
+              - InlineTextBox "4 vCPU · 8 GiB"
+            - StaticText "磁盘 200 GiB"
+              - InlineTextBox "磁盘 200 GiB"
+          - cell "192.168.0.40" [ref=e27]
+            - generic
+              - StaticText "192.168.0.40"
+                - InlineTextBox "192.168.0.40"
+          - cell "启动 关机 强制停止 重启 挂起 恢复 配置 控制台 删除" [ref=e28]
+            - button "启动" [disabled, ref=e103]
+              - StaticText "启动"
+                - InlineTextBox "启动"
+            - button "关机" [ref=e104]
+              - StaticText "关机"
+                - InlineTextBox "关机"
+            - button "强制停止" [ref=e105]
+              - StaticText "强制停止"
+                - InlineTextBox "强制停止"
+            - button "重启" [ref=e106]
+              - StaticText "重启"
+                - InlineTextBox "重启"
+            - button "挂起" [ref=e107]
+              - StaticText "挂起"
+                - InlineTextBox "挂起"
+            - button "恢复" [disabled, ref=e108]
+              - StaticText "恢复"
+                - InlineTextBox "恢复"
+            - button "配置" [disabled, ref=e109]
+              - StaticText "配置"
+                - InlineTextBox "配置"
+            - button "控制台" [ref=e110]
+              - StaticText "控制台"
+                - InlineTextBox "控制台"
+            - button "删除" [disabled, ref=e111]
+              - StaticText "删除"
+                - InlineTextBox "删除"
+        - row
+          - cell "ubuntu 503a9548-ef36-49cd-b471-c9ebfe9ff534" [ref=e29]
+            - StaticText "ubuntu"
+              - InlineTextBox "ubuntu"
+            - generic
+              - StaticText "503a9548-ef36-49cd-b471-c9ebfe9ff534"
+                - InlineTextBox "503a9548-ef36-49cd-b471-c9ebfe9ff534"
+          - cell "运行中 CPU 34% · 内存 0.4%" [ref=e30]
+            - StaticText "运行中"
+              - InlineTextBox "运行中"
+            - StaticText "CPU 34% · 内存 0.4%"
+              - InlineTextBox "CPU 34% · 内存 0.4%"
+          - cell "8 vCPU · 16 GiB 磁盘 512 GiB" [ref=e31]
+            - StaticText "8 vCPU · 16 GiB"
+              - InlineTextBox "8 vCPU · 16 GiB"
+            - StaticText "磁盘 512 GiB"
+              - InlineTextBox "磁盘 512 GiB"
+          - cell "192.168.0.25" [ref=e32]
+            - generic
+              - StaticText "192.168.0.25"
+                - InlineTextBox "192.168.0.25"
+          - cell "启动 关机 强制停止 重启 挂起 恢复 配置 控制台 删除" [ref=e33]
+            - button "启动" [disabled, ref=e112]
+              - StaticText "启动"
+                - InlineTextBox "启动"
+            - button "关机" [ref=e113]
+              - StaticText "关机"
+                - InlineTextBox "关机"
+            - button "强制停止" [ref=e114]
+              - StaticText "强制停止"
+                - InlineTextBox "强制停止"
+            - button "重启" [ref=e115]
+              - StaticText "重启"
+                - InlineTextBox "重启"
+            - button "挂起" [ref=e116]
+              - StaticText "挂起"
+                - InlineTextBox "挂起"
+            - button "恢复" [disabled, ref=e117]
+              - StaticText "恢复"
+                - InlineTextBox "恢复"
+            - button "配置" [disabled, ref=e118]
+              - StaticText "配置"
+                - InlineTextBox "配置"
+            - button "控制台" [ref=e119]
+              - StaticText "控制台"
+                - InlineTextBox "控制台"
+            - button "删除" [disabled, ref=e120]
+              - StaticText "删除"
+                - InlineTextBox "删除"
+        - row
+          - cell "chatgpt 4f39ecd4-9972-48ef-9761-4a60d80614a8" [ref=e34]
+            - StaticText "chatgpt"
+              - InlineTextBox "chatgpt"
+            - generic
+              - StaticText "4f39ecd4-9972-48ef-9761-4a60d80614a8"
+                - InlineTextBox "4f39ecd4-9972-48ef-9761-4a60d80614a8"
+          - cell "已关机" [ref=e35]
+            - StaticText "已关机"
+              - InlineTextBox "已关机"
+          - cell "8 vCPU · 16 GiB 磁盘 80 GiB" [ref=e36]
+            - StaticText "8 vCPU · 16 GiB"
+              - InlineTextBox "8 vCPU · 16 GiB"
+            - StaticText "磁盘 80 GiB"
+              - InlineTextBox "磁盘 80 GiB"
+          - cell "—" [ref=e37]
+            - StaticText "—"
+              - InlineTextBox "—"
+          - cell "启动 关机 强制停止 重启 挂起 恢复 配置 控制台 删除" [ref=e38]
+            - button "启动" [ref=e121]
+              - StaticText "启动"
+                - InlineTextBox "启动"
+            - button "关机" [disabled, ref=e122]
+              - StaticText "关机"
+                - InlineTextBox "关机"
+            - button "强制停止" [disabled, ref=e123]
+              - StaticText "强制停止"
+                - InlineTextBox "强制停止"
+            - button "重启" [disabled, ref=e124]
+              - StaticText "重启"
+                - InlineTextBox "重启"
+            - button "挂起" [disabled, ref=e125]
+              - StaticText "挂起"
+                - InlineTextBox "挂起"
+            - button "恢复" [disabled, ref=e126]
+              - StaticText "恢复"
+                - InlineTextBox "恢复"
+            - button "配置" [ref=e127]
+              - StaticText "配置"
+                - InlineTextBox "配置"
+            - button "控制台" [disabled, ref=e128]
+              - StaticText "控制台"
+                - InlineTextBox "控制台"
+            - button "删除" [ref=e129]
+              - StaticText "删除"
+                - InlineTextBox "删除"
+        - row
+          - cell "euler 24b56a05-54dd-4e8f-ab7b-fe0dfa71f0bc" [ref=e39]
+            - StaticText "euler"
+              - InlineTextBox "euler"
+            - generic
+              - StaticText "24b56a05-54dd-4e8f-ab7b-fe0dfa71f0bc"
+                - InlineTextBox "24b56a05-54dd-4e8f-ab7b-fe0dfa71f0bc"
+          - cell "已关机" [ref=e40]
+            - StaticText "已关机"
+              - InlineTextBox "已关机"
+          - cell "4 vCPU · 8 GiB 磁盘 80 GiB" [ref=e41]
+            - StaticText "4 vCPU · 8 GiB"
+              - InlineTextBox "4 vCPU · 8 GiB"
+            - StaticText "磁盘 80 GiB"
+              - InlineTextBox "磁盘 80 GiB"
+          - cell "—" [ref=e42]
+            - StaticText "—"
+              - InlineTextBox "—"
+          - cell "启动 关机 强制停止 重启 挂起 恢复 配置 控制台 删除" [ref=e43]
+            - button "启动" [ref=e130]
+              - StaticText "启动"
+                - InlineTextBox "启动"
+            - button "关机" [disabled, ref=e131]
+              - StaticText "关机"
+                - InlineTextBox "关机"
+            - button "强制停止" [disabled, ref=e132]
+              - StaticText "强制停止"
+                - InlineTextBox "强制停止"
+            - button "重启" [disabled, ref=e133]
+              - StaticText "重启"
+                - InlineTextBox "重启"
+            - button "挂起" [disabled, ref=e134]
+              - StaticText "挂起"
+                - InlineTextBox "挂起"
+            - button "恢复" [disabled, ref=e135]
+              - StaticText "恢复"
+                - InlineTextBox "恢复"
+            - button "配置" [ref=e136]
+              - StaticText "配置"
+                - InlineTextBox "配置"
+            - button "控制台" [disabled, ref=e137]
+              - StaticText "控制台"
+                - InlineTextBox "控制台"
+            - button "删除" [ref=e138]
+              - StaticText "删除"
+                - InlineTextBox "删除"
+        - row
+          - cell "ubuntu-200 70d81301-0711-45d2-8976-7bdd4988dd5d" [ref=e44]
+            - StaticText "ubuntu-200"
+              - InlineTextBox "ubuntu-200"
+            - generic
+              - StaticText "70d81301-0711-45d2-8976-7bdd4988dd5d"
+                - InlineTextBox "70d81301-0711-45d2-8976-7bdd4988dd5d"
+          - cell "已保存" [ref=e45]
+            - StaticText "已保存"
+              - InlineTextBox "已保存"
+          - cell "4 vCPU · 8 GiB 磁盘 100 GiB" [ref=e46]
+            - StaticText "4 vCPU · 8 GiB"
+              - InlineTextBox "4 vCPU · 8 GiB"
+            - StaticText "磁盘 100 GiB"
+              - InlineTextBox "磁盘 100 GiB"
+          - cell "—" [ref=e47]
+            - StaticText "—"
+              - InlineTextBox "—"
+          - cell "启动 关机 强制停止 重启 挂起 恢复 配置 控制台 删除" [ref=e48]
+            - button "启动" [ref=e139]
+              - StaticText "启动"
+                - InlineTextBox "启动"
+            - button "关机" [disabled, ref=e140]
+              - StaticText "关机"
+                - InlineTextBox "关机"
+            - button "强制停止" [disabled, ref=e141]
+              - StaticText "强制停止"
+                - InlineTextBox "强制停止"
+            - button "重启" [disabled, ref=e142]
+              - StaticText "重启"
+                - InlineTextBox "重启"
+            - button "挂起" [disabled, ref=e143]
+              - StaticText "挂起"
+                - InlineTextBox "挂起"
+            - button "恢复" [disabled, ref=e144]
+              - StaticText "恢复"
+                - InlineTextBox "恢复"
+            - button "配置" [disabled, ref=e145]
+              - StaticText "配置"
+                - InlineTextBox "配置"
+            - button "控制台" [disabled, ref=e146]
+              - StaticText "控制台"
+                - InlineTextBox "控制台"
+            - button "删除" [ref=e147]
+              - StaticText "删除"
+                - InlineTextBox "删除"
+        - row
+          - cell "ubuntu-300 e654be19-7d5c-44ea-9fd2-13a03640bf18" [ref=e49]
+            - StaticText "ubuntu-300"
+              - InlineTextBox "ubuntu-300"
+            - generic
+              - StaticText "e654be19-7d5c-44ea-9fd2-13a03640bf18"
+                - InlineTextBox "e654be19-7d5c-44ea-9fd2-13a03640bf18"
+          - cell "已关机" [ref=e50]
+            - StaticText "已关机"
+              - InlineTextBox "已关机"
+          - cell "8 vCPU · 16 GiB 磁盘 80 GiB" [ref=e51]
+            - StaticText "8 vCPU · 16 GiB"
+              - InlineTextBox "8 vCPU · 16 GiB"
+            - StaticText "磁盘 80 GiB"
+              - InlineTextBox "磁盘 80 GiB"
+          - cell "—" [ref=e52]
+            - StaticText "—"
+              - InlineTextBox "—"
+          - cell "启动 关机 强制停止 重启 挂起 恢复 配置 控制台 删除" [ref=e53]
+            - button "启动" [ref=e148]
+              - StaticText "启动"
+                - InlineTextBox "启动"
+            - button "关机" [disabled, ref=e149]
+              - StaticText "关机"
+                - InlineTextBox "关机"
+            - button "强制停止" [disabled, ref=e150]
+              - StaticText "强制停止"
+                - InlineTextBox "强制停止"
+            - button "重启" [disabled, ref=e151]
+              - StaticText "重启"
+                - InlineTextBox "重启"
+            - button "挂起" [disabled, ref=e152]
+              - StaticText "挂起"
+                - InlineTextBox "挂起"
+            - button "恢复" [disabled, ref=e153]
+              - StaticText "恢复"
+                - InlineTextBox "恢复"
+            - button "配置" [ref=e154]
+              - StaticText "配置"
+                - InlineTextBox "配置"
+            - button "控制台" [disabled, ref=e155]
+              - StaticText "控制台"
+                - InlineTextBox "控制台"
+            - button "删除" [ref=e156]
+              - StaticText "删除"
+                - InlineTextBox "删除"
+        - row
+          - cell "ubuntu-400 684bc0cd-41cf-479c-9681-106f308a39bd" [ref=e54]
+            - StaticText "ubuntu-400"
+              - InlineTextBox "ubuntu-400"
+            - generic
+              - StaticText "684bc0cd-41cf-479c-9681-106f308a39bd"
+                - InlineTextBox "684bc0cd-41cf-479c-9681-106f308a39bd"
+          - cell "已关机" [ref=e55]
+            - StaticText "已关机"
+              - InlineTextBox "已关机"
+          - cell "8 vCPU · 16 GiB 磁盘 80 GiB" [ref=e56]
+            - StaticText "8 vCPU · 16 GiB"
+              - InlineTextBox "8 vCPU · 16 GiB"
+            - StaticText "磁盘 80 GiB"
+              - InlineTextBox "磁盘 80 GiB"
+          - cell "—" [ref=e57]
+            - StaticText "—"
+              - InlineTextBox "—"
+          - cell "启动 关机 强制停止 重启 挂起 恢复 配置 控制台 删除" [ref=e58]
+            - button "启动" [ref=e157]
+              - StaticText "启动"
+                - InlineTextBox "启动"
+            - button "关机" [disabled, ref=e158]
+              - StaticText "关机"
+                - InlineTextBox "关机"
+            - button "强制停止" [disabled, ref=e159]
+              - StaticText "强制停止"
+                - InlineTextBox "强制停止"
+            - button "重启" [disabled, ref=e160]
+              - StaticText "重启"
+                - InlineTextBox "重启"
+            - button "挂起" [disabled, ref=e161]
+              - StaticText "挂起"
+                - InlineTextBox "挂起"
+            - button "恢复" [disabled, ref=e162]
+              - StaticText "恢复"
+                - InlineTextBox "恢复"
+            - button "配置" [ref=e163]
+              - StaticText "配置"
+                - InlineTextBox "配置"
+            - button "控制台" [disabled, ref=e164]
+              - StaticText "控制台"
+                - InlineTextBox "控制台"
+            - button "删除" [ref=e165]
+              - StaticText "删除"
+                - InlineTextBox "删除"
+        - row
+          - cell "ubuntu1 e0fd39e0-b9c4-479b-ae50-b76243cd80e3" [ref=e59]
+            - StaticText "ubuntu1"
+              - InlineTextBox "ubuntu1"
+            - generic
+              - StaticText "e0fd39e0-b9c4-479b-ae50-b76243cd80e3"
+                - InlineTextBox "e0fd39e0-b9c4-479b-ae50-b76243cd80e3"
+          - cell "已保存" [ref=e60]
+            - StaticText "已保存"
+              - InlineTextBox "已保存"
+          - cell "8 vCPU · 16 GiB 磁盘 512 GiB" [ref=e61]
+            - StaticText "8 vCPU · 16 GiB"
+              - InlineTextBox "8 vCPU · 16 GiB"
+            - StaticText "磁盘 512 GiB"
+              - InlineTextBox "磁盘 512 GiB"
+          - cell "—" [ref=e62]
+            - StaticText "—"
+              - InlineTextBox "—"
+          - cell "启动 关机 强制停止 重启 挂起 恢复 配置 控制台 删除" [ref=e63]
+            - button "启动" [ref=e166]
+              - StaticText "启动"
+                - InlineTextBox "启动"
+            - button "关机" [disabled, ref=e167]
+              - StaticText "关机"
+                - InlineTextBox "关机"
+            - button "强制停止" [disabled, ref=e168]
+              - StaticText "强制停止"
+                - InlineTextBox "强制停止"
+            - button "重启" [disabled, ref=e169]
+              - StaticText "重启"
+                - InlineTextBox "重启"
+            - button "挂起" [disabled, ref=e170]
+              - StaticText "挂起"
+                - InlineTextBox "挂起"
+            - button "恢复" [disabled, ref=e171]
+              - StaticText "恢复"
+                - InlineTextBox "恢复"
+            - button "配置" [disabled, ref=e172]
+              - StaticText "配置"
+                - InlineTextBox "配置"
+            - button "控制台" [disabled, ref=e173]
+              - StaticText "控制台"
+                - InlineTextBox "控制台"
+            - button "删除" [ref=e174]
+              - StaticText "删除"
+                - InlineTextBox "删除"
+        - row
+          - cell "ubuntu2 d292d954-2ad2-4a93-81e9-ca993f6e1aea" [ref=e64]
+            - StaticText "ubuntu2"
+              - InlineTextBox "ubuntu2"
+            - generic
+              - StaticText "d292d954-2ad2-4a93-81e9-ca993f6e1aea"
+                - InlineTextBox "d292d954-2ad2-4a93-81e9-ca993f6e1aea"
+          - cell "已关机" [ref=e65]
+            - StaticText "已关机"
+              - InlineTextBox "已关机"
+          - cell "8 vCPU · 16 GiB 磁盘 512 GiB" [ref=e66]
+            - StaticText "8 vCPU · 16 GiB"
+              - InlineTextBox "8 vCPU · 16 GiB"
+            - StaticText "磁盘 512 GiB"
+              - InlineTextBox "磁盘 512 GiB"
+          - cell "—" [ref=e67]
+            - StaticText "—"
+              - InlineTextBox "—"
+          - cell "启动 关机 强制停止 重启 挂起 恢复 配置 控制台 删除" [ref=e68]
+            - button "启动" [ref=e175]
+              - StaticText "启动"
+                - InlineTextBox "启动"
+            - button "关机" [disabled, ref=e176]
+              - StaticText "关机"
+                - InlineTextBox "关机"
+            - button "强制停止" [disabled, ref=e177]
+              - StaticText "强制停止"
+                - InlineTextBox "强制停止"
+            - button "重启" [disabled, ref=e178]
+              - StaticText "重启"
+                - InlineTextBox "重启"
+            - button "挂起" [disabled, ref=e179]
+              - StaticText "挂起"
+                - InlineTextBox "挂起"
+            - button "恢复" [disabled, ref=e180]
+              - StaticText "恢复"
+                - InlineTextBox "恢复"
+            - button "配置" [ref=e181]
+              - StaticText "配置"
+                - InlineTextBox "配置"
+            - button "控制台" [disabled, ref=e182]
+              - StaticText "控制台"
+                - InlineTextBox "控制台"
+            - button "删除" [ref=e183]
+              - StaticText "删除"
+                - InlineTextBox "删除"
+        - row
+          - cell "ubuntu2204 287e5832-97e5-418b-aed6-099f4fe9dff5" [ref=e69]
+            - StaticText "ubuntu2204"
+              - InlineTextBox "ubuntu2204"
+            - generic
+              - StaticText "287e5832-97e5-418b-aed6-099f4fe9dff5"
+                - InlineTextBox "287e5832-97e5-418b-aed6-099f4fe9dff5"
+          - cell "已保存" [ref=e70]
+            - StaticText "已保存"
+              - InlineTextBox "已保存"
+          - cell "8 vCPU · 16 GiB 磁盘 512 GiB" [ref=e71]
+            - StaticText "8 vCPU · 16 GiB"
+              - InlineTextBox "8 vCPU · 16 GiB"
+            - StaticText "磁盘 512 GiB"
+              - InlineTextBox "磁盘 512 GiB"
+          - cell "—" [ref=e72]
+            - StaticText "—"
+              - InlineTextBox "—"
+          - cell "启动 关机 强制停止 重启 挂起 恢复 配置 控制台 删除" [ref=e73]
+            - button "启动" [ref=e184]
+              - StaticText "启动"
+                - InlineTextBox "启动"
+            - button "关机" [disabled, ref=e185]
+              - StaticText "关机"
+                - InlineTextBox "关机"
+            - button "强制停止" [disabled, ref=e186]
+              - StaticText "强制停止"
+                - InlineTextBox "强制停止"
+            - button "重启" [disabled, ref=e187]
+              - StaticText "重启"
+                - InlineTextBox "重启"
+            - button "挂起" [disabled, ref=e188]
+              - StaticText "挂起"
+                - InlineTextBox "挂起"
+            - button "恢复" [disabled, ref=e189]
+              - StaticText "恢复"
+                - InlineTextBox "恢复"
+            - button "配置" [disabled, ref=e190]
+              - StaticText "配置"
+                - InlineTextBox "配置"
+            - button "控制台" [disabled, ref=e191]
+              - StaticText "控制台"
+                - InlineTextBox "控制台"
+            - button "删除" [ref=e192]
+              - StaticText "删除"
+                - InlineTextBox "删除"
+        - row
+          - cell "ubuntu3 964dd391-4597-424f-a5d6-1255d638ade5" [ref=e74]
+            - StaticText "ubuntu3"
+              - InlineTextBox "ubuntu3"
+            - generic
+              - StaticText "964dd391-4597-424f-a5d6-1255d638ade5"
+                - InlineTextBox "964dd391-4597-424f-a5d6-1255d638ade5"
+          - cell "已关机" [ref=e75]
+            - StaticText "已关机"
+              - InlineTextBox "已关机"
+          - cell "16 vCPU · 32 GiB 磁盘 512 GiB" [ref=e76]
+            - StaticText "16 vCPU · 32 GiB"
+              - InlineTextBox "16 vCPU · 32 GiB"
+            - StaticText "磁盘 512 GiB"
+              - InlineTextBox "磁盘 512 GiB"
+          - cell "—" [ref=e77]
+            - StaticText "—"
+              - InlineTextBox "—"
+          - cell "启动 关机 强制停止 重启 挂起 恢复 配置 控制台 删除" [ref=e78]
+            - button "启动" [ref=e193]
+              - StaticText "启动"
+                - InlineTextBox "启动"
+            - button "关机" [disabled, ref=e194]
+              - StaticText "关机"
+                - InlineTextBox "关机"
+            - button "强制停止" [disabled, ref=e195]
+              - StaticText "强制停止"
+                - InlineTextBox "强制停止"
+            - button "重启" [disabled, ref=e196]
+              - StaticText "重启"
+                - InlineTextBox "重启"
+            - button "挂起" [disabled, ref=e197]
+              - StaticText "挂起"
+                - InlineTextBox "挂起"
+            - button "恢复" [disabled, ref=e198]
+              - StaticText "恢复"
+                - InlineTextBox "恢复"
+            - button "配置" [ref=e199]
+              - StaticText "配置"
+                - InlineTextBox "配置"
+            - button "控制台" [disabled, ref=e200]
+              - StaticText "控制台"
+                - InlineTextBox "控制台"
+            - button "删除" [ref=e201]
+              - StaticText "删除"
+                - InlineTextBox "删除"
+        - row
+          - cell "ubuntu4 3d40f33b-1ca3-46fb-ba7f-4e6d6d8093c1" [ref=e79]
+            - StaticText "ubuntu4"
+              - InlineTextBox "ubuntu4"
+            - generic
+              - StaticText "3d40f33b-1ca3-46fb-ba7f-4e6d6d8093c1"
+                - InlineTextBox "3d40f33b-1ca3-46fb-ba7f-4e6d6d8093c1"
+          - cell "已关机" [ref=e80]
+            - StaticText "已关机"
+              - InlineTextBox "已关机"
+          - cell "8 vCPU · 16 GiB 磁盘 512 GiB" [ref=e81]
+            - StaticText "8 vCPU · 16 GiB"
+              - InlineTextBox "8 vCPU · 16 GiB"
+            - StaticText "磁盘 512 GiB"
+              - InlineTextBox "磁盘 512 GiB"
+          - cell "—" [ref=e82]
+            - StaticText "—"
+              - InlineTextBox "—"
+          - cell "启动 关机 强制停止 重启 挂起 恢复 配置 控制台 删除" [ref=e83]
+            - button "启动" [ref=e202]
+              - StaticText "启动"
+                - InlineTextBox "启动"
+            - button "关机" [disabled, ref=e203]
+              - StaticText "关机"
+                - InlineTextBox "关机"
+            - button "强制停止" [disabled, ref=e204]
+              - StaticText "强制停止"
+                - InlineTextBox "强制停止"
+            - button "重启" [disabled, ref=e205]
+              - StaticText "重启"
+                - InlineTextBox "重启"
+            - button "挂起" [disabled, ref=e206]
+              - StaticText "挂起"
+                - InlineTextBox "挂起"
+            - button "恢复" [disabled, ref=e207]
+              - StaticText "恢复"
+                - InlineTextBox "恢复"
+            - button "配置" [ref=e208]
+              - StaticText "配置"
+                - InlineTextBox "配置"
+            - button "控制台" [disabled, ref=e209]
+              - StaticText "控制台"
+                - InlineTextBox "控制台"
+            - button "删除" [ref=e210]
+              - StaticText "删除"
+                - InlineTextBox "删除"
+        - row
+          - cell "ubuntu5 4b5401ef-1ec8-46f4-b966-45b0458fd7e6" [ref=e84]
+            - StaticText "ubuntu5"
+              - InlineTextBox "ubuntu5"
+            - generic
+              - StaticText "4b5401ef-1ec8-46f4-b966-45b0458fd7e6"
+                - InlineTextBox "4b5401ef-1ec8-46f4-b966-45b0458fd7e6"
+          - cell "已关机" [ref=e85]
+            - StaticText "已关机"
+              - InlineTextBox "已关机"
+          - cell "8 vCPU · 16 GiB 磁盘 512 GiB" [ref=e86]
+            - StaticText "8 vCPU · 16 GiB"
+              - InlineTextBox "8 vCPU · 16 GiB"
+            - StaticText "磁盘 512 GiB"
+              - InlineTextBox "磁盘 512 GiB"
+          - cell "—" [ref=e87]
+            - StaticText "—"
+              - InlineTextBox "—"
+          - cell "启动 关机 强制停止 重启 挂起 恢复 配置 控制台 删除" [ref=e88]
+            - button "启动" [ref=e211]
+              - StaticText "启动"
+                - InlineTextBox "启动"
+            - button "关机" [disabled, ref=e212]
+              - StaticText "关机"
+                - InlineTextBox "关机"
+            - button "强制停止" [disabled, ref=e213]
+              - StaticText "强制停止"
+                - InlineTextBox "强制停止"
+            - button "重启" [disabled, ref=e214]
+              - StaticText "重启"
+                - InlineTextBox "重启"
+            - button "挂起" [disabled, ref=e215]
+              - StaticText "挂起"
+                - InlineTextBox "挂起"
+            - button "恢复" [disabled, ref=e216]
+              - StaticText "恢复"
+                - InlineTextBox "恢复"
+            - button "配置" [ref=e217]
+              - StaticText "配置"
+                - InlineTextBox "配置"
+            - button "控制台" [disabled, ref=e218]
+              - StaticText "控制台"
+                - InlineTextBox "控制台"
+            - button "删除" [ref=e219]
+              - StaticText "删除"
+                - InlineTextBox "删除"
+- generic
+- status
+  - StaticText "已保存主机登记"
+    - InlineTextBox "已保存主机登记"
+  - button "关闭通知" [ref=e1]
+  - StaticText "已保存主机登记"
+    - InlineTextBox "已保存主机登记"
+  - button "关闭通知" [ref=e2]

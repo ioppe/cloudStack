@@ -1,0 +1,3 @@
+### stage=cleanup started_utc=2026-11-03T06:29:04Z target=node150/uuid=506cc484-fdda-494e-9681-5da8331b7e27 name=platform-accept-20261103 force+remove_disks
+PASS temporary VM removed
+### stage=cleanup EXIT=0 finished_utc=2026-11-03T06:29:08Z

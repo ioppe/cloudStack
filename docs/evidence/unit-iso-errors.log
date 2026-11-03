@@ -1,0 +1,67 @@
+=== ISO 错误来源检查 · CreateCommandTests (5 项) 2026-11-03 01:21:41 ===
+# 命令: PYTHONPATH=tests:. python3 -m unittest test_worker.CreateCommandTests -v
+--- 本地 Python 3.13.7 ---
+33b80caef69197bc975aca7d591a4e3fff29df1567b830adc509ae07d3b53cf2  tests/test_worker.py
+212b2d7de71c9522889dc6d250dcaac20871deb9592567edd9bb08d3531184d9  vmops.py
+a552980fd14e11819581bec376e9e0b16c2c26922315f27dd5d2c1170b4afe11  worker.py
+--- unittest ---
+test_custom_cloud_init_user_does_not_require_distribution_groups (test_worker.CreateCommandTests.test_custom_cloud_init_user_does_not_require_distribution_groups) ... ok
+test_disk_create_with_cloud_init_does_not_leak_password (test_worker.CreateCommandTests.test_disk_create_with_cloud_init_does_not_leak_password) ... ok
+test_iso_install_uses_version_appropriate_os_args (test_worker.CreateCommandTests.test_iso_install_uses_version_appropriate_os_args) ... ok
+test_iso_rejects_disk_template_before_install (test_worker.CreateCommandTests.test_iso_rejects_disk_template_before_install) ... ok
+test_symlinked_template_is_rejected (test_worker.CreateCommandTests.test_symlinked_template_is_rejected) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.004s
+
+OK
+EXIT=0
+
+=== .30 Python3.6 · 2026-11-03 01:22:05 ===
+** WARNING: connection is not using a post-quantum key exchange algorithm.
+** This session may be vulnerable to "store now, decrypt later" attacks.
+** The server may need to be upgraded. See https://openssh.com/pq.html
+--- 远端 /usr/bin/python3 Python 3.6.8 ---
+33b80caef69197bc975aca7d591a4e3fff29df1567b830adc509ae07d3b53cf2  tests/test_worker.py
+--- unittest ---
+test_custom_cloud_init_user_does_not_require_distribution_groups (test_worker.CreateCommandTests) ... ok
+test_disk_create_with_cloud_init_does_not_leak_password (test_worker.CreateCommandTests) ... ok
+test_iso_install_uses_version_appropriate_os_args (test_worker.CreateCommandTests) ... ok
+test_iso_rejects_disk_template_before_install (test_worker.CreateCommandTests) ... ok
+test_symlinked_template_is_rejected (test_worker.CreateCommandTests) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.008s
+
+OK
+EXIT=0
+
+=== .150 Python3.12 · 2026-11-03 01:22:13 ===
+--- 远端 /usr/bin/python3 Python 3.12.3 ---
+33b80caef69197bc975aca7d591a4e3fff29df1567b830adc509ae07d3b53cf2  tests/test_worker.py
+--- unittest ---
+test_custom_cloud_init_user_does_not_require_distribution_groups (test_worker.CreateCommandTests.test_custom_cloud_init_user_does_not_require_distribution_groups) ... ok
+test_disk_create_with_cloud_init_does_not_leak_password (test_worker.CreateCommandTests.test_disk_create_with_cloud_init_does_not_leak_password) ... ok
+test_iso_install_uses_version_appropriate_os_args (test_worker.CreateCommandTests.test_iso_install_uses_version_appropriate_os_args) ... ok
+test_iso_rejects_disk_template_before_install (test_worker.CreateCommandTests.test_iso_rejects_disk_template_before_install) ... ok
+test_symlinked_template_is_rejected (test_worker.CreateCommandTests.test_symlinked_template_is_rejected) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.003s
+
+OK
+EXIT=0
+
+=== 附: e2e/tools 语法编译检查 2026-11-03 01:22:46 · 本地 Python 3.13.7 ===
+# PYTHONPYCACHEPREFIX=$PI_SCRATCH_DIR/pycache python3 -m py_compile ...  仅编译，不执行
+88cb29d843bd7966ca64106d150d36a4646cd9069397bd6d6f0c1c2ae89cc6d8  tests/e2e_platform.py
+3f7600092e8a167e817660c5e63ed47818943e83fda662184f23a204144d1818  tests/e2e_fault.py
+350882ef83afe23ed36495e2485b6f8342ce65d57700878be52228e166180e18  tools/guest_probe.py
+PY_COMPILE_EXIT=0
+
+=== 汇总 ===
+CreateCommandTests: 实际 5 项 (263/304/362/373/379 行)，其中新增 test_iso_rejects_disk_template_before_install (362)
+本地 Python3.13.7: Ran 5, OK, exit 0
+.30 Python3.6.8: Ran 5, OK, exit 0
+.150 Python3.12.3: Ran 5, OK, exit 0
+e2e/tools py_compile: exit 0

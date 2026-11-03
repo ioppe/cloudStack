@@ -1,0 +1,9 @@
+{
+  "passed": true,
+  "fixture_mode": "isolated demo UI only, no management operations",
+  "checks": [
+    "cloud-init toggle preserves selected non-first image",
+    "bridge-default host selects its independent configured NAT source",
+    "logout button invokes its handler exactly once"
+  ]
+}

@@ -1,0 +1,4 @@
+### stage=environment started_utc=2026-11-03T06:29:23Z scope=readonly-two-host-baseline
+PASS old panel HTTP/files and all 14 VM UUID/state/XML unchanged
+PASS new services active/enabled; node150 NAT/template/physical network preserved; temporary resources absent
+### stage=environment EXIT=0 finished_utc=2026-11-03T06:29:26Z

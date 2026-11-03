@@ -1,0 +1,18 @@
+{
+  "passed": true,
+  "hosts": {
+    "node30": {
+      "online": true,
+      "vm_count": 14
+    },
+    "node150": {
+      "online": true,
+      "vm_count": 0
+    }
+  },
+  "task_feedback": "success and explicit failed-operation reason visible",
+  "screenshots": [
+    "browser-hosts-final.png",
+    "browser-tasks-final.png"
+  ]
+}

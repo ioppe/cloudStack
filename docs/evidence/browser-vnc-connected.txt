@@ -1,0 +1,34 @@
+- banner
+  - StaticText "云栈 · 控制台"
+    - InlineTextBox "云栈 · 控制台"
+  - generic
+    - StaticText "platform-accept-20261103"
+      - InlineTextBox "platform-accept-20261103"
+  - generic
+    - StaticText "Ubuntu 150（node150） · 506cc484-fdda-494e-9681-5da8331b7e27 · running"
+      - InlineTextBox "Ubuntu 150（node150） · 506cc484-fdda-494e-9681-5da8331b7e27 · running"
+  - generic
+    - generic
+      - StaticText "已连接"
+        - InlineTextBox "已连接"
+  - button "Ctrl+Alt+Del" [ref=e1]
+    - StaticText "Ctrl+Alt+Del"
+      - InlineTextBox "Ctrl+Alt+Del"
+  - button "适应窗口" [ref=e2]
+    - StaticText "适应窗口"
+      - InlineTextBox "适应窗口"
+  - button "重新连接" [ref=e3]
+    - StaticText "重新连接"
+      - InlineTextBox "重新连接"
+  - button "关闭窗口" [ref=e4]
+    - StaticText "关闭窗口"
+      - InlineTextBox "关闭窗口"
+- main
+  - generic
+    - Canvas
+- contentinfo
+  - generic
+    - StaticText "已绑定目标主机与虚拟机，连接通过平台验证。"
+      - InlineTextBox "已绑定目标主机与虚拟机，连接通过平台验证。"
+  - StaticText "键盘输入直接送入 guest；如被浏览器截获，点击画面后重试。"
+    - InlineTextBox "键盘输入直接送入 guest；如被浏览器截获，点击画面后重试。"

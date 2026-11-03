@@ -1,0 +1,172 @@
+- generic
+  - complementary
+    - StaticText "云栈"
+      - InlineTextBox "云栈"
+    - StaticText "虚拟机平台"
+      - InlineTextBox "虚拟机平台"
+    - navigation "主导航" [ref=e1]
+      - button "主机 2" [ref=e8]
+        - StaticText "主机"
+          - InlineTextBox "主机"
+        - StaticText "2"
+          - InlineTextBox "2"
+      - button "虚拟机" [ref=e9]
+        - StaticText "虚拟机"
+          - InlineTextBox "虚拟机"
+      - button "镜像" [ref=e10]
+        - StaticText "镜像"
+          - InlineTextBox "镜像"
+      - button "任务" [ref=e11]
+        - StaticText "任务"
+          - InlineTextBox "任务"
+    - generic
+      - StaticText "admin"
+        - InlineTextBox "admin"
+    - StaticText "原有虚拟机受保护 · 新建资源按主机隔离"
+      - InlineTextBox "原有虚拟机受保护 · 新建资源按主"
+      - InlineTextBox "机隔离"
+  - banner
+    - LabelText
+      - StaticText "目标主机"
+        - InlineTextBox "目标主机"
+    - combobox "目标主机" [expanded=false, ref=e2]: Ubuntu 150 · node150
+      - MenuListPopup
+        - option "Ubuntu 150 · node150" [selected, ref=e12]
+        - option "主机 30 · node30" [ref=e13]
+    - generic
+      - generic
+        - StaticText "在线"
+          - InlineTextBox "在线"
+    - button "刷新" [ref=e3]
+      - StaticText "刷新"
+        - InlineTextBox "刷新"
+    - generic
+      - StaticText "admin"
+        - InlineTextBox "admin"
+    - button "退出" [ref=e4]
+      - StaticText "退出"
+        - InlineTextBox "退出"
+  - main
+    - heading "主机 2" [level=1, ref=e5]
+      - StaticText "主机"
+        - InlineTextBox "主机"
+      - StaticText "2"
+        - InlineTextBox "2"
+    - paragraph
+      - StaticText "纳管登记、连接方式与实时资源。解除纳管只删除本平台登记，不会改动被管主机。"
+        - InlineTextBox "纳管登记、连接方式与实时资源。解除纳管只删除本平台登记，不会改动被管主机。"
+    - button "检测当前主机" [ref=e6]
+      - StaticText "检测当前主机"
+        - InlineTextBox "检测当前主机"
+    - button "新增主机" [ref=e7]
+      - StaticText "新增主机"
+        - InlineTextBox "新增主机"
+    - generic
+      - table
+        - rowgroup
+          - row
+            - columnheader "主机" [ref=e24]
+              - StaticText "主机"
+                - InlineTextBox "主机"
+            - columnheader "地址 / 连接" [ref=e25]
+              - StaticText "地址 / 连接"
+                - InlineTextBox "地址 / 连接"
+            - columnheader "状态" [ref=e26]
+              - StaticText "状态"
+                - InlineTextBox "状态"
+            - columnheader "资源" [ref=e27]
+              - StaticText "资源"
+                - InlineTextBox "资源"
+            - columnheader "操作" [ref=e28]
+              - StaticText "操作"
+                - InlineTextBox "操作"
+        - row
+          - cell "Ubuntu 150 当前 node150" [ref=e14]
+            - StaticText "Ubuntu 150"
+              - InlineTextBox "Ubuntu 150"
+            - StaticText "当前"
+              - InlineTextBox "当前"
+            - StaticText "node150"
+              - InlineTextBox "node150"
+          - cell "ssh root@192.168.0.150:22 192.168.0.150" [ref=e15]
+            - StaticText "ssh root@192.168.0.150:22"
+              - InlineTextBox "ssh root@192.168.0.150:22"
+            - StaticText "192.168.0.150"
+              - InlineTextBox "192.168.0.150"
+          - cell "在线 sky · Ubuntu 24.04.5 LTS" [ref=e16]
+            - StaticText "在线"
+              - InlineTextBox "在线"
+            - generic
+              - StaticText "sky · Ubuntu 24.04.5 LTS"
+                - InlineTextBox "sky · Ubuntu 24.04.5 "
+                - InlineTextBox "LTS"
+          - cell "CPU 80 核 · KVM 内存 5.3 GiB / 125.5 GiB 磁盘 102.1 GiB / 1829.7 GiB VM 0 · 运行 0" [ref=e17]
+            - StaticText "CPU"
+              - InlineTextBox "CPU"
+            - StaticText "80 核 · KVM"
+              - InlineTextBox "80 核 · KVM"
+            - StaticText "内存"
+              - InlineTextBox "内存"
+            - StaticText "5.3 GiB / 125.5 GiB"
+              - InlineTextBox "5.3 GiB / 125.5 GiB"
+            - StaticText "磁盘"
+              - InlineTextBox "磁盘"
+            - StaticText "102.1 GiB / 1829.7 GiB"
+              - InlineTextBox "102.1 GiB / 1829.7 GiB"
+            - StaticText "VM 0 · 运行 0"
+              - InlineTextBox "VM 0 · 运行 0"
+          - cell "检测 编辑 解除纳管" [ref=e18]
+            - button "检测" [ref=e29]
+              - StaticText "检测"
+                - InlineTextBox "检测"
+            - button "编辑" [ref=e30]
+              - StaticText "编辑"
+                - InlineTextBox "编辑"
+            - button "解除纳管" [ref=e31]
+              - StaticText "解除纳管"
+                - InlineTextBox "解除纳管"
+        - row
+          - cell "主机 30 node30" [ref=e19]
+            - StaticText "主机 30"
+              - InlineTextBox "主机 30"
+            - StaticText "node30"
+              - InlineTextBox "node30"
+          - cell "local · 本机 192.168.0.30" [ref=e20]
+            - StaticText "local · 本机"
+              - InlineTextBox "local · 本机"
+            - StaticText "192.168.0.30"
+              - InlineTextBox "192.168.0.30"
+          - cell "在线 k8s-node03 · CentOS Linux 7 (Core)" [ref=e21]
+            - StaticText "在线"
+              - InlineTextBox "在线"
+            - generic
+              - StaticText "k8s-node03 · CentOS Linux 7 (Core)"
+                - InlineTextBox "k8s-node03 · CentOS L"
+                - InlineTextBox "inux 7 (Core)"
+          - cell "CPU 80 核 · KVM 内存 45.5 GiB / 125.4 GiB 磁盘 2526.2 GiB / 10545.2 GiB VM 14 · 运行 3" [ref=e22]
+            - StaticText "CPU"
+              - InlineTextBox "CPU"
+            - StaticText "80 核 · KVM"
+              - InlineTextBox "80 核 · KVM"
+            - StaticText "内存"
+              - InlineTextBox "内存"
+            - StaticText "45.5 GiB / 125.4 GiB"
+              - InlineTextBox "45.5 GiB / 125.4 GiB"
+            - StaticText "磁盘"
+              - InlineTextBox "磁盘"
+            - StaticText "2526.2 GiB / 10545.2 GiB"
+              - InlineTextBox "2526.2 GiB / 10545.2 GiB"
+            - StaticText "VM 14 · 运行 3"
+              - InlineTextBox "VM 14 · 运行 3"
+          - cell "检测 编辑 解除纳管" [ref=e23]
+            - button "检测" [ref=e32]
+              - StaticText "检测"
+                - InlineTextBox "检测"
+            - button "编辑" [ref=e33]
+              - StaticText "编辑"
+                - InlineTextBox "编辑"
+            - button "解除纳管" [ref=e34]
+              - StaticText "解除纳管"
+                - InlineTextBox "解除纳管"
+- generic
+- status

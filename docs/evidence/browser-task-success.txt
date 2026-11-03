@@ -1,0 +1,157 @@
+- generic
+  - complementary
+    - StaticText "云栈"
+      - InlineTextBox "云栈"
+    - StaticText "虚拟机平台"
+      - InlineTextBox "虚拟机平台"
+    - navigation "主导航" [ref=e3]
+      - button "主机 2" [ref=e9]
+        - StaticText "主机"
+          - InlineTextBox "主机"
+        - StaticText "2"
+          - InlineTextBox "2"
+      - button "虚拟机 1" [ref=e10]
+        - StaticText "虚拟机"
+          - InlineTextBox "虚拟机"
+        - StaticText "1"
+          - InlineTextBox "1"
+      - button "镜像 1" [ref=e11]
+        - StaticText "镜像"
+          - InlineTextBox "镜像"
+        - StaticText "1"
+          - InlineTextBox "1"
+      - button "任务" [ref=e12]
+        - StaticText "任务"
+          - InlineTextBox "任务"
+    - generic
+      - StaticText "admin"
+        - InlineTextBox "admin"
+    - StaticText "原有虚拟机受保护 · 新建资源按主机隔离"
+      - InlineTextBox "原有虚拟机受保护 · 新建资源按主"
+      - InlineTextBox "机隔离"
+  - banner
+    - LabelText
+      - StaticText "目标主机"
+        - InlineTextBox "目标主机"
+    - combobox "目标主机" [expanded=false, ref=e4]: Ubuntu 150 · node150
+      - MenuListPopup
+        - option "Ubuntu 150 · node150" [selected, ref=e13]
+        - option "主机 30 · node30" [ref=e14]
+    - generic
+      - generic
+        - StaticText "在线"
+          - InlineTextBox "在线"
+    - button "刷新" [ref=e5]
+      - StaticText "刷新"
+        - InlineTextBox "刷新"
+    - generic
+      - StaticText "admin"
+        - InlineTextBox "admin"
+    - button "退出" [ref=e6]
+      - StaticText "退出"
+        - InlineTextBox "退出"
+  - main
+    - heading "任务 2" [level=1, ref=e7]
+      - StaticText "任务"
+        - InlineTextBox "任务"
+      - StaticText "2"
+        - InlineTextBox "2"
+    - paragraph
+      - StaticText "创建、生命周期与配置都以后台任务执行；页面打开时每 3 秒自动轮询。"
+        - InlineTextBox "创建、生命周期与配置都以后台任务执行；页面打开时每 3 秒自动轮询。"
+    - button "立即刷新" [ref=e8]
+      - StaticText "立即刷新"
+        - InlineTextBox "立即刷新"
+    - StaticText "自动轮询 3s"
+      - InlineTextBox "自动轮询 3s"
+    - StaticText "最近更新 01:18:01"
+      - InlineTextBox "最近更新 01:18:01"
+    - StaticText "0 个执行中"
+      - InlineTextBox "0 个执行中"
+    - generic
+      - table
+        - rowgroup
+          - row
+            - columnheader "状态" [ref=e27]
+              - StaticText "状态"
+                - InlineTextBox "状态"
+            - columnheader "任务" [ref=e28]
+              - StaticText "任务"
+                - InlineTextBox "任务"
+            - columnheader "主机" [ref=e29]
+              - StaticText "主机"
+                - InlineTextBox "主机"
+            - columnheader "虚拟机" [ref=e30]
+              - StaticText "虚拟机"
+                - InlineTextBox "虚拟机"
+            - columnheader "时间" [ref=e31]
+              - StaticText "时间"
+                - InlineTextBox "时间"
+            - columnheader "错误" [ref=e32]
+              - StaticText "错误"
+                - InlineTextBox "错误"
+        - row
+          - cell "成功" [ref=e15]
+            - StaticText "成功"
+              - InlineTextBox "成功"
+          - cell "创建虚拟机 f6eb85b85a38459ca743c09330992097" [ref=e16]
+            - StaticText "创建虚拟机"
+              - InlineTextBox "创建虚拟机"
+            - StaticText "f6eb85b85a38459ca743c09330992097"
+              - InlineTextBox "f6eb85b85a38459ca743c09330992097"
+          - cell "Ubuntu 150 node150" [ref=e17]
+            - StaticText "Ubuntu 150"
+              - InlineTextBox "Ubuntu 150"
+            - StaticText "node150"
+              - InlineTextBox "node150"
+          - cell "platform-accept-20261103 506cc484-fdda-494e-9681-5da8331b7e27" [ref=e18]
+            - StaticText "platform-accept-20261103"
+              - InlineTextBox "platform-accept-20261103"
+            - StaticText "506cc484-fdda-494e-9681-5da8331b7e27"
+              - InlineTextBox "506cc484-fdda-494e-9681-5d"
+              - InlineTextBox "a8331b7e27"
+          - cell "11-03 01:17:47完成 11-03 01:18:00" [ref=e19]
+            - StaticText "11-03 01:17:47"
+              - InlineTextBox "11-03 01:17:47"
+            - StaticText "完成 11-03 01:18:00"
+              - InlineTextBox "完成 "
+              - InlineTextBox "11-03 01:18:00"
+          - cell "—" [ref=e20]
+            - StaticText "—"
+              - InlineTextBox "—"
+        - row
+          - cell "失败" [ref=e21]
+            - StaticText "失败"
+              - InlineTextBox "失败"
+          - cell "创建虚拟机 a57413a09c8049098b7974500df2898e" [ref=e22]
+            - StaticText "创建虚拟机"
+              - InlineTextBox "创建虚拟机"
+            - StaticText "a57413a09c8049098b7974500df2898e"
+              - InlineTextBox "a57413a09c8049098b7974500df2898e"
+          - cell "Ubuntu 150 node150" [ref=e23]
+            - StaticText "Ubuntu 150"
+              - InlineTextBox "Ubuntu 150"
+            - StaticText "node150"
+              - InlineTextBox "node150"
+          - cell "platform-accept-20261103-denied" [ref=e24]
+            - StaticText "platform-accept-20261103-denied"
+              - InlineTextBox "platform-accept-20261103-"
+              - InlineTextBox "denied"
+          - cell "11-03 01:10:41完成 11-03 01:10:41" [ref=e25]
+            - StaticText "11-03 01:10:41"
+              - InlineTextBox "11-03 01:10:41"
+            - StaticText "完成 11-03 01:10:41"
+              - InlineTextBox "完成 "
+              - InlineTextBox "11-03 01:10:41"
+          - cell "镜像文件必须位于执行端配置的目录内" [ref=e26]
+            - StaticText "镜像文件必须位于执行端配置的目录内"
+              - InlineTextBox "镜像文件必须位于执行端配置"
+              - InlineTextBox "的目录内"
+- generic
+- status
+  - StaticText "任务完成：创建虚拟机"
+    - InlineTextBox "任务完成：创建虚拟机"
+  - button "查看任务" [ref=e1]
+    - StaticText "查看任务"
+      - InlineTextBox "查看任务"
+  - button "关闭通知" [ref=e2]

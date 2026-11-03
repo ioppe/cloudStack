@@ -1,0 +1,21 @@
+{
+  "stage": "cleanup",
+  "time": 1793687344,
+  "checks": [
+    {
+      "check": "temporary VM removed",
+      "evidence": {
+        "uuid": "506cc484-fdda-494e-9681-5da8331b7e27",
+        "task": "ce7c5881c1bf49119faaaf6ae0284828",
+        "result": {
+          "summary": "已删除虚拟机 platform-accept-20261103，移除 2 个磁盘文件，跳过 0 个",
+          "name": "platform-accept-20261103",
+          "uuid": "506cc484-fdda-494e-9681-5da8331b7e27",
+          "removed_count": 2,
+          "skipped_count": 0
+        }
+      }
+    }
+  ],
+  "passed": true
+}

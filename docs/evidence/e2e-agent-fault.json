@@ -1,0 +1,68 @@
+{
+  "time": 1793687013,
+  "before": {
+    "hostname": "k8s-node03",
+    "os": "CentOS Linux 7 (Core)",
+    "cpu_count": 80,
+    "memory_total": 134623551488,
+    "memory_available": 85826121728,
+    "disk_total": 11322836123648,
+    "disk_free": 8610461048832,
+    "vm_count": 14,
+    "running_count": 3,
+    "kvm": true
+  },
+  "remote_error": {
+    "error": "无法连接宿主机执行端：服务未启动或连接中断，请检查执行端服务"
+  },
+  "local_while_remote_offline": {
+    "hostname": "k8s-node03",
+    "os": "CentOS Linux 7 (Core)",
+    "cpu_count": 80,
+    "memory_total": 134623551488,
+    "memory_available": 85817831424,
+    "disk_total": 11322836123648,
+    "disk_free": 8610461048832,
+    "vm_count": 14,
+    "running_count": 3,
+    "kvm": true
+  },
+  "offline_operation": {
+    "id": "1496dbbc40a342b79119af656a91cc28",
+    "host_id": "node150",
+    "host_name": "Ubuntu 150",
+    "vm_uuid": "506cc484-fdda-494e-9681-5da8331b7e27",
+    "vm_name": "platform-accept-20261103",
+    "title": "暂停",
+    "status": "failed",
+    "created_at": 1793687014,
+    "finished_at": 1793687014,
+    "error": "无法连接宿主机执行端：服务未启动或连接中断，请检查执行端服务",
+    "result": null
+  },
+  "temporary_vm_state_preserved": "running",
+  "recovered": {
+    "host": {
+      "id": "node150",
+      "name": "Ubuntu 150",
+      "address": "192.168.0.150",
+      "transport": "ssh",
+      "ssh_user": "root",
+      "ssh_port": 22
+    },
+    "online": true,
+    "status": {
+      "hostname": "sky",
+      "os": "Ubuntu 24.04.5 LTS",
+      "cpu_count": 80,
+      "memory_total": 134776745984,
+      "memory_available": 128253734912,
+      "disk_total": 1964618686464,
+      "disk_free": 1853105258496,
+      "vm_count": 1,
+      "running_count": 1,
+      "kvm": true
+    }
+  },
+  "passed": true
+}

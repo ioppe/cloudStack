@@ -1,0 +1,15 @@
+### stage=lifecycle started_utc=2026-11-03T06:22:20Z python=Python 3.13.7 guest_key=scratch/vm-platform-accept-guest base=http://192.168.0.30:8089
+PASS created via browser
+PASS NAT address obtained
+PASS cloud-init custom user SSH and guest identity
+PASS lifecycle suspend
+PASS lifecycle resume
+PASS guest reboot boot ID changed
+PASS lifecycle reboot
+PASS lifecycle shutdown
+PASS offline CPU memory disk growth
+PASS lifecycle start
+PASS lifecycle stop
+PASS lifecycle start
+PASS configured guest booted with three vCPUs
+### stage=lifecycle EXIT=0 finished_utc=2026-11-03T06:23:12Z

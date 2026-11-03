@@ -1,0 +1,4 @@
+=== 2026-11-03T08:02:50Z commit=NONE(no-commits) cmd=tests/e2e_environment.py --node150-network bridge ===
+PASS old panel HTTP/files and all 14 VM UUID/state/XML unchanged
+PASS new services active/enabled; node150 NAT/template/physical network preserved; temporary resources absent
+EXIT=0

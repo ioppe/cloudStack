@@ -1,0 +1,26 @@
+{
+  "libvirt_uri": "qemu:///system",
+  "allow_writes": false,
+  "read_only_uuids": [],
+  "image_dirs": [
+    "/var/lib/libvirt/images/templates"
+  ],
+  "disk_dirs": [
+    "/var/lib/libvirt/images/vms"
+  ],
+  "storage_report_dir": "",
+  "default_bridge": "br0",
+  "default_network": "default",
+  "default_network_type": "network",
+  "default_timezone": "Asia/Shanghai",
+  "socket_path": "/run/vm-platform/agent.sock",
+  "virsh": "virsh",
+  "virt_install": "virt-install",
+  "qemu_img": "qemu-img",
+  "genisoimage": "",
+  "max_vcpus": 256,
+  "max_memory_gb": 1024,
+  "max_disk_gb": 20000,
+  "command_timeout": 120,
+  "install_timeout": 3600
+}

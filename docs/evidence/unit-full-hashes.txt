@@ -1,0 +1,31 @@
+# 单元测试源码 hash 证据 (sha256)
+# 说明：测试期间主会话在编辑源码/测试，共观察到 3 个快照。日志内两轮结果分别绑定下列 hash。
+# 复现：python3 -m unittest discover -s tests -v
+#       远端: ssh root@192.168.0.30 'cd /opt/vm-platform-check-only && /usr/bin/python3 -m unittest discover -s tests -v'
+
+[ROUND 1] 时间 2026-11-03 06:00-06:02 UTC，本地 53 tests / 远端 53 tests
+e57a4a614d9cda384e20638477fa778af99e61cea2f698a5129f2a3a98e5f3bf  controller.py
+2f59c12fac53256d343f38ef390e797e5961dceb83171288d1569079f5f696aa  worker.py
+bf88b7acacfb3e483ed8f6cc1af95eeb995c8ade8af9a93b7630149130f3d7a3  vmops.py
+4082b78d2dbd4055643bc2e45a41a3ba51055d8758eee18988f2773089a2ca5d  tests/test_controller.py
+8f020f82e75c78af9e4bfb2ededbd7a6e634e6c2e4da9f68033726757521d743  tests/test_worker.py
+03aad6f8d9aa834b4a727c0d7421bb7589302fa4804604fb137e17fdd41fa9c2  tools/api_client.py
+2d9b7ead75775d305fcf397df31dd67b301c630ad8a78615e28f43f0985d317e  tools/authorize-agent.py
+32e5d89403e289f300dac10dc848e8f81afd70eb4d9a487410b6ac4999c3cfaf  tools/bootstrap.py
+
+[ROUND 2] 时间 2026-11-03 01:03-01:04 本地时钟，本地 58 tests(含新增 tests/test_transport.py) / 远端 53 tests(未含 test_transport.py)
+85ded1e7965066ae692e67bc555a2cfd08c83277d810391278141470e784ca55  controller.py
+a552980fd14e11819581bec376e9e0b16c2c26922315f27dd5d2c1170b4afe11  worker.py
+24475564065c6f47258de3700eb7cca8a0f70a001db8cce76fce535e6fa7a887  vmops.py
+4082b78d2dbd4055643bc2e45a41a3ba51055d8758eee18988f2773089a2ca5d  tests/test_controller.py
+4f3f02a752910fc32f60310b3eb532375be3361d45fce4232ae5e920dd9809fc  tests/test_worker.py
+6f11baa2...  tests/test_transport.py (新增，仅本地)
+03aad6f8d9aa834b4a727c0d7421bb7589302fa4804604fb137e17fdd41fa9c2  tools/api_client.py
+
+[快照 3 / 未测] 2026-11-03 01:06:35 观察到仍在变动，未跑
+85ded1e7  controller.py
+a552980f  worker.py
+212b2d7d  vmops.py          (较 ROUND 2 已变)
+fe7a067b  tests/test_controller.py (连续变动: 4082b78d -> 96599c2a -> fe7a067b)
+6f11baa2  tests/test_transport.py
+9c8a0425  tests/test_worker.py

@@ -1,0 +1,5 @@
+{"scheduled": true, "rollback_after_seconds": 180, "backup": "/var/lib/vm-platform/backups/node150-bridge-v1", "bridge": "br0", "preserved_address": "192.168.0.150/24", "nat_preserved": true}
+Running timer as unit: vm-platform-node150-bridge-rollback.timer
+Will run service as unit: vm-platform-node150-bridge-rollback.service
+Running timer as unit: vm-platform-node150-bridge-apply.timer
+Will run service as unit: vm-platform-node150-bridge-apply.service

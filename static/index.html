@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>云栈 · 虚拟机平台</title>
+  <link rel="stylesheet" href="/static/app.css">
+</head>
+<body>
+  <!-- 登录门：未登录 / 401 时显示，登录成功后隐藏 -->
+  <section id="login-layer" class="login-layer" data-testid="login-layer" hidden aria-labelledby="login-title">
+    <div class="login-card">
+      <div class="login-brand">
+        <span class="login-brand__name">云栈</span>
+        <span class="login-brand__sub" id="login-title">虚拟机平台 · 请登录</span>
+      </div>
+      <form class="login-form" id="login-form" data-testid="login-form" novalidate>
+        <div class="field">
+          <label class="field__label" for="login-username">用户名</label>
+          <input class="input" id="login-username" name="username" type="text"
+                 autocomplete="username" autocapitalize="off" spellcheck="false"
+                 data-testid="login-username" required>
+        </div>
+        <div class="field">
+          <label class="field__label" for="login-password">密码</label>
+          <input class="input" id="login-password" name="password" type="password"
+                 autocomplete="current-password" data-testid="login-password" required>
+        </div>
+        <p class="field__error" id="login-error" data-testid="login-error" role="alert" hidden></p>
+        <button class="btn btn--primary btn--lg" id="login-submit" type="submit" data-testid="login-submit">
+          登录
+        </button>
+      </form>
+      <div class="login-foot">
+        <span>管理员专用管理入口</span>
+        <span id="login-version">v1.1.0</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 应用主体 -->
+  <div id="app" class="app" data-testid="app-shell" hidden>
+    <aside class="sidebar">
+      <div class="brand">
+        <span class="brand__name">云栈</span>
+        <span class="brand__sub">虚拟机平台</span>
+      </div>
+      <nav class="nav" id="nav" aria-label="主导航">
+        <button class="nav__item" type="button" data-view="hosts" data-testid="nav-hosts" aria-current="page">
+          <span data-icon="hosts"></span>
+          <span class="nav__label">主机</span>
+          <span class="nav__count" data-count="hosts"></span>
+        </button>
+        <button class="nav__item" type="button" data-view="vms" data-testid="nav-vms">
+          <span data-icon="vms"></span>
+          <span class="nav__label">虚拟机</span>
+          <span class="nav__count" data-count="vms"></span>
+        </button>
+        <button class="nav__item" type="button" data-view="images" data-testid="nav-images">
+          <span data-icon="images"></span>
+          <span class="nav__label">镜像</span>
+          <span class="nav__count" data-count="images"></span>
+        </button>
+        <button class="nav__item" type="button" data-view="tasks" data-testid="nav-tasks">
+          <span data-icon="tasks"></span>
+          <span class="nav__label">任务</span>
+          <span class="nav__count" data-count="tasks"></span>
+        </button>
+      </nav>
+      <div class="sidebar__foot">
+        <span class="sidebar__user">
+          <span class="sidebar__dot" aria-hidden="true"></span>
+          <span id="sidebar-user" data-testid="sidebar-user">—</span>
+        </span>
+        <span>原有虚拟机受保护 · 新建资源按主机隔离</span>
+      </div>
+    </aside>
+
+    <div class="main">
+      <header class="topbar">
+        <div class="topbar__host">
+          <label class="topbar__label" for="host-select">目标主机</label>
+          <select class="select topbar__select" id="host-select" data-testid="topbar-host-select"
+                  aria-label="目标主机"></select>
+          <span class="pill" id="topbar-status" data-testid="topbar-status">
+            <span class="pill__dot" aria-hidden="true"></span>
+            <span id="topbar-status-text">未选择主机</span>
+          </span>
+        </div>
+        <span class="topbar__spacer"></span>
+        <div class="topbar__actions">
+          <button class="btn btn--sm" type="button" id="btn-refresh" data-testid="btn-refresh"
+                  title="刷新主机状态与虚拟机列表">
+            <span data-icon="refresh"></span>
+            <span>刷新</span>
+          </button>
+          <span class="topbar__user" id="topbar-user" data-testid="topbar-user">—</span>
+          <button class="btn btn--sm btn--quiet" type="button" id="btn-password" data-testid="btn-password"
+                  title="修改当前管理员密码">
+            <span data-icon="key"></span>
+            <span>修改密码</span>
+          </button>
+          <button class="btn btn--sm btn--quiet" type="button" id="btn-logout" data-testid="btn-logout">
+            <span data-icon="logout"></span>
+            <span>退出</span>
+          </button>
+        </div>
+      </header>
+
+      <main class="view-root" id="view-root" data-testid="view-root" tabindex="-1"></main>
+    </div>
+  </div>
+
+  <div class="demo-banner" id="demo-banner" data-testid="demo-banner" hidden></div>
+  <div id="modal-root"></div>
+  <div class="toast-root" id="toast-root" data-testid="toast-root" role="status" aria-live="polite"></div>
+
+  <script src="/static/app.js"></script>
+  <script>
+    /* 仅纯静态预览（file://）时生效：控制器部署下资源始终来自 /static/。
+       把失败的绝对资源路径改写成同级相对路径，便于无后端时走查界面。 */
+    if (location.protocol === 'file:') {
+      document.querySelectorAll('link[href^="/static/"], script[src^="/static/"]').forEach(function (n) {
+        var attr = n.tagName === 'LINK' ? 'href' : 'src';
+        n.setAttribute(attr, n.getAttribute(attr).slice('/static/'.length));
+      });
+    }
+  </script>
+</body>
+</html>

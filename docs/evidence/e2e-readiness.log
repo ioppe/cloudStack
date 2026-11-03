@@ -1,0 +1,11 @@
+### stage=readiness base=http://192.168.0.30:8089 started_utc=2026-11-03T06:10:28Z python=Python 3.13.7
+PASS health
+PASS unauthenticated writes and wrong password rejected
+PASS online node150
+PASS online node30
+PASS host CRUD and unknown-host isolation
+PASS logout invalidates cookie
+### stage=readiness EXIT=0 finished_utc=2026-11-03T06:10:35Z
+### stage=failure base=http://192.168.0.30:8089 started_utc=2026-11-03T06:10:40Z
+PASS out-of-directory image rejected with failed task
+### stage=failure EXIT=0 finished_utc=2026-11-03T06:10:42Z

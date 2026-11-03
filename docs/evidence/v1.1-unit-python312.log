@@ -1,0 +1,300 @@
+# v1.1 unit regression — python3.12.3
+generated_utc: 2026-11-03T07:45:08Z
+host: 192.168.0.150 (sky) as root, StrictHostKeyChecking=yes
+tree: /opt/vm-platform-v11-check-only (created for this check; core + tests/test_*.py + deploy script + tools)
+command: cd /opt/vm-platform-v11-check-only && /usr/bin/python3 -m unittest discover -s tests -v
+python: Python 3.12.3
+exit: 0
+
+=== source hashes (sha256, remote copy) — identical to local and to .30 ===
+6e2d835eefc0239cbb0e3fa1d690a54428fbc7e0d56cc8c44b372e30a5b16877  controller.py
+a552980fd14e11819581bec376e9e0b16c2c26922315f27dd5d2c1170b4afe11  worker.py
+98bfbe2e80b3e041b529bcdfd2a0fb94fabba584cb4b1e30081fc8e10ea60257  vmops.py
+f48dc71f78ce8bd792793726253765add80804c9f8c513ce999f05be0a7a7d54  tests/test_bridge_migration.py
+875e7d312d1b6dfbcdfdbc598bab02ad384f881ebfb4b8a06775237cf9b015cb  tests/test_controller.py
+84fd651c113d2166c7f65dce0a50903c1e3e875fe17652769d4ac3189caf5baa  tests/test_network_config.py
+6f11baa2cd93728e8ec3b57cf3216421e8fb16f46cf400884870705efd38dc9b  tests/test_transport.py
+33b80caef69197bc975aca7d591a4e3fff29df1567b830adc509ae07d3b53cf2  tests/test_worker.py
+ed70eae3544941411eeaa6aa285dc3f5a1cfe472ae600dcf8e883f4c2042bb48  deploy/prepare-node150-bridge.py
+03aad6f8d9aa834b4a727c0d7421bb7589302fa4804604fb137e17fdd41fa9c2  tools/api_client.py
+2d9b7ead75775d305fcf397df31dd67b301c630ad8a78615e28f43f0985d317e  tools/authorize-agent.py
+32e5d89403e289f300dac10dc848e8f81afd70eb4d9a487410b6ac4999c3cfaf  tools/bootstrap.py
+350882ef83afe23ed36495e2485b6f8342ce65d57700878be52228e166180e18  tools/guest_probe.py
+6fac349dd9ceb6a2ba271d2959edc70a9fae458222cf3730c125236e6fd5b9f1  tools/rotate_password.py
+
+=== unittest ===
+Python 3.12.3
+test_preserves_address_gateway_dns_and_mac_on_real_bridge (test_bridge_migration.BridgeMigrationTests.test_preserves_address_gateway_dns_and_mac_on_real_bridge) ... ok
+test_rejects_different_gateway_or_dns (test_bridge_migration.BridgeMigrationTests.test_rejects_different_gateway_or_dns) ... ok
+test_rejects_different_management_address (test_bridge_migration.BridgeMigrationTests.test_rejects_different_management_address) ... ok
+test_rejects_existing_bridge (test_bridge_migration.BridgeMigrationTests.test_rejects_existing_bridge) ... ok
+test_console_requires_same_origin_and_websocket_upgrade (test_controller.HTTPTests.test_console_requires_same_origin_and_websocket_upgrade) ... 127.0.0.1 "GET /api/hosts/node150/vms/11111111-2222-3333-4444-555555555555/vnc HTTP/1.1" 401 -
+127.0.0.1 "POST /api/login HTTP/1.1" 200 -
+127.0.0.1 "GET /api/hosts/node150/vms/11111111-2222-3333-4444-555555555555/vnc HTTP/1.1" 403 -
+127.0.0.1 "GET /api/hosts/node150/vms/11111111-2222-3333-4444-555555555555/vnc HTTP/1.1" 403 -
+127.0.0.1 "GET /api/hosts/node150/vms/11111111-2222-3333-4444-555555555555/vnc HTTP/1.1" 400 -
+ok
+test_failed_remote_task_has_error_without_local_fallback (test_controller.HTTPTests.test_failed_remote_task_has_error_without_local_fallback) ... ok
+test_host_arguments_reject_shell_and_local_override (test_controller.HTTPTests.test_host_arguments_reject_shell_and_local_override) ... ok
+test_host_edit_remove_does_not_touch_worker_or_vms (test_controller.HTTPTests.test_host_edit_remove_does_not_touch_worker_or_vms) ... ok
+test_http_auth_and_csrf (test_controller.HTTPTests.test_http_auth_and_csrf) ... 127.0.0.1 "GET /api/hosts HTTP/1.1" 401 -
+127.0.0.1 "POST /api/hosts/node150/vms HTTP/1.1" 401 -
+127.0.0.1 "POST /api/login HTTP/1.1" 200 -
+127.0.0.1 "GET /api/hosts HTTP/1.1" 200 -
+127.0.0.1 "DELETE /api/hosts/node150 HTTP/1.1" 403 -
+127.0.0.1 "POST /api/logout HTTP/1.1" 403 -
+127.0.0.1 "POST /api/logout HTTP/1.1" 200 -
+127.0.0.1 "GET /api/hosts HTTP/1.1" 401 -
+ok
+test_password_change_invalidates_sessions_and_persists_hash (test_controller.HTTPTests.test_password_change_invalidates_sessions_and_persists_hash) ... 127.0.0.1 "POST /api/login HTTP/1.1" 200 -
+127.0.0.1 "POST /api/password HTTP/1.1" 200 -
+127.0.0.1 "GET /api/hosts HTTP/1.1" 401 -
+127.0.0.1 "POST /api/login HTTP/1.1" 401 -
+127.0.0.1 "POST /api/login HTTP/1.1" 200 -
+127.0.0.1 "GET /api/hosts HTTP/1.1" 200 -
+ok
+test_password_change_rejects_wrong_current_and_weak_new_password (test_controller.HTTPTests.test_password_change_rejects_wrong_current_and_weak_new_password) ... 127.0.0.1 "POST /api/login HTTP/1.1" 200 -
+127.0.0.1 "POST /api/password HTTP/1.1" 403 -
+127.0.0.1 "POST /api/password HTTP/1.1" 400 -
+127.0.0.1 "GET /api/hosts HTTP/1.1" 200 -
+ok
+test_password_hash_and_rejection (test_controller.HTTPTests.test_password_hash_and_rejection) ... ok
+test_restart_marks_uncertain_task_failed (test_controller.HTTPTests.test_restart_marks_uncertain_task_failed) ... ok
+test_running_task_prevents_retarget_or_unregister (test_controller.HTTPTests.test_running_task_prevents_retarget_or_unregister) ... ok
+test_selected_host_failure_does_not_break_other_host (test_controller.HTTPTests.test_selected_host_failure_does_not_break_other_host) ... 127.0.0.1 "POST /api/login HTTP/1.1" 200 -
+127.0.0.1 "GET /api/hosts/node150/status HTTP/1.1" 502 -
+127.0.0.1 "GET /api/hosts/node30/status HTTP/1.1" 200 -
+127.0.0.1 "GET /api/hosts/missing/status HTTP/1.1" 404 -
+ok
+test_sessions_persist_then_logout_invalidates (test_controller.HTTPTests.test_sessions_persist_then_logout_invalidates) ... ok
+test_static_path_cannot_expose_source_or_secrets (test_controller.HTTPTests.test_static_path_cannot_expose_source_or_secrets) ... 127.0.0.1 "GET /static/../controller.py HTTP/1.1" 404 -
+ok
+test_task_result_does_not_store_password_or_commands (test_controller.HTTPTests.test_task_result_does_not_store_password_or_commands) ... ok
+test_unknown_host_never_falls_back (test_controller.HTTPTests.test_unknown_host_never_falls_back) ... ok
+test_vnc_uses_selected_host_and_uuid (test_controller.HTTPTests.test_vnc_uses_selected_host_and_uuid) ... ok
+test_failed_remote_task_has_error_without_local_fallback (test_controller.PlatformTests.test_failed_remote_task_has_error_without_local_fallback) ... ok
+test_host_arguments_reject_shell_and_local_override (test_controller.PlatformTests.test_host_arguments_reject_shell_and_local_override) ... ok
+test_host_edit_remove_does_not_touch_worker_or_vms (test_controller.PlatformTests.test_host_edit_remove_does_not_touch_worker_or_vms) ... ok
+test_password_hash_and_rejection (test_controller.PlatformTests.test_password_hash_and_rejection) ... ok
+test_restart_marks_uncertain_task_failed (test_controller.PlatformTests.test_restart_marks_uncertain_task_failed) ... ok
+test_running_task_prevents_retarget_or_unregister (test_controller.PlatformTests.test_running_task_prevents_retarget_or_unregister) ... ok
+test_sessions_persist_then_logout_invalidates (test_controller.PlatformTests.test_sessions_persist_then_logout_invalidates) ... ok
+test_task_result_does_not_store_password_or_commands (test_controller.PlatformTests.test_task_result_does_not_store_password_or_commands) ... ok
+test_unknown_host_never_falls_back (test_controller.PlatformTests.test_unknown_host_never_falls_back) ... ok
+test_vnc_uses_selected_host_and_uuid (test_controller.PlatformTests.test_vnc_uses_selected_host_and_uuid) ... ok
+test_dhcp_output_is_unchanged_for_legacy_clients (test_network_config.NetworkConfigTests.test_dhcp_output_is_unchanged_for_legacy_clients) ... ok
+test_static_output_matches_mac_address_route_and_dns (test_network_config.NetworkConfigTests.test_static_output_matches_mac_address_route_and_dns) ... ok
+test_static_without_gateway_or_dns_omits_optional_sections (test_network_config.NetworkConfigTests.test_static_without_gateway_or_dns_omits_optional_sections) ... ok
+test_dhcp_mode_ignores_static_fields (test_network_config.StaticCreateTests.test_dhcp_mode_ignores_static_fields) ... ok
+test_gateway_must_be_unicast_in_same_subnet_and_not_guest (test_network_config.StaticCreateTests.test_gateway_must_be_unicast_in_same_subnet_and_not_guest) ... ok
+test_host_default_bridge_accepts_static_without_explicit_network_fields (test_network_config.StaticCreateTests.test_host_default_bridge_accepts_static_without_explicit_network_fields) ... ok
+test_invalid_cidr_is_rejected_before_any_disk_or_seed_write (test_network_config.StaticCreateTests.test_invalid_cidr_is_rejected_before_any_disk_or_seed_write) ... ok
+test_invalid_dns_values_are_rejected (test_network_config.StaticCreateTests.test_invalid_dns_values_are_rejected) ... ok
+test_legacy_payload_without_ci_dhcp_keeps_dhcp_seed (test_network_config.StaticCreateTests.test_legacy_payload_without_ci_dhcp_keeps_dhcp_seed) ... ok
+test_static_create_writes_validated_settings_into_seed (test_network_config.StaticCreateTests.test_static_create_writes_validated_settings_into_seed) ... ok
+test_static_rejected_for_iso_install (test_network_config.StaticCreateTests.test_static_rejected_for_iso_install) ... ok
+test_static_rejected_for_nat_network (test_network_config.StaticCreateTests.test_static_rejected_for_nat_network) ... ok
+test_static_rejected_when_cloud_init_disabled (test_network_config.StaticCreateTests.test_static_rejected_when_cloud_init_disabled) ... ok
+test_cli_wraps_operations_in_socket_transport (test_transport.AgentTransportTests.test_cli_wraps_operations_in_socket_transport) ... ok
+test_config_request_reaches_daemon_with_uuid (test_transport.AgentTransportTests.test_config_request_reaches_daemon_with_uuid) ... ok
+test_daemon_failure_is_preserved (test_transport.AgentTransportTests.test_daemon_failure_is_preserved) ... ok
+test_rpc_requires_running_agent (test_transport.AgentTransportTests.test_rpc_requires_running_agent) ... vm-platform-agent: operation status failed: 无法连接宿主机执行端：服务未启动或连接中断，请检查执行端服务
+ok
+test_vnc_rejects_mismatched_identity_before_connect (test_transport.AgentTransportTests.test_vnc_rejects_mismatched_identity_before_connect) ... ok
+test_defaults_are_read_only (test_worker.ConfigLoadingTests.test_defaults_are_read_only) ... ok
+test_os_install_args_by_version (test_worker.ConfigLoadingTests.test_os_install_args_by_version) ... ok
+test_relative_directories_are_rejected (test_worker.ConfigLoadingTests.test_relative_directories_are_rejected) ... ok
+test_config_grows_disk_and_updates_xml (test_worker.ConfigOperationTests.test_config_grows_disk_and_updates_xml) ... ok
+test_config_requires_powered_off_vm (test_worker.ConfigOperationTests.test_config_requires_powered_off_vm) ... ok
+test_disk_outside_allowed_dirs_is_rejected (test_worker.ConfigOperationTests.test_disk_outside_allowed_dirs_is_rejected) ... ok
+test_disk_shrink_is_rejected (test_worker.ConfigOperationTests.test_disk_shrink_is_rejected) ... ok
+test_read_only_agent_blocks_writes (test_worker.ConfigOperationTests.test_read_only_agent_blocks_writes) ... ok
+test_read_only_uuid_list_blocks_single_vm (test_worker.ConfigOperationTests.test_read_only_uuid_list_blocks_single_vm) ... ok
+test_custom_cloud_init_user_does_not_require_distribution_groups (test_worker.CreateCommandTests.test_custom_cloud_init_user_does_not_require_distribution_groups) ... ok
+test_disk_create_with_cloud_init_does_not_leak_password (test_worker.CreateCommandTests.test_disk_create_with_cloud_init_does_not_leak_password) ... ok
+test_iso_install_uses_version_appropriate_os_args (test_worker.CreateCommandTests.test_iso_install_uses_version_appropriate_os_args) ... ok
+test_iso_rejects_disk_template_before_install (test_worker.CreateCommandTests.test_iso_rejects_disk_template_before_install) ... ok
+test_symlinked_template_is_rejected (test_worker.CreateCommandTests.test_symlinked_template_is_rejected) ... ok
+test_delete_refuses_when_other_vm_disks_unknown (test_worker.DeleteSafetyTests.test_delete_refuses_when_other_vm_disks_unknown) ... ok
+test_delete_removes_only_owned_disks_after_precheck (test_worker.DeleteSafetyTests.test_delete_removes_only_owned_disks_after_precheck) ... ok
+test_delete_requires_force_when_running (test_worker.DeleteSafetyTests.test_delete_requires_force_when_running) ... ok
+test_name_cannot_be_used_as_uuid (test_worker.DomainResolutionTests.test_name_cannot_be_used_as_uuid) ... ok
+test_resolved_uuid_matches_domain (test_worker.DomainResolutionTests.test_resolved_uuid_matches_domain) ... ok
+test_uuid_mismatch_is_rejected_without_action (test_worker.DomainResolutionTests.test_uuid_mismatch_is_rejected_without_action) ... ok
+test_loopback_display_reports_port (test_worker.VncTargetTests.test_loopback_display_reports_port) ... ok
+test_non_loopback_display_is_refused (test_worker.VncTargetTests.test_non_loopback_display_is_refused) ... ok
+test_vnc_requires_running_vm (test_worker.VncTargetTests.test_vnc_requires_running_vm) ... ok
+test_dispatch_rejects_non_object_payload (test_worker.WorkerCliTests.test_dispatch_rejects_non_object_payload) ... ok
+test_dispatch_routes_known_operations (test_worker.WorkerCliTests.test_dispatch_routes_known_operations) ... ok
+test_rpc_invalid_json_returns_error (test_worker.WorkerCliTests.test_rpc_invalid_json_returns_error) ... ok
+test_rpc_unknown_operation_returns_error (test_worker.WorkerCliTests.test_rpc_unknown_operation_returns_error) ... vm-platform-agent: operation nope failed: 不支持的操作：nope
+ok
+test_rpc_writes_single_json_line (test_worker.WorkerCliTests.test_rpc_writes_single_json_line) ... vm-platform-agent: operation status ok
+ok
+test_ssh_accepts_rpc (test_worker.WorkerCliTests.test_ssh_accepts_rpc) ... ok
+test_ssh_accepts_vnc_uuid (test_worker.WorkerCliTests.test_ssh_accepts_vnc_uuid) ... ok
+test_ssh_rejects_arbitrary_command (test_worker.WorkerCliTests.test_ssh_rejects_arbitrary_command) ... vm-platform-agent: 拒绝的 SSH 命令
+vm-platform-agent: 拒绝的 SSH 命令
+vm-platform-agent: 拒绝的 SSH 命令
+ok
+test_ssh_rejects_vnc_without_uuid (test_worker.WorkerCliTests.test_ssh_rejects_vnc_without_uuid) ... vm-platform-agent: 拒绝的 VNC UUID
+ok
+
+----------------------------------------------------------------------
+Ran 80 tests in 12.183s
+
+OK
+
+==================================================================
+=== ROUND 2 (post code-review fixes) generated_utc: 2026-11-03T07:52:37Z ===
+host: 192.168.0.150 (sky) as root, StrictHostKeyChecking=yes
+tree: /opt/vm-platform-v11-check-only
+resynced: vmops.py, tests/test_network_config.py (remote __pycache__ cleared before run)
+command: cd /opt/vm-platform-v11-check-only && /usr/bin/python3 -m unittest discover -s tests -v
+python: Python 3.12.3
+expected: 83
+exit: 0
+
+=== final snapshot hashes (sha256, remote copy) — identical to local and to .30 ===
+6e2d835eefc0239cbb0e3fa1d690a54428fbc7e0d56cc8c44b372e30a5b16877  controller.py
+a552980fd14e11819581bec376e9e0b16c2c26922315f27dd5d2c1170b4afe11  worker.py
+5bbf7747870ac3e129b850cb43ba476952fbc114c3848376bd45599e7a24f930  vmops.py
+f48dc71f78ce8bd792793726253765add80804c9f8c513ce999f05be0a7a7d54  tests/test_bridge_migration.py
+875e7d312d1b6dfbcdfdbc598bab02ad384f881ebfb4b8a06775237cf9b015cb  tests/test_controller.py
+bda49d7e21d359d9b1c6f6a550de6f48d9fc2458b0438ad0ab5f059ffc80fbbc  tests/test_network_config.py
+6f11baa2cd93728e8ec3b57cf3216421e8fb16f46cf400884870705efd38dc9b  tests/test_transport.py
+33b80caef69197bc975aca7d591a4e3fff29df1567b830adc509ae07d3b53cf2  tests/test_worker.py
+ed70eae3544941411eeaa6aa285dc3f5a1cfe472ae600dcf8e883f4c2042bb48  deploy/prepare-node150-bridge.py
+03aad6f8d9aa834b4a727c0d7421bb7589302fa4804604fb137e17fdd41fa9c2  tools/api_client.py
+2d9b7ead75775d305fcf397df31dd67b301c630ad8a78615e28f43f0985d317e  tools/authorize-agent.py
+32e5d89403e289f300dac10dc848e8f81afd70eb4d9a487410b6ac4999c3cfaf  tools/bootstrap.py
+350882ef83afe23ed36495e2485b6f8342ce65d57700878be52228e166180e18  tools/guest_probe.py
+6fac349dd9ceb6a2ba271d2959edc70a9fae458222cf3730c125236e6fd5b9f1  tools/rotate_password.py
+
+=== unittest ===
+5bbf7747870ac3e129b850cb43ba476952fbc114c3848376bd45599e7a24f930  vmops.py
+bda49d7e21d359d9b1c6f6a550de6f48d9fc2458b0438ad0ab5f059ffc80fbbc  tests/test_network_config.py
+Python 3.12.3
+test_preserves_address_gateway_dns_and_mac_on_real_bridge (test_bridge_migration.BridgeMigrationTests.test_preserves_address_gateway_dns_and_mac_on_real_bridge) ... ok
+test_rejects_different_gateway_or_dns (test_bridge_migration.BridgeMigrationTests.test_rejects_different_gateway_or_dns) ... ok
+test_rejects_different_management_address (test_bridge_migration.BridgeMigrationTests.test_rejects_different_management_address) ... ok
+test_rejects_existing_bridge (test_bridge_migration.BridgeMigrationTests.test_rejects_existing_bridge) ... ok
+test_console_requires_same_origin_and_websocket_upgrade (test_controller.HTTPTests.test_console_requires_same_origin_and_websocket_upgrade) ... 127.0.0.1 "GET /api/hosts/node150/vms/11111111-2222-3333-4444-555555555555/vnc HTTP/1.1" 401 -
+127.0.0.1 "POST /api/login HTTP/1.1" 200 -
+127.0.0.1 "GET /api/hosts/node150/vms/11111111-2222-3333-4444-555555555555/vnc HTTP/1.1" 403 -
+127.0.0.1 "GET /api/hosts/node150/vms/11111111-2222-3333-4444-555555555555/vnc HTTP/1.1" 403 -
+127.0.0.1 "GET /api/hosts/node150/vms/11111111-2222-3333-4444-555555555555/vnc HTTP/1.1" 400 -
+ok
+test_failed_remote_task_has_error_without_local_fallback (test_controller.HTTPTests.test_failed_remote_task_has_error_without_local_fallback) ... ok
+test_host_arguments_reject_shell_and_local_override (test_controller.HTTPTests.test_host_arguments_reject_shell_and_local_override) ... ok
+test_host_edit_remove_does_not_touch_worker_or_vms (test_controller.HTTPTests.test_host_edit_remove_does_not_touch_worker_or_vms) ... ok
+test_http_auth_and_csrf (test_controller.HTTPTests.test_http_auth_and_csrf) ... 127.0.0.1 "GET /api/hosts HTTP/1.1" 401 -
+127.0.0.1 "POST /api/hosts/node150/vms HTTP/1.1" 401 -
+127.0.0.1 "POST /api/login HTTP/1.1" 200 -
+127.0.0.1 "GET /api/hosts HTTP/1.1" 200 -
+127.0.0.1 "DELETE /api/hosts/node150 HTTP/1.1" 403 -
+127.0.0.1 "POST /api/logout HTTP/1.1" 403 -
+127.0.0.1 "POST /api/logout HTTP/1.1" 200 -
+127.0.0.1 "GET /api/hosts HTTP/1.1" 401 -
+ok
+test_password_change_invalidates_sessions_and_persists_hash (test_controller.HTTPTests.test_password_change_invalidates_sessions_and_persists_hash) ... 127.0.0.1 "POST /api/login HTTP/1.1" 200 -
+127.0.0.1 "POST /api/password HTTP/1.1" 200 -
+127.0.0.1 "GET /api/hosts HTTP/1.1" 401 -
+127.0.0.1 "POST /api/login HTTP/1.1" 401 -
+127.0.0.1 "POST /api/login HTTP/1.1" 200 -
+127.0.0.1 "GET /api/hosts HTTP/1.1" 200 -
+ok
+test_password_change_rejects_wrong_current_and_weak_new_password (test_controller.HTTPTests.test_password_change_rejects_wrong_current_and_weak_new_password) ... 127.0.0.1 "POST /api/login HTTP/1.1" 200 -
+127.0.0.1 "POST /api/password HTTP/1.1" 403 -
+127.0.0.1 "POST /api/password HTTP/1.1" 400 -
+127.0.0.1 "GET /api/hosts HTTP/1.1" 200 -
+ok
+test_password_hash_and_rejection (test_controller.HTTPTests.test_password_hash_and_rejection) ... ok
+test_restart_marks_uncertain_task_failed (test_controller.HTTPTests.test_restart_marks_uncertain_task_failed) ... ok
+test_running_task_prevents_retarget_or_unregister (test_controller.HTTPTests.test_running_task_prevents_retarget_or_unregister) ... ok
+test_selected_host_failure_does_not_break_other_host (test_controller.HTTPTests.test_selected_host_failure_does_not_break_other_host) ... 127.0.0.1 "POST /api/login HTTP/1.1" 200 -
+127.0.0.1 "GET /api/hosts/node150/status HTTP/1.1" 502 -
+127.0.0.1 "GET /api/hosts/node30/status HTTP/1.1" 200 -
+127.0.0.1 "GET /api/hosts/missing/status HTTP/1.1" 404 -
+ok
+test_sessions_persist_then_logout_invalidates (test_controller.HTTPTests.test_sessions_persist_then_logout_invalidates) ... ok
+test_static_path_cannot_expose_source_or_secrets (test_controller.HTTPTests.test_static_path_cannot_expose_source_or_secrets) ... 127.0.0.1 "GET /static/../controller.py HTTP/1.1" 404 -
+ok
+test_task_result_does_not_store_password_or_commands (test_controller.HTTPTests.test_task_result_does_not_store_password_or_commands) ... ok
+test_unknown_host_never_falls_back (test_controller.HTTPTests.test_unknown_host_never_falls_back) ... ok
+test_vnc_uses_selected_host_and_uuid (test_controller.HTTPTests.test_vnc_uses_selected_host_and_uuid) ... ok
+test_failed_remote_task_has_error_without_local_fallback (test_controller.PlatformTests.test_failed_remote_task_has_error_without_local_fallback) ... ok
+test_host_arguments_reject_shell_and_local_override (test_controller.PlatformTests.test_host_arguments_reject_shell_and_local_override) ... ok
+test_host_edit_remove_does_not_touch_worker_or_vms (test_controller.PlatformTests.test_host_edit_remove_does_not_touch_worker_or_vms) ... ok
+test_password_hash_and_rejection (test_controller.PlatformTests.test_password_hash_and_rejection) ... ok
+test_restart_marks_uncertain_task_failed (test_controller.PlatformTests.test_restart_marks_uncertain_task_failed) ... ok
+test_running_task_prevents_retarget_or_unregister (test_controller.PlatformTests.test_running_task_prevents_retarget_or_unregister) ... ok
+test_sessions_persist_then_logout_invalidates (test_controller.PlatformTests.test_sessions_persist_then_logout_invalidates) ... ok
+test_task_result_does_not_store_password_or_commands (test_controller.PlatformTests.test_task_result_does_not_store_password_or_commands) ... ok
+test_unknown_host_never_falls_back (test_controller.PlatformTests.test_unknown_host_never_falls_back) ... ok
+test_vnc_uses_selected_host_and_uuid (test_controller.PlatformTests.test_vnc_uses_selected_host_and_uuid) ... ok
+test_dhcp_output_is_unchanged_for_legacy_clients (test_network_config.NetworkConfigTests.test_dhcp_output_is_unchanged_for_legacy_clients) ... ok
+test_static_output_matches_mac_address_route_and_dns (test_network_config.NetworkConfigTests.test_static_output_matches_mac_address_route_and_dns) ... ok
+test_static_without_gateway_or_dns_omits_optional_sections (test_network_config.NetworkConfigTests.test_static_without_gateway_or_dns_omits_optional_sections) ... ok
+test_dhcp_mode_ignores_static_fields (test_network_config.StaticCreateTests.test_dhcp_mode_ignores_static_fields) ... ok
+test_dns_string_is_split_and_deduplicated (test_network_config.StaticCreateTests.test_dns_string_is_split_and_deduplicated) ... ok
+test_failed_partial_seed_is_removed_and_same_name_can_retry (test_network_config.StaticCreateTests.test_failed_partial_seed_is_removed_and_same_name_can_retry) ... ok
+test_gateway_must_be_unicast_in_same_subnet_and_not_guest (test_network_config.StaticCreateTests.test_gateway_must_be_unicast_in_same_subnet_and_not_guest) ... ok
+test_host_default_bridge_accepts_static_without_explicit_network_fields (test_network_config.StaticCreateTests.test_host_default_bridge_accepts_static_without_explicit_network_fields) ... ok
+test_invalid_cidr_is_rejected_before_any_disk_or_seed_write (test_network_config.StaticCreateTests.test_invalid_cidr_is_rejected_before_any_disk_or_seed_write) ... ok
+test_invalid_dns_values_are_rejected (test_network_config.StaticCreateTests.test_invalid_dns_values_are_rejected) ... ok
+test_legacy_payload_without_ci_dhcp_keeps_dhcp_seed (test_network_config.StaticCreateTests.test_legacy_payload_without_ci_dhcp_keeps_dhcp_seed) ... ok
+test_networks_report_independent_defaults_for_both_modes (test_network_config.StaticCreateTests.test_networks_report_independent_defaults_for_both_modes) ... ok
+test_static_create_writes_validated_settings_into_seed (test_network_config.StaticCreateTests.test_static_create_writes_validated_settings_into_seed) ... ok
+test_static_rejected_for_iso_install (test_network_config.StaticCreateTests.test_static_rejected_for_iso_install) ... ok
+test_static_rejected_for_nat_network (test_network_config.StaticCreateTests.test_static_rejected_for_nat_network) ... ok
+test_static_rejected_when_cloud_init_disabled (test_network_config.StaticCreateTests.test_static_rejected_when_cloud_init_disabled) ... ok
+test_cli_wraps_operations_in_socket_transport (test_transport.AgentTransportTests.test_cli_wraps_operations_in_socket_transport) ... ok
+test_config_request_reaches_daemon_with_uuid (test_transport.AgentTransportTests.test_config_request_reaches_daemon_with_uuid) ... ok
+test_daemon_failure_is_preserved (test_transport.AgentTransportTests.test_daemon_failure_is_preserved) ... ok
+test_rpc_requires_running_agent (test_transport.AgentTransportTests.test_rpc_requires_running_agent) ... vm-platform-agent: operation status failed: 无法连接宿主机执行端：服务未启动或连接中断，请检查执行端服务
+ok
+test_vnc_rejects_mismatched_identity_before_connect (test_transport.AgentTransportTests.test_vnc_rejects_mismatched_identity_before_connect) ... ok
+test_defaults_are_read_only (test_worker.ConfigLoadingTests.test_defaults_are_read_only) ... ok
+test_os_install_args_by_version (test_worker.ConfigLoadingTests.test_os_install_args_by_version) ... ok
+test_relative_directories_are_rejected (test_worker.ConfigLoadingTests.test_relative_directories_are_rejected) ... ok
+test_config_grows_disk_and_updates_xml (test_worker.ConfigOperationTests.test_config_grows_disk_and_updates_xml) ... ok
+test_config_requires_powered_off_vm (test_worker.ConfigOperationTests.test_config_requires_powered_off_vm) ... ok
+test_disk_outside_allowed_dirs_is_rejected (test_worker.ConfigOperationTests.test_disk_outside_allowed_dirs_is_rejected) ... ok
+test_disk_shrink_is_rejected (test_worker.ConfigOperationTests.test_disk_shrink_is_rejected) ... ok
+test_read_only_agent_blocks_writes (test_worker.ConfigOperationTests.test_read_only_agent_blocks_writes) ... ok
+test_read_only_uuid_list_blocks_single_vm (test_worker.ConfigOperationTests.test_read_only_uuid_list_blocks_single_vm) ... ok
+test_custom_cloud_init_user_does_not_require_distribution_groups (test_worker.CreateCommandTests.test_custom_cloud_init_user_does_not_require_distribution_groups) ... ok
+test_disk_create_with_cloud_init_does_not_leak_password (test_worker.CreateCommandTests.test_disk_create_with_cloud_init_does_not_leak_password) ... ok
+test_iso_install_uses_version_appropriate_os_args (test_worker.CreateCommandTests.test_iso_install_uses_version_appropriate_os_args) ... ok
+test_iso_rejects_disk_template_before_install (test_worker.CreateCommandTests.test_iso_rejects_disk_template_before_install) ... ok
+test_symlinked_template_is_rejected (test_worker.CreateCommandTests.test_symlinked_template_is_rejected) ... ok
+test_delete_refuses_when_other_vm_disks_unknown (test_worker.DeleteSafetyTests.test_delete_refuses_when_other_vm_disks_unknown) ... ok
+test_delete_removes_only_owned_disks_after_precheck (test_worker.DeleteSafetyTests.test_delete_removes_only_owned_disks_after_precheck) ... ok
+test_delete_requires_force_when_running (test_worker.DeleteSafetyTests.test_delete_requires_force_when_running) ... ok
+test_name_cannot_be_used_as_uuid (test_worker.DomainResolutionTests.test_name_cannot_be_used_as_uuid) ... ok
+test_resolved_uuid_matches_domain (test_worker.DomainResolutionTests.test_resolved_uuid_matches_domain) ... ok
+test_uuid_mismatch_is_rejected_without_action (test_worker.DomainResolutionTests.test_uuid_mismatch_is_rejected_without_action) ... ok
+test_loopback_display_reports_port (test_worker.VncTargetTests.test_loopback_display_reports_port) ... ok
+test_non_loopback_display_is_refused (test_worker.VncTargetTests.test_non_loopback_display_is_refused) ... ok
+test_vnc_requires_running_vm (test_worker.VncTargetTests.test_vnc_requires_running_vm) ... ok
+test_dispatch_rejects_non_object_payload (test_worker.WorkerCliTests.test_dispatch_rejects_non_object_payload) ... ok
+test_dispatch_routes_known_operations (test_worker.WorkerCliTests.test_dispatch_routes_known_operations) ... ok
+test_rpc_invalid_json_returns_error (test_worker.WorkerCliTests.test_rpc_invalid_json_returns_error) ... ok
+test_rpc_unknown_operation_returns_error (test_worker.WorkerCliTests.test_rpc_unknown_operation_returns_error) ... vm-platform-agent: operation nope failed: 不支持的操作：nope
+ok
+test_rpc_writes_single_json_line (test_worker.WorkerCliTests.test_rpc_writes_single_json_line) ... vm-platform-agent: operation status ok
+ok
+test_ssh_accepts_rpc (test_worker.WorkerCliTests.test_ssh_accepts_rpc) ... ok
+test_ssh_accepts_vnc_uuid (test_worker.WorkerCliTests.test_ssh_accepts_vnc_uuid) ... ok
+test_ssh_rejects_arbitrary_command (test_worker.WorkerCliTests.test_ssh_rejects_arbitrary_command) ... vm-platform-agent: 拒绝的 SSH 命令
+vm-platform-agent: 拒绝的 SSH 命令
+vm-platform-agent: 拒绝的 SSH 命令
+ok
+test_ssh_rejects_vnc_without_uuid (test_worker.WorkerCliTests.test_ssh_rejects_vnc_without_uuid) ... vm-platform-agent: 拒绝的 VNC UUID
+ok
+
+----------------------------------------------------------------------
+Ran 83 tests in 12.144s
+
+OK

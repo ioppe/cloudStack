@@ -1,0 +1,27 @@
+- region "虚拟机平台 · 请登录" [ref=e1]
+  - StaticText "云栈"
+    - InlineTextBox "云栈"
+  - generic
+    - StaticText "虚拟机平台 · 请登录"
+      - InlineTextBox "虚拟机平台 · 请登录"
+  - generic
+    - LabelText
+      - StaticText "用户名"
+        - InlineTextBox "用户名"
+    - textbox "用户名" [required, ref=e2]
+      - generic
+    - LabelText
+      - StaticText "密码"
+        - InlineTextBox "密码"
+    - textbox "密码" [required, ref=e3]
+      - generic
+    - button "登录" [ref=e4]
+      - StaticText "登录"
+        - InlineTextBox "登录"
+  - StaticText "管理员专用管理入口"
+    - InlineTextBox "管理员专用管理入口"
+  - generic
+    - StaticText "v1.0.0"
+      - InlineTextBox "v1.0.0"
+- generic
+- status

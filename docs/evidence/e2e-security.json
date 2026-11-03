@@ -1,0 +1,45 @@
+{
+  "frontend_secret_hits": 0,
+  "frontend_private_key_headers": 0,
+  "service_log_secret_hits": 0,
+  "service_log_private_key_headers": 0,
+  "controller": {
+    "private_modes": {
+      "/etc/vm-platform/controller.json": "0o600",
+      "/etc/vm-platform/agent.json": "0o600",
+      "/etc/vm-platform/id_ed25519": "0o600",
+      "/etc/vm-platform/known_hosts": "0o600"
+    },
+    "socket_mode": "0o600",
+    "protected_uuids": [
+      "92d1d752-4b47-4550-b470-fb1e96e6f927",
+      "a66dd284-40cc-48a4-89b6-84a00843ede6",
+      "503a9548-ef36-49cd-b471-c9ebfe9ff534",
+      "4f39ecd4-9972-48ef-9761-4a60d80614a8",
+      "24b56a05-54dd-4e8f-ab7b-fe0dfa71f0bc",
+      "70d81301-0711-45d2-8976-7bdd4988dd5d",
+      "e654be19-7d5c-44ea-9fd2-13a03640bf18",
+      "684bc0cd-41cf-479c-9681-106f308a39bd",
+      "e0fd39e0-b9c4-479b-ae50-b76243cd80e3",
+      "d292d954-2ad2-4a93-81e9-ca993f6e1aea",
+      "287e5832-97e5-418b-aed6-099f4fe9dff5",
+      "964dd391-4597-424f-a5d6-1255d638ade5",
+      "3d40f33b-1ca3-46fb-ba7f-4e6d6d8093c1",
+      "4b5401ef-1ec8-46f4-b966-45b0458fd7e6"
+    ],
+    "restricted_ssh_exit": 2,
+    "restricted_ssh_stdout_empty": true,
+    "restricted_ssh_refused": true
+  },
+  "node150": {
+    "uuid": "506cc484-fdda-494e-9681-5da8331b7e27",
+    "vnc_listen": "127.0.0.1",
+    "vnc_port": 5900,
+    "vnc_listener_lines": [
+      "LISTEN 0      1          127.0.0.1:5900      0.0.0.0:*    users:((\"qemu-system-x86\",pid=282903,fd=26))            "
+    ],
+    "agent_socket_mode": "0o600",
+    "agent_config_mode": "0o600"
+  },
+  "passed": true
+}

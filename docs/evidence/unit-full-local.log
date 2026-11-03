@@ -1,0 +1,394 @@
+test_failed_remote_task_has_error_without_local_fallback (test_controller.HTTPTests.test_failed_remote_task_has_error_without_local_fallback) ... ok
+test_host_arguments_reject_shell_and_local_override (test_controller.HTTPTests.test_host_arguments_reject_shell_and_local_override) ... ok
+test_host_edit_remove_does_not_touch_worker_or_vms (test_controller.HTTPTests.test_host_edit_remove_does_not_touch_worker_or_vms) ... ok
+test_http_auth_and_csrf (test_controller.HTTPTests.test_http_auth_and_csrf) ... 127.0.0.1 "GET /api/hosts HTTP/1.1" 401 -
+127.0.0.1 "POST /api/hosts/node150/vms HTTP/1.1" 401 -
+127.0.0.1 "POST /api/login HTTP/1.1" 200 -
+127.0.0.1 "GET /api/hosts HTTP/1.1" 200 -
+127.0.0.1 "DELETE /api/hosts/node150 HTTP/1.1" 403 -
+127.0.0.1 "POST /api/logout HTTP/1.1" 403 -
+127.0.0.1 "POST /api/logout HTTP/1.1" 200 -
+127.0.0.1 "GET /api/hosts HTTP/1.1" 401 -
+ok
+test_password_hash_and_rejection (test_controller.HTTPTests.test_password_hash_and_rejection) ... ok
+test_restart_marks_uncertain_task_failed (test_controller.HTTPTests.test_restart_marks_uncertain_task_failed) ... ok
+test_running_task_prevents_retarget_or_unregister (test_controller.HTTPTests.test_running_task_prevents_retarget_or_unregister) ... ok
+test_selected_host_failure_does_not_break_other_host (test_controller.HTTPTests.test_selected_host_failure_does_not_break_other_host) ... 127.0.0.1 "POST /api/login HTTP/1.1" 200 -
+127.0.0.1 "GET /api/hosts/node150/status HTTP/1.1" 502 -
+127.0.0.1 "GET /api/hosts/node30/status HTTP/1.1" 200 -
+127.0.0.1 "GET /api/hosts/missing/status HTTP/1.1" 404 -
+ok
+test_sessions_persist_then_logout_invalidates (test_controller.HTTPTests.test_sessions_persist_then_logout_invalidates) ... ok
+test_static_path_cannot_expose_source_or_secrets (test_controller.HTTPTests.test_static_path_cannot_expose_source_or_secrets) ... 127.0.0.1 "GET /static/../controller.py HTTP/1.1" 404 -
+ok
+test_task_result_does_not_store_password_or_commands (test_controller.HTTPTests.test_task_result_does_not_store_password_or_commands) ... ok
+test_unknown_host_never_falls_back (test_controller.HTTPTests.test_unknown_host_never_falls_back) ... ok
+test_vnc_uses_selected_host_and_uuid (test_controller.HTTPTests.test_vnc_uses_selected_host_and_uuid) ... ok
+test_failed_remote_task_has_error_without_local_fallback (test_controller.PlatformTests.test_failed_remote_task_has_error_without_local_fallback) ... ok
+test_host_arguments_reject_shell_and_local_override (test_controller.PlatformTests.test_host_arguments_reject_shell_and_local_override) ... ok
+test_host_edit_remove_does_not_touch_worker_or_vms (test_controller.PlatformTests.test_host_edit_remove_does_not_touch_worker_or_vms) ... ok
+test_password_hash_and_rejection (test_controller.PlatformTests.test_password_hash_and_rejection) ... ok
+test_restart_marks_uncertain_task_failed (test_controller.PlatformTests.test_restart_marks_uncertain_task_failed) ... ok
+test_running_task_prevents_retarget_or_unregister (test_controller.PlatformTests.test_running_task_prevents_retarget_or_unregister) ... ok
+test_sessions_persist_then_logout_invalidates (test_controller.PlatformTests.test_sessions_persist_then_logout_invalidates) ... ok
+test_task_result_does_not_store_password_or_commands (test_controller.PlatformTests.test_task_result_does_not_store_password_or_commands) ... ok
+test_unknown_host_never_falls_back (test_controller.PlatformTests.test_unknown_host_never_falls_back) ... ok
+test_vnc_uses_selected_host_and_uuid (test_controller.PlatformTests.test_vnc_uses_selected_host_and_uuid) ... ok
+test_defaults_are_read_only (test_worker.ConfigLoadingTests.test_defaults_are_read_only) ... ok
+test_os_install_args_by_version (test_worker.ConfigLoadingTests.test_os_install_args_by_version) ... ok
+test_relative_directories_are_rejected (test_worker.ConfigLoadingTests.test_relative_directories_are_rejected) ... ok
+test_config_grows_disk_and_updates_xml (test_worker.ConfigOperationTests.test_config_grows_disk_and_updates_xml) ... ERROR
+test_config_requires_powered_off_vm (test_worker.ConfigOperationTests.test_config_requires_powered_off_vm) ... ERROR
+test_disk_outside_allowed_dirs_is_rejected (test_worker.ConfigOperationTests.test_disk_outside_allowed_dirs_is_rejected) ... ERROR
+test_disk_shrink_is_rejected (test_worker.ConfigOperationTests.test_disk_shrink_is_rejected) ... ERROR
+test_read_only_agent_blocks_writes (test_worker.ConfigOperationTests.test_read_only_agent_blocks_writes) ... ok
+test_read_only_uuid_list_blocks_single_vm (test_worker.ConfigOperationTests.test_read_only_uuid_list_blocks_single_vm) ... ok
+test_disk_create_with_cloud_init_does_not_leak_password (test_worker.CreateCommandTests.test_disk_create_with_cloud_init_does_not_leak_password) ... ERROR
+test_iso_install_uses_version_appropriate_os_args (test_worker.CreateCommandTests.test_iso_install_uses_version_appropriate_os_args) ... 
+  test_iso_install_uses_version_appropriate_os_args (test_worker.CreateCommandTests.test_iso_install_uses_version_appropriate_os_args) (version='4.1.0\n') ... ERROR
+  test_iso_install_uses_version_appropriate_os_args (test_worker.CreateCommandTests.test_iso_install_uses_version_appropriate_os_args) (version='1.5.1\n') ... ERROR
+test_symlinked_template_is_rejected (test_worker.CreateCommandTests.test_symlinked_template_is_rejected) ... FAIL
+test_delete_refuses_when_other_vm_disks_unknown (test_worker.DeleteSafetyTests.test_delete_refuses_when_other_vm_disks_unknown) ... ok
+test_delete_removes_only_owned_disks_after_precheck (test_worker.DeleteSafetyTests.test_delete_removes_only_owned_disks_after_precheck) ... FAIL
+test_delete_requires_force_when_running (test_worker.DeleteSafetyTests.test_delete_requires_force_when_running) ... ok
+test_name_cannot_be_used_as_uuid (test_worker.DomainResolutionTests.test_name_cannot_be_used_as_uuid) ... ok
+test_resolved_uuid_matches_domain (test_worker.DomainResolutionTests.test_resolved_uuid_matches_domain) ... ok
+test_uuid_mismatch_is_rejected_without_action (test_worker.DomainResolutionTests.test_uuid_mismatch_is_rejected_without_action) ... ok
+test_loopback_display_reports_port (test_worker.VncTargetTests.test_loopback_display_reports_port) ... ok
+test_non_loopback_display_is_refused (test_worker.VncTargetTests.test_non_loopback_display_is_refused) ... ok
+test_vnc_requires_running_vm (test_worker.VncTargetTests.test_vnc_requires_running_vm) ... ok
+test_dispatch_rejects_non_object_payload (test_worker.WorkerCliTests.test_dispatch_rejects_non_object_payload) ... ok
+test_dispatch_routes_known_operations (test_worker.WorkerCliTests.test_dispatch_routes_known_operations) ... ok
+test_rpc_invalid_json_returns_error (test_worker.WorkerCliTests.test_rpc_invalid_json_returns_error) ... ok
+test_rpc_unknown_operation_returns_error (test_worker.WorkerCliTests.test_rpc_unknown_operation_returns_error) ... vm-platform-agent: operation nope failed: 不支持的操作：nope
+ok
+test_rpc_writes_single_json_line (test_worker.WorkerCliTests.test_rpc_writes_single_json_line) ... vm-platform-agent: operation status ok
+ok
+test_ssh_accepts_rpc (test_worker.WorkerCliTests.test_ssh_accepts_rpc) ... ok
+test_ssh_accepts_vnc_uuid (test_worker.WorkerCliTests.test_ssh_accepts_vnc_uuid) ... ok
+test_ssh_rejects_arbitrary_command (test_worker.WorkerCliTests.test_ssh_rejects_arbitrary_command) ... vm-platform-agent: 拒绝的 SSH 命令
+vm-platform-agent: 拒绝的 SSH 命令
+vm-platform-agent: 拒绝的 SSH 命令
+ok
+test_ssh_rejects_vnc_without_uuid (test_worker.WorkerCliTests.test_ssh_rejects_vnc_without_uuid) ... vm-platform-agent: 拒绝的 VNC UUID
+ok
+
+======================================================================
+ERROR: test_config_grows_disk_and_updates_xml (test_worker.ConfigOperationTests.test_config_grows_disk_and_updates_xml)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sky/vm-platform/tests/test_worker.py", line 446, in test_config_grows_disk_and_updates_xml
+    result = host.config({"uuid": VM_UUID, "vcpus": 4, "memory_gb": 4, "disk_gb": 30})
+TypeError: 'dict' object is not callable
+
+======================================================================
+ERROR: test_config_requires_powered_off_vm (test_worker.ConfigOperationTests.test_config_requires_powered_off_vm)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sky/vm-platform/tests/test_worker.py", line 416, in test_config_requires_powered_off_vm
+    host.config({"uuid": VM_UUID, "vcpus": 4, "memory_gb": 4, "disk_gb": 10})
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: 'dict' object is not callable
+
+======================================================================
+ERROR: test_disk_outside_allowed_dirs_is_rejected (test_worker.ConfigOperationTests.test_disk_outside_allowed_dirs_is_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sky/vm-platform/tests/test_worker.py", line 427, in test_disk_outside_allowed_dirs_is_rejected
+    host.config({"uuid": VM_UUID, "vcpus": 2, "memory_gb": 2, "disk_gb": 5})
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: 'dict' object is not callable
+
+======================================================================
+ERROR: test_disk_shrink_is_rejected (test_worker.ConfigOperationTests.test_disk_shrink_is_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sky/vm-platform/tests/test_worker.py", line 405, in test_disk_shrink_is_rejected
+    host.config({"uuid": VM_UUID, "vcpus": 2, "memory_gb": 2, "disk_gb": 10})
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: 'dict' object is not callable
+
+======================================================================
+ERROR: test_disk_create_with_cloud_init_does_not_leak_password (test_worker.CreateCommandTests.test_disk_create_with_cloud_init_does_not_leak_password)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sky/vm-platform/tests/test_worker.py", line 335, in test_disk_create_with_cloud_init_does_not_leak_password
+    result = host.create(
+        {
+    ...<12 lines>...
+        }
+    )
+  File "/Users/sky/vm-platform/vmops.py", line 1182, in create
+    return self._create_locked(payload)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/Users/sky/vm-platform/vmops.py", line 1224, in _create_locked
+    source = self._template_image(payload.get("source"), label="镜像文件")
+             ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/sky/vm-platform/vmops.py", line 570, in _template_image
+    path = self._resolve_inside(value, dirs, label)
+  File "/Users/sky/vm-platform/vmops.py", line 562, in _resolve_inside
+    raise OpError("%s必须位于执行端配置的目录内" % label)
+vmops.OpError: 镜像文件必须位于执行端配置的目录内
+
+======================================================================
+ERROR: test_iso_install_uses_version_appropriate_os_args (test_worker.CreateCommandTests.test_iso_install_uses_version_appropriate_os_args) (version='4.1.0\n')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sky/vm-platform/tests/test_worker.py", line 282, in test_iso_install_uses_version_appropriate_os_args
+    result = host.create(
+        {
+    ...<8 lines>...
+        }
+    )
+  File "/Users/sky/vm-platform/vmops.py", line 1182, in create
+    return self._create_locked(payload)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/Users/sky/vm-platform/vmops.py", line 1243, in _create_locked
+    source = self._template_image(payload.get("source"), required_suffix=".iso", label="ISO 镜像")
+             ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/sky/vm-platform/vmops.py", line 570, in _template_image
+    path = self._resolve_inside(value, dirs, label)
+  File "/Users/sky/vm-platform/vmops.py", line 562, in _resolve_inside
+    raise OpError("%s必须位于执行端配置的目录内" % label)
+vmops.OpError: ISO 镜像必须位于执行端配置的目录内
+
+======================================================================
+ERROR: test_iso_install_uses_version_appropriate_os_args (test_worker.CreateCommandTests.test_iso_install_uses_version_appropriate_os_args) (version='1.5.1\n')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sky/vm-platform/tests/test_worker.py", line 282, in test_iso_install_uses_version_appropriate_os_args
+    result = host.create(
+        {
+    ...<8 lines>...
+        }
+    )
+  File "/Users/sky/vm-platform/vmops.py", line 1182, in create
+    return self._create_locked(payload)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/Users/sky/vm-platform/vmops.py", line 1243, in _create_locked
+    source = self._template_image(payload.get("source"), required_suffix=".iso", label="ISO 镜像")
+             ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/sky/vm-platform/vmops.py", line 570, in _template_image
+    path = self._resolve_inside(value, dirs, label)
+  File "/Users/sky/vm-platform/vmops.py", line 562, in _resolve_inside
+    raise OpError("%s必须位于执行端配置的目录内" % label)
+vmops.OpError: ISO 镜像必须位于执行端配置的目录内
+
+======================================================================
+FAIL: test_symlinked_template_is_rejected (test_worker.CreateCommandTests.test_symlinked_template_is_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sky/vm-platform/tests/test_worker.py", line 385, in test_symlinked_template_is_rejected
+    self.assertIn("符号链接", str(context.exception))
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: '符号链接' not found in '镜像文件必须位于执行端配置的目录内'
+
+======================================================================
+FAIL: test_delete_removes_only_owned_disks_after_precheck (test_worker.DeleteSafetyTests.test_delete_removes_only_owned_disks_after_precheck)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sky/vm-platform/tests/test_worker.py", line 216, in test_delete_removes_only_owned_disks_after_precheck
+    self.assertEqual(result["removed_count"], 2)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 0 != 2
+
+----------------------------------------------------------------------
+Ran 53 tests in 7.126s
+
+FAILED (failures=2, errors=7)
+
+=== ROUND 2 2026-11-03 01:03:11 当前快照 ===
+85ded1e7965066ae692e67bc555a2cfd08c83277d810391278141470e784ca55  controller.py
+a552980fd14e11819581bec376e9e0b16c2c26922315f27dd5d2c1170b4afe11  worker.py
+24475564065c6f47258de3700eb7cca8a0f70a001db8cce76fce535e6fa7a887  vmops.py
+4082b78d2dbd4055643bc2e45a41a3ba51055d8758eee18988f2773089a2ca5d  tests/test_controller.py
+4f3f02a752910fc32f60310b3eb532375be3361d45fce4232ae5e920dd9809fc  tests/test_worker.py
+03aad6f8d9aa834b4a727c0d7421bb7589302fa4804604fb137e17fdd41fa9c2  tools/api_client.py
+2d9b7ead75775d305fcf397df31dd67b301c630ad8a78615e28f43f0985d317e  tools/authorize-agent.py
+32e5d89403e289f300dac10dc848e8f81afd70eb4d9a487410b6ac4999c3cfaf  tools/bootstrap.py
+--- unittest ---
+test_failed_remote_task_has_error_without_local_fallback (test_controller.HTTPTests.test_failed_remote_task_has_error_without_local_fallback) ... ok
+test_host_arguments_reject_shell_and_local_override (test_controller.HTTPTests.test_host_arguments_reject_shell_and_local_override) ... ok
+test_host_edit_remove_does_not_touch_worker_or_vms (test_controller.HTTPTests.test_host_edit_remove_does_not_touch_worker_or_vms) ... ok
+test_http_auth_and_csrf (test_controller.HTTPTests.test_http_auth_and_csrf) ... 127.0.0.1 "GET /api/hosts HTTP/1.1" 401 -
+127.0.0.1 "POST /api/hosts/node150/vms HTTP/1.1" 401 -
+127.0.0.1 "POST /api/login HTTP/1.1" 200 -
+127.0.0.1 "GET /api/hosts HTTP/1.1" 200 -
+127.0.0.1 "DELETE /api/hosts/node150 HTTP/1.1" 403 -
+127.0.0.1 "POST /api/logout HTTP/1.1" 403 -
+127.0.0.1 "POST /api/logout HTTP/1.1" 200 -
+127.0.0.1 "GET /api/hosts HTTP/1.1" 401 -
+ok
+test_password_hash_and_rejection (test_controller.HTTPTests.test_password_hash_and_rejection) ... ok
+test_restart_marks_uncertain_task_failed (test_controller.HTTPTests.test_restart_marks_uncertain_task_failed) ... ok
+test_running_task_prevents_retarget_or_unregister (test_controller.HTTPTests.test_running_task_prevents_retarget_or_unregister) ... ok
+test_selected_host_failure_does_not_break_other_host (test_controller.HTTPTests.test_selected_host_failure_does_not_break_other_host) ... 127.0.0.1 "POST /api/login HTTP/1.1" 200 -
+127.0.0.1 "GET /api/hosts/node150/status HTTP/1.1" 502 -
+127.0.0.1 "GET /api/hosts/node30/status HTTP/1.1" 200 -
+127.0.0.1 "GET /api/hosts/missing/status HTTP/1.1" 404 -
+ok
+test_sessions_persist_then_logout_invalidates (test_controller.HTTPTests.test_sessions_persist_then_logout_invalidates) ... ok
+test_static_path_cannot_expose_source_or_secrets (test_controller.HTTPTests.test_static_path_cannot_expose_source_or_secrets) ... 127.0.0.1 "GET /static/../controller.py HTTP/1.1" 404 -
+ok
+test_task_result_does_not_store_password_or_commands (test_controller.HTTPTests.test_task_result_does_not_store_password_or_commands) ... ok
+test_unknown_host_never_falls_back (test_controller.HTTPTests.test_unknown_host_never_falls_back) ... ok
+test_vnc_uses_selected_host_and_uuid (test_controller.HTTPTests.test_vnc_uses_selected_host_and_uuid) ... ok
+test_failed_remote_task_has_error_without_local_fallback (test_controller.PlatformTests.test_failed_remote_task_has_error_without_local_fallback) ... ok
+test_host_arguments_reject_shell_and_local_override (test_controller.PlatformTests.test_host_arguments_reject_shell_and_local_override) ... ok
+test_host_edit_remove_does_not_touch_worker_or_vms (test_controller.PlatformTests.test_host_edit_remove_does_not_touch_worker_or_vms) ... ok
+test_password_hash_and_rejection (test_controller.PlatformTests.test_password_hash_and_rejection) ... ok
+test_restart_marks_uncertain_task_failed (test_controller.PlatformTests.test_restart_marks_uncertain_task_failed) ... ok
+test_running_task_prevents_retarget_or_unregister (test_controller.PlatformTests.test_running_task_prevents_retarget_or_unregister) ... ok
+test_sessions_persist_then_logout_invalidates (test_controller.PlatformTests.test_sessions_persist_then_logout_invalidates) ... ok
+test_task_result_does_not_store_password_or_commands (test_controller.PlatformTests.test_task_result_does_not_store_password_or_commands) ... ok
+test_unknown_host_never_falls_back (test_controller.PlatformTests.test_unknown_host_never_falls_back) ... ok
+test_vnc_uses_selected_host_and_uuid (test_controller.PlatformTests.test_vnc_uses_selected_host_and_uuid) ... ok
+test_cli_wraps_operations_in_socket_transport (test_transport.AgentTransportTests.test_cli_wraps_operations_in_socket_transport) ... ok
+test_config_request_reaches_daemon_with_uuid (test_transport.AgentTransportTests.test_config_request_reaches_daemon_with_uuid) ... ok
+test_daemon_failure_is_preserved (test_transport.AgentTransportTests.test_daemon_failure_is_preserved) ... ok
+test_rpc_requires_running_agent (test_transport.AgentTransportTests.test_rpc_requires_running_agent) ... vm-platform-agent: operation status failed: 无法连接宿主机执行端：服务未启动或连接中断，请检查执行端服务
+ok
+test_vnc_rejects_mismatched_identity_before_connect (test_transport.AgentTransportTests.test_vnc_rejects_mismatched_identity_before_connect) ... ok
+test_defaults_are_read_only (test_worker.ConfigLoadingTests.test_defaults_are_read_only) ... ok
+test_os_install_args_by_version (test_worker.ConfigLoadingTests.test_os_install_args_by_version) ... ok
+test_relative_directories_are_rejected (test_worker.ConfigLoadingTests.test_relative_directories_are_rejected) ... ok
+test_config_grows_disk_and_updates_xml (test_worker.ConfigOperationTests.test_config_grows_disk_and_updates_xml) ... ERROR
+test_config_requires_powered_off_vm (test_worker.ConfigOperationTests.test_config_requires_powered_off_vm) ... ok
+test_disk_outside_allowed_dirs_is_rejected (test_worker.ConfigOperationTests.test_disk_outside_allowed_dirs_is_rejected) ... ok
+test_disk_shrink_is_rejected (test_worker.ConfigOperationTests.test_disk_shrink_is_rejected) ... ok
+test_read_only_agent_blocks_writes (test_worker.ConfigOperationTests.test_read_only_agent_blocks_writes) ... ok
+test_read_only_uuid_list_blocks_single_vm (test_worker.ConfigOperationTests.test_read_only_uuid_list_blocks_single_vm) ... ok
+test_disk_create_with_cloud_init_does_not_leak_password (test_worker.CreateCommandTests.test_disk_create_with_cloud_init_does_not_leak_password) ... ERROR
+test_iso_install_uses_version_appropriate_os_args (test_worker.CreateCommandTests.test_iso_install_uses_version_appropriate_os_args) ... 
+  test_iso_install_uses_version_appropriate_os_args (test_worker.CreateCommandTests.test_iso_install_uses_version_appropriate_os_args) (version='4.1.0\n') ... ERROR
+  test_iso_install_uses_version_appropriate_os_args (test_worker.CreateCommandTests.test_iso_install_uses_version_appropriate_os_args) (version='1.5.1\n') ... ERROR
+test_symlinked_template_is_rejected (test_worker.CreateCommandTests.test_symlinked_template_is_rejected) ... FAIL
+test_delete_refuses_when_other_vm_disks_unknown (test_worker.DeleteSafetyTests.test_delete_refuses_when_other_vm_disks_unknown) ... ok
+test_delete_removes_only_owned_disks_after_precheck (test_worker.DeleteSafetyTests.test_delete_removes_only_owned_disks_after_precheck) ... FAIL
+test_delete_requires_force_when_running (test_worker.DeleteSafetyTests.test_delete_requires_force_when_running) ... ok
+test_name_cannot_be_used_as_uuid (test_worker.DomainResolutionTests.test_name_cannot_be_used_as_uuid) ... ok
+test_resolved_uuid_matches_domain (test_worker.DomainResolutionTests.test_resolved_uuid_matches_domain) ... ok
+test_uuid_mismatch_is_rejected_without_action (test_worker.DomainResolutionTests.test_uuid_mismatch_is_rejected_without_action) ... ok
+test_loopback_display_reports_port (test_worker.VncTargetTests.test_loopback_display_reports_port) ... ok
+test_non_loopback_display_is_refused (test_worker.VncTargetTests.test_non_loopback_display_is_refused) ... ok
+test_vnc_requires_running_vm (test_worker.VncTargetTests.test_vnc_requires_running_vm) ... ok
+test_dispatch_rejects_non_object_payload (test_worker.WorkerCliTests.test_dispatch_rejects_non_object_payload) ... ok
+test_dispatch_routes_known_operations (test_worker.WorkerCliTests.test_dispatch_routes_known_operations) ... ok
+test_rpc_invalid_json_returns_error (test_worker.WorkerCliTests.test_rpc_invalid_json_returns_error) ... ok
+test_rpc_unknown_operation_returns_error (test_worker.WorkerCliTests.test_rpc_unknown_operation_returns_error) ... vm-platform-agent: operation nope failed: 不支持的操作：nope
+ok
+test_rpc_writes_single_json_line (test_worker.WorkerCliTests.test_rpc_writes_single_json_line) ... vm-platform-agent: operation status ok
+ok
+test_ssh_accepts_rpc (test_worker.WorkerCliTests.test_ssh_accepts_rpc) ... ok
+test_ssh_accepts_vnc_uuid (test_worker.WorkerCliTests.test_ssh_accepts_vnc_uuid) ... ok
+test_ssh_rejects_arbitrary_command (test_worker.WorkerCliTests.test_ssh_rejects_arbitrary_command) ... vm-platform-agent: 拒绝的 SSH 命令
+vm-platform-agent: 拒绝的 SSH 命令
+vm-platform-agent: 拒绝的 SSH 命令
+ok
+test_ssh_rejects_vnc_without_uuid (test_worker.WorkerCliTests.test_ssh_rejects_vnc_without_uuid) ... vm-platform-agent: 拒绝的 VNC UUID
+ok
+
+======================================================================
+ERROR: test_config_grows_disk_and_updates_xml (test_worker.ConfigOperationTests.test_config_grows_disk_and_updates_xml)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sky/vm-platform/tests/test_worker.py", line 446, in test_config_grows_disk_and_updates_xml
+    result = host.configure({"uuid": VM_UUID, "vcpus": 4, "memory_gb": 4, "disk_gb": 30})
+  File "/Users/sky/vm-platform/vmops.py", line 1623, in configure
+    verified = self._mutable_disk_path(disk_path)
+  File "/Users/sky/vm-platform/vmops.py", line 610, in _mutable_disk_path
+    path = self._resolve_inside(value, dirs, "磁盘路径")
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/sky/vm-platform/vmops.py", line 562, in _resolve_inside
+    raise OpError("%s必须位于执行端配置的目录内" % label)
+vmops.OpError: 磁盘路径必须位于执行端配置的目录内
+
+======================================================================
+ERROR: test_disk_create_with_cloud_init_does_not_leak_password (test_worker.CreateCommandTests.test_disk_create_with_cloud_init_does_not_leak_password)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sky/vm-platform/tests/test_worker.py", line 335, in test_disk_create_with_cloud_init_does_not_leak_password
+    result = host.create(
+        {
+    ...<12 lines>...
+        }
+    )
+  File "/Users/sky/vm-platform/vmops.py", line 1182, in create
+    return self._create_locked(payload)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/Users/sky/vm-platform/vmops.py", line 1224, in _create_locked
+    source = self._template_image(payload.get("source"), label="镜像文件")
+             ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/sky/vm-platform/vmops.py", line 570, in _template_image
+    path = self._resolve_inside(value, dirs, label)
+  File "/Users/sky/vm-platform/vmops.py", line 562, in _resolve_inside
+    raise OpError("%s必须位于执行端配置的目录内" % label)
+vmops.OpError: 镜像文件必须位于执行端配置的目录内
+
+======================================================================
+ERROR: test_iso_install_uses_version_appropriate_os_args (test_worker.CreateCommandTests.test_iso_install_uses_version_appropriate_os_args) (version='4.1.0\n')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sky/vm-platform/tests/test_worker.py", line 282, in test_iso_install_uses_version_appropriate_os_args
+    result = host.create(
+        {
+    ...<8 lines>...
+        }
+    )
+  File "/Users/sky/vm-platform/vmops.py", line 1182, in create
+    return self._create_locked(payload)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/Users/sky/vm-platform/vmops.py", line 1243, in _create_locked
+    source = self._template_image(payload.get("source"), required_suffix=".iso", label="ISO 镜像")
+             ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/sky/vm-platform/vmops.py", line 570, in _template_image
+    path = self._resolve_inside(value, dirs, label)
+  File "/Users/sky/vm-platform/vmops.py", line 562, in _resolve_inside
+    raise OpError("%s必须位于执行端配置的目录内" % label)
+vmops.OpError: ISO 镜像必须位于执行端配置的目录内
+
+======================================================================
+ERROR: test_iso_install_uses_version_appropriate_os_args (test_worker.CreateCommandTests.test_iso_install_uses_version_appropriate_os_args) (version='1.5.1\n')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sky/vm-platform/tests/test_worker.py", line 282, in test_iso_install_uses_version_appropriate_os_args
+    result = host.create(
+        {
+    ...<8 lines>...
+        }
+    )
+  File "/Users/sky/vm-platform/vmops.py", line 1182, in create
+    return self._create_locked(payload)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/Users/sky/vm-platform/vmops.py", line 1243, in _create_locked
+    source = self._template_image(payload.get("source"), required_suffix=".iso", label="ISO 镜像")
+             ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/sky/vm-platform/vmops.py", line 570, in _template_image
+    path = self._resolve_inside(value, dirs, label)
+  File "/Users/sky/vm-platform/vmops.py", line 562, in _resolve_inside
+    raise OpError("%s必须位于执行端配置的目录内" % label)
+vmops.OpError: ISO 镜像必须位于执行端配置的目录内
+
+======================================================================
+FAIL: test_symlinked_template_is_rejected (test_worker.CreateCommandTests.test_symlinked_template_is_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sky/vm-platform/tests/test_worker.py", line 385, in test_symlinked_template_is_rejected
+    self.assertIn("符号链接", str(context.exception))
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: '符号链接' not found in '镜像文件必须位于执行端配置的目录内'
+
+======================================================================
+FAIL: test_delete_removes_only_owned_disks_after_precheck (test_worker.DeleteSafetyTests.test_delete_removes_only_owned_disks_after_precheck)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sky/vm-platform/tests/test_worker.py", line 216, in test_delete_removes_only_owned_disks_after_precheck
+    self.assertEqual(result["removed_count"], 2)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 0 != 2
+
+----------------------------------------------------------------------
+Ran 58 tests in 7.085s
+
+FAILED (failures=2, errors=4)
+EXIT=1

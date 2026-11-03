@@ -1,0 +1,18 @@
+[Unit]
+Description=Yunzhan VM Platform Controller
+After=network-online.target vm-platform-agent.service
+Wants=network-online.target vm-platform-agent.service
+
+[Service]
+Type=simple
+WorkingDirectory=/opt/vm-platform
+Environment=VM_PLATFORM_CONFIG=/etc/vm-platform/controller.json
+Environment=VM_PLATFORM_AGENT_CONFIG=/etc/vm-platform/agent.json
+ExecStart=/usr/bin/python3 /opt/vm-platform/controller.py
+Restart=on-failure
+RestartSec=3
+UMask=0077
+TimeoutStopSec=15
+
+[Install]
+WantedBy=multi-user.target

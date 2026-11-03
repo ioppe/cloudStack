@@ -1,0 +1,55 @@
+{
+  "passed": true,
+  "confirmation": {
+    "confirmed": true,
+    "backup": "/var/lib/vm-platform/backups/node150-bridge-v1",
+    "address": "192.168.0.150/24",
+    "interface": "br0",
+    "nat_preserved": true,
+    "rollback_timer_cancelled": true
+  },
+  "platform_status": {
+    "host": {
+      "id": "node150",
+      "name": "Ubuntu 150",
+      "address": "192.168.0.150",
+      "transport": "ssh",
+      "ssh_user": "root",
+      "ssh_port": 22
+    },
+    "online": true,
+    "status": {
+      "hostname": "sky",
+      "os": "Ubuntu 24.04.5 LTS",
+      "cpu_count": 80,
+      "memory_total": 134776745984,
+      "memory_available": 129110806528,
+      "disk_total": 1964618686464,
+      "disk_free": 1855040319488,
+      "vm_count": 0,
+      "running_count": 0,
+      "kvm": true
+    }
+  },
+  "networks": {
+    "bridges": [
+      "virbr0",
+      "br0"
+    ],
+    "libvirt_networks": [
+      {
+        "name": "default",
+        "state": "active"
+      }
+    ],
+    "default_bridge": "virbr0",
+    "default_type": "network",
+    "default_source": "default"
+  },
+  "network_state": {
+    "addresses": "lo               UNKNOWN        127.0.0.1/8 ::1/128 \neno1np0          DOWN           \neno2np1          UP             \nvirbr0           DOWN           192.168.122.1/24 \nbr0              UP             192.168.0.150/24 fe80::ae1f:6bff:feeb:a7b1/64",
+    "routes": "default via 192.168.0.1 dev br0 proto static",
+    "dns": "Link 10 (br0): 192.168.0.1 8.8.8.8",
+    "nat": "Name:           default\nUUID:           d17e1f94-f903-4cbd-a1f4-3f8d6e749afa\nActive:         yes\nPersistent:     yes\nAutostart:      yes\nBridge:         virbr0"
+  }
+}
