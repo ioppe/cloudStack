@@ -1,0 +1,310 @@
+# v1.1.2 IP discovery — mocked unit suite (REMOTE 192.168.0.150 (sky), FINAL c49b2221)
+# captured_utc: 2026-11-04T15:49:35Z
+# ssh: ssh -o BatchMode=yes -o StrictHostKeyChecking=yes root@192.168.0.150   (BatchMode enforced, host keys verified)
+# interpreter: /usr/bin/python3 -> Python 3.12.3
+# isolation_dir: /opt/vm-platform-ip-discovery-check-only   pre-check ABSENT -> created -> snapshot copied -> removed after run (post-run assertion ABSENT)
+# final_source_sha256: same 13-entry marker map as the local log
+# snapshot_manifest_sha256: abc2b40c5712bc0a6fe4c8e9e28b0e6b192af9b980117fcf5d07f70e44693a55  (86 files; remote per-file manifest diff vs local = 0)
+# command: cd /opt/vm-platform-ip-discovery-check-only && PYTHONDONTWRITEBYTECODE=1 PYTHONIOENCODING=utf-8 /usr/bin/python3 -m unittest discover -s tests -p 'test_*.py' -v
+# return_code: 0
+# result: Ran 157 tests — passed 157, failures 0, errors 0, skipped 0
+# earlier rounds kept unchanged: round1 142 tests / failures 6-7-6 (ip-discovery-unit-*-round1.log, ip-discovery-unit-summary-round1.json); pre-format 157/157 (snapshot 90642b1f..., ip-discovery-unit-summary-preformat.json)
+# untouched: /opt/vm-platform (production), systemd units, network config, libvirt domains/images
+# note: mocked only; raw output below is unmodified.
+# ============================================================================
+=== host 192.168.0.150 :: pre-check /opt/vm-platform-ip-discovery-check-only ===
+ABSENT
+=== create /opt/vm-platform-ip-discovery-check-only ===
+CREATED
+=== copy snapshot /Users/sky/Documents/.pi-desktop/data/scratch/import-codex-01a083f2-2ab3-7fc3-9172-db4835ca6d56/ip-src-final2 (COPYFILE_DISABLE=1) ===
+COPIED
+=== remote per-file manifest (before test run) ===
+56f77c8138c8171c9f81d2c285145b97385da3eb35d9a59358b064c96dcf8bf4  ./config/agent.example.json
+a86dccc44d81c5bbcaa2b864d424447ba582420f04f6c28122ecc32ca69da699  ./config/controller.example.json
+2fb800a3e54ffddcd3eec64a149fbdf9fb54df87c9cefc00a9e4905ba41a1c80  ./controller.py
+ec213ce0c0e198b4cf45016f8402a93a558bd3513261f7ff315e97b32cd1700e  ./deploy/install-agent.sh
+69909960a33bf054c8de0778b4abc02d69d215771dbf7e95c436dcf445b74406  ./deploy/install-controller.sh
+ec35435be6de3df8a7128b06bc006839d1557cab9b50d4c321c00da7265bf67c  ./deploy/node150-home-storage.conf
+ed70eae3544941411eeaa6aa285dc3f5a1cfe472ae600dcf8e883f4c2042bb48  ./deploy/prepare-node150-bridge.py
+d95caca0079e0a745ec18c734429ab93e86381bdbedca8f0b77629679986b361  ./deploy/vm-platform-agent.service
+2e49e2d62bb5135467842c7b9d55ba4ee561018f7392fe290cded7098f67a92b  ./deploy/vm-platform.service
+c49b22214acf20b8c0ec6c1a63fa220aa3dc7f86539060f27c033142bf2b0614  ./ipdiscovery.py
+7926edc3111a7ab9c45532d17dc5a2c28e7db3f083bd83fab6fc684817dec0e8  ./static/app.css
+e31da5d4c66b8107201754f19cba1875b74a50934a9151521e9082e0469da8e6  ./static/app.js
+49a22346568f1ef95e097b5b48a66f74907f1f97430ee04398ae768d5a6ff10a  ./static/console.html
+da60668bd624d49db2a6deaa13b3db3f59f12ff276961685159c38c312a17f9a  ./static/console.js
+f574eb320b0dce154c43b9a295e015b8d51be5cf1e69b6cb077247e061edf0bc  ./static/index.html
+3ccd2242d7f5b6c5ae831a486f63cce1f18d8cd11c511f6a7a7251673763b2d1  ./static/novnc/LICENSE.txt
+76d6b7ec73aed8cbc72b49b8b865bcb334acc59a6b0e96b19bc39c9e8e053ae3  ./static/novnc/core/base64.js
+00b9a69185f913b882270c4cc7a076b4dd3a083981edb91c1e55db22f8ffcef3  ./static/novnc/core/crypto/aes.js
+e7880d27af8bf439579f6fc40d7b81fd379a9babb1d13c83999effd8c64823ab  ./static/novnc/core/crypto/bigint.js
+e6006697ce1d195c951ef1e986172d17174e533909df19e07be583ac75dd344b  ./static/novnc/core/crypto/crypto.js
+91d8c8ed596d2beda7da9dd68c9ae1d325c673822e3ccfc8a4091e121c99a316  ./static/novnc/core/crypto/des.js
+9102454282ba646ee4a4ce34c5db5d2a9979179f9d4606737fc6bb7a669e5ebe  ./static/novnc/core/crypto/dh.js
+364c0f0d44d3f8fd608c18a0e1253e5a77e9b8e4c48e3c6503a0f45c9bb2ff8d  ./static/novnc/core/crypto/md5.js
+83875db9e5d978ea0eb2a1e2af8afbb7dedfb0f18eca2bab75c2756285037476  ./static/novnc/core/crypto/rsa.js
+da3b571e10984438ea49559738e11034b5d0c85154a68eac1a6bf9ef10e5aa02  ./static/novnc/core/decoders/copyrect.js
+96d47901c5e26dc02256b152aa642490d936bbcc395f59ffd580356118edff84  ./static/novnc/core/decoders/h264.js
+63eb86247bea83119af75f3d145a4515a2411ff28a72492d2d7b925268d50163  ./static/novnc/core/decoders/hextile.js
+6747ac900d09a5899c3a6fff897e58e88607e69b39ff4a6bddddee2e9e6bc6b4  ./static/novnc/core/decoders/jpeg.js
+bc7d4517213dc1df8626e8198eadf32b2c1946f75228b31387d3916963af0727  ./static/novnc/core/decoders/raw.js
+b3380dbc75310769ef24e956e1fa1f13d8217f8b1d7d6f5c9d08db9a336a4c0d  ./static/novnc/core/decoders/rre.js
+a7f01df99922be812ea21c5e46597b76379a5d8267f99ec8bea9a202bec34130  ./static/novnc/core/decoders/tight.js
+38bd2fd200f5c8e9b0905eca2389fb8e6ad2151de886e4fa9a9c59cc1c7696f0  ./static/novnc/core/decoders/tightpng.js
+1d1c05cdca4840ff46082103ab35aa7696b41504bec91ebd74fae9e0e5f61380  ./static/novnc/core/decoders/zlib.js
+6853c115f97a1d4de39ca71ab8b519a05916bb8c173aa8112ce4881cbb612cbd  ./static/novnc/core/decoders/zrle.js
+ceb6763eb3fcc53f34d08534a8d1df9b63af3a95c58f8d96d238ef5ce639ad1f  ./static/novnc/core/deflator.js
+10d298551124a172c97dcb54d8d30fca416e6038b064c93ba5f7cf079fa4bf1f  ./static/novnc/core/display.js
+4975904fe1da6dc22b53ecb8462ec7c9a43e99db72dba4aab9f625c4177e355d  ./static/novnc/core/encodings.js
+b1955cbd1608619911b8dfd451fae07f38c5767098f6f47e4a2a1682c11feb65  ./static/novnc/core/inflator.js
+5eb985e1a412d1be6b606ba0d7e912fc0842d873d252bd7ec8a363670dfc800c  ./static/novnc/core/input/domkeytable.js
+6bb21b0a2d5f5d7ad73e75b80ddc1d844ac770c4426b312d5740f2443455f0c0  ./static/novnc/core/input/fixedkeys.js
+c04b67fdae6ac061c7d51cb5ee8ca296ee9c7c80aa246cee5751e74eefe61758  ./static/novnc/core/input/gesturehandler.js
+46f82adef772b726ae3db144fb9c12b3d03374b7c803b8a5106e422a10ddcdba  ./static/novnc/core/input/keyboard.js
+4ddf0e21f07328358974d91aa2d7f839ba2116688b28e43d3f6f4e2eae8c45cf  ./static/novnc/core/input/keysym.js
+76f338d45fb73b7decb7d8b4ef6e95edf7ce9583722c5220642a9be85fc2cc89  ./static/novnc/core/input/keysymdef.js
+2e156ea656404afcb6cc54dd85cbe5dd2dd0ba209ae9a6fb1b78ec5db17d01ce  ./static/novnc/core/input/util.js
+9a1ce4393e1aa4ace5dcdcf7e032f4a1c03a9cb964b4e0e7b7fcffd3a982eb84  ./static/novnc/core/input/vkeys.js
+f0fc982627e1c02feaac1bd50d7fdd3bcbb05f0062b910d8002f47d1b08967a6  ./static/novnc/core/input/xtscancodes.js
+4aeffb60af9c163365170e2af392acb6f0a7c21a0cb6827f85dd776d33277bee  ./static/novnc/core/ra2.js
+c46dfefbf869eda0c6d06c5dd86c42e96fc8a77c125e91599a2cdf3841261564  ./static/novnc/core/rfb.js
+592f56dc2195331c3b8329f8e51fa3a444a89ac85d5fa29e2364508aa9303df7  ./static/novnc/core/util/browser.js
+adabe605d73f38e5f29abd302489d4b9e98a9e495823a06a2edbe7f6744856fa  ./static/novnc/core/util/cursor.js
+13845321fc5abccc1de25594082d8db15405af56c5f4fc32b3bdd0878bd891e3  ./static/novnc/core/util/element.js
+ec7f4da0407ea67f5d6f5ce53bd9b3342155feb9407707de3992c5261e460ead  ./static/novnc/core/util/events.js
+9481965aa6cee36ae2decdccc6ca5203c9371a8afc33346ad4170e471766e0da  ./static/novnc/core/util/eventtarget.js
+b1c4b7dec2e7767322b3464f3c186b13138cdf341c621db44ddd06ce78180c01  ./static/novnc/core/util/int.js
+c3a49715c9f908d5bb385de5787e99b824faf34d26036d993eea4740bac9d482  ./static/novnc/core/util/logging.js
+77d0604c7bf9e95de780f8cb9764d918ae24c86811a0a1c5b08cd30e50ad2a3a  ./static/novnc/core/util/strings.js
+d1a96fc1316eaab9badcba9b0f1a7a55d748a4d4d26dc0263cc179dba2131cf4  ./static/novnc/core/websock.js
+f8c225592d43c9a63e1ed4cb1ba8e9abee222ad7da9f1108f43f556a6c9db5e7  ./static/novnc/package.json
+3bc404ffa7888053253eedcc5a667619aa08dc1be0bea400e5ff28c51602180f  ./static/novnc/vendor/pako/LICENSE
+f78ded7db9ffa4be474ce75020659f165d97adc4276ef5c7fcd698a3aa03e6ce  ./static/novnc/vendor/pako/README.md
+0749bc4661ed186714b90e7f2321c9625a8ce7c680563bfe3ac6df7aa332bf28  ./static/novnc/vendor/pako/lib/utils/common.js
+7412dd3ecc015888b99292f45e4d4ba69abc77f208508c9a1c93e8dfe54ba6cd  ./static/novnc/vendor/pako/lib/zlib/adler32.js
+9d2c0dd36349e6eec9d41a37f965b2ff7e7374fbf00fb139e3116d428b551898  ./static/novnc/vendor/pako/lib/zlib/constants.js
+897fa9eabd2bb239ec632326dbff85bc72cc81d4da80265cde59520db339f405  ./static/novnc/vendor/pako/lib/zlib/crc32.js
+d2a498ad04bb5d1f67ba01696c31a2e88e8b88e4fc6c36c635294d1c445b22c1  ./static/novnc/vendor/pako/lib/zlib/deflate.js
+9f9b2da72593769fcc97d397ceb771bb11d5b96f202759e2ed014c2be24d40d7  ./static/novnc/vendor/pako/lib/zlib/gzheader.js
+ec1e0f7abeec681a0d5e3da46d06f499969cbf265eaaa5e21a135d2a9b878c16  ./static/novnc/vendor/pako/lib/zlib/inffast.js
+321582ddc4023e47aa981a71caed0e1dad8b58f0d9e93a0b0a34fe7e3c45e05f  ./static/novnc/vendor/pako/lib/zlib/inflate.js
+94780cbdef562bcd0434c7e6f4faca1ff6be6980bf7305a200809d98d419d9c7  ./static/novnc/vendor/pako/lib/zlib/inftrees.js
+7860a8d3c873c28e4f5f92db9ca3e45006e21b084210d87b8b7775cddccf05ed  ./static/novnc/vendor/pako/lib/zlib/messages.js
+ad9cb5245b9e39edd164234d6ca19febb9dba683f1f99a67af48d62931d91426  ./static/novnc/vendor/pako/lib/zlib/trees.js
+240917347c379b1ad33b8bf07cc6981557173bc3408f35e9875866a14b9967b2  ./static/novnc/vendor/pako/lib/zlib/zstream.js
+f48dc71f78ce8bd792793726253765add80804c9f8c513ce999f05be0a7a7d54  ./tests/test_bridge_migration.py
+875e7d312d1b6dfbcdfdbc598bab02ad384f881ebfb4b8a06775237cf9b015cb  ./tests/test_controller.py
+5bee4927cfdfc59a657702c16ac78019c0b2bf08d5ec86630413ac523af071ec  ./tests/test_ipdiscovery.py
+6714fde7795550ca4b6e68904ce38d88651ccb67955af207f96e04cf3c167920  ./tests/test_network_config.py
+6f11baa2cd93728e8ec3b57cf3216421e8fb16f46cf400884870705efd38dc9b  ./tests/test_transport.py
+ba042bc36f05ced85c41030566d65898f2ca373cf8840f5ba8133a39f080ebf4  ./tests/test_worker.py
+03aad6f8d9aa834b4a727c0d7421bb7589302fa4804604fb137e17fdd41fa9c2  ./tools/api_client.py
+2d9b7ead75775d305fcf397df31dd67b301c630ad8a78615e28f43f0985d317e  ./tools/authorize-agent.py
+32e5d89403e289f300dac10dc848e8f81afd70eb4d9a487410b6ac4999c3cfaf  ./tools/bootstrap.py
+350882ef83afe23ed36495e2485b6f8342ce65d57700878be52228e166180e18  ./tools/guest_probe.py
+6fac349dd9ceb6a2ba271d2959edc70a9fae458222cf3730c125236e6fd5b9f1  ./tools/rotate_password.py
+8af857870db00076d2acaaecff3d87e652b4fef9f85d84f8283bb6f110577709  ./vmops.py
+a552980fd14e11819581bec376e9e0b16c2c26922315f27dd5d2c1170b4afe11  ./worker.py
+=== python version ===
+Python 3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]
+=== command: cd /opt/vm-platform-ip-discovery-check-only && python3 -m unittest discover -s tests -p 'test_*.py' -v ===
+test_preserves_address_gateway_dns_and_mac_on_real_bridge (test_bridge_migration.BridgeMigrationTests.test_preserves_address_gateway_dns_and_mac_on_real_bridge) ... ok
+test_rejects_different_gateway_or_dns (test_bridge_migration.BridgeMigrationTests.test_rejects_different_gateway_or_dns) ... ok
+test_rejects_different_management_address (test_bridge_migration.BridgeMigrationTests.test_rejects_different_management_address) ... ok
+test_rejects_existing_bridge (test_bridge_migration.BridgeMigrationTests.test_rejects_existing_bridge) ... ok
+test_console_requires_same_origin_and_websocket_upgrade (test_controller.HTTPTests.test_console_requires_same_origin_and_websocket_upgrade) ... 127.0.0.1 "GET /api/hosts/node150/vms/11111111-2222-3333-4444-555555555555/vnc HTTP/1.1" 401 -
+127.0.0.1 "POST /api/login HTTP/1.1" 200 -
+127.0.0.1 "GET /api/hosts/node150/vms/11111111-2222-3333-4444-555555555555/vnc HTTP/1.1" 403 -
+127.0.0.1 "GET /api/hosts/node150/vms/11111111-2222-3333-4444-555555555555/vnc HTTP/1.1" 403 -
+127.0.0.1 "GET /api/hosts/node150/vms/11111111-2222-3333-4444-555555555555/vnc HTTP/1.1" 400 -
+ok
+test_failed_remote_task_has_error_without_local_fallback (test_controller.HTTPTests.test_failed_remote_task_has_error_without_local_fallback) ... ok
+test_host_arguments_reject_shell_and_local_override (test_controller.HTTPTests.test_host_arguments_reject_shell_and_local_override) ... ok
+test_host_edit_remove_does_not_touch_worker_or_vms (test_controller.HTTPTests.test_host_edit_remove_does_not_touch_worker_or_vms) ... ok
+test_http_auth_and_csrf (test_controller.HTTPTests.test_http_auth_and_csrf) ... 127.0.0.1 "GET /api/hosts HTTP/1.1" 401 -
+127.0.0.1 "POST /api/hosts/node150/vms HTTP/1.1" 401 -
+127.0.0.1 "POST /api/login HTTP/1.1" 200 -
+127.0.0.1 "GET /api/hosts HTTP/1.1" 200 -
+127.0.0.1 "DELETE /api/hosts/node150 HTTP/1.1" 403 -
+127.0.0.1 "POST /api/logout HTTP/1.1" 403 -
+127.0.0.1 "POST /api/logout HTTP/1.1" 200 -
+127.0.0.1 "GET /api/hosts HTTP/1.1" 401 -
+ok
+test_password_change_invalidates_sessions_and_persists_hash (test_controller.HTTPTests.test_password_change_invalidates_sessions_and_persists_hash) ... 127.0.0.1 "POST /api/login HTTP/1.1" 200 -
+127.0.0.1 "POST /api/password HTTP/1.1" 200 -
+127.0.0.1 "GET /api/hosts HTTP/1.1" 401 -
+127.0.0.1 "POST /api/login HTTP/1.1" 401 -
+127.0.0.1 "POST /api/login HTTP/1.1" 200 -
+127.0.0.1 "GET /api/hosts HTTP/1.1" 200 -
+ok
+test_password_change_rejects_wrong_current_and_weak_new_password (test_controller.HTTPTests.test_password_change_rejects_wrong_current_and_weak_new_password) ... 127.0.0.1 "POST /api/login HTTP/1.1" 200 -
+127.0.0.1 "POST /api/password HTTP/1.1" 403 -
+127.0.0.1 "POST /api/password HTTP/1.1" 400 -
+127.0.0.1 "GET /api/hosts HTTP/1.1" 200 -
+ok
+test_password_hash_and_rejection (test_controller.HTTPTests.test_password_hash_and_rejection) ... ok
+test_restart_marks_uncertain_task_failed (test_controller.HTTPTests.test_restart_marks_uncertain_task_failed) ... ok
+test_running_task_prevents_retarget_or_unregister (test_controller.HTTPTests.test_running_task_prevents_retarget_or_unregister) ... ok
+test_selected_host_failure_does_not_break_other_host (test_controller.HTTPTests.test_selected_host_failure_does_not_break_other_host) ... 127.0.0.1 "POST /api/login HTTP/1.1" 200 -
+127.0.0.1 "GET /api/hosts/node150/status HTTP/1.1" 502 -
+127.0.0.1 "GET /api/hosts/node30/status HTTP/1.1" 200 -
+127.0.0.1 "GET /api/hosts/missing/status HTTP/1.1" 404 -
+ok
+test_sessions_persist_then_logout_invalidates (test_controller.HTTPTests.test_sessions_persist_then_logout_invalidates) ... ok
+test_static_path_cannot_expose_source_or_secrets (test_controller.HTTPTests.test_static_path_cannot_expose_source_or_secrets) ... 127.0.0.1 "GET /static/../controller.py HTTP/1.1" 404 -
+ok
+test_task_result_does_not_store_password_or_commands (test_controller.HTTPTests.test_task_result_does_not_store_password_or_commands) ... ok
+test_unknown_host_never_falls_back (test_controller.HTTPTests.test_unknown_host_never_falls_back) ... ok
+test_vnc_uses_selected_host_and_uuid (test_controller.HTTPTests.test_vnc_uses_selected_host_and_uuid) ... ok
+test_failed_remote_task_has_error_without_local_fallback (test_controller.PlatformTests.test_failed_remote_task_has_error_without_local_fallback) ... ok
+test_host_arguments_reject_shell_and_local_override (test_controller.PlatformTests.test_host_arguments_reject_shell_and_local_override) ... ok
+test_host_edit_remove_does_not_touch_worker_or_vms (test_controller.PlatformTests.test_host_edit_remove_does_not_touch_worker_or_vms) ... ok
+test_password_hash_and_rejection (test_controller.PlatformTests.test_password_hash_and_rejection) ... ok
+test_restart_marks_uncertain_task_failed (test_controller.PlatformTests.test_restart_marks_uncertain_task_failed) ... ok
+test_running_task_prevents_retarget_or_unregister (test_controller.PlatformTests.test_running_task_prevents_retarget_or_unregister) ... ok
+test_sessions_persist_then_logout_invalidates (test_controller.PlatformTests.test_sessions_persist_then_logout_invalidates) ... ok
+test_task_result_does_not_store_password_or_commands (test_controller.PlatformTests.test_task_result_does_not_store_password_or_commands) ... ok
+test_unknown_host_never_falls_back (test_controller.PlatformTests.test_unknown_host_never_falls_back) ... ok
+test_vnc_uses_selected_host_and_uuid (test_controller.PlatformTests.test_vnc_uses_selected_host_and_uuid) ... ok
+test_ethernet_source_must_match_arp_sender (test_ipdiscovery.ArpFrameTests.test_ethernet_source_must_match_arp_sender) ... ok
+test_non_reply_and_malformed_frames_are_rejected (test_ipdiscovery.ArpFrameTests.test_non_reply_and_malformed_frames_are_rejected) ... ok
+test_reply_for_unrequested_mac_is_rejected (test_ipdiscovery.ArpFrameTests.test_reply_for_unrequested_mac_is_rejected) ... ok
+test_reply_from_other_subnet_is_rejected (test_ipdiscovery.ArpFrameTests.test_reply_from_other_subnet_is_rejected) ... ok
+test_reply_to_other_host_is_rejected (test_ipdiscovery.ArpFrameTests.test_reply_to_other_host_is_rejected) ... ok
+test_reply_with_network_or_host_address_is_rejected (test_ipdiscovery.ArpFrameTests.test_reply_with_network_or_host_address_is_rejected) ... ok
+test_reply_with_wrong_target_ip_is_rejected (test_ipdiscovery.ArpFrameTests.test_reply_with_wrong_target_ip_is_rejected) ... ok
+test_reply_with_wrong_target_mac_is_rejected (test_ipdiscovery.ArpFrameTests.test_reply_with_wrong_target_mac_is_rejected) ... ok
+test_request_frame_layout (test_ipdiscovery.ArpFrameTests.test_request_frame_layout) ... ok
+test_valid_reply_is_accepted (test_ipdiscovery.ArpFrameTests.test_valid_reply_is_accepted) ... ok
+test_background_frames_do_not_hide_late_target_replies (test_ipdiscovery.BridgeScannerTests.test_background_frames_do_not_hide_late_target_replies) ... ok
+test_receive_budget_is_bounded_with_endless_background (test_ipdiscovery.BridgeScannerTests.test_receive_budget_is_bounded_with_endless_background) ... ok
+test_scan_ignores_frames_for_other_macs (test_ipdiscovery.BridgeScannerTests.test_scan_ignores_frames_for_other_macs) ... ok
+test_scan_keeps_all_addresses_and_walks_every_target (test_ipdiscovery.BridgeScannerTests.test_scan_keeps_all_addresses_and_walks_every_target) ... ok
+test_scan_rejects_non_bridge_target (test_ipdiscovery.BridgeScannerTests.test_scan_rejects_non_bridge_target) ... ok
+test_scan_respects_three_second_deadline (test_ipdiscovery.BridgeScannerTests.test_scan_respects_three_second_deadline) ... ok
+test_scan_send_error_degrades_without_raising (test_ipdiscovery.BridgeScannerTests.test_scan_send_error_degrades_without_raising) ... ok
+test_scan_without_permission_is_unavailable (test_ipdiscovery.BridgeScannerTests.test_scan_without_permission_is_unavailable) ... ok
+test_bridge_rate_limit_defers_new_mac_within_window (test_ipdiscovery.DiscoveryManagerTests.test_bridge_rate_limit_defers_new_mac_within_window) ... ok
+test_cache_is_isolated_by_bridge_and_mac (test_ipdiscovery.DiscoveryManagerTests.test_cache_is_isolated_by_bridge_and_mac) ... ok
+test_in_flight_result_is_discarded_when_target_removed_mid_scan (test_ipdiscovery.DiscoveryManagerTests.test_in_flight_result_is_discarded_when_target_removed_mid_scan) ... ok
+test_invalid_mac_or_bridge_is_unavailable (test_ipdiscovery.DiscoveryManagerTests.test_invalid_mac_or_bridge_is_unavailable) ... ok
+test_lookup_is_non_blocking_and_reports_discovering (test_ipdiscovery.DiscoveryManagerTests.test_lookup_is_non_blocking_and_reports_discovering) ... ok
+test_multiple_addresses_are_cached_in_order_and_deduped (test_ipdiscovery.DiscoveryManagerTests.test_multiple_addresses_are_cached_in_order_and_deduped) ... ok
+test_negative_cache_blocks_retry_for_window_then_retries (test_ipdiscovery.DiscoveryManagerTests.test_negative_cache_blocks_retry_for_window_then_retries) ... ok
+test_no_response_becomes_unavailable_not_stuck (test_ipdiscovery.DiscoveryManagerTests.test_no_response_becomes_unavailable_not_stuck) ... ok
+test_non_dict_scan_result_is_unavailable (test_ipdiscovery.DiscoveryManagerTests.test_non_dict_scan_result_is_unavailable) ... ok
+test_removed_target_is_not_backfilled_after_readd (test_ipdiscovery.DiscoveryManagerTests.test_removed_target_is_not_backfilled_after_readd) ... ok
+test_removing_all_targets_does_not_reset_bridge_rate_limit (test_ipdiscovery.DiscoveryManagerTests.test_removing_all_targets_does_not_reset_bridge_rate_limit) ... ok
+test_retain_targets_clears_pending_and_bridge_state (test_ipdiscovery.DiscoveryManagerTests.test_retain_targets_clears_pending_and_bridge_state) ... ok
+test_retain_targets_expires_cache (test_ipdiscovery.DiscoveryManagerTests.test_retain_targets_expires_cache) ... ok
+test_retain_targets_keeps_valid_targets (test_ipdiscovery.DiscoveryManagerTests.test_retain_targets_keeps_valid_targets) ... ok
+test_retain_targets_prunes_stopped_or_deleted_vm (test_ipdiscovery.DiscoveryManagerTests.test_retain_targets_prunes_stopped_or_deleted_vm) ... ok
+test_scan_result_becomes_resolved_and_cached (test_ipdiscovery.DiscoveryManagerTests.test_scan_result_becomes_resolved_and_cached) ... ok
+test_scanner_exception_does_not_break_lookup (test_ipdiscovery.DiscoveryManagerTests.test_scanner_exception_does_not_break_lookup) ... ok
+test_shutdown_stops_further_scans (test_ipdiscovery.DiscoveryManagerTests.test_shutdown_stops_further_scans) ... ok
+test_single_worker_and_merged_requests_per_bridge (test_ipdiscovery.DiscoveryManagerTests.test_single_worker_and_merged_requests_per_bridge) ... ok
+test_status_reports_background_activity (test_ipdiscovery.DiscoveryManagerTests.test_status_reports_background_activity) ... ok
+test_success_cache_expires_after_ttl (test_ipdiscovery.DiscoveryManagerTests.test_success_cache_expires_after_ttl) ... ok
+test_thread_creation_failure_is_negative_not_pending (test_ipdiscovery.DiscoveryManagerTests.test_thread_creation_failure_is_negative_not_pending) ... ok
+test_first_eligible_network_wins (test_ipdiscovery.NetworkBoundTests.test_first_eligible_network_wins) ... ok
+test_ip_address_parsing_ignores_ipv6_and_garbage (test_ipdiscovery.NetworkBoundTests.test_ip_address_parsing_ignores_ipv6_and_garbage) ... ok
+test_large_and_tiny_prefixes_are_skipped (test_ipdiscovery.NetworkBoundTests.test_large_and_tiny_prefixes_are_skipped) ... ok
+test_resolve_bridge_source_rejects_bad_interface_name (test_ipdiscovery.NetworkBoundTests.test_resolve_bridge_source_rejects_bad_interface_name) ... ok
+test_resolve_bridge_source_rejects_large_network (test_ipdiscovery.NetworkBoundTests.test_resolve_bridge_source_rejects_large_network) ... ok
+test_resolve_bridge_source_rejects_non_bridge (test_ipdiscovery.NetworkBoundTests.test_resolve_bridge_source_rejects_non_bridge) ... ok
+test_resolve_bridge_source_requires_host_mac (test_ipdiscovery.NetworkBoundTests.test_resolve_bridge_source_requires_host_mac) ... ok
+test_resolve_bridge_source_without_host_ipv4 (test_ipdiscovery.NetworkBoundTests.test_resolve_bridge_source_without_host_ipv4) ... ok
+test_scanner_targets_exclude_host_and_stay_in_subnet (test_ipdiscovery.NetworkBoundTests.test_scanner_targets_exclude_host_and_stay_in_subnet) ... ok
+test_slash24_and_slash30_are_accepted (test_ipdiscovery.NetworkBoundTests.test_slash24_and_slash30_are_accepted) ... ok
+test_dhcp_output_is_unchanged_for_legacy_clients (test_network_config.NetworkConfigTests.test_dhcp_output_is_unchanged_for_legacy_clients) ... ok
+test_static_output_matches_mac_address_route_and_dns (test_network_config.NetworkConfigTests.test_static_output_matches_mac_address_route_and_dns) ... ok
+test_static_without_gateway_or_dns_omits_optional_sections (test_network_config.NetworkConfigTests.test_static_without_gateway_or_dns_omits_optional_sections) ... ok
+test_complete_manual_values_are_not_overwritten_by_profile (test_network_config.StaticCreateTests.test_complete_manual_values_are_not_overwritten_by_profile) ... ok
+test_default_gateway_outside_guest_subnet_is_not_used (test_network_config.StaticCreateTests.test_default_gateway_outside_guest_subnet_is_not_used) ... ok
+test_dhcp_mode_ignores_static_fields (test_network_config.StaticCreateTests.test_dhcp_mode_ignores_static_fields) ... ok
+test_dns_string_is_split_and_deduplicated (test_network_config.StaticCreateTests.test_dns_string_is_split_and_deduplicated) ... ok
+test_failed_partial_seed_is_removed_and_same_name_can_retry (test_network_config.StaticCreateTests.test_failed_partial_seed_is_removed_and_same_name_can_retry) ... ok
+test_four_argument_call_derives_bridge_from_payload_and_config (test_network_config.StaticCreateTests.test_four_argument_call_derives_bridge_from_payload_and_config) ... ok
+test_gateway_must_be_unicast_in_same_subnet_and_not_guest (test_network_config.StaticCreateTests.test_gateway_must_be_unicast_in_same_subnet_and_not_guest) ... ok
+test_host_default_bridge_accepts_static_without_explicit_network_fields (test_network_config.StaticCreateTests.test_host_default_bridge_accepts_static_without_explicit_network_fields) ... ok
+test_invalid_cidr_is_rejected_before_any_disk_or_seed_write (test_network_config.StaticCreateTests.test_invalid_cidr_is_rejected_before_any_disk_or_seed_write) ... ok
+test_invalid_dns_values_are_rejected (test_network_config.StaticCreateTests.test_invalid_dns_values_are_rejected) ... ok
+test_isolated_create_writes_no_route_or_dns (test_network_config.StaticCreateTests.test_isolated_create_writes_no_route_or_dns) ... ok
+test_isolated_validation_output_has_empty_gateway_and_dns (test_network_config.StaticCreateTests.test_isolated_validation_output_has_empty_gateway_and_dns) ... ok
+test_isolated_with_gateway_or_dns_is_rejected (test_network_config.StaticCreateTests.test_isolated_with_gateway_or_dns_is_rejected) ... ok
+test_legacy_payload_without_ci_dhcp_keeps_dhcp_seed (test_network_config.StaticCreateTests.test_legacy_payload_without_ci_dhcp_keeps_dhcp_seed) ... ok
+test_manual_gateway_is_kept_while_missing_dns_is_filled (test_network_config.StaticCreateTests.test_manual_gateway_is_kept_while_missing_dns_is_filled) ... ok
+test_missing_gateway_or_dns_without_profile_is_rejected_before_writes (test_network_config.StaticCreateTests.test_missing_gateway_or_dns_without_profile_is_rejected_before_writes) ... ok
+test_networks_defaults_are_empty_without_config (test_network_config.StaticCreateTests.test_networks_defaults_are_empty_without_config) ... ok
+test_networks_report_independent_defaults_for_both_modes (test_network_config.StaticCreateTests.test_networks_report_independent_defaults_for_both_modes) ... ok
+test_networks_returns_only_valid_profiles_for_real_bridges (test_network_config.StaticCreateTests.test_networks_returns_only_valid_profiles_for_real_bridges) ... ok
+test_profile_fills_route_and_dns_when_only_ip_is_sent (test_network_config.StaticCreateTests.test_profile_fills_route_and_dns_when_only_ip_is_sent) ... ok
+test_profile_from_another_bridge_or_subnet_is_not_applied (test_network_config.StaticCreateTests.test_profile_from_another_bridge_or_subnet_is_not_applied) ... ok
+test_profile_gateway_is_revalidated_against_guest_before_writes (test_network_config.StaticCreateTests.test_profile_gateway_is_revalidated_against_guest_before_writes) ... ok
+test_profiles_do_not_change_dhcp_mode (test_network_config.StaticCreateTests.test_profiles_do_not_change_dhcp_mode) ... ok
+test_static_create_writes_validated_settings_into_seed (test_network_config.StaticCreateTests.test_static_create_writes_validated_settings_into_seed) ... ok
+test_static_rejected_for_iso_install (test_network_config.StaticCreateTests.test_static_rejected_for_iso_install) ... ok
+test_static_rejected_for_nat_network (test_network_config.StaticCreateTests.test_static_rejected_for_nat_network) ... ok
+test_static_rejected_when_cloud_init_disabled (test_network_config.StaticCreateTests.test_static_rejected_when_cloud_init_disabled) ... ok
+test_cli_wraps_operations_in_socket_transport (test_transport.AgentTransportTests.test_cli_wraps_operations_in_socket_transport) ... ok
+test_config_request_reaches_daemon_with_uuid (test_transport.AgentTransportTests.test_config_request_reaches_daemon_with_uuid) ... ok
+test_daemon_failure_is_preserved (test_transport.AgentTransportTests.test_daemon_failure_is_preserved) ... ok
+test_rpc_requires_running_agent (test_transport.AgentTransportTests.test_rpc_requires_running_agent) ... vm-platform-agent: operation status failed: 无法连接宿主机执行端：服务未启动或连接中断，请检查执行端服务
+ok
+test_vnc_rejects_mismatched_identity_before_connect (test_transport.AgentTransportTests.test_vnc_rejects_mismatched_identity_before_connect) ... ok
+test_defaults_are_read_only (test_worker.ConfigLoadingTests.test_defaults_are_read_only) ... ok
+test_os_install_args_by_version (test_worker.ConfigLoadingTests.test_os_install_args_by_version) ... ok
+test_relative_directories_are_rejected (test_worker.ConfigLoadingTests.test_relative_directories_are_rejected) ... ok
+test_config_grows_disk_and_updates_xml (test_worker.ConfigOperationTests.test_config_grows_disk_and_updates_xml) ... ok
+test_config_requires_powered_off_vm (test_worker.ConfigOperationTests.test_config_requires_powered_off_vm) ... ok
+test_disk_outside_allowed_dirs_is_rejected (test_worker.ConfigOperationTests.test_disk_outside_allowed_dirs_is_rejected) ... ok
+test_disk_shrink_is_rejected (test_worker.ConfigOperationTests.test_disk_shrink_is_rejected) ... ok
+test_read_only_agent_blocks_writes (test_worker.ConfigOperationTests.test_read_only_agent_blocks_writes) ... ok
+test_read_only_uuid_list_blocks_single_vm (test_worker.ConfigOperationTests.test_read_only_uuid_list_blocks_single_vm) ... ok
+test_custom_cloud_init_user_does_not_require_distribution_groups (test_worker.CreateCommandTests.test_custom_cloud_init_user_does_not_require_distribution_groups) ... ok
+test_disk_create_with_cloud_init_does_not_leak_password (test_worker.CreateCommandTests.test_disk_create_with_cloud_init_does_not_leak_password) ... ok
+test_iso_install_uses_version_appropriate_os_args (test_worker.CreateCommandTests.test_iso_install_uses_version_appropriate_os_args) ... ok
+test_iso_rejects_disk_template_before_install (test_worker.CreateCommandTests.test_iso_rejects_disk_template_before_install) ... ok
+test_symlinked_template_is_rejected (test_worker.CreateCommandTests.test_symlinked_template_is_rejected) ... ok
+test_delete_refuses_when_other_vm_disks_unknown (test_worker.DeleteSafetyTests.test_delete_refuses_when_other_vm_disks_unknown) ... ok
+test_delete_removes_only_owned_disks_after_precheck (test_worker.DeleteSafetyTests.test_delete_removes_only_owned_disks_after_precheck) ... ok
+test_delete_requires_force_when_running (test_worker.DeleteSafetyTests.test_delete_requires_force_when_running) ... ok
+test_name_cannot_be_used_as_uuid (test_worker.DomainResolutionTests.test_name_cannot_be_used_as_uuid) ... ok
+test_resolved_uuid_matches_domain (test_worker.DomainResolutionTests.test_resolved_uuid_matches_domain) ... ok
+test_uuid_mismatch_is_rejected_without_action (test_worker.DomainResolutionTests.test_uuid_mismatch_is_rejected_without_action) ... ok
+test_discovery_disabled_does_not_create_manager (test_worker.IpDiscoveryIntegrationTests.test_discovery_disabled_does_not_create_manager) ... ok
+test_enabled_discovery_reports_discovering_without_blocking (test_worker.IpDiscoveryIntegrationTests.test_enabled_discovery_reports_discovering_without_blocking) ... ok
+test_enabled_discovery_resolves_from_arp_when_scan_completes (test_worker.IpDiscoveryIntegrationTests.test_enabled_discovery_resolves_from_arp_when_scan_completes) ... ok
+test_guest_agent_address_is_resolved_with_source (test_worker.IpDiscoveryIntegrationTests.test_guest_agent_address_is_resolved_with_source) ... ok
+test_multiple_arp_addresses_are_all_reported (test_worker.IpDiscoveryIntegrationTests.test_multiple_arp_addresses_are_all_reported) ... ok
+test_passive_dhcp_address_skips_active_scan (test_worker.IpDiscoveryIntegrationTests.test_passive_dhcp_address_skips_active_scan) ... ok
+test_retain_targets_receives_all_running_bridge_interfaces (test_worker.IpDiscoveryIntegrationTests.test_retain_targets_receives_all_running_bridge_interfaces) ... ok
+test_running_vm_without_any_source_is_unavailable_when_disabled (test_worker.IpDiscoveryIntegrationTests.test_running_vm_without_any_source_is_unavailable_when_disabled) ... ok
+test_scan_is_only_requested_for_running_bridge_without_passive_ip (test_worker.IpDiscoveryIntegrationTests.test_scan_is_only_requested_for_running_bridge_without_passive_ip) ... ok
+test_shut_off_vm_reports_not_running_without_guest_agent (test_worker.IpDiscoveryIntegrationTests.test_shut_off_vm_reports_not_running_without_guest_agent) ... ok
+test_loopback_display_reports_port (test_worker.VncTargetTests.test_loopback_display_reports_port) ... ok
+test_non_loopback_display_is_refused (test_worker.VncTargetTests.test_non_loopback_display_is_refused) ... ok
+test_vnc_requires_running_vm (test_worker.VncTargetTests.test_vnc_requires_running_vm) ... ok
+test_dispatch_rejects_non_object_payload (test_worker.WorkerCliTests.test_dispatch_rejects_non_object_payload) ... ok
+test_dispatch_routes_known_operations (test_worker.WorkerCliTests.test_dispatch_routes_known_operations) ... ok
+test_rpc_invalid_json_returns_error (test_worker.WorkerCliTests.test_rpc_invalid_json_returns_error) ... ok
+test_rpc_unknown_operation_returns_error (test_worker.WorkerCliTests.test_rpc_unknown_operation_returns_error) ... vm-platform-agent: operation nope failed: 不支持的操作：nope
+ok
+test_rpc_writes_single_json_line (test_worker.WorkerCliTests.test_rpc_writes_single_json_line) ... vm-platform-agent: operation status ok
+ok
+test_ssh_accepts_rpc (test_worker.WorkerCliTests.test_ssh_accepts_rpc) ... ok
+test_ssh_accepts_vnc_uuid (test_worker.WorkerCliTests.test_ssh_accepts_vnc_uuid) ... ok
+test_ssh_rejects_arbitrary_command (test_worker.WorkerCliTests.test_ssh_rejects_arbitrary_command) ... vm-platform-agent: 拒绝的 SSH 命令
+vm-platform-agent: 拒绝的 SSH 命令
+vm-platform-agent: 拒绝的 SSH 命令
+ok
+test_ssh_rejects_vnc_without_uuid (test_worker.WorkerCliTests.test_ssh_rejects_vnc_without_uuid) ... vm-platform-agent: 拒绝的 VNC UUID
+ok
+
+----------------------------------------------------------------------
+Ran 157 tests in 12.322s
+
+OK
+UNITTEST_RC=0
+=== cleanup: rm -rf /opt/vm-platform-ip-discovery-check-only ===
+CLEANED

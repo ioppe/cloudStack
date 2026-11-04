@@ -694,6 +694,219 @@ class ConfigLoadingTests(unittest.TestCase):
         self.assertEqual(vmops.os_install_args("1.5.1"), ["--os-type", "linux"])
         self.assertEqual(vmops.os_install_args(""), ["--osinfo", "detect=on,require=off"])
 
+class IpDiscoveryIntegrationTests(HostTestCase):
+    """v1.1.2：ip_status / ip_source 与后台探测的集成（不接触真实网络与线程）。"""
+
+    DOMIFLIST_BRIDGE = (
+        " Interface   Type      Source    Model    MAC\n"
+        "--------------------------------------------------------\n"
+        " vnet0       bridge    br0       virtio   52:54:00:3a:56:b5\n"
+    )
+    DOMIFLIST_NAT = (
+        " Interface   Type      Source    Model    MAC\n"
+        "--------------------------------------------------------\n"
+        " vnet0       network   default   virtio   52:54:00:3a:56:b5\n"
+    )
+    AGENT_ROW = (
+        " Name       MAC address          Protocol     Address\n"
+        "-------------------------------------------------------------------------------\n"
+        " vnet0      52:54:00:3a:56:b5    ipv4         192.168.0.160/24\n"
+    )
+
+    def make_host(self, commands, **overrides):
+        host = super(IpDiscoveryIntegrationTests, self).make_host(commands, **overrides)
+        # 本组用例的被动来源由夹具控制，不能读取执行测试宿主机的 /proc/net/arp。
+        host._neigh_map = lambda: {}
+        return host
+
+    def vms_commands(self, running=True, interfaces=None, agent="", networks="", leases=""):
+        commands = FakeCommands()
+        commands.add("net-list", stdout=networks)
+        commands.add("list --all --name", stdout="demo\n")
+        commands.add(["ip", "neigh", "show"], stdout="")
+        commands.add("dominfo demo", stdout=DOMINFO_RUNNING if running else DOMINFO_SHUT_OFF)
+        commands.add("domiflist demo", stdout=interfaces if interfaces else self.DOMIFLIST_BRIDGE)
+        commands.add("domuuid demo", stdout=VM_UUID + "\n")
+        commands.add("domdisplay demo", stdout="")
+        commands.add("domstats demo", stdout="")
+        commands.add("domblklist demo", stdout=" Type   Device   Target   Source\n")
+        if leases:
+            commands.add("net-dhcp-leases", stdout=leases)
+        if running:
+            commands.add("domifaddr demo", stdout=agent)
+        return commands
+
+    class FakeScanner(object):
+        def __init__(self, result=None):
+            self.calls = []
+            self.result = result or {"status": "unavailable", "reason": "", "addresses": {}}
+
+        def __call__(self, bridge, macs):
+            self.calls.append((bridge, tuple(macs)))
+            return self.result
+
+    def test_shut_off_vm_reports_not_running_without_guest_agent(self):
+        commands = self.vms_commands(running=False)
+        host = self.make_host(commands)
+        vm = host.vms()["vms"][0]
+        self.assertEqual(vm["state"], "shut off")
+        self.assertEqual(vm["ip_status"], "not_running")
+        self.assertEqual(vm["ip_status_reason"], "")
+        self.assertEqual(vm["interfaces"][0]["ip_source"], "")
+        self.assertEqual(commands.called("domifaddr"), [])
+
+    def test_running_vm_without_any_source_is_unavailable_when_disabled(self):
+        commands = self.vms_commands(running=True)
+        host = self.make_host(commands)
+        scanner = self.FakeScanner()
+        host._ip_scanner = scanner
+        vm = host.vms()["vms"][0]
+        self.assertEqual(vm["ip_addresses"], [])
+        self.assertEqual(vm["ip_status"], "unavailable")
+        self.assertIn("未启用局域网探测", vm["ip_status_reason"])
+        self.assertEqual(scanner.calls, [])          # 未启用配置：绝不开扫描
+
+    def test_guest_agent_address_is_resolved_with_source(self):
+        commands = self.vms_commands(running=True, agent=self.AGENT_ROW)
+        host = self.make_host(commands)
+        vm = host.vms()["vms"][0]
+        self.assertEqual(vm["ip_addresses"], ["192.168.0.160"])
+        self.assertEqual(vm["ip_status"], "resolved")
+        self.assertEqual(vm["interfaces"][0]["ip_source"], "agent")
+
+    def test_enabled_discovery_reports_discovering_without_blocking(self):
+        commands = self.vms_commands(running=True)
+        host = self.make_host(commands, bridge_ip_discovery=True)
+        scanner = self.FakeScanner()
+        threads = []
+        host._ip_scanner = scanner
+        host._ip_thread_factory = lambda target: threads.append(target) or _IdleThread(target)
+        vm = host.vms()["vms"][0]
+        self.assertEqual(vm["ip_status"], "discovering")
+        self.assertEqual(len(scanner.calls), 0)      # 后台线程尚未执行
+        self.assertEqual(len(threads), 1)
+        self.assertEqual(scanner.calls, [])
+
+    def test_enabled_discovery_resolves_from_arp_when_scan_completes(self):
+        commands = self.vms_commands(running=True)
+        host = self.make_host(commands, bridge_ip_discovery=True)
+        scanner = self.FakeScanner(
+            {"status": "ok", "reason": "", "addresses": {"52:54:00:3a:56:b5": "192.168.0.160"}})
+        host._ip_scanner = scanner
+        host._ip_thread_factory = _InlineThread
+        vm = host.vms()["vms"][0]
+        self.assertEqual(scanner.calls, [("br0", ("52:54:00:3a:56:b5",))])
+        self.assertEqual(vm["ip_addresses"], ["192.168.0.160"])
+        self.assertEqual(vm["ip_status"], "resolved")
+        self.assertEqual(vm["interfaces"][0]["ip_source"], "arp")
+
+    def test_scan_is_only_requested_for_running_bridge_without_passive_ip(self):
+        commands = self.vms_commands(running=True, interfaces=self.DOMIFLIST_NAT)
+        host = self.make_host(commands, bridge_ip_discovery=True)
+        scanner = self.FakeScanner()
+        host._ip_scanner = scanner
+        host._ip_thread_factory = _InlineThread
+        vm = host.vms()["vms"][0]
+        self.assertEqual(scanner.calls, [])          # NAT/network 接口不主动探测
+        self.assertEqual(vm["ip_status"], "unavailable")
+
+    def test_passive_dhcp_address_skips_active_scan(self):
+        leases = (" Expiry Time          MAC address        Protocol   IP address        Hostname  Client ID or DUID\n"
+                  "--------------------------------------------------------------------------------\n"
+                  " 2026-01-01 00:00:00  52:54:00:3a:56:b5  ipv4       192.168.0.160/24  -         -\n")
+        commands = self.vms_commands(running=True, networks=" default   active   yes   yes\n", leases=leases)
+        host = self.make_host(commands, bridge_ip_discovery=True)
+        scanner = self.FakeScanner()
+        host._ip_scanner = scanner
+        host._ip_thread_factory = _InlineThread
+        vm = host.vms()["vms"][0]
+        self.assertEqual(scanner.calls, [])
+        self.assertEqual(vm["ip_addresses"], ["192.168.0.160"])
+        self.assertEqual(vm["interfaces"][0]["ip_source"], "dhcp")
+
+    def test_multiple_arp_addresses_are_all_reported(self):
+        # 真实场景：同一 guest MAC 同时有 192.168.0.28 与 192.168.0.211
+        commands = self.vms_commands(running=True)
+        host = self.make_host(commands, bridge_ip_discovery=True)
+        scanner = self.FakeScanner(
+            {"status": "ok", "reason": "",
+             "addresses": {"52:54:00:3a:56:b5": ["192.168.0.28", "192.168.0.211"]}})
+        host._ip_scanner = scanner
+        host._ip_thread_factory = _InlineThread
+        vm = host.vms()["vms"][0]
+        self.assertEqual(vm["ip_addresses"], ["192.168.0.28", "192.168.0.211"])
+        self.assertEqual(vm["interfaces"][0]["ips"], ["192.168.0.28", "192.168.0.211"])
+        self.assertEqual(vm["ip_status"], "resolved")
+        self.assertEqual(vm["interfaces"][0]["ip_source"], "arp")
+
+    def test_retain_targets_receives_all_running_bridge_interfaces(self):
+        # 被动已命中的接口也必须进快照，否则暂停/换口后旧缓存无法剪枝
+        commands = self.vms_commands(running=True, agent=self.AGENT_ROW)
+        host = self.make_host(commands, bridge_ip_discovery=True)
+        manager = _FakeManagerForHost()
+        host._ip_discovery_manager = manager
+        vm = host.vms()["vms"][0]
+        self.assertEqual(manager.retained, [{"br0": ["52:54:00:3a:56:b5"]}])
+        self.assertEqual(manager.requests, [])
+        self.assertEqual(vm["interfaces"][0]["ip_source"], "agent")
+
+    def test_discovery_disabled_does_not_create_manager(self):
+        commands = self.vms_commands(running=True)
+        host = self.make_host(commands)
+        scanner = self.FakeScanner()
+        host._ip_scanner = scanner
+        vm = host.vms()["vms"][0]
+        self.assertIsNone(host._ip_discovery_manager)
+        self.assertEqual(scanner.calls, [])
+        self.assertEqual(vm["ip_status"], "unavailable")
+
+
+class _FakeManagerForHost(object):
+    """Host 层的发现管理器替身：只记录 retain/request，不接触网络。"""
+
+    def __init__(self, results=None):
+        self.retained = []
+        self.requests = []
+        self.results = results or {}
+
+    def retain_targets(self, targets):
+        self.retained.append(targets)
+        return {"kept": 0, "pruned": 0}
+
+    def request(self, requests):
+        self.requests.append(requests)
+        return {}
+
+    def lookup(self, bridge, mac):
+        return self.results.get((bridge, mac)) or {
+            "status": "unavailable", "address": "", "addresses": [], "reason": ""}
+class _IdleThread(object):
+    """记录 target 但绝不执行的假线程：验证 vms() 不被后台扫描阻塞。"""
+
+    def __init__(self, target):
+        self.target = target
+        self.started = False
+
+    def start(self):
+        self.started = True
+
+    def is_alive(self):
+        return False
+
+    def join(self, timeout=None):
+        return None
+
+
+class _InlineThread(_IdleThread):
+    """同步执行的假线程：让扫描在 request() 内完成，便于断言缓存结果。"""
+
+    def start(self):
+        self.started = True
+        self.target()
+
+    def is_alive(self):
+        return False
+
 
 if __name__ == "__main__":
     unittest.main()

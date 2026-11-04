@@ -3,7 +3,8 @@
 set -eu
 cd /opt/vm-platform
 [ "$(id -u)" = 0 ] || { echo 'Run as root' >&2; exit 1; }
-[ -f worker.py ] && [ -f vmops.py ] && [ -f deploy/vm-platform-agent.service ]
+# v1.1.2：ipdiscovery.py 是 vmops 的硬依赖（局域网 ARP 地址发现），缺失直接失败。
+[ -f worker.py ] && [ -f vmops.py ] && [ -f ipdiscovery.py ] && [ -f deploy/vm-platform-agent.service ]
 [ -f /etc/vm-platform/agent.json ] || { echo 'Prepare /etc/vm-platform/agent.json first' >&2; exit 1; }
 install -d -m 700 /var/lib/vm-platform /etc/vm-platform
 chmod 600 /etc/vm-platform/agent.json

@@ -1,0 +1,314 @@
+# v1.1.2 IP discovery — mocked unit suite (LOCAL)
+# captured_utc: 2026-11-04T13:04:23Z
+# interpreter: /usr/local/bin/python3 -> Python 3.13.7 (CPython)
+# source_tree: /Users/sky/vm-platform (git HEAD 9955e74334696bcc938ebd13bfae1d204e1bdd5b, branch main, dirty v1.1.2 working tree)
+# run_dir: /Users/sky/Documents/.pi-desktop/data/scratch/import-codex-01a083f2-2ab3-7fc3-9172-db4835ca6d56/ip-src-snapshot  [86/86 files byte-identical to source_tree, verified with cmp]
+# snapshot_manifest_sha256: da8a9a2728a02595ca677d41c12511483dcab06e93c730ea96e399791374a9b6  (sha256 of the sorted "<sha256>  ./<path>" manifest, 86 files)
+# ipdiscovery.py sha256: 90f10769c03d06f468ce4a3640b8c86f5c6d905f74a90a2115ae1465e863de19
+# command: PYTHONDONTWRITEBYTECODE=1 PYTHONIOENCODING=utf-8 python3 -m unittest discover -s tests -p 'test_*.py' -v
+# return_code: 1
+# result: Ran 142 tests — passed 136, failures 6, errors 0, skipped 0
+# note: mocked only; no ARP scan, no guest/libvirt/system change. Raw unittest output below is unmodified;
+#       no source file and no test was edited while producing this evidence.
+# ============================================================================
+test_preserves_address_gateway_dns_and_mac_on_real_bridge (test_bridge_migration.BridgeMigrationTests.test_preserves_address_gateway_dns_and_mac_on_real_bridge) ... ok
+test_rejects_different_gateway_or_dns (test_bridge_migration.BridgeMigrationTests.test_rejects_different_gateway_or_dns) ... ok
+test_rejects_different_management_address (test_bridge_migration.BridgeMigrationTests.test_rejects_different_management_address) ... ok
+test_rejects_existing_bridge (test_bridge_migration.BridgeMigrationTests.test_rejects_existing_bridge) ... ok
+test_console_requires_same_origin_and_websocket_upgrade (test_controller.HTTPTests.test_console_requires_same_origin_and_websocket_upgrade) ... 127.0.0.1 "GET /api/hosts/node150/vms/11111111-2222-3333-4444-555555555555/vnc HTTP/1.1" 401 -
+127.0.0.1 "POST /api/login HTTP/1.1" 200 -
+127.0.0.1 "GET /api/hosts/node150/vms/11111111-2222-3333-4444-555555555555/vnc HTTP/1.1" 403 -
+127.0.0.1 "GET /api/hosts/node150/vms/11111111-2222-3333-4444-555555555555/vnc HTTP/1.1" 403 -
+127.0.0.1 "GET /api/hosts/node150/vms/11111111-2222-3333-4444-555555555555/vnc HTTP/1.1" 400 -
+ok
+test_failed_remote_task_has_error_without_local_fallback (test_controller.HTTPTests.test_failed_remote_task_has_error_without_local_fallback) ... ok
+test_host_arguments_reject_shell_and_local_override (test_controller.HTTPTests.test_host_arguments_reject_shell_and_local_override) ... ok
+test_host_edit_remove_does_not_touch_worker_or_vms (test_controller.HTTPTests.test_host_edit_remove_does_not_touch_worker_or_vms) ... ok
+test_http_auth_and_csrf (test_controller.HTTPTests.test_http_auth_and_csrf) ... 127.0.0.1 "GET /api/hosts HTTP/1.1" 401 -
+127.0.0.1 "POST /api/hosts/node150/vms HTTP/1.1" 401 -
+127.0.0.1 "POST /api/login HTTP/1.1" 200 -
+127.0.0.1 "GET /api/hosts HTTP/1.1" 200 -
+127.0.0.1 "DELETE /api/hosts/node150 HTTP/1.1" 403 -
+127.0.0.1 "POST /api/logout HTTP/1.1" 403 -
+127.0.0.1 "POST /api/logout HTTP/1.1" 200 -
+127.0.0.1 "GET /api/hosts HTTP/1.1" 401 -
+ok
+test_password_change_invalidates_sessions_and_persists_hash (test_controller.HTTPTests.test_password_change_invalidates_sessions_and_persists_hash) ... 127.0.0.1 "POST /api/login HTTP/1.1" 200 -
+127.0.0.1 "POST /api/password HTTP/1.1" 200 -
+127.0.0.1 "GET /api/hosts HTTP/1.1" 401 -
+127.0.0.1 "POST /api/login HTTP/1.1" 401 -
+127.0.0.1 "POST /api/login HTTP/1.1" 200 -
+127.0.0.1 "GET /api/hosts HTTP/1.1" 200 -
+ok
+test_password_change_rejects_wrong_current_and_weak_new_password (test_controller.HTTPTests.test_password_change_rejects_wrong_current_and_weak_new_password) ... 127.0.0.1 "POST /api/login HTTP/1.1" 200 -
+127.0.0.1 "POST /api/password HTTP/1.1" 403 -
+127.0.0.1 "POST /api/password HTTP/1.1" 400 -
+127.0.0.1 "GET /api/hosts HTTP/1.1" 200 -
+ok
+test_password_hash_and_rejection (test_controller.HTTPTests.test_password_hash_and_rejection) ... ok
+test_restart_marks_uncertain_task_failed (test_controller.HTTPTests.test_restart_marks_uncertain_task_failed) ... ok
+test_running_task_prevents_retarget_or_unregister (test_controller.HTTPTests.test_running_task_prevents_retarget_or_unregister) ... ok
+test_selected_host_failure_does_not_break_other_host (test_controller.HTTPTests.test_selected_host_failure_does_not_break_other_host) ... 127.0.0.1 "POST /api/login HTTP/1.1" 200 -
+127.0.0.1 "GET /api/hosts/node150/status HTTP/1.1" 502 -
+127.0.0.1 "GET /api/hosts/node30/status HTTP/1.1" 200 -
+127.0.0.1 "GET /api/hosts/missing/status HTTP/1.1" 404 -
+ok
+test_sessions_persist_then_logout_invalidates (test_controller.HTTPTests.test_sessions_persist_then_logout_invalidates) ... ok
+test_static_path_cannot_expose_source_or_secrets (test_controller.HTTPTests.test_static_path_cannot_expose_source_or_secrets) ... 127.0.0.1 "GET /static/../controller.py HTTP/1.1" 404 -
+ok
+test_task_result_does_not_store_password_or_commands (test_controller.HTTPTests.test_task_result_does_not_store_password_or_commands) ... ok
+test_unknown_host_never_falls_back (test_controller.HTTPTests.test_unknown_host_never_falls_back) ... ok
+test_vnc_uses_selected_host_and_uuid (test_controller.HTTPTests.test_vnc_uses_selected_host_and_uuid) ... ok
+test_failed_remote_task_has_error_without_local_fallback (test_controller.PlatformTests.test_failed_remote_task_has_error_without_local_fallback) ... ok
+test_host_arguments_reject_shell_and_local_override (test_controller.PlatformTests.test_host_arguments_reject_shell_and_local_override) ... ok
+test_host_edit_remove_does_not_touch_worker_or_vms (test_controller.PlatformTests.test_host_edit_remove_does_not_touch_worker_or_vms) ... ok
+test_password_hash_and_rejection (test_controller.PlatformTests.test_password_hash_and_rejection) ... ok
+test_restart_marks_uncertain_task_failed (test_controller.PlatformTests.test_restart_marks_uncertain_task_failed) ... ok
+test_running_task_prevents_retarget_or_unregister (test_controller.PlatformTests.test_running_task_prevents_retarget_or_unregister) ... ok
+test_sessions_persist_then_logout_invalidates (test_controller.PlatformTests.test_sessions_persist_then_logout_invalidates) ... ok
+test_task_result_does_not_store_password_or_commands (test_controller.PlatformTests.test_task_result_does_not_store_password_or_commands) ... ok
+test_unknown_host_never_falls_back (test_controller.PlatformTests.test_unknown_host_never_falls_back) ... ok
+test_vnc_uses_selected_host_and_uuid (test_controller.PlatformTests.test_vnc_uses_selected_host_and_uuid) ... ok
+test_ethernet_source_must_match_arp_sender (test_ipdiscovery.ArpFrameTests.test_ethernet_source_must_match_arp_sender) ... ok
+test_non_reply_and_malformed_frames_are_rejected (test_ipdiscovery.ArpFrameTests.test_non_reply_and_malformed_frames_are_rejected) ... ok
+test_reply_for_unrequested_mac_is_rejected (test_ipdiscovery.ArpFrameTests.test_reply_for_unrequested_mac_is_rejected) ... ok
+test_reply_from_other_subnet_is_rejected (test_ipdiscovery.ArpFrameTests.test_reply_from_other_subnet_is_rejected) ... ok
+test_reply_to_other_host_is_rejected (test_ipdiscovery.ArpFrameTests.test_reply_to_other_host_is_rejected) ... ok
+test_reply_with_network_or_host_address_is_rejected (test_ipdiscovery.ArpFrameTests.test_reply_with_network_or_host_address_is_rejected) ... ok
+test_reply_with_wrong_target_ip_is_rejected (test_ipdiscovery.ArpFrameTests.test_reply_with_wrong_target_ip_is_rejected) ... ok
+test_reply_with_wrong_target_mac_is_rejected (test_ipdiscovery.ArpFrameTests.test_reply_with_wrong_target_mac_is_rejected) ... ok
+test_request_frame_layout (test_ipdiscovery.ArpFrameTests.test_request_frame_layout) ... ok
+test_valid_reply_is_accepted (test_ipdiscovery.ArpFrameTests.test_valid_reply_is_accepted) ... ok
+test_scan_ignores_frames_for_other_macs (test_ipdiscovery.BridgeScannerTests.test_scan_ignores_frames_for_other_macs) ... ok
+test_scan_maps_requested_mac_and_closes_socket (test_ipdiscovery.BridgeScannerTests.test_scan_maps_requested_mac_and_closes_socket) ... ok
+test_scan_rejects_non_bridge_target (test_ipdiscovery.BridgeScannerTests.test_scan_rejects_non_bridge_target) ... ok
+test_scan_send_error_degrades_without_raising (test_ipdiscovery.BridgeScannerTests.test_scan_send_error_degrades_without_raising) ... ok
+test_scan_stops_after_all_requested_macs_are_found (test_ipdiscovery.BridgeScannerTests.test_scan_stops_after_all_requested_macs_are_found) ... ok
+test_scan_without_permission_is_unavailable (test_ipdiscovery.BridgeScannerTests.test_scan_without_permission_is_unavailable) ... ok
+test_bridge_rate_limit_defers_new_mac_within_window (test_ipdiscovery.DiscoveryManagerTests.test_bridge_rate_limit_defers_new_mac_within_window) ... ok
+test_cache_is_isolated_by_bridge_and_mac (test_ipdiscovery.DiscoveryManagerTests.test_cache_is_isolated_by_bridge_and_mac) ... ok
+test_invalid_mac_or_bridge_is_unavailable (test_ipdiscovery.DiscoveryManagerTests.test_invalid_mac_or_bridge_is_unavailable) ... ok
+test_lookup_is_non_blocking_and_reports_discovering (test_ipdiscovery.DiscoveryManagerTests.test_lookup_is_non_blocking_and_reports_discovering) ... ok
+test_negative_cache_blocks_retry_for_window_then_retries (test_ipdiscovery.DiscoveryManagerTests.test_negative_cache_blocks_retry_for_window_then_retries) ... ok
+test_no_response_becomes_unavailable_not_stuck (test_ipdiscovery.DiscoveryManagerTests.test_no_response_becomes_unavailable_not_stuck) ... ok
+test_scan_result_becomes_resolved_and_cached (test_ipdiscovery.DiscoveryManagerTests.test_scan_result_becomes_resolved_and_cached) ... ok
+test_scanner_exception_does_not_break_lookup (test_ipdiscovery.DiscoveryManagerTests.test_scanner_exception_does_not_break_lookup) ... ok
+test_shutdown_stops_further_scans (test_ipdiscovery.DiscoveryManagerTests.test_shutdown_stops_further_scans) ... ok
+test_single_worker_and_merged_requests_per_bridge (test_ipdiscovery.DiscoveryManagerTests.test_single_worker_and_merged_requests_per_bridge) ... ok
+test_status_reports_background_activity (test_ipdiscovery.DiscoveryManagerTests.test_status_reports_background_activity) ... ok
+test_success_cache_expires_after_ttl (test_ipdiscovery.DiscoveryManagerTests.test_success_cache_expires_after_ttl) ... FAIL
+test_first_eligible_network_wins (test_ipdiscovery.NetworkBoundTests.test_first_eligible_network_wins) ... ok
+test_ip_address_parsing_ignores_ipv6_and_garbage (test_ipdiscovery.NetworkBoundTests.test_ip_address_parsing_ignores_ipv6_and_garbage) ... ok
+test_large_and_tiny_prefixes_are_skipped (test_ipdiscovery.NetworkBoundTests.test_large_and_tiny_prefixes_are_skipped) ... ok
+test_resolve_bridge_source_rejects_bad_interface_name (test_ipdiscovery.NetworkBoundTests.test_resolve_bridge_source_rejects_bad_interface_name) ... ok
+test_resolve_bridge_source_rejects_large_network (test_ipdiscovery.NetworkBoundTests.test_resolve_bridge_source_rejects_large_network) ... ok
+test_resolve_bridge_source_rejects_non_bridge (test_ipdiscovery.NetworkBoundTests.test_resolve_bridge_source_rejects_non_bridge) ... ok
+test_resolve_bridge_source_requires_host_mac (test_ipdiscovery.NetworkBoundTests.test_resolve_bridge_source_requires_host_mac) ... ok
+test_resolve_bridge_source_without_host_ipv4 (test_ipdiscovery.NetworkBoundTests.test_resolve_bridge_source_without_host_ipv4) ... ok
+test_scanner_targets_exclude_host_and_stay_in_subnet (test_ipdiscovery.NetworkBoundTests.test_scanner_targets_exclude_host_and_stay_in_subnet) ... ok
+test_slash24_and_slash30_are_accepted (test_ipdiscovery.NetworkBoundTests.test_slash24_and_slash30_are_accepted) ... ok
+test_dhcp_output_is_unchanged_for_legacy_clients (test_network_config.NetworkConfigTests.test_dhcp_output_is_unchanged_for_legacy_clients) ... ok
+test_static_output_matches_mac_address_route_and_dns (test_network_config.NetworkConfigTests.test_static_output_matches_mac_address_route_and_dns) ... ok
+test_static_without_gateway_or_dns_omits_optional_sections (test_network_config.NetworkConfigTests.test_static_without_gateway_or_dns_omits_optional_sections) ... ok
+test_complete_manual_values_are_not_overwritten_by_profile (test_network_config.StaticCreateTests.test_complete_manual_values_are_not_overwritten_by_profile) ... ok
+test_default_gateway_outside_guest_subnet_is_not_used (test_network_config.StaticCreateTests.test_default_gateway_outside_guest_subnet_is_not_used) ... ok
+test_dhcp_mode_ignores_static_fields (test_network_config.StaticCreateTests.test_dhcp_mode_ignores_static_fields) ... ok
+test_dns_string_is_split_and_deduplicated (test_network_config.StaticCreateTests.test_dns_string_is_split_and_deduplicated) ... ok
+test_failed_partial_seed_is_removed_and_same_name_can_retry (test_network_config.StaticCreateTests.test_failed_partial_seed_is_removed_and_same_name_can_retry) ... ok
+test_four_argument_call_derives_bridge_from_payload_and_config (test_network_config.StaticCreateTests.test_four_argument_call_derives_bridge_from_payload_and_config) ... ok
+test_gateway_must_be_unicast_in_same_subnet_and_not_guest (test_network_config.StaticCreateTests.test_gateway_must_be_unicast_in_same_subnet_and_not_guest) ... ok
+test_host_default_bridge_accepts_static_without_explicit_network_fields (test_network_config.StaticCreateTests.test_host_default_bridge_accepts_static_without_explicit_network_fields) ... ok
+test_invalid_cidr_is_rejected_before_any_disk_or_seed_write (test_network_config.StaticCreateTests.test_invalid_cidr_is_rejected_before_any_disk_or_seed_write) ... ok
+test_invalid_dns_values_are_rejected (test_network_config.StaticCreateTests.test_invalid_dns_values_are_rejected) ... ok
+test_isolated_create_writes_no_route_or_dns (test_network_config.StaticCreateTests.test_isolated_create_writes_no_route_or_dns) ... ok
+test_isolated_validation_output_has_empty_gateway_and_dns (test_network_config.StaticCreateTests.test_isolated_validation_output_has_empty_gateway_and_dns) ... ok
+test_isolated_with_gateway_or_dns_is_rejected (test_network_config.StaticCreateTests.test_isolated_with_gateway_or_dns_is_rejected) ... ok
+test_legacy_payload_without_ci_dhcp_keeps_dhcp_seed (test_network_config.StaticCreateTests.test_legacy_payload_without_ci_dhcp_keeps_dhcp_seed) ... ok
+test_manual_gateway_is_kept_while_missing_dns_is_filled (test_network_config.StaticCreateTests.test_manual_gateway_is_kept_while_missing_dns_is_filled) ... ok
+test_missing_gateway_or_dns_without_profile_is_rejected_before_writes (test_network_config.StaticCreateTests.test_missing_gateway_or_dns_without_profile_is_rejected_before_writes) ... ok
+test_networks_defaults_are_empty_without_config (test_network_config.StaticCreateTests.test_networks_defaults_are_empty_without_config) ... ok
+test_networks_report_independent_defaults_for_both_modes (test_network_config.StaticCreateTests.test_networks_report_independent_defaults_for_both_modes) ... ok
+test_networks_returns_only_valid_profiles_for_real_bridges (test_network_config.StaticCreateTests.test_networks_returns_only_valid_profiles_for_real_bridges) ... ok
+test_profile_fills_route_and_dns_when_only_ip_is_sent (test_network_config.StaticCreateTests.test_profile_fills_route_and_dns_when_only_ip_is_sent) ... ok
+test_profile_from_another_bridge_or_subnet_is_not_applied (test_network_config.StaticCreateTests.test_profile_from_another_bridge_or_subnet_is_not_applied) ... ok
+test_profile_gateway_is_revalidated_against_guest_before_writes (test_network_config.StaticCreateTests.test_profile_gateway_is_revalidated_against_guest_before_writes) ... ok
+test_profiles_do_not_change_dhcp_mode (test_network_config.StaticCreateTests.test_profiles_do_not_change_dhcp_mode) ... ok
+test_static_create_writes_validated_settings_into_seed (test_network_config.StaticCreateTests.test_static_create_writes_validated_settings_into_seed) ... ok
+test_static_rejected_for_iso_install (test_network_config.StaticCreateTests.test_static_rejected_for_iso_install) ... ok
+test_static_rejected_for_nat_network (test_network_config.StaticCreateTests.test_static_rejected_for_nat_network) ... ok
+test_static_rejected_when_cloud_init_disabled (test_network_config.StaticCreateTests.test_static_rejected_when_cloud_init_disabled) ... ok
+test_cli_wraps_operations_in_socket_transport (test_transport.AgentTransportTests.test_cli_wraps_operations_in_socket_transport) ... ok
+test_config_request_reaches_daemon_with_uuid (test_transport.AgentTransportTests.test_config_request_reaches_daemon_with_uuid) ... ok
+test_daemon_failure_is_preserved (test_transport.AgentTransportTests.test_daemon_failure_is_preserved) ... ok
+test_rpc_requires_running_agent (test_transport.AgentTransportTests.test_rpc_requires_running_agent) ... vm-platform-agent: operation status failed: 无法连接宿主机执行端：服务未启动或连接中断，请检查执行端服务
+ok
+test_vnc_rejects_mismatched_identity_before_connect (test_transport.AgentTransportTests.test_vnc_rejects_mismatched_identity_before_connect) ... ok
+test_defaults_are_read_only (test_worker.ConfigLoadingTests.test_defaults_are_read_only) ... ok
+test_os_install_args_by_version (test_worker.ConfigLoadingTests.test_os_install_args_by_version) ... ok
+test_relative_directories_are_rejected (test_worker.ConfigLoadingTests.test_relative_directories_are_rejected) ... ok
+test_config_grows_disk_and_updates_xml (test_worker.ConfigOperationTests.test_config_grows_disk_and_updates_xml) ... ok
+test_config_requires_powered_off_vm (test_worker.ConfigOperationTests.test_config_requires_powered_off_vm) ... ok
+test_disk_outside_allowed_dirs_is_rejected (test_worker.ConfigOperationTests.test_disk_outside_allowed_dirs_is_rejected) ... ok
+test_disk_shrink_is_rejected (test_worker.ConfigOperationTests.test_disk_shrink_is_rejected) ... ok
+test_read_only_agent_blocks_writes (test_worker.ConfigOperationTests.test_read_only_agent_blocks_writes) ... ok
+test_read_only_uuid_list_blocks_single_vm (test_worker.ConfigOperationTests.test_read_only_uuid_list_blocks_single_vm) ... ok
+test_custom_cloud_init_user_does_not_require_distribution_groups (test_worker.CreateCommandTests.test_custom_cloud_init_user_does_not_require_distribution_groups) ... ok
+test_disk_create_with_cloud_init_does_not_leak_password (test_worker.CreateCommandTests.test_disk_create_with_cloud_init_does_not_leak_password) ... ok
+test_iso_install_uses_version_appropriate_os_args (test_worker.CreateCommandTests.test_iso_install_uses_version_appropriate_os_args) ... ok
+test_iso_rejects_disk_template_before_install (test_worker.CreateCommandTests.test_iso_rejects_disk_template_before_install) ... ok
+test_symlinked_template_is_rejected (test_worker.CreateCommandTests.test_symlinked_template_is_rejected) ... ok
+test_delete_refuses_when_other_vm_disks_unknown (test_worker.DeleteSafetyTests.test_delete_refuses_when_other_vm_disks_unknown) ... ok
+test_delete_removes_only_owned_disks_after_precheck (test_worker.DeleteSafetyTests.test_delete_removes_only_owned_disks_after_precheck) ... ok
+test_delete_requires_force_when_running (test_worker.DeleteSafetyTests.test_delete_requires_force_when_running) ... ok
+test_name_cannot_be_used_as_uuid (test_worker.DomainResolutionTests.test_name_cannot_be_used_as_uuid) ... ok
+test_resolved_uuid_matches_domain (test_worker.DomainResolutionTests.test_resolved_uuid_matches_domain) ... ok
+test_uuid_mismatch_is_rejected_without_action (test_worker.DomainResolutionTests.test_uuid_mismatch_is_rejected_without_action) ... ok
+test_enabled_discovery_reports_discovering_without_blocking (test_worker.IpDiscoveryIntegrationTests.test_enabled_discovery_reports_discovering_without_blocking) ... FAIL
+test_enabled_discovery_resolves_from_arp_when_scan_completes (test_worker.IpDiscoveryIntegrationTests.test_enabled_discovery_resolves_from_arp_when_scan_completes) ... FAIL
+test_guest_agent_address_is_resolved_with_source (test_worker.IpDiscoveryIntegrationTests.test_guest_agent_address_is_resolved_with_source) ... ok
+test_passive_dhcp_address_skips_active_scan (test_worker.IpDiscoveryIntegrationTests.test_passive_dhcp_address_skips_active_scan) ... FAIL
+test_running_vm_without_any_source_is_unavailable_when_disabled (test_worker.IpDiscoveryIntegrationTests.test_running_vm_without_any_source_is_unavailable_when_disabled) ... FAIL
+test_scan_is_only_requested_for_running_bridge_without_passive_ip (test_worker.IpDiscoveryIntegrationTests.test_scan_is_only_requested_for_running_bridge_without_passive_ip) ... FAIL
+test_shut_off_vm_reports_not_running_without_guest_agent (test_worker.IpDiscoveryIntegrationTests.test_shut_off_vm_reports_not_running_without_guest_agent) ... ok
+test_loopback_display_reports_port (test_worker.VncTargetTests.test_loopback_display_reports_port) ... ok
+test_non_loopback_display_is_refused (test_worker.VncTargetTests.test_non_loopback_display_is_refused) ... ok
+test_vnc_requires_running_vm (test_worker.VncTargetTests.test_vnc_requires_running_vm) ... ok
+test_dispatch_rejects_non_object_payload (test_worker.WorkerCliTests.test_dispatch_rejects_non_object_payload) ... ok
+test_dispatch_routes_known_operations (test_worker.WorkerCliTests.test_dispatch_routes_known_operations) ... ok
+test_rpc_invalid_json_returns_error (test_worker.WorkerCliTests.test_rpc_invalid_json_returns_error) ... ok
+test_rpc_unknown_operation_returns_error (test_worker.WorkerCliTests.test_rpc_unknown_operation_returns_error) ... vm-platform-agent: operation nope failed: 不支持的操作：nope
+ok
+test_rpc_writes_single_json_line (test_worker.WorkerCliTests.test_rpc_writes_single_json_line) ... vm-platform-agent: operation status ok
+ok
+test_ssh_accepts_rpc (test_worker.WorkerCliTests.test_ssh_accepts_rpc) ... ok
+test_ssh_accepts_vnc_uuid (test_worker.WorkerCliTests.test_ssh_accepts_vnc_uuid) ... ok
+test_ssh_rejects_arbitrary_command (test_worker.WorkerCliTests.test_ssh_rejects_arbitrary_command) ... vm-platform-agent: 拒绝的 SSH 命令
+vm-platform-agent: 拒绝的 SSH 命令
+vm-platform-agent: 拒绝的 SSH 命令
+ok
+test_ssh_rejects_vnc_without_uuid (test_worker.WorkerCliTests.test_ssh_rejects_vnc_without_uuid) ... vm-platform-agent: 拒绝的 VNC UUID
+ok
+
+======================================================================
+FAIL: test_success_cache_expires_after_ttl (test_ipdiscovery.DiscoveryManagerTests.test_success_cache_expires_after_ttl)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sky/Documents/.pi-desktop/data/scratch/import-codex-01a083f2-2ab3-7fc3-9172-db4835ca6d56/ip-src-snapshot/tests/test_ipdiscovery.py", line 426, in test_success_cache_expires_after_ttl
+    self.assertEqual(len(scanner.calls), 2)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 1 != 2
+
+======================================================================
+FAIL: test_enabled_discovery_reports_discovering_without_blocking (test_worker.IpDiscoveryIntegrationTests.test_enabled_discovery_reports_discovering_without_blocking)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sky/Documents/.pi-desktop/data/scratch/import-codex-01a083f2-2ab3-7fc3-9172-db4835ca6d56/ip-src-snapshot/tests/test_worker.py", line 778, in test_enabled_discovery_reports_discovering_without_blocking
+    vm = host.vms()["vms"][0]
+         ~~~~~~~~^^
+  File "/Users/sky/Documents/.pi-desktop/data/scratch/import-codex-01a083f2-2ab3-7fc3-9172-db4835ca6d56/ip-src-snapshot/vmops.py", line 1133, in vms
+    agent_ips = self._agent_ips(name) if state == "running" else {}
+                ~~~~~~~~~~~~~~~^^^^^^
+  File "/Users/sky/Documents/.pi-desktop/data/scratch/import-codex-01a083f2-2ab3-7fc3-9172-db4835ca6d56/ip-src-snapshot/vmops.py", line 822, in _agent_ips
+    result = self.virsh("domifaddr", name, "--source", "agent", timeout=8)
+  File "/Users/sky/Documents/.pi-desktop/data/scratch/import-codex-01a083f2-2ab3-7fc3-9172-db4835ca6d56/ip-src-snapshot/vmops.py", line 551, in virsh
+    return self.run(argv, timeout=timeout)
+           ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/sky/Documents/.pi-desktop/data/scratch/import-codex-01a083f2-2ab3-7fc3-9172-db4835ca6d56/ip-src-snapshot/vmops.py", line 543, in run
+    return self._runner(argv, timeout=timeout, cwd=cwd)
+           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/sky/Documents/.pi-desktop/data/scratch/import-codex-01a083f2-2ab3-7fc3-9172-db4835ca6d56/ip-src-snapshot/tests/test_worker.py", line 86, in __call__
+    raise AssertionError("未预期的命令：%s" % joined)
+AssertionError: 未预期的命令：virsh --connect qemu:///system domifaddr demo --source agent
+
+======================================================================
+FAIL: test_enabled_discovery_resolves_from_arp_when_scan_completes (test_worker.IpDiscoveryIntegrationTests.test_enabled_discovery_resolves_from_arp_when_scan_completes)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sky/Documents/.pi-desktop/data/scratch/import-codex-01a083f2-2ab3-7fc3-9172-db4835ca6d56/ip-src-snapshot/tests/test_worker.py", line 791, in test_enabled_discovery_resolves_from_arp_when_scan_completes
+    vm = host.vms()["vms"][0]
+         ~~~~~~~~^^
+  File "/Users/sky/Documents/.pi-desktop/data/scratch/import-codex-01a083f2-2ab3-7fc3-9172-db4835ca6d56/ip-src-snapshot/vmops.py", line 1133, in vms
+    agent_ips = self._agent_ips(name) if state == "running" else {}
+                ~~~~~~~~~~~~~~~^^^^^^
+  File "/Users/sky/Documents/.pi-desktop/data/scratch/import-codex-01a083f2-2ab3-7fc3-9172-db4835ca6d56/ip-src-snapshot/vmops.py", line 822, in _agent_ips
+    result = self.virsh("domifaddr", name, "--source", "agent", timeout=8)
+  File "/Users/sky/Documents/.pi-desktop/data/scratch/import-codex-01a083f2-2ab3-7fc3-9172-db4835ca6d56/ip-src-snapshot/vmops.py", line 551, in virsh
+    return self.run(argv, timeout=timeout)
+           ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/sky/Documents/.pi-desktop/data/scratch/import-codex-01a083f2-2ab3-7fc3-9172-db4835ca6d56/ip-src-snapshot/vmops.py", line 543, in run
+    return self._runner(argv, timeout=timeout, cwd=cwd)
+           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/sky/Documents/.pi-desktop/data/scratch/import-codex-01a083f2-2ab3-7fc3-9172-db4835ca6d56/ip-src-snapshot/tests/test_worker.py", line 86, in __call__
+    raise AssertionError("未预期的命令：%s" % joined)
+AssertionError: 未预期的命令：virsh --connect qemu:///system domifaddr demo --source agent
+
+======================================================================
+FAIL: test_passive_dhcp_address_skips_active_scan (test_worker.IpDiscoveryIntegrationTests.test_passive_dhcp_address_skips_active_scan)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sky/Documents/.pi-desktop/data/scratch/import-codex-01a083f2-2ab3-7fc3-9172-db4835ca6d56/ip-src-snapshot/tests/test_worker.py", line 816, in test_passive_dhcp_address_skips_active_scan
+    vm = host.vms()["vms"][0]
+         ~~~~~~~~^^
+  File "/Users/sky/Documents/.pi-desktop/data/scratch/import-codex-01a083f2-2ab3-7fc3-9172-db4835ca6d56/ip-src-snapshot/vmops.py", line 1133, in vms
+    agent_ips = self._agent_ips(name) if state == "running" else {}
+                ~~~~~~~~~~~~~~~^^^^^^
+  File "/Users/sky/Documents/.pi-desktop/data/scratch/import-codex-01a083f2-2ab3-7fc3-9172-db4835ca6d56/ip-src-snapshot/vmops.py", line 822, in _agent_ips
+    result = self.virsh("domifaddr", name, "--source", "agent", timeout=8)
+  File "/Users/sky/Documents/.pi-desktop/data/scratch/import-codex-01a083f2-2ab3-7fc3-9172-db4835ca6d56/ip-src-snapshot/vmops.py", line 551, in virsh
+    return self.run(argv, timeout=timeout)
+           ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/sky/Documents/.pi-desktop/data/scratch/import-codex-01a083f2-2ab3-7fc3-9172-db4835ca6d56/ip-src-snapshot/vmops.py", line 543, in run
+    return self._runner(argv, timeout=timeout, cwd=cwd)
+           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/sky/Documents/.pi-desktop/data/scratch/import-codex-01a083f2-2ab3-7fc3-9172-db4835ca6d56/ip-src-snapshot/tests/test_worker.py", line 86, in __call__
+    raise AssertionError("未预期的命令：%s" % joined)
+AssertionError: 未预期的命令：virsh --connect qemu:///system domifaddr demo --source agent
+
+======================================================================
+FAIL: test_running_vm_without_any_source_is_unavailable_when_disabled (test_worker.IpDiscoveryIntegrationTests.test_running_vm_without_any_source_is_unavailable_when_disabled)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sky/Documents/.pi-desktop/data/scratch/import-codex-01a083f2-2ab3-7fc3-9172-db4835ca6d56/ip-src-snapshot/tests/test_worker.py", line 757, in test_running_vm_without_any_source_is_unavailable_when_disabled
+    vm = host.vms()["vms"][0]
+         ~~~~~~~~^^
+  File "/Users/sky/Documents/.pi-desktop/data/scratch/import-codex-01a083f2-2ab3-7fc3-9172-db4835ca6d56/ip-src-snapshot/vmops.py", line 1133, in vms
+    agent_ips = self._agent_ips(name) if state == "running" else {}
+                ~~~~~~~~~~~~~~~^^^^^^
+  File "/Users/sky/Documents/.pi-desktop/data/scratch/import-codex-01a083f2-2ab3-7fc3-9172-db4835ca6d56/ip-src-snapshot/vmops.py", line 822, in _agent_ips
+    result = self.virsh("domifaddr", name, "--source", "agent", timeout=8)
+  File "/Users/sky/Documents/.pi-desktop/data/scratch/import-codex-01a083f2-2ab3-7fc3-9172-db4835ca6d56/ip-src-snapshot/vmops.py", line 551, in virsh
+    return self.run(argv, timeout=timeout)
+           ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/sky/Documents/.pi-desktop/data/scratch/import-codex-01a083f2-2ab3-7fc3-9172-db4835ca6d56/ip-src-snapshot/vmops.py", line 543, in run
+    return self._runner(argv, timeout=timeout, cwd=cwd)
+           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/sky/Documents/.pi-desktop/data/scratch/import-codex-01a083f2-2ab3-7fc3-9172-db4835ca6d56/ip-src-snapshot/tests/test_worker.py", line 86, in __call__
+    raise AssertionError("未预期的命令：%s" % joined)
+AssertionError: 未预期的命令：virsh --connect qemu:///system domifaddr demo --source agent
+
+======================================================================
+FAIL: test_scan_is_only_requested_for_running_bridge_without_passive_ip (test_worker.IpDiscoveryIntegrationTests.test_scan_is_only_requested_for_running_bridge_without_passive_ip)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sky/Documents/.pi-desktop/data/scratch/import-codex-01a083f2-2ab3-7fc3-9172-db4835ca6d56/ip-src-snapshot/tests/test_worker.py", line 803, in test_scan_is_only_requested_for_running_bridge_without_passive_ip
+    vm = host.vms()["vms"][0]
+         ~~~~~~~~^^
+  File "/Users/sky/Documents/.pi-desktop/data/scratch/import-codex-01a083f2-2ab3-7fc3-9172-db4835ca6d56/ip-src-snapshot/vmops.py", line 1133, in vms
+    agent_ips = self._agent_ips(name) if state == "running" else {}
+                ~~~~~~~~~~~~~~~^^^^^^
+  File "/Users/sky/Documents/.pi-desktop/data/scratch/import-codex-01a083f2-2ab3-7fc3-9172-db4835ca6d56/ip-src-snapshot/vmops.py", line 822, in _agent_ips
+    result = self.virsh("domifaddr", name, "--source", "agent", timeout=8)
+  File "/Users/sky/Documents/.pi-desktop/data/scratch/import-codex-01a083f2-2ab3-7fc3-9172-db4835ca6d56/ip-src-snapshot/vmops.py", line 551, in virsh
+    return self.run(argv, timeout=timeout)
+           ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/sky/Documents/.pi-desktop/data/scratch/import-codex-01a083f2-2ab3-7fc3-9172-db4835ca6d56/ip-src-snapshot/vmops.py", line 543, in run
+    return self._runner(argv, timeout=timeout, cwd=cwd)
+           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/sky/Documents/.pi-desktop/data/scratch/import-codex-01a083f2-2ab3-7fc3-9172-db4835ca6d56/ip-src-snapshot/tests/test_worker.py", line 86, in __call__
+    raise AssertionError("未预期的命令：%s" % joined)
+AssertionError: 未预期的命令：virsh --connect qemu:///system domifaddr demo --source agent
+
+----------------------------------------------------------------------
+Ran 142 tests in 9.309s
+
+FAILED (failures=6)

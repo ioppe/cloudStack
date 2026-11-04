@@ -71,3 +71,11 @@ sudo /usr/bin/python3 /opt/vm-platform/deploy/prepare-node150-bridge.py --rollba
 ```
 
 回退恢复原 Netplan 并重新应用，不删除 default NAT、模板或VM磁盘。平台软件回退和网络回退独立：只停止新平台服务不会自动撤销网桥。回退时不能在仍有业务VM使用br0的情况下断开物理网桥。
+
+## 地址发现与“未探测到”（v1.1.2）
+
+平台显示 guest 内实际地址，优先取 qemu-guest-agent、libvirt DHCP 租约和宿主机邻居表。桥接 VM 的 DHCP 通常由外部路由器提供，静态地址也不会出现在 libvirt 租约中；guest-agent 没连接、且 guest 未与该宿主机通信时，邻居表可能为空。因此此前“获取中”并不意味着虚拟机没有 IP。本轮实测 `ubutnu24.04` 的 MAC 响应 `192.168.0.160`，`ubuntu5` 的 MAC 同时响应 `192.168.0.28` 和 `192.168.0.211`，不擅自调整它们的地址。
+
+执行端可显式设置 `bridge_ip_discovery:true`（默认 false，两已部署主机启用）。仅当运行中的桥接网卡缺少被动发现地址时，在其实际本地 Linux 网桥的首个适用 IPv4 网段做后台 ARP 查询。范围限制 /24–/30（网段最多 256 个地址，每轮至多 253 个 ARP 请求），排除宿主机自身；每轮至多 3 秒，同一桥最短 30 秒重试，正结果缓存 120 秒、阴性结果缓存 30 秒，缓存按 bridge+MAC 隔离。仅当前目标 VM MAC 的有效真实响应进入结果，同一 MAC 多个 IP 会保留。不是配置 IP 的步骤，也不连接业务端口、修改宿主机地址／路由／DNS、安装 guest 软件、改 XML 或读取 guest 磁盘。
+
+无合适本地网段、权限不足或 guest 不响应时不扩大扫描范围，也不猜测地址；可在 guest 内使用 qemu-guest-agent 辅助上报，或通过控制台检查。列表每5秒刷新，`ip_status=discovering` 对应“探测中…”，`unavailable` 对应“未探测到”，`resolved` 显示实际地址，`not_running` 显示横线。未探测到不是联网故障结论，IPv6及不在宿主机本地小网段的地址仍依赖 agent／既有来源。

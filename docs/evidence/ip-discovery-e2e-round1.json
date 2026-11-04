@@ -1,0 +1,256 @@
+{
+  "passed": false,
+  "checks": [
+    {
+      "check": "capture current VM configuration and host environment with permissions preserved",
+      "evidence": {
+        "192.168.0.30": {
+          "existing_vms": [
+            {
+              "uuid": "92d1d752-4b47-4550-b470-fb1e96e6f927",
+              "name": "centos",
+              "state": "running",
+              "inactive_xml_sha256": "2fcfff1f99364fdd1257ddf6782785173687d45741acd9134c6f0a93795f4ee7"
+            },
+            {
+              "uuid": "a66dd284-40cc-48a4-89b6-84a00843ede6",
+              "name": "ubuntu-100",
+              "state": "running",
+              "inactive_xml_sha256": "9f7cd70d99c3a77c244461c76321a69e3f0e32f10d6538d6106cceff02ed361b"
+            },
+            {
+              "uuid": "503a9548-ef36-49cd-b471-c9ebfe9ff534",
+              "name": "ubuntu",
+              "state": "running",
+              "inactive_xml_sha256": "fc0979b594912e1413de5db9b9cfb2e34b52d46e35f9795d9b8b8f6ddeed73dd"
+            },
+            {
+              "uuid": "4b5401ef-1ec8-46f4-b966-45b0458fd7e6",
+              "name": "ubuntu5",
+              "state": "running",
+              "inactive_xml_sha256": "4ccafa39136695a578c92d5ae757f514d76cb0a7d801dbb302abc90d4a86382a"
+            },
+            {
+              "uuid": "4f39ecd4-9972-48ef-9761-4a60d80614a8",
+              "name": "chatgpt",
+              "state": "shut off",
+              "inactive_xml_sha256": "379d20acde3111dd855a31232764e58ab172880e4dd0e7f6d285fb123bc9eedb"
+            },
+            {
+              "uuid": "24b56a05-54dd-4e8f-ab7b-fe0dfa71f0bc",
+              "name": "euler",
+              "state": "shut off",
+              "inactive_xml_sha256": "9f88831c75f3c84dc00cba217c224330abe33f22f64ccf66846feb4376456a02"
+            },
+            {
+              "uuid": "70d81301-0711-45d2-8976-7bdd4988dd5d",
+              "name": "ubuntu-200",
+              "state": "shut off",
+              "inactive_xml_sha256": "ab8015764461c0e4a37353945143b9420e74dc6dbcafda635261a4e7cda67efc"
+            },
+            {
+              "uuid": "e654be19-7d5c-44ea-9fd2-13a03640bf18",
+              "name": "ubuntu-300",
+              "state": "shut off",
+              "inactive_xml_sha256": "beb90f438fd4ad4f4d91648c237d5f7144b93c95e391741b2bb02e14c69ba055"
+            },
+            {
+              "uuid": "684bc0cd-41cf-479c-9681-106f308a39bd",
+              "name": "ubuntu-400",
+              "state": "shut off",
+              "inactive_xml_sha256": "f855928b233f89b9448ea4c5c979c4e28b25353c7cb9a85a092b5b4ed0b051e7"
+            },
+            {
+              "uuid": "e0fd39e0-b9c4-479b-ae50-b76243cd80e3",
+              "name": "ubuntu1",
+              "state": "shut off",
+              "inactive_xml_sha256": "87ac3c121411cd4484875eabef0a64717d77f1496b898624d3f65599f2a732f7"
+            },
+            {
+              "uuid": "d292d954-2ad2-4a93-81e9-ca993f6e1aea",
+              "name": "ubuntu2",
+              "state": "shut off",
+              "inactive_xml_sha256": "1db3f264c547480def35c402f9ebf46fdce93e40aad37992deae1cf170841316"
+            },
+            {
+              "uuid": "287e5832-97e5-418b-aed6-099f4fe9dff5",
+              "name": "ubuntu2204",
+              "state": "shut off",
+              "inactive_xml_sha256": "d2812502ada3c3a680b1e9378c4cc99d88e85e05b6263a22e6ff885b35f1b989"
+            },
+            {
+              "uuid": "964dd391-4597-424f-a5d6-1255d638ade5",
+              "name": "ubuntu3",
+              "state": "shut off",
+              "inactive_xml_sha256": "4bf3bc6804f40a69add86a65674c481cd370eb65f38904a22a0c04363207b062"
+            },
+            {
+              "uuid": "3d40f33b-1ca3-46fb-ba7f-4e6d6d8093c1",
+              "name": "ubuntu4",
+              "state": "shut off",
+              "inactive_xml_sha256": "02123e498b929024e5fb5bd0a37865ab685997d6cda01993aadf52ecc67e1471"
+            }
+          ],
+          "agent_config_sha256": "8bdc8919db4e5729eb20864c5f1099a28e26ad61739f9767f8ef5052fceab032",
+          "read_only_uuid_count": 0,
+          "bridge_ip_discovery": true,
+          "bridge_ipv4": "4: br0    inet 192.168.0.30/24 brd 192.168.0.255 scope global noprefixroute br0\\       valid_lft forever preferred_lft forever",
+          "default_route": "default via 192.168.0.1 dev br0 proto static metric 425",
+          "resolver_sha256": "992c33a95dfa9d829542f2a30cf0a395565469166a5af42de6e322174562f6e0",
+          "services": {
+            "vm-platform-agent.service": {
+              "active": "active",
+              "enabled": "enabled"
+            },
+            "vm-platform.service": {
+              "active": "active",
+              "enabled": "enabled"
+            },
+            "vm-panel.service": {
+              "active": "active",
+              "enabled": "enabled"
+            }
+          },
+          "agent_socket_mode": "0600",
+          "old_files": {
+            "server.py": "e4027995a691c9ef420a637a5b6fb73e079f3bdbb44eb1deb9ae6d20e9e7942f",
+            "config.json": "a0e01be27f87d541cbf7762b3953d9cbfaf07426e230257c2b0612725d32ae48",
+            "vm-panel.db": "d07aeea64ffd46c502b3d7b0b0dd60f7a9fd5a2036293b5356c470886f57844c"
+          },
+          "old_http": 200
+        },
+        "192.168.0.150": {
+          "existing_vms": [
+            {
+              "uuid": "5bf2a360-20d4-4c05-99de-499796069fef",
+              "name": "ubutnu24.04",
+              "state": "running",
+              "inactive_xml_sha256": "8bbb1b752ba688f89a1d17587304d7d5c58d161477a7fd9f297f8e786b4a42a6"
+            }
+          ],
+          "agent_config_sha256": "2a86aa9234dfd96d0f99386eea85c9f897fd1dc01d4575ea3c14ec6b9692a6b8",
+          "read_only_uuid_count": 0,
+          "bridge_ip_discovery": true,
+          "bridge_ipv4": "10: br0    inet 192.168.0.150/24 brd 192.168.0.255 scope global br0\\       valid_lft forever preferred_lft forever",
+          "default_route": "default via 192.168.0.1 dev br0 proto static",
+          "resolver_sha256": "ebdf560272a77357195c39e98340b77e18c8a8ce2025ee950e9e0c7b01467ab8",
+          "services": {
+            "vm-platform-agent.service": {
+              "active": "active",
+              "enabled": "enabled"
+            }
+          },
+          "agent_socket_mode": "0600",
+          "dns": "Link 10 (br0): 192.168.0.1 8.8.8.8",
+          "netplan_sha256": "09c06b014120749aa411eaa6a26521998eeb913cc57b17d3baf29faacdff104e",
+          "mount_dependency": "Requires=system.slice home.mount -.mount sysinit.target libvirtd.service\nRequiresMountsFor=/var/tmp /run/vm-platform /home/vm-disks"
+        }
+      }
+    },
+    {
+      "check": "existing bridged VM address resolves on 192.168.0.150",
+      "evidence": {
+        "uuid": "5bf2a360-20d4-4c05-99de-499796069fef",
+        "observations": [
+          {
+            "state": "running",
+            "ip_status": "resolved",
+            "ip_status_reason": "",
+            "ip_addresses": [
+              "192.168.0.160"
+            ],
+            "interfaces": [
+              {
+                "interface": "vnet0",
+                "type": "bridge",
+                "source": "br0",
+                "model": "virtio",
+                "mac": "52:54:00:9c:98:ea",
+                "ips": [
+                  "192.168.0.160"
+                ],
+                "ip_source": "neighbor"
+              }
+            ]
+          }
+        ],
+        "resolved": {
+          "state": "running",
+          "ip_status": "resolved",
+          "ip_status_reason": "",
+          "ip_addresses": [
+            "192.168.0.160"
+          ],
+          "interfaces": [
+            {
+              "interface": "vnet0",
+              "type": "bridge",
+              "source": "br0",
+              "model": "virtio",
+              "mac": "52:54:00:9c:98:ea",
+              "ips": [
+                "192.168.0.160"
+              ],
+              "ip_source": "neighbor"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "check": "existing bridged VM address resolves on 192.168.0.30",
+      "evidence": {
+        "uuid": "4b5401ef-1ec8-46f4-b966-45b0458fd7e6",
+        "observations": [
+          {
+            "state": "running",
+            "ip_status": "resolved",
+            "ip_status_reason": "",
+            "ip_addresses": [
+              "192.168.0.28",
+              "192.168.0.211"
+            ],
+            "interfaces": [
+              {
+                "interface": "vnet3",
+                "type": "bridge",
+                "source": "br0",
+                "model": "virtio",
+                "mac": "52:54:00:3a:56:b5",
+                "ips": [
+                  "192.168.0.28",
+                  "192.168.0.211"
+                ],
+                "ip_source": "neighbor"
+              }
+            ]
+          }
+        ],
+        "resolved": {
+          "state": "running",
+          "ip_status": "resolved",
+          "ip_status_reason": "",
+          "ip_addresses": [
+            "192.168.0.28",
+            "192.168.0.211"
+          ],
+          "interfaces": [
+            {
+              "interface": "vnet3",
+              "type": "bridge",
+              "source": "br0",
+              "model": "virtio",
+              "mac": "52:54:00:3a:56:b5",
+              "ips": [
+                "192.168.0.28",
+                "192.168.0.211"
+              ],
+              "ip_source": "neighbor"
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "scope": "Existing guests metadata only; only dedicated acceptance guest lifecycle changes"
+}

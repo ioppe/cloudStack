@@ -25,7 +25,7 @@ from pathlib import Path
 from socketserver import ThreadingMixIn
 from urllib.parse import parse_qs, unquote, urlparse
 
-VERSION = "1.1.1"
+VERSION = "1.1.2"
 BASE = Path(__file__).resolve().parent
 HOST_ID = re.compile(r"^[a-z][a-z0-9_-]{0,39}$")
 VM_UUID = re.compile(r"^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$")

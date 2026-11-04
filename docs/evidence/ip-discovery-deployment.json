@@ -1,0 +1,74 @@
+{
+  "hosts": [
+    {
+      "host": "192.168.0.150",
+      "config_backup": "/var/lib/vm-platform/backups/agent-before-ip-discovery-9lq3n6nh.json",
+      "code_backup": "/var/lib/vm-platform/backups/code-before-ip-discovery-gorgf_i5.tar.gz",
+      "only_config_field_changed": "bridge_ip_discovery",
+      "read_only_uuid_count": 0,
+      "services": {
+        "vm-platform-agent.service": {
+          "active": "active",
+          "enabled": "enabled"
+        }
+      },
+      "existing_vms_unchanged": 1,
+      "source_sha256": {
+        "ipdiscovery.py": "c49b22214acf20b8c0ec6c1a63fa220aa3dc7f86539060f27c033142bf2b0614",
+        "vmops.py": "8af857870db00076d2acaaecff3d87e652b4fef9f85d84f8283bb6f110577709",
+        "controller.py": "2fb800a3e54ffddcd3eec64a149fbdf9fb54df87c9cefc00a9e4905ba41a1c80",
+        "static/app.js": "e31da5d4c66b8107201754f19cba1875b74a50934a9151521e9082e0469da8e6",
+        "static/index.html": "f574eb320b0dce154c43b9a295e015b8d51be5cf1e69b6cb077247e061edf0bc",
+        "deploy/install-agent.sh": "ec213ce0c0e198b4cf45016f8402a93a558bd3513261f7ff315e97b32cd1700e",
+        "config/agent.example.json": "56f77c8138c8171c9f81d2c285145b97385da3eb35d9a59358b064c96dcf8bf4"
+      },
+      "format_normalization": {
+        "from_sha256": "2d5d122007a934f3e145a140051d6113ec4b4a1874e9601841285c86a160f9d7",
+        "to_sha256": "c49b22214acf20b8c0ec6c1a63fa220aa3dc7f86539060f27c033142bf2b0614",
+        "ast_unchanged": true,
+        "only_final_blank_line_removed": true,
+        "backup": "/var/lib/vm-platform/backups/ipdiscovery-before-format-lvnj4fof.py",
+        "private_configuration_unchanged": true,
+        "existing_vm_state_and_xml_unchanged": 1,
+        "agent_active": true
+      }
+    },
+    {
+      "host": "192.168.0.30",
+      "config_backup": "/var/lib/vm-platform/backups/agent-before-ip-discovery-nexs9bfg.json",
+      "code_backup": "/var/lib/vm-platform/backups/code-before-ip-discovery-u401jv6w.tar.gz",
+      "only_config_field_changed": "bridge_ip_discovery",
+      "read_only_uuid_count": 0,
+      "services": {
+        "vm-platform-agent.service": {
+          "active": "active",
+          "enabled": "enabled"
+        },
+        "vm-platform.service": {
+          "active": "active",
+          "enabled": "enabled"
+        }
+      },
+      "existing_vms_unchanged": 14,
+      "source_sha256": {
+        "ipdiscovery.py": "c49b22214acf20b8c0ec6c1a63fa220aa3dc7f86539060f27c033142bf2b0614",
+        "vmops.py": "8af857870db00076d2acaaecff3d87e652b4fef9f85d84f8283bb6f110577709",
+        "controller.py": "2fb800a3e54ffddcd3eec64a149fbdf9fb54df87c9cefc00a9e4905ba41a1c80",
+        "static/app.js": "e31da5d4c66b8107201754f19cba1875b74a50934a9151521e9082e0469da8e6",
+        "static/index.html": "f574eb320b0dce154c43b9a295e015b8d51be5cf1e69b6cb077247e061edf0bc",
+        "deploy/install-agent.sh": "ec213ce0c0e198b4cf45016f8402a93a558bd3513261f7ff315e97b32cd1700e",
+        "config/agent.example.json": "56f77c8138c8171c9f81d2c285145b97385da3eb35d9a59358b064c96dcf8bf4"
+      },
+      "format_normalization": {
+        "from_sha256": "2d5d122007a934f3e145a140051d6113ec4b4a1874e9601841285c86a160f9d7",
+        "to_sha256": "c49b22214acf20b8c0ec6c1a63fa220aa3dc7f86539060f27c033142bf2b0614",
+        "ast_unchanged": true,
+        "only_final_blank_line_removed": true,
+        "backup": "/var/lib/vm-platform/backups/ipdiscovery-before-format-vyfs7t41.py",
+        "private_configuration_unchanged": true,
+        "existing_vm_state_and_xml_unchanged": 14,
+        "agent_active": true
+      }
+    }
+  ]
+}

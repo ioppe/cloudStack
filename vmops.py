@@ -25,6 +25,8 @@ import time
 import uuid
 import xml.etree.ElementTree as ET
 
+import ipdiscovery
+
 GIB = 1024 ** 3
 
 UUID_RE = re.compile(r"^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$")
@@ -81,6 +83,8 @@ DEFAULT_CONFIG = {
     "max_disk_gb": 20000,
     "command_timeout": 120,
     "install_timeout": 3600,
+    # v1.1.2：默认关闭的局域网 ARP 地址发现（仅显式配置 true 才启用）。
+    "bridge_ip_discovery": False,
 }
 
 
@@ -356,6 +360,8 @@ def build_config(overrides=None):
         str(item).strip().lower() for item in (config.get("read_only_uuids") or []) if str(item).strip()
     ]
     config["allow_writes"] = bool_value(config.get("allow_writes", False))
+    config["bridge_ip_discovery"] = bool_value(
+        config.get("bridge_ip_discovery", DEFAULT_CONFIG["bridge_ip_discovery"]))
     config["socket_path"] = os.path.abspath(str(config.get("socket_path") or DEFAULT_CONFIG["socket_path"]))
     storage_dir = str(config.get("storage_report_dir") or "").strip()
     if storage_dir and not os.path.isabs(storage_dir):
@@ -509,7 +515,8 @@ def build_cloud_init_meta_data(vm_name):
 class Host(object):
     """一台执行端的本机操作集合。--serve 模式下实例常驻，CPU 采样得以保留。"""
 
-    def __init__(self, config, runner=None, log=None, clock=None):
+    def __init__(self, config, runner=None, log=None, clock=None, ip_scanner=None,
+                 ip_thread_factory=None, discovery_clock=None):
         self.config = config if isinstance(config, dict) else build_config(config)
         self._runner = runner or run_command
         self._log = log or (lambda message: None)
@@ -518,6 +525,14 @@ class Host(object):
         self._cpu_lock = threading.Lock()
         self._secrets = set()
         self.mutation_lock = threading.Lock()
+        # v1.1.2 局域网 IP 发现：默认关闭；scanner / 线程 / 时钟可注入以便单元测试。
+        # 发现层必须用单调时钟，不能复用 CPU/展示用的 wall clock（clock）。
+        self._ip_discovery_enabled = bool_value(self.config.get("bridge_ip_discovery", False))
+        self._ip_scanner = ip_scanner
+        self._ip_thread_factory = ip_thread_factory
+        self._discovery_clock = discovery_clock or time.monotonic
+        self._ip_discovery_manager = None
+        self._ip_discovery_lock = threading.Lock()
 
     # -- 命令 ---------------------------------------------------------------
     def _binary(self, key):
@@ -998,22 +1013,78 @@ class Host(object):
             return ""
         return result["stdout"].strip()
 
-    def _vm_summary(self, name, neigh_ips, lease_ips):
-        info = self._domain_info(name)
-        uuid_text = self._domain_uuid(name)
+    @staticmethod
+    def _passive_ips(agent_ips, lease_ips, neigh_ips, mac):
+        """按 agent > dhcp > neighbor 的既有优先级取被动来源地址。"""
+        for source, mapping in (("agent", agent_ips), ("dhcp", lease_ips), ("neighbor", neigh_ips)):
+            ips = mapping.get(mac) or []
+            if ips:
+                return list(ips), source
+        return [], ""
+
+    @staticmethod
+    def _ip_status(state, ip_addresses, probes, discovery):
+        """返回 (ip_status, ip_status_reason)：resolved/discovering/unavailable/not_running。"""
+        if state != "running":
+            return "not_running", ""
+        if ip_addresses:
+            return "resolved", ""
+        for item in probes:
+            if item.get("status") == "discovering":
+                return "discovering", "guest-agent 未上报地址，正在从局域网 ARP 探测"
+        for item in probes:
+            if item.get("reason"):
+                return "unavailable", item["reason"]
+        if probes:
+            return "unavailable", "未探测到地址"
+        if discovery is None:
+            return "unavailable", "未启用局域网探测（guest-agent 未连接时可在控制台确认）"
+        return "unavailable", "未探测到地址（guest-agent 未连接时可在控制台确认）"
+
+    def _vm_summary(self, name, neigh_ips, lease_ips, pre=None, discovery=None):
+        pre = pre or {}
+        info = pre.get("info")
+        if info is None:
+            info = self._domain_info(name)
+        uuid_text = pre.get("uuid") or self._domain_uuid(name)
         state = normalized_state(info)
         display = self._vnc_display(name)
         target = parse_vnc_display(display)
-        agent_ips = self._agent_ips(name)
-        interfaces = self._domain_interfaces(name)
+        interfaces = pre.get("interfaces")
+        if interfaces is None:
+            interfaces = self._domain_interfaces(name)
+        interfaces = [dict(item) for item in interfaces]
+        agent_ips = pre.get("agent_ips")
+        if agent_ips is None:
+            # QGA 只对运行中的 VM 查询：关机/暂停不付 8 秒重试代价。
+            agent_ips = self._agent_ips(name) if state == "running" else {}
         ip_addresses = []
+        probes = []
         for interface in interfaces:
             mac = (interface.get("mac") or "").lower()
-            ips = agent_ips.get(mac) or lease_ips.get(mac) or neigh_ips.get(mac) or []
+            ips, source = self._passive_ips(agent_ips, lease_ips, neigh_ips, mac)
+            bridge = (interface.get("source") or "").strip()
+            probeable = (not ips and state == "running" and MAC_RE.match(mac)
+                         and LINUX_IFACE_RE.match(bridge)
+                         and (interface.get("type") or "").strip() == "bridge")
+            if probeable:
+                result = (discovery or {}).get((bridge, mac))
+                if result:
+                    probes.append(result)
+                    addresses = result.get("addresses")
+                    if not isinstance(addresses, list):
+                        single = result.get("address")
+                        addresses = [single] if single else []
+                    # 同一 MAC 可能同时有多个地址：全部使用，不把列表转成字符串。
+                    usable = [ip for ip in addresses if isinstance(ip, str) and ip]
+                    if result.get("status") == "resolved" and usable:
+                        ips, source = usable, "arp"
             interface["ips"] = list(ips)
+            interface["ip_source"] = source if ips else ""
             for ip in ips:
                 if ip not in ip_addresses:
                     ip_addresses.append(ip)
+        ip_status, ip_reason = self._ip_status(state, ip_addresses, probes, discovery)
         stats = self._domain_stats(name)
         vcpus = parse_int(info.get("CPU(s)"), 1) or 1
         disk_data = self._disk_metrics(self._domain_disks(name), stats)
@@ -1036,6 +1107,8 @@ class Host(object):
             "used_memory": info.get("Used memory", ""),
             "interfaces": interfaces,
             "ip_addresses": ip_addresses,
+            "ip_status": ip_status,
+            "ip_status_reason": ip_reason,
             "disks": disk_data["disks"],
             "metrics": {
                 "cpu": self._cpu_metrics(uuid_text, stats, vcpus),
@@ -1057,10 +1130,102 @@ class Host(object):
     def vms(self, payload=None):
         neigh_ips = self._neigh_map()
         lease_ips = self._dhcp_leases()
+        names = self._domain_names()
+        prepared = {}
+        candidates = []
+        eligible = {}
+        for name in names:
+            info = self._domain_info(name)
+            state = normalized_state(info)
+            interfaces = self._domain_interfaces(name)
+            # QGA 只对运行中的 VM 查询，避免关机 VM 每次 8 秒重试。
+            agent_ips = self._agent_ips(name) if state == "running" else {}
+            prepared[name] = {
+                "info": info,
+                "uuid": self._domain_uuid(name),
+                "interfaces": interfaces,
+                "agent_ips": agent_ips,
+            }
+            if state != "running":
+                continue
+            for interface in interfaces:
+                if (interface.get("type") or "").strip() != "bridge":
+                    continue
+                mac = (interface.get("mac") or "").lower()
+                bridge = (interface.get("source") or "").strip()
+                if not MAC_RE.match(mac) or not LINUX_IFACE_RE.match(bridge):
+                    continue
+                # 全部 running 桥接口都进快照（含被动已命中者），用于剪枝过期缓存。
+                eligible.setdefault(bridge, [])
+                if mac not in eligible[bridge]:
+                    eligible[bridge].append(mac)
+                if agent_ips.get(mac) or lease_ips.get(mac) or neigh_ips.get(mac):
+                    continue
+                item = (bridge, mac)
+                if item not in candidates:
+                    candidates.append(item)
+        discovered = self._discover_ips(eligible, candidates)
         vms = []
-        for name in self._domain_names():
-            vms.append(self._vm_summary(name, neigh_ips, lease_ips))
+        for name in names:
+            vms.append(self._vm_summary(name, neigh_ips, lease_ips, prepared[name], discovered))
         return {"vms": vms}
+
+    def _discover_ips(self, eligible, candidates):
+        """先按本轮目标快照剪枝，再只对未知候选做一次批量请求 + 非阻塞 lookup。
+
+        返回 None 表示执行端未启用 bridge_ip_discovery（不探测、不起线程）；
+        返回 dict（可能为空）表示已启用，值为每个 (bridge, mac) 的 lookup 结果。
+        即使本轮没有未知候选也要 retain：暂停/关机/删除/换接口的旧缓存必须被清除。
+        """
+        try:
+            manager = self._ip_discovery()
+        except Exception:
+            manager = None
+        if manager is None:
+            return None
+        results = {}
+        try:
+            manager.retain_targets(eligible)
+        except Exception:
+            self._log("ip discovery: 目标快照剪枝失败")
+        if not candidates:
+            return results
+        requests = {}
+        for bridge, mac in candidates:
+            requests.setdefault(bridge, [])
+            if mac not in requests[bridge]:
+                requests[bridge].append(mac)
+        try:
+            manager.request(requests)
+        except Exception:
+            self._log("ip discovery: 批量请求失败")
+        for bridge, mac in candidates:
+            try:
+                results[(bridge, mac)] = manager.lookup(bridge, mac)
+            except Exception:
+                results[(bridge, mac)] = None
+        return results
+
+    def _ip_discovery(self):
+        """按配置惰性创建后台发现管理器；未启用时返回 None（不起线程）。"""
+        if not self._ip_discovery_enabled:
+            return None
+        with self._ip_discovery_lock:
+            if self._ip_discovery_manager is None:
+                scanner = self._ip_scanner
+                if scanner is None:
+                    # 发现层用单调时钟（模块默认），不传 Host 的 wall clock。
+                    scanner = ipdiscovery.BridgeScanner(runner=self.run)
+                self._ip_discovery_manager = ipdiscovery.DiscoveryManager(
+                    scanner, clock=self._discovery_clock,
+                    thread_factory=self._ip_thread_factory, log=self._log)
+            return self._ip_discovery_manager
+
+    def shutdown_ip_discovery(self):
+        """停止后台发现线程（进程退出或主机被移除时调用）。"""
+        manager = self._ip_discovery_manager
+        if manager is not None:
+            manager.shutdown()
 
     def _disk_dirs_info(self):
         dirs = []

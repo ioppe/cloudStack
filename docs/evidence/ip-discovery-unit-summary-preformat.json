@@ -1,0 +1,268 @@
+{
+  "version": "1.1.2 (uncommitted working tree at capture; final implementation + fixtures)",
+  "phase": "final",
+  "captured_utc": "2026-11-04T15:35:48Z",
+  "scope": "mocked unit suite + syntax checks only; no real ARP, no guest/libvirt/system change, no E2E execution",
+  "git": {
+    "head": "9955e74334696bcc938ebd13bfae1d204e1bdd5b",
+    "branch": "main",
+    "dirty": true,
+    "tracked_modified": [
+      "CHANGELOG.md",
+      "README.md",
+      "config/agent.example.json",
+      "controller.py",
+      "deploy/install-agent.sh",
+      "docs/AGENT.md",
+      "docs/DEPLOY.md",
+      "docs/IMPLEMENTATION.md",
+      "docs/NETWORKS.md",
+      "docs/UI.md",
+      "docs/evidence/spec-sync.md",
+      "static/app.js",
+      "static/index.html",
+      "tests/test_worker.py",
+      "vmops.py"
+    ],
+    "untracked": [
+      "docs/ACCEPTANCE-1.1.2.md",
+      "docs/evidence/ip-discovery-baseline.json",
+      "docs/evidence/ip-discovery-diagnosis.json",
+      "ipdiscovery.py",
+      "tests/e2e_ip_discovery.py",
+      "tests/e2e_ip_discovery_ui.py",
+      "tests/test_ipdiscovery.py"
+    ]
+  },
+  "ready_marker": {
+    "path": "/Users/sky/Documents/.pi-desktop/data/scratch/import-codex-01a083f2-2ab3-7fc3-9172-db4835ca6d56/ip-discovery-final-ready.json",
+    "state": "final implementation and fixtures ready; no source mutations during unit run",
+    "entries": 13,
+    "verification": "all 13 entries matched the working tree (sha256) immediately after the marker appeared and again right after snapshot creation"
+  },
+  "final_source_sha256": {
+    "ipdiscovery.py": "2d5d122007a934f3e145a140051d6113ec4b4a1874e9601841285c86a160f9d7",
+    "vmops.py": "8af857870db00076d2acaaecff3d87e652b4fef9f85d84f8283bb6f110577709",
+    "worker.py": "a552980fd14e11819581bec376e9e0b16c2c26922315f27dd5d2c1170b4afe11",
+    "controller.py": "2fb800a3e54ffddcd3eec64a149fbdf9fb54df87c9cefc00a9e4905ba41a1c80",
+    "static/app.js": "e31da5d4c66b8107201754f19cba1875b74a50934a9151521e9082e0469da8e6",
+    "static/index.html": "f574eb320b0dce154c43b9a295e015b8d51be5cf1e69b6cb077247e061edf0bc",
+    "deploy/install-agent.sh": "ec213ce0c0e198b4cf45016f8402a93a558bd3513261f7ff315e97b32cd1700e",
+    "config/agent.example.json": "56f77c8138c8171c9f81d2c285145b97385da3eb35d9a59358b064c96dcf8bf4",
+    "config/controller.example.json": "a86dccc44d81c5bbcaa2b864d424447ba582420f04f6c28122ecc32ca69da699",
+    "tests/test_ipdiscovery.py": "5bee4927cfdfc59a657702c16ac78019c0b2bf08d5ec86630413ac523af071ec",
+    "tests/test_worker.py": "ba042bc36f05ced85c41030566d65898f2ca373cf8840f5ba8133a39f080ebf4",
+    "tests/e2e_ip_discovery.py": "e2d06a90558910eeddc7d5d87ccc8a4cd68462b22f2c2e1e5590e23141789a51",
+    "tests/e2e_ip_discovery_ui.py": "8016d5ee2c4d34ad7911f5778a2dd1cec9bc0a5e7f12271cf110d834fe0baa0b"
+  },
+  "source_snapshot": {
+    "root": "/Users/sky/vm-platform",
+    "staging_dir": "/Users/sky/Documents/.pi-desktop/data/scratch/import-codex-01a083f2-2ab3-7fc3-9172-db4835ca6d56/ip-src-final",
+    "manifest_sha256": "90642b1f76fe5ff8bfba74a6150e728c6fddc1d5c896c6166e68db0539949a34",
+    "manifest_recipe": "LC_ALL=C find . -type f | LC_ALL=C sort | xargs shasum -a 256  (then sha256 of that text)",
+    "file_count": 86,
+    "contents": {
+      "root_py": [
+        "controller.py",
+        "ipdiscovery.py",
+        "vmops.py",
+        "worker.py"
+      ],
+      "tests": [
+        "tests/test_bridge_migration.py",
+        "tests/test_controller.py",
+        "tests/test_ipdiscovery.py",
+        "tests/test_network_config.py",
+        "tests/test_transport.py",
+        "tests/test_worker.py"
+      ],
+      "tools": [
+        "tools/api_client.py",
+        "tools/authorize-agent.py",
+        "tools/bootstrap.py",
+        "tools/guest_probe.py",
+        "tools/rotate_password.py"
+      ],
+      "deploy": [
+        "deploy/install-agent.sh",
+        "deploy/install-controller.sh",
+        "deploy/prepare-node150-bridge.py",
+        "deploy/vm-platform-agent.service",
+        "deploy/vm-platform.service",
+        "deploy/node150-home-storage.conf"
+      ],
+      "static": "static/** including static/novnc (712K)",
+      "config_examples": [
+        "config/agent.example.json",
+        "config/controller.example.json"
+      ]
+    },
+    "excluded": [
+      ".git/",
+      "ADMIN-CREDENTIALS.txt",
+      "releases/",
+      "docs/ (other than these evidence files)",
+      "__pycache__/ and *.pyc",
+      "private/state databases (none present in the tree)",
+      "tests/e2e_*.py (never copied to the hosts, never executed)"
+    ],
+    "drift_recheck": "cmp of all 86 files against the working tree immediately after snapshot: 0 differences",
+    "bytecode_check": "0 __pycache__ / *.pyc entries in the snapshot"
+  },
+  "runs": [
+    {
+      "target": "local",
+      "host": "macOS",
+      "python": "3.13.7",
+      "binary": "/usr/local/bin/python3",
+      "run_dir": "/Users/sky/Documents/.pi-desktop/data/scratch/import-codex-01a083f2-2ab3-7fc3-9172-db4835ca6d56/ip-src-final",
+      "command": "PYTHONDONTWRITEBYTECODE=1 PYTHONIOENCODING=utf-8 python3 -m unittest discover -s tests -p 'test_*.py' -v",
+      "tests_run": 157,
+      "passed": 157,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "exit": 0,
+      "status": "pass",
+      "duration_seconds": 9.312,
+      "log": "docs/evidence/ip-discovery-unit-local.log"
+    },
+    {
+      "target": "node30",
+      "host": "192.168.0.30 (k8s-node03)",
+      "python": "3.6.8",
+      "binary": "/usr/bin/python3",
+      "run_dir": "/opt/vm-platform-ip-discovery-check-only",
+      "command": "cd /opt/vm-platform-ip-discovery-check-only && PYTHONDONTWRITEBYTECODE=1 PYTHONIOENCODING=utf-8 /usr/bin/python3 -m unittest discover -s tests -p 'test_*.py' -v",
+      "tests_run": 157,
+      "passed": 157,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "exit": 0,
+      "status": "pass",
+      "duration_seconds": 15.961,
+      "log": "docs/evidence/ip-discovery-unit-node30.log"
+    },
+    {
+      "target": "node150",
+      "host": "192.168.0.150 (sky)",
+      "python": "3.12.3",
+      "binary": "/usr/bin/python3",
+      "run_dir": "/opt/vm-platform-ip-discovery-check-only",
+      "command": "cd /opt/vm-platform-ip-discovery-check-only && PYTHONDONTWRITEBYTECODE=1 PYTHONIOENCODING=utf-8 /usr/bin/python3 -m unittest discover -s tests -p 'test_*.py' -v",
+      "tests_run": 157,
+      "passed": 157,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "exit": 0,
+      "status": "pass",
+      "duration_seconds": 12.292,
+      "log": "docs/evidence/ip-discovery-unit-node150.log"
+    }
+  ],
+  "test_count_growth": "142 (round1) -> 157 (final): +15 tests covering multi-IP retention, packet budget, monotonic clock, target pruning and late-generation inflight results",
+  "isolation": {
+    "dir": "/opt/vm-platform-ip-discovery-check-only",
+    "precheck": "ABSENT asserted on both hosts before creation",
+    "copy": "COPYFILE_DISABLE=1 tar czf - -C <final snapshot> . | ssh root@HOST 'tar xzf - -C DIR'",
+    "verification": "remote per-file sha256 manifest: 86/86 files, aggregate 90642b1f76fe5ff8bfba74a6150e728c6fddc1d5c896c6166e68db0539949a34, diff vs local manifest = 0 on both hosts",
+    "cleanup": "rm -rf DIR after each run; post-run assertion ABSENT verified for both hosts",
+    "untouched": [
+      "/opt/vm-platform production tree",
+      "systemd units",
+      "network configuration",
+      "libvirt domains/images"
+    ]
+  },
+  "static_checks": [
+    {
+      "check": "node --check static/app.js",
+      "tool": "node v24.18.0",
+      "exit": 0,
+      "status": "pass"
+    },
+    {
+      "check": "sh -n deploy/install-agent.sh",
+      "tool": "/bin/sh (POSIX mode)",
+      "exit": 0,
+      "status": "pass"
+    },
+    {
+      "check": "JSON parse config/agent.example.json",
+      "exit": 0,
+      "status": "pass"
+    },
+    {
+      "check": "JSON parse config/controller.example.json",
+      "exit": 0,
+      "status": "pass"
+    },
+    {
+      "check": "AST compile tests/e2e_ip_discovery.py",
+      "exit": 0,
+      "status": "pass"
+    },
+    {
+      "check": "AST compile tests/e2e_ip_discovery_ui.py",
+      "exit": 0,
+      "status": "pass",
+      "note": "no SyntaxWarning this round (round1 had an invalid '\\/' escape at line 57)"
+    },
+    {
+      "check": "AST extract + compile all embedded remote Python in tests/e2e_ip_discovery.py",
+      "exit": 0,
+      "status": "pass",
+      "snippets": [
+        {
+          "line": 33,
+          "role": "environment() probe",
+          "sha256_12": "e601e0cdbbe8",
+          "bytes": 3189
+        },
+        {
+          "line": 66,
+          "role": "files() probe (repr(paths) -> placeholder)",
+          "sha256_12": "80d3b8c99654",
+          "bytes": 91
+        },
+        {
+          "line": 70,
+          "role": "choose_address() ARP frame builder",
+          "sha256_12": "ffa1ae8094b0",
+          "bytes": 1240
+        },
+        {
+          "line": 94,
+          "role": "raw_arp() BridgeScanner call (repr([mac]) -> ['52:54:00:00:00:00'])",
+          "sha256_12": "9d8c1ec54e80",
+          "bytes": 266
+        }
+      ],
+      "method": "ast.parse -> remote(...) call args -> flatten Constant/BinOp -> compile(); nothing executed"
+    }
+  ],
+  "round1_baseline_preserved": {
+    "logs": [
+      "docs/evidence/ip-discovery-unit-local-round1.log",
+      "docs/evidence/ip-discovery-unit-node30-round1.log",
+      "docs/evidence/ip-discovery-unit-node150-round1.log"
+    ],
+    "summary": "docs/evidence/ip-discovery-unit-summary-round1.json",
+    "tests_run": 142,
+    "failures": {
+      "local": 6,
+      "node30": 7,
+      "node150": 6
+    },
+    "snapshot_manifest_sha256": "da8a9a2728a02595ca677d41c12511483dcab06e93c730ea96e399791374a9b6",
+    "note": "historical round1 results are kept as-is and must not be relabelled as final; they are not the current state"
+  },
+  "notes": [
+    "All three targets ran the identical final snapshot: local and both hosts differ only in interpreter version.",
+    "157/157 pass with exit 0, zero failures/errors/skips on 3.13.7, 3.6.8 and 3.12.3.",
+    "One discarded attempt: the first final remote invocation reused the round1 snapshot path by harness mistake and reproduced the old 142/6/7 results; it was discarded and the hosts were re-run against the final snapshot (logs above).",
+    "No source file and no test file was modified by this task; only docs/evidence/ip-discovery-unit-* files were written."
+  ]
+}

@@ -1,0 +1,17 @@
+PASS capture current VM configuration and host environment with permissions preserved
+PASS existing bridged VM address resolves on 192.168.0.150
+PASS existing bridged VM address resolves on 192.168.0.30
+PASS real ARP fallback resolves the existing node150 VM without neighbor-cache dependence
+PASS real ARP fallback preserves both observed addresses for the same node30 MAC
+PASS temporary address passes three ARP conflict probes
+PASS new VM IP becomes visible without guest login or ping
+PASS temporary domain disk and seed removed
+PASS all existing VM states XML host network and permissions remain unchanged
+Traceback (most recent call last):
+  File "/Users/sky/vm-platform/tests/e2e_ip_discovery.py", line 179, in <module>
+    main()
+    ~~~~^^
+  File "/Users/sky/vm-platform/tests/e2e_ip_discovery.py", line 153, in main
+    assert stopped['state'] == 'shut off'
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError

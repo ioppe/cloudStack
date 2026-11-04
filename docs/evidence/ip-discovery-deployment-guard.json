@@ -1,0 +1,25 @@
+{
+  "reason": "pre-write guard required an explicit empty key instead of the documented absent-key default",
+  "checks": [
+    {
+      "allow_writes": true,
+      "read_only_key_present": false,
+      "read_only_uuid_count": 0,
+      "agent_config_sha256": "96edff50f9b1a34cc7b9e8c659fb99d3ab67cf13f8e61f605f5df4a4f8741c43",
+      "new_module_present": false,
+      "agent_active": "active",
+      "host": "192.168.0.150",
+      "config_matches_predeployment_baseline": true
+    },
+    {
+      "allow_writes": true,
+      "read_only_key_present": true,
+      "read_only_uuid_count": 0,
+      "agent_config_sha256": "d2ad2fb4900fc23fe8ad018f25db2ea0da68d51a8b81f8932b7ca02bf8a02363",
+      "new_module_present": false,
+      "agent_active": "active",
+      "host": "192.168.0.30",
+      "config_matches_predeployment_baseline": true
+    }
+  ]
+}

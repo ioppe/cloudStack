@@ -1,0 +1,70 @@
+{
+  "health": {
+    "ok": true,
+    "version": "1.1.2"
+  },
+  "runtime_sha256": {
+    "ipdiscovery.py": "c49b22214acf20b8c0ec6c1a63fa220aa3dc7f86539060f27c033142bf2b0614",
+    "vmops.py": "8af857870db00076d2acaaecff3d87e652b4fef9f85d84f8283bb6f110577709",
+    "controller.py": "2fb800a3e54ffddcd3eec64a149fbdf9fb54df87c9cefc00a9e4905ba41a1c80",
+    "static/app.js": "e31da5d4c66b8107201754f19cba1875b74a50934a9151521e9082e0469da8e6",
+    "static/index.html": "f574eb320b0dce154c43b9a295e015b8d51be5cf1e69b6cb077247e061edf0bc",
+    "deploy/install-agent.sh": "ec213ce0c0e198b4cf45016f8402a93a558bd3513261f7ff315e97b32cd1700e",
+    "config/agent.example.json": "56f77c8138c8171c9f81d2c285145b97385da3eb35d9a59358b064c96dcf8bf4"
+  },
+  "public_sha256": {
+    ".gitattributes": "e87111c876ccb263b47e908fe866847cb6387383d666ca375419b8133adba8f8",
+    "CHANGELOG.md": "b74dee96026de6e5069aa8c17d4b909c3178ef7490ec1e46e8b1d9efddf478d5",
+    "README.md": "cb8e705b2b55697193a8033405ceef4ace89a0006243ca5d634bc794d08dac9e",
+    "docs/ACCEPTANCE-1.1.2.md": "15bed208195e8b359ac8e6f61f8272fc01de3563d182140a7426fedcff96fd58",
+    "docs/AGENT.md": "cdf533d6bfa8063e2d5ccbf385aae13c97b4d147f27ba633149e0f5b6284deb6",
+    "docs/DEPLOY.md": "456b7d8775552af3f18275faf7e298e665818b0af2cb6435581a25d9033e1566",
+    "docs/IMPLEMENTATION.md": "7b04a4eb965f0c61bd9aee3a8c1fc86f73115c8ee05c74aa3fea7e78902b3a63",
+    "docs/NETWORKS.md": "5f835c6978720477370e764cbc0d3f93e66ffc6beb36e9275f65bc824cedbdf9",
+    "docs/UI.md": "62b5b029b9fed765f3a66f86a022db3aabcb85c838aa404808b85fc29926ed84",
+    "docs/evidence/ip-discovery-baseline.json": "21cefbbc13b6ee766bb13a4cc23992aea7a57dbc1fa583fd2a81347e5cb80552",
+    "docs/evidence/ip-discovery-delivery-gate.md": "ab1dff2baea86ad37f4e0babf4730dfa17a1e5d5fcc5bc1d23f51abb777b668c",
+    "docs/evidence/ip-discovery-deployment-guard.json": "b49f50e35464f370cbad124600bbb137f883fb54193eea2998857f901b1eae22",
+    "docs/evidence/ip-discovery-deployment.json": "6ff672db1d8d66aacc6734479921369e1f7ec3e4ebb279d1294f9478004cad60",
+    "docs/evidence/ip-discovery-diagnosis.json": "a145ebb8c0895d7756864acda17858dd4946b972e5444ebf6e284dd86b9305c7",
+    "docs/evidence/ip-discovery-e2e-round1.json": "61d1fddc62ef65359bc1c9673bf4f32e662d2d89c9c8e905842c32a759da6372",
+    "docs/evidence/ip-discovery-e2e-round1.log": "8701581f483e64be67c5001228e9a8ca73107b2623f014f868c95f0b61c6cfd8",
+    "docs/evidence/ip-discovery-e2e-round2.json": "b537a0681268180cc105cf75bfd6223ec842b703e4b241eb09e84321a6040aad",
+    "docs/evidence/ip-discovery-e2e-round2.log": "93b3d23ac70e01bd00558892b3bb9bb65e7414b68cc18c241f3d87b958f0e615",
+    "docs/evidence/ip-discovery-e2e.json": "5b38ffc903a82c720623e2b12e9c84fffde744d08c7ae5e7a659d704765aae70",
+    "docs/evidence/ip-discovery-e2e.log": "d8b1f2cd1037e965c5b37e2db9bbf5720b322e89513eb99cbbc1a9c5baf26341",
+    "docs/evidence/ip-discovery-review.md": "b0e8297e1edb04a944aa7dab7a2109e9ada5bd9d80bb558dd556b0bf7fcc6fec",
+    "docs/evidence/ip-discovery-ui.json": "ca7459b8fed506292727f42f1743d56d642d5dbbe0a69a8b396d19071a8be38d",
+    "docs/evidence/ip-discovery-ui.log": "553ee7cef8fa529b3918a936247fff804fd6506fcd7b92223b5dfbb977857af7",
+    "docs/evidence/ip-discovery-unit-local-round1.log": "d072b3f4a62de186c1d315bb383868ca0612f1fc3d2986ad9c268c0af33e3077",
+    "docs/evidence/ip-discovery-unit-local.log": "04e384041135187d301f3521287d7d071f8f2add84ae5961740f9fdb06926e9f",
+    "docs/evidence/ip-discovery-unit-node150-round1.log": "6912646c40083585e73d85ed09b269193a2ca14ebaa2f0b841595e843622ddf6",
+    "docs/evidence/ip-discovery-unit-node150.log": "f19a9e44f9885a9f67434e99538ac5134b2b73f93334625655e955d1651c24ec",
+    "docs/evidence/ip-discovery-unit-node30-round1.log": "68e97bcb11d3f9b1cae78414f0dc419215d075c0f59a7bce89698453b7cc8f25",
+    "docs/evidence/ip-discovery-unit-node30.log": "42c85c0607564fe87239581260f5cf3633a12e8de7e16b218da2dcfac041e496",
+    "docs/evidence/ip-discovery-unit-summary-preformat.json": "a47375876c6cf63bc57a80f66b8b6c1c90ee8effb36a214e17c6c45a18502286",
+    "docs/evidence/ip-discovery-unit-summary-round1.json": "26840b6590731e4b7a3f636195bae57683f1789e841919a4f910bf98df895226",
+    "docs/evidence/ip-discovery-unit-summary.json": "cd7b8aabefb0785377f13ca4c25c8617fe50f131aa5c86d21742694865bcf49c",
+    "docs/evidence/spec-sync.md": "5e12e28d3735f1ce98d719677f35ba90fc0e569ee62464783bef30434240e660",
+    "tests/e2e_ip_discovery.py": "bb3aa4b3b69e76a409702bd23c95f3276d95489c44d859c17d8c7fb46d6f7570",
+    "tests/e2e_ip_discovery_ui.py": "8016d5ee2c4d34ad7911f5778a2dd1cec9bc0a5e7f12271cf110d834fe0baa0b",
+    "tests/test_ipdiscovery.py": "5bee4927cfdfc59a657702c16ac78019c0b2bf08d5ec86630413ac523af071ec",
+    "tests/test_worker.py": "ba042bc36f05ced85c41030566d65898f2ca373cf8840f5ba8133a39f080ebf4"
+  },
+  "hosts": [
+    {
+      "public_files_verified": 37,
+      "runtime_files_verified": 7,
+      "private_configuration_unchanged": true,
+      "read_only_uuid_count": 0,
+      "host": "192.168.0.150"
+    },
+    {
+      "public_files_verified": 37,
+      "runtime_files_verified": 7,
+      "private_configuration_unchanged": true,
+      "read_only_uuid_count": 0,
+      "host": "192.168.0.30"
+    }
+  ]
+}

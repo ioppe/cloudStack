@@ -1,0 +1,354 @@
+{
+  "version": "1.1.2 (uncommitted working tree, not a released artefact)",
+  "captured_utc": "2026-11-04T13:04:23Z",
+  "scope": "mocked unit suite + syntax checks only; no real ARP, no guest/libvirt/system change, no E2E execution",
+  "git": {
+    "head": "9955e74334696bcc938ebd13bfae1d204e1bdd5b",
+    "branch": "main",
+    "dirty": true,
+    "tracked_modified": [
+      "CHANGELOG.md",
+      "README.md",
+      "config/agent.example.json",
+      "controller.py",
+      "deploy/install-agent.sh",
+      "docs/AGENT.md",
+      "docs/DEPLOY.md",
+      "docs/IMPLEMENTATION.md",
+      "docs/NETWORKS.md",
+      "docs/UI.md",
+      "docs/evidence/spec-sync.md",
+      "static/app.js",
+      "static/index.html",
+      "tests/test_worker.py",
+      "vmops.py"
+    ],
+    "untracked": [
+      "docs/ACCEPTANCE-1.1.2.md",
+      "docs/evidence/ip-discovery-baseline.json",
+      "docs/evidence/ip-discovery-diagnosis.json",
+      "ipdiscovery.py",
+      "tests/e2e_ip_discovery.py",
+      "tests/e2e_ip_discovery_ui.py",
+      "tests/test_ipdiscovery.py"
+    ]
+  },
+  "source_snapshot": {
+    "root": "/Users/sky/vm-platform",
+    "staging_dir": "/Users/sky/Documents/.pi-desktop/data/scratch/import-codex-01a083f2-2ab3-7fc3-9172-db4835ca6d56/ip-src-snapshot",
+    "manifest_sha256": "da8a9a2728a02595ca677d41c12511483dcab06e93c730ea96e399791374a9b6",
+    "manifest_recipe": "LC_ALL=C find . -type f | LC_ALL=C sort | xargs shasum -a 256  (then sha256 of that text)",
+    "file_count": 86,
+    "contents": {
+      "root_py": [
+        "controller.py",
+        "ipdiscovery.py",
+        "vmops.py",
+        "worker.py"
+      ],
+      "tests": [
+        "tests/test_bridge_migration.py",
+        "tests/test_controller.py",
+        "tests/test_ipdiscovery.py",
+        "tests/test_network_config.py",
+        "tests/test_transport.py",
+        "tests/test_worker.py"
+      ],
+      "tools": [
+        "tools/api_client.py",
+        "tools/authorize-agent.py",
+        "tools/bootstrap.py",
+        "tools/guest_probe.py",
+        "tools/rotate_password.py"
+      ],
+      "deploy": [
+        "deploy/install-agent.sh",
+        "deploy/install-controller.sh",
+        "deploy/prepare-node150-bridge.py",
+        "deploy/vm-platform-agent.service",
+        "deploy/vm-platform.service",
+        "deploy/node150-home-storage.conf"
+      ],
+      "static": "static/** including static/novnc (712K)",
+      "config_examples": [
+        "config/agent.example.json",
+        "config/controller.example.json"
+      ]
+    },
+    "excluded": [
+      ".git/",
+      "ADMIN-CREDENTIALS.txt",
+      "releases/",
+      "docs/ (other than these evidence files)",
+      "__pycache__/ and *.pyc",
+      "private/state databases (none present in the tree)",
+      "tests/e2e_*.py (never copied to the hosts, never executed)"
+    ],
+    "key_file_sha256": {
+      "ipdiscovery.py": "90f10769c03d06f468ce4a3640b8c86f5c6d905f74a90a2115ae1465e863de19",
+      "vmops.py": "7079880227e8b888b119f5da11723b32047e9987bdfabc565253e532e78f53a2",
+      "controller.py": "2fb800a3e54ffddcd3eec64a149fbdf9fb54df87c9cefc00a9e4905ba41a1c80",
+      "worker.py": "a552980fd14e11819581bec376e9e0b16c2c26922315f27dd5d2c1170b4afe11",
+      "tests/test_ipdiscovery.py": "46214f47083e7d935c770cc4d5f7e3dd4f936512dc8d1d7191ab663f334491d6",
+      "tests/test_worker.py": "69031d3f5096ef21473b86a5869c03363e89527780482420f240d36fc77cdd21",
+      "tests/e2e_ip_discovery.py": "e2d06a90558910eeddc7d5d87ccc8a4cd68462b22f2c2e1e5590e23141789a51",
+      "tests/e2e_ip_discovery_ui.py": "3aa5251b1e275c545918c719586b4d2f5642a50ada4f0a35331cfca13682978c",
+      "static/app.js": "e31da5d4c66b8107201754f19cba1875b74a50934a9151521e9082e0469da8e6",
+      "deploy/install-agent.sh": "ec213ce0c0e198b4cf45016f8402a93a558bd3513261f7ff315e97b32cd1700e",
+      "config/agent.example.json": "1548add4d4619b101c13e6a55139eeb1b2074fd1a72fae0fee0167f4f697a525",
+      "config/controller.example.json": "a86dccc44d81c5bbcaa2b864d424447ba582420f04f6c28122ecc32ca69da699"
+    },
+    "drift_recheck": "cmp of all 86 files against the working tree immediately before writing evidence: 0 differences",
+    "sha_not_final_note": "These hashes describe the working tree as captured at 2026-11-04T13:04:23Z. If the main session edits the source afterwards, this SHA must not be presented as the final source hash."
+  },
+  "runs": [
+    {
+      "target": "local",
+      "host": "macOS",
+      "python": "3.13.7",
+      "binary": "/usr/local/bin/python3",
+      "run_dir": "/Users/sky/Documents/.pi-desktop/data/scratch/import-codex-01a083f2-2ab3-7fc3-9172-db4835ca6d56/ip-src-snapshot",
+      "command": "PYTHONDONTWRITEBYTECODE=1 PYTHONIOENCODING=utf-8 python3 -m unittest discover -s tests -p 'test_*.py' -v",
+      "tests_run": 142,
+      "passed": 136,
+      "failures": 6,
+      "errors": 0,
+      "skipped": 0,
+      "exit": 1,
+      "status": "fail",
+      "duration_seconds": 9.309,
+      "log": "docs/evidence/ip-discovery-unit-local.log"
+    },
+    {
+      "target": "node30",
+      "host": "192.168.0.30 (k8s-node03)",
+      "python": "3.6.8",
+      "binary": "/usr/bin/python3",
+      "run_dir": "/opt/vm-platform-ip-discovery-check-only",
+      "command": "cd /opt/vm-platform-ip-discovery-check-only && PYTHONIOENCODING=utf-8 /usr/bin/python3 -m unittest discover -s tests -p 'test_*.py' -v",
+      "tests_run": 142,
+      "passed": 135,
+      "failures": 7,
+      "errors": 0,
+      "skipped": 0,
+      "exit": 1,
+      "status": "fail",
+      "duration_seconds": 18.766,
+      "log": "docs/evidence/ip-discovery-unit-node30.log"
+    },
+    {
+      "target": "node150",
+      "host": "192.168.0.150 (sky)",
+      "python": "3.12.3",
+      "binary": "/usr/bin/python3",
+      "run_dir": "/opt/vm-platform-ip-discovery-check-only",
+      "command": "cd /opt/vm-platform-ip-discovery-check-only && PYTHONIOENCODING=utf-8 /usr/bin/python3 -m unittest discover -s tests -p 'test_*.py' -v",
+      "tests_run": 142,
+      "passed": 136,
+      "failures": 6,
+      "errors": 0,
+      "skipped": 0,
+      "exit": 1,
+      "status": "fail",
+      "duration_seconds": 12.374,
+      "log": "docs/evidence/ip-discovery-unit-node150.log"
+    }
+  ],
+  "isolation": {
+    "dir": "/opt/vm-platform-ip-discovery-check-only",
+    "precheck": "ABSENT on both hosts before creation (verified with 'if [ -e DIR ]')",
+    "copy": "COPYFILE_DISABLE=1 tar czf - -C <snapshot> . | ssh root@HOST 'tar xzf - -C DIR'",
+    "verification": "remote per-file sha256 manifest compared with the local manifest: 86/86 identical, 0 diffs on both hosts",
+    "cleanup": "rm -rf DIR after each run; post-check reported CLEANED (path absent) on both hosts",
+    "untouched": [
+      "/opt/vm-platform production tree",
+      "systemd units",
+      "network configuration",
+      "libvirt domains/images"
+    ],
+    "note": "vmops._neigh_map reads the real host /proc/net/arp (read-only); this is what makes node30 report 7 instead of 6 failures"
+  },
+  "static_checks": [
+    {
+      "check": "node --check static/app.js",
+      "tool": "node v24.18.0",
+      "exit": 0,
+      "status": "pass"
+    },
+    {
+      "check": "sh -n deploy/install-agent.sh",
+      "tool": "/bin/sh (POSIX mode)",
+      "exit": 0,
+      "status": "pass"
+    },
+    {
+      "check": "JSON parse config/agent.example.json",
+      "tool": "python3 json.load",
+      "exit": 0,
+      "status": "pass"
+    },
+    {
+      "check": "JSON parse config/controller.example.json",
+      "tool": "python3 json.load",
+      "exit": 0,
+      "status": "pass"
+    },
+    {
+      "check": "AST compile tests/e2e_ip_discovery.py",
+      "exit": 0,
+      "status": "pass"
+    },
+    {
+      "check": "AST compile tests/e2e_ip_discovery_ui.py",
+      "exit": 0,
+      "status": "pass",
+      "warning": "SyntaxWarning 'invalid escape sequence \\/' at tests/e2e_ip_discovery_ui.py:57 (embedded JS regex literal; intentional JS escaping, warning only)"
+    },
+    {
+      "check": "AST extract + compile embedded remote code in tests/e2e_ip_discovery.py",
+      "exit": 0,
+      "status": "pass",
+      "snippets": [
+        {
+          "line": 33,
+          "role": "environment() probe",
+          "sha256_12": "e601e0cdbbe8",
+          "bytes": 3189
+        },
+        {
+          "line": 66,
+          "role": "files() existence probe (repr(paths) replaced by placeholder)",
+          "sha256_12": "80d3b8c99654",
+          "bytes": 91
+        },
+        {
+          "line": 70,
+          "role": "choose_address() ARP probe frame builder",
+          "sha256_12": "ffa1ae8094b0",
+          "bytes": 1240
+        },
+        {
+          "line": 94,
+          "role": "raw_arp() BridgeScanner call (repr([mac]) replaced by ['52:54:00:00:00:00'])",
+          "sha256_12": "9d8c1ec54e80",
+          "bytes": 266
+        }
+      ],
+      "method": "ast.parse -> walk Call nodes named remote -> flatten first argument (Constant / BinOp Add), substitute a placeholder literal for dynamic sub-expressions, compile() each snippet; nothing executed",
+      "harness": "/Users/sky/Documents/.pi-desktop/data/scratch/import-codex-01a083f2-2ab3-7fc3-9172-db4835ca6d56/check_e2e_syntax.py"
+    }
+  ],
+  "failures": [
+    {
+      "test": "test_ipdiscovery.DiscoveryManagerTests.test_success_cache_expires_after_ttl",
+      "targets": [
+        "local",
+        "node30",
+        "node150"
+      ],
+      "assertion": "AssertionError: 1 != 2  — self.assertEqual(len(scanner.calls), 2)",
+      "location": "tests/test_ipdiscovery.py:426",
+      "cause": "After the success cache expires the test calls manager.request() again (line 425) but never calls self.threads.run_all(), so the DeferredThread registered by ThreadRegistry is never executed and scanner.calls stays 1. The neighbouring negative-cache test calls run_all() after every request (tests/test_ipdiscovery.py:433-440).",
+      "anchors": [
+        "ipdiscovery.py:444 request() queues + _start_worker_locked()",
+        "ipdiscovery.py:515 _start_worker_locked only registers the thread",
+        "tests/test_ipdiscovery.py:340-352 ThreadRegistry/DeferredThread require run_all()"
+      ]
+    },
+    {
+      "test": "test_worker.IpDiscoveryIntegrationTests.test_enabled_discovery_reports_discovering_without_blocking",
+      "targets": [
+        "local",
+        "node30",
+        "node150"
+      ],
+      "assertion": "AssertionError: 未预期的命令：virsh --connect qemu:///system domifaddr demo --source agent",
+      "location": "tests/test_worker.py:86 (FakeCommands.__call__ fallback); raised from vmops.py:822 via vmops.py:1133",
+      "cause": "vmops.vms() now queries QGA for every running VM, but the fixture helper only registers a domifaddr rule when the agent kwarg is truthy (tests/test_worker.py:729). These tests call vms_commands(running=True) with the default agent='', so the command is unexpected.",
+      "anchors": [
+        "vmops.py:1133 agent_ips = self._agent_ips(name) if state == \"running\" else {}",
+        "vmops.py:822 result = self.virsh(\"domifaddr\", name, \"--source\", \"agent\", timeout=8)",
+        "tests/test_worker.py:716 vms_commands(... agent=\"\")",
+        "tests/test_worker.py:729-730 if agent: commands.add(\"domifaddr demo\", ...)"
+      ]
+    },
+    {
+      "test": "test_worker.IpDiscoveryIntegrationTests.test_enabled_discovery_resolves_from_arp_when_scan_completes",
+      "targets": [
+        "local",
+        "node30",
+        "node150"
+      ],
+      "assertion": "AssertionError: 未预期的命令：virsh --connect qemu:///system domifaddr demo --source agent",
+      "location": "tests/test_worker.py:86 (FakeCommands.__call__); vmops.py:822 / vmops.py:1133",
+      "cause": "Same fixture gap as above (tests/test_worker.py:729 conditional domifaddr stub).",
+      "anchors": [
+        "tests/test_worker.py:784 test definition",
+        "tests/test_worker.py:786 vms_commands(running=True)"
+      ]
+    },
+    {
+      "test": "test_worker.IpDiscoveryIntegrationTests.test_scan_is_only_requested_for_running_bridge_without_passive_ip",
+      "targets": [
+        "local",
+        "node30",
+        "node150"
+      ],
+      "assertion": "AssertionError: 未预期的命令：virsh --connect qemu:///system domifaddr demo --source agent",
+      "location": "tests/test_worker.py:86 (FakeCommands.__call__); vmops.py:822 / vmops.py:1133",
+      "cause": "Same fixture gap (tests/test_worker.py:729).",
+      "anchors": [
+        "tests/test_worker.py:797 test definition",
+        "tests/test_worker.py:798 vms_commands(running=True, interfaces=DOMIFLIST_NAT)"
+      ]
+    },
+    {
+      "test": "test_worker.IpDiscoveryIntegrationTests.test_passive_dhcp_address_skips_active_scan",
+      "targets": [
+        "local",
+        "node30",
+        "node150"
+      ],
+      "assertion": "AssertionError: 未预期的命令：virsh --connect qemu:///system domifaddr demo --source agent",
+      "location": "tests/test_worker.py:86 (FakeCommands.__call__); vmops.py:822 / vmops.py:1133",
+      "cause": "Same fixture gap (tests/test_worker.py:729).",
+      "anchors": [
+        "tests/test_worker.py:807 test definition"
+      ]
+    },
+    {
+      "test": "test_worker.IpDiscoveryIntegrationTests.test_running_vm_without_any_source_is_unavailable_when_disabled",
+      "targets": [
+        "local",
+        "node30",
+        "node150"
+      ],
+      "assertion": "AssertionError: 未预期的命令：virsh --connect qemu:///system domifaddr demo --source agent",
+      "location": "tests/test_worker.py:86 (FakeCommands.__call__); vmops.py:822 / vmops.py:1133",
+      "cause": "Same fixture gap (tests/test_worker.py:729).",
+      "anchors": [
+        "tests/test_worker.py:752 test definition",
+        "tests/test_worker.py:753 vms_commands(running=True)"
+      ]
+    },
+    {
+      "test": "test_worker.IpDiscoveryIntegrationTests.test_shut_off_vm_reports_not_running_without_guest_agent",
+      "targets": [
+        "node30"
+      ],
+      "assertion": "AssertionError: 'neighbor' != ''  — self.assertEqual(vm[\"interfaces\"][0][\"ip_source\"], \"\")",
+      "location": "tests/test_worker.py:749",
+      "cause": "Host-state leak, not a Python 3.6 incompatibility: vmops._neigh_map reads the real /proc/net/arp in addition to the stubbed 'ip neigh show'. On 192.168.0.30 that file contains the fixture MAC 52:54:00:3a:56:b5 (192.168.0.28 and 192.168.0.211), so _passive_ips returns source 'neighbor' even for the shut-off fixture. The same MAC is absent from /proc/net/arp on 192.168.0.150 and on the local machine, where the test passes.",
+      "anchors": [
+        "vmops.py:860-895 _neigh_map() reads /proc/net/arp unconditionally",
+        "vmops.py:879 arp_path = \"/proc/net/arp\"",
+        "vmops.py:1016-1021 _passive_ips agent > dhcp > neighbor",
+        "tests/test_worker.py:742 test definition"
+      ]
+    }
+  ],
+  "known_outstanding": [
+    "Multi-IP / cache-detail work is still pending by design; this round only captures the current state and must not be treated as a fix round.",
+    "The 5 test_worker failures share one fixture gap (no domifaddr stub for running VMs) and the 1 test_ipdiscovery failure is a missing run_all(); the node30 7th failure is host ARP state."
+  ]
+}

@@ -9,7 +9,7 @@
 | SSH forced command | `worker.py --ssh` | 受控端只允许 `rpc` 与 `vnc <UUID>` |
 | RPC 客户端 | `worker.py --rpc` | 一行 JSON 进出，转发到本机 Unix socket；服务离线即报错 |
 
-实现文件：`worker.py`（传输/协议）、`vmops.py`（本机操作与安全边界）。仅使用 Python 标准库，
+实现文件：`worker.py`（传输/协议）、`vmops.py`（本机操作与安全边界）、`ipdiscovery.py`（受限后台地址探测）。仅使用 Python 标准库，
 同时兼容 Python 3.6.8（.30，EL7）与 Python 3.12（.150，Ubuntu 24.04）。
 
 ## 1. 运行模式
@@ -48,6 +48,7 @@ worker.py --vnc <UUID> [--config PATH]              # 原始字节双向转发
 | `default_network` | `default` | libvirt 网络默认值 |
 | `default_network_type` | `network` | `network` 或 `bridge` |
 | `static_network_defaults` | `{}` | 按网桥配置 `{cidr,gateway,dns:[IPv4]}`，用于静态联网缺项补齐；CIDR 须为规范网络地址且前缀 1–30，网关须在网段内且非网络／广播，DNS 非空；无效配置或非实际网桥不套用 |
+| `bridge_ip_discovery` | `false` | 显式启用运行中桥接 VM 的受限后台 ARP 地址发现；仅本机真实网桥有 `/24`–`/30` IPv4 时生效，不修改 guest 或宿主机网络 |
 | `default_timezone` | `Asia/Shanghai` | cloud-init 时区 |
 | `socket_path` | `/run/vm-platform/agent.sock` | `--serve` 监听路径 |
 | `virsh` / `virt_install` / `qemu_img` / `genisoimage` | 同名命令 | 可执行文件路径覆盖；`genisoimage` 为空时自动找 genisoimage/mkisofs |
@@ -92,12 +93,11 @@ worker.py --vnc <UUID> [--config PATH]              # 原始字节双向转发
 
 每个元素：`uuid, name, state, managed_save, id, cpu, max_memory, used_memory, interfaces[], ip_addresses[], disks[], metrics{cpu{percent,text},memory{…},storage{…}}, config{vcpus,memory_gb,primary_disk_target,primary_disk_path,primary_disk_gb,primary_disk_human}, display, has_console`。
 
-- `state`：`running / paused / shut off / saved / in shutdown / pmsuspended / crashed` 等 libvirt 原值（小写），
-  有 managed save 的关机域归为 `saved`。
-- `interfaces[]`：`{interface,type,source,model,mac,ips[]}`。
-- 地址来源优先级：qemu-guest-agent → `virsh net-dhcp-leases`（NAT）→ 主机 ARP/neigh。
-- `metrics.cpu.percent` 依赖常驻 agent 的两次采样，第二次查询起可返回利用率。
-  本地 RPC 与远程 SSH 最终使用同一个私有 socket，因此采样能跨请求保留。
+- `state`：`running / paused / shut off / saved / in shutdown / pmsuspended / crashed` 等 libvirt 原值（小写），有 managed save 的关机域归为 `saved`。
+- `interfaces[]`：`{interface,type,source,model,mac,ips[],ip_source}`；来源为 `agent`、`dhcp`、`neighbor`、`arp` 或空。
+- 地址优先读取 qemu-guest-agent → `virsh net-dhcp-leases`（NAT）→ 主机 ARP/neigh；显式启用后可对缺少地址的运行中桥接 VM 异步探测局域网 ARP。仅真实响应可作为地址，不把创建配置中的 IP 当作实测值。
+- `ip_status`：`resolved`／`discovering`／`unavailable`／`not_running`；`ip_status_reason` 为简短原因。未探测到不等于 guest 没有网络，详见 NETWORKS.md。
+- `metrics.cpu.percent` 依赖常驻 agent 的两次采样，第二次查询起可返回利用率。本地 RPC 与远程 SSH 最终使用同一个私有 socket，因此采样和 ARP 缓存能跨请求保留。
 
 ### 3.3 `images` → `data`
 
@@ -197,7 +197,7 @@ worker.py --vnc <UUID> [--config PATH]              # 原始字节双向转发
 
 ```bash
 install -d -m 0755 /opt/vm-platform /etc/vm-platform
-install -m 0644 worker.py vmops.py /opt/vm-platform/
+install -m 0644 worker.py vmops.py ipdiscovery.py /opt/vm-platform/
 install -m 0755 -d /opt/vm-platform/docs
 install -m 0644 docs/AGENT.md docs/IMPLEMENTATION.md /opt/vm-platform/docs/
 install -m 0600 config/agent.example.json /etc/vm-platform/agent.json   # 首次安装；不要覆盖已有私有配置
@@ -215,13 +215,13 @@ ss -xlp | grep vm-platform          # 只有 /run/vm-platform/agent.sock，无 T
 
 ### .30（CentOS 7 / Python 3.6.8）
 
-同法安装 `worker.py`/`vmops.py`/service。仅查询时可使用以下保守配置：
+同法安装 `worker.py`／`vmops.py`／`ipdiscovery.py`／service。仅查询时可使用以下保守配置：
 
 ```json
 {"allow_writes": false, "image_dirs": ["/var/lib/libvirt/images"], "disk_dirs": ["/home/vm-disks"], "default_network_type": "bridge", "default_bridge": "br0"}
 ```
 
-当前实际部署为 `allow_writes:true`、磁盘目录 `/home/vm-disks`，并已把 `docs/evidence/old-domains-baseline.json` 的全部 14 个原 VM UUID 写入 `read_only_uuids`；这些 VM 一律拒绝写操作。新 VM 的管理能力独立保留。
+当前实际部署为 `allow_writes:true`、磁盘目录 `/home/vm-disks`。首版曾保护全部 14 个原 VM UUID，后续用户明确授权全部解除，当前 `read_only_uuids:[]`；管理能力仍受路径、资源和删除预检约束，更新不得恢复旧名单。
 未来接入主机应先只读核对，再按需要明确开启写入并配置保护 UUID；不要根据名称判断保护身份。
 
 ### 远程 SSH 通道（转发到节点本机 Unix socket）
@@ -265,7 +265,7 @@ printf '%s\n' '{"operation":"vnc_target","payload":{"uuid":"<UUID>"}}' | python3
 SSH_ORIGINAL_COMMAND='bash -lc id' python3 worker.py --ssh; echo "exit=$?"   # 期望 2
 ```
 
-单元测试在包含 `controller.py`、`worker.py`、`vmops.py`、`tests/` 与 `tools/` 的完整源码目录执行（不接触真实 libvirt）；仅按上方精简执行端清单安装时不包含测试：
+单元测试在包含 `controller.py`、`worker.py`、`vmops.py`、`ipdiscovery.py`、`tests/` 与 `tools/` 的完整源码目录执行（不接触真实 libvirt）；仅按上方精简执行端清单安装时不包含测试：
 
 ```bash
 cd /path/to/full-vm-platform-source && python3 -m unittest discover -s tests -v

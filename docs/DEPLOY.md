@@ -18,7 +18,7 @@
    ```
 
    生成器拒绝覆盖已有文件。密码哈希只在首次初始化时进入 SQLite；服务重启不会重置密码、主机登记或登录会话。凭据文件仅管理员可读。
-3. 按 `config/agent.example.json` 准备本机 `/etc/vm-platform/agent.json`：URI `qemu:///system`，镜像 `/var/lib/libvirt/images`，VM 目录 `/home/vm-disks`，默认桥接 `br0`。保守安装可设 `allow_writes:false`；当前部署为 `allow_writes:true`，并将 `docs/evidence/old-domains-baseline.json` 中全部 14 个原 VM UUID 写入 `read_only_uuids`，禁止改写这些既有 VM。数据库与旧面板分离。
+3. 按 `config/agent.example.json` 准备本机 `/etc/vm-platform/agent.json`：URI `qemu:///system`，镜像 `/var/lib/libvirt/images`，VM 目录 `/home/vm-disks`，默认桥接 `br0`。保守安装可设 `allow_writes:false`。首版曾将原 14 台 VM UUID 放入 `read_only_uuids`；用户随后明确授权全部解除，当前为 `allow_writes:true`、`read_only_uuids:[]`。更新不得恢复旧保护名单。数据库与旧面板分离。
 4. 在控制端生成专用 SSH key：
 
    ```sh
@@ -35,17 +35,20 @@
 1. 在目标机安装 `qemu-system-x86 qemu-utils libvirt-daemon-system libvirt-clients virtinst genisoimage`，启用 libvirtd。当前 `.150` 软件源没有 qemu-kvm 包候选，使用 qemu-system-x86。
 2. 核对 `/dev/kvm` 与 `virsh -c qemu:///system list --all`。准备 `/var/lib/libvirt/images/templates`、`/var/lib/libvirt/images/vms`；node150另有独立 `/home` 大盘，新增专用 `/home/vm-disks`。先确认 `/home` 持久挂载，再 `install -d -m 0755 /home/vm-disks`，QEMU用户需有目录遍历权限；不要将整个 `/home` 加入白名单或放宽无关用户目录权限。
 3. 首次接入先启用本机 libvirt `default` NAT 并 `virsh net-autostart default`，检查地址段无冲突。v1.1 的 node150 已按用户后续请求增加 br0（eno2np1为端口），管理IP／网关／DNS原值迁到br0；保留NAT，详细步骤与独立网络回退见 NETWORKS.md。不要对其他节点原样套用本节点专用迁移脚本。
-4. 复制 `worker.py`、`vmops.py`、`deploy/` 到 `/opt/vm-platform`；根据示例设置 `/etc/vm-platform/agent.json`，URI `qemu:///system`，`image_dirs:["/var/lib/libvirt/images/templates"]`、`disk_dirs:["/var/lib/libvirt/images/vms","/home/vm-disks"]`。创建表单分别显示每个目录的真实剩余容量，node150的 `/home` 当前约6.9 TiB可用；原目录仍为默认，按需选择大盘。网络为 `default`、类型 `network`；明确设 `allow_writes:true` 才能创建和管理新VM，示例默认false。
+4. 复制 `worker.py`、`vmops.py`、`ipdiscovery.py`、`deploy/` 到 `/opt/vm-platform`；根据示例设置 `/etc/vm-platform/agent.json`，URI `qemu:///system`，`image_dirs:["/var/lib/libvirt/images/templates"]`、`disk_dirs:["/var/lib/libvirt/images/vms","/home/vm-disks"]`。创建表单分别显示每个目录的真实剩余容量，node150的 `/home` 当前约6.9 TiB可用；原目录仍为默认，按需选择大盘。网络为 `default`、类型 `network`；明确设 `allow_writes:true` 才能创建和管理新VM，示例默认false。
 5. 执行端 `sh deploy/install-agent.sh`。从已信任管理通道安装受限公钥、核对主机 key；控制端的私钥始终留在控制端。
 6. 平台“主机 → 登记主机”填写唯一标识、名称、地址、root/已授权用户和 SSH 端口；检测通过后管理资源。此步骤只是登记，软件和网络初始化仍按上述步骤完成。
 
 node150 当前私有 agent 配置继续使用 `default_network_type:"network"`、`default_network:"default"`，同时设 `default_bridge:"br0"`。新建VM可在界面切换NAT或桥接，静态地址仅注入桥接guest，不修改宿主机。
 
-v1.1.1 仅在 node150 的私有配置添加 `static_network_defaults:{"br0":{"cidr":"192.168.0.0/24","gateway":"192.168.0.1","dns":["192.168.0.1","8.8.8.8"]}}`。配置应合并到已有 JSON，保留存储、保护 UUID 与其他私有字段；不要用示例覆盖已有配置。其他主机默认 `{}`，按实际网络规划填写，不复制 node30 的 Tailscale DNS。静态联网缺项会在写盘前拒绝，显式仅同网段模式见 NETWORKS.md；不更新已有 guest 的 Netplan。
+v1.1.1 仅在 node150 的私有配置添加 `static_network_defaults:{"br0":{"cidr":"192.168.0.0/24","gateway":"192.168.0.1","dns":["192.168.0.1","8.8.8.8"]}}`。配置应合并到已有 JSON，保留存储、静态联网 profile 与其他私有字段；不要用示例覆盖已有配置。其他主机默认 `{}`，按实际网络规划填写，不复制 node30 的 Tailscale DNS。静态联网缺项会在写盘前拒绝，显式仅同网段模式见 NETWORKS.md；不更新已有 guest 的 Netplan。
 
 更新代码前确认没有运行中的平台任务；备份新平台代码及待更新的 agent 配置，更新 `/opt/vm-platform` 后只重启 `vm-platform-agent.service` 和控制端 `vm-platform.service`。保留私有配置、SQLite、原面板、libvirt、网桥与所有已有 VM；不要重复运行网络迁移脚本。
 
 node150 使用独立 `/home` 存储时，安装挂载依赖：`install -d /etc/systemd/system/vm-platform-agent.service.d`，将 `deploy/node150-home-storage.conf` 安装为该目录的 `home-storage.conf`，再执行 `systemctl daemon-reload` 和 `systemctl restart vm-platform-agent.service`。此配置让 agent 依赖 `home.mount`，防止大盘未挂载时写入系统盘。已有镜像和磁盘不迁移；移除存储选项前确认无VM使用该目录，不删除目录中的业务磁盘。
+
+v1.1.2 执行端新增 `ipdiscovery.py` 模块，精简安装也须与 `worker.py`、`vmops.py` 一同复制。`bridge_ip_discovery` 默认 false；两台已确认的节点显式启用 true，保留其余私有配置（尤其空 `read_only_uuids`、静态联网 profile、存储目录）。开启后仅对运行中桥接 VM 缺少地址的网卡，在宿主机真实本地网桥 `/24` 至 `/30` 网段做受限后台 ARP 查询；不是 guest 网络配置步骤。大网段或无本地地址不扫描，详见 NETWORKS.md。
+
 
 ## 运行与操作
 

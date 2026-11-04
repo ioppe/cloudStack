@@ -1,0 +1,33 @@
+{
+  "192.168.0.150": {
+    "bridge": "br0",
+    "host_subnet": "192.168.0.0/24",
+    "arp_requests": 253,
+    "duration_seconds": 3.03,
+    "target_mac_addresses": [
+      "52:54:00:9c:98:ea"
+    ],
+    "observed": {
+      "52:54:00:9c:98:ea": [
+        "192.168.0.160"
+      ]
+    },
+    "port_scan": false
+  },
+  "192.168.0.30": {
+    "bridge": "br0",
+    "host_subnet": "192.168.0.0/24",
+    "arp_requests": 253,
+    "duration_seconds": 3.03,
+    "target_mac_addresses": [
+      "52:54:00:3a:56:b5"
+    ],
+    "observed": {
+      "52:54:00:3a:56:b5": [
+        "192.168.0.28",
+        "192.168.0.211"
+      ]
+    },
+    "port_scan": false
+  }
+}

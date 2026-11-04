@@ -1,0 +1,14 @@
+PASS capture current VM configuration and host environment with permissions preserved
+PASS existing bridged VM address resolves on 192.168.0.150
+PASS existing bridged VM address resolves on 192.168.0.30
+Traceback (most recent call last):
+  File "/Users/sky/vm-platform/tests/e2e_ip_discovery.py", line 179, in <module>
+    main()
+    ~~~~^^
+  File "/Users/sky/vm-platform/tests/e2e_ip_discovery.py", line 139, in main
+    record('real ARP fallback resolves the existing node150 VM without neighbor-cache dependence', raw_arp(HOST, '52:54:00:9c:98:ea', ['192.168.0.160']))
+                                                                                                   ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/sky/vm-platform/tests/e2e_ip_discovery.py", line 95, in raw_arp
+    assert result.get('status') == 'ok', result
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: {'status': 'unavailable', 'reason': '网桥没有本机 IPv4 地址', 'addresses': {}, 'elapsed_seconds': 0.0}

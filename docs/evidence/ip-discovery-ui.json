@@ -1,0 +1,14 @@
+{
+  "passed": true,
+  "fixture_mode": "Explicit demo fixtures only; no production login or management writes",
+  "checks": [
+    "running VM with active discovery shows a bounded discovery status",
+    "completed discovery appears through automatic polling without manual refresh",
+    "no response becomes not discovered instead of an endless acquiring label",
+    "stopped VM hides previously observed addresses instead of showing stale IPs",
+    "a late address response from the previous host cannot overwrite the selected host",
+    "leaving the VM list stops automatic VM polling",
+    "hidden pages pause polling and visible pages resume it",
+    "logout cancels automatic VM polling"
+  ]
+}

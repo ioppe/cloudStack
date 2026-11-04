@@ -350,6 +350,9 @@ async function logout() {
 
 function resetHostState() {
   gen.hosts++; gen.vms++; gen.status++; gen.images++;
+  cancelVmsPoll();
+  vmsInflight = null;
+  vmsRefreshQueued = false;
   state.hosts = [];
   state.hostsError = null;
   state.hostId = null;
@@ -764,6 +767,27 @@ function viewIps(vm) {
   return out;
 }
 
+// guest-agent 未连接时，执行端会从宿主机网桥本机网段做 ARP 探测；两者都没有就只能控制台确认。
+const IP_TITLE_HINT = 'guest-agent 未连接时由执行端从局域网 ARP 探测，仍未知可在控制台确认。';
+
+function ipCell(vm, flags, ips) {
+  const testid = 'vm-ip-' + (vm && vm.uuid);
+  const status = (vm && vm.ip_status) || '';
+  const reason = (vm && vm.ip_status_reason) || '';
+  if (status === 'not_running' || !flags.running) {
+    return h('span', { class: 'muted', title: '虚拟机未运行', 'data-testid': testid }, '—');
+  }
+  if (ips.length) {
+    const text = ips.slice(0, 2).join(', ') + (ips.length > 2 ? ' +' + (ips.length - 2) : '');
+    return h('span', { class: 'num', title: ips.join(', '), 'data-testid': testid }, text);
+  }
+  if (status === 'discovering') {
+    return h('span', { class: 'muted', title: (reason || '正在从局域网 ARP 探测地址') + '。' + IP_TITLE_HINT, 'data-testid': testid }, '探测中…');
+  }
+  // unavailable，或旧数据没有 ip_status：明确“未探测到”，不再一直显示获取中。
+  return h('span', { class: 'muted', title: (reason ? reason + '。' : '未探测到地址。') + IP_TITLE_HINT, 'data-testid': testid }, '未探测到');
+}
+
 function buildVmsView() {
   const frag = document.createDocumentFragment();
   const hostId = state.hostId;
@@ -903,11 +927,7 @@ function buildVmsView() {
             h('span', { class: 'mono' }, '磁盘 ' + (diskGb === null || diskGb === undefined ? '—' : diskGb + ' GiB'))
           )
         ),
-        h('td', null,
-          ips.length
-            ? h('span', { class: 'num', title: ips.join(', ') }, ips.slice(0, 2).join(', ') + (ips.length > 2 ? ' +' + (ips.length - 2) : ''))
-            : h('span', { class: 'muted' }, f.running ? '获取中…' : '—')
-        ),
+        h('td', null, ipCell(vm, f, ips)),
         h('td', null,
           h('div', { class: 'cell-actions' },
             actionBtn('start', '启动', { disabled: !f.canStart, title: f.canStart ? '启动虚拟机' : '当前状态不可启动' }),
@@ -1195,7 +1215,10 @@ function selectHost(hostId, opts) {
   if (!hostId) return;
   if (hostId === state.hostId && !(opts && opts.force)) return;
 
-  // 切主机：丢弃所有旧状态与在途响应
+  // 切主机：丢弃所有旧状态与在途响应，并停掉旧主机的轮询
+  cancelVmsPoll();
+  vmsInflight = null;
+  vmsRefreshQueued = false;
   state.hostId = hostId;
   gen.vms++;
   gen.status++;
@@ -1220,24 +1243,70 @@ function selectHost(hostId, opts) {
   if (state.view === 'images') loadImages(hostId);
 }
 
-async function loadVms(hostId) {
+/* VM 列表轻量轮询：只在“虚拟机页 + 已登录 + 主机已选 + 页面可见”时每 5 秒静默刷新。 */
+const VMS_POLL_MS = 5000;
+let vmsPollTimer = null;
+let vmsInflight = null;      // {hostId, gen}：每主机最多一个在途请求
+let vmsRefreshQueued = false;
+
+function vmsPollAllowed() {
+  return !!(state.user && state.view === 'vms' && state.hostId && !document.hidden);
+}
+
+function cancelVmsPoll() {
+  if (vmsPollTimer) {
+    window.clearTimeout(vmsPollTimer);
+    vmsPollTimer = null;
+  }
+}
+
+function scheduleVmsPoll(delay) {
+  if (!vmsPollAllowed()) { cancelVmsPoll(); return; }
+  if (vmsPollTimer) return;   // 只保留一个定时器，完成后才排下一次
+  const wait = typeof delay === 'number' ? delay : VMS_POLL_MS;
+  vmsPollTimer = window.setTimeout(function () {
+    vmsPollTimer = null;
+    if (!vmsPollAllowed()) return;
+    loadVms(state.hostId, { quiet: true, poll: true });
+  }, wait);
+}
+
+async function loadVms(hostId, opts) {
+  const options = opts || {};
+  if (!hostId || hostId !== state.hostId) return;
+  if (vmsInflight && vmsInflight.hostId === hostId) {
+    // 轮询遇到在途请求直接跳过；手动刷新排队一次，绝不把在途响应作废。
+    if (!options.poll) vmsRefreshQueued = true;
+    return;
+  }
   const g = ++gen.vms;
-  state.vmsLoading = true;
-  state.vmsError = null;
-  render();
+  vmsInflight = { hostId: hostId, gen: g };
+  if (!options.quiet) {
+    state.vmsLoading = true;
+    state.vmsError = null;
+    render();
+  }
   try {
     const data = await api('GET', '/api/hosts/' + enc(hostId) + '/vms');
     if (g !== gen.vms || hostId !== state.hostId) return;   // 迟到响应丢弃
     state.vms = Array.isArray(data.vms) ? data.vms : [];
+    state.vmsError = null;
   } catch (e) {
     if (g !== gen.vms || hostId !== state.hostId) return;
-    state.vms = [];
+    if (e.status === 401) cancelVmsPoll();
+    // 静默刷新失败：保留已有列表只显示错误，不覆盖其它主机的数据
     state.vmsError = e.status === 401 ? '登录已过期' : e.message;
+    if (!options.quiet) state.vms = [];
   } finally {
+    if (vmsInflight && vmsInflight.gen === g) vmsInflight = null;
     if (g === gen.vms && hostId === state.hostId) {
       state.vmsLoading = false;
       render();
     }
+    const again = vmsRefreshQueued;
+    vmsRefreshQueued = false;
+    if (again) loadVms(hostId);
+    scheduleVmsPoll();
   }
 }
 
@@ -2630,9 +2699,11 @@ function setView(view) {
   state.view = view;
   state.highlight = null;
   lastViewKey = '';
+  if (view !== 'vms') cancelVmsPoll();
   render();
   if (view === 'images' && state.hostId) loadImages(state.hostId);
   if (view === 'tasks') scheduleTaskPoll(0);
+  if (view === 'vms') scheduleVmsPoll(0);
 }
 
 /* --------------------------------------------------------------- 绑定 */
@@ -2717,12 +2788,13 @@ async function boot() {
     }
   } catch (e) { /* 版本号非关键路径 */ }
 
-  // 页面重新可见时补一次刷新，避免后台长时间停留后数据过期
+  // 页面重新可见时补一次静默刷新并重新排 VM 轮询；隐藏时停掉 timer。
   document.addEventListener('visibilitychange', () => {
-    if (!document.hidden && state.user) {
-      if (state.hostId) loadVms(state.hostId);
-      scheduleTaskPoll(0);
-    }
+    if (document.hidden) { cancelVmsPoll(); return; }
+    if (!state.user) return;
+    if (state.hostId) loadVms(state.hostId, { quiet: true });
+    scheduleTaskPoll(0);
+    scheduleVmsPoll();
   });
 }
 
@@ -2862,7 +2934,7 @@ async function demoApi(method, path, body) {
   if (url === '/api/login') return { username: 'demo', csrf_token: 'demo-csrf-token' };
   if (url === '/api/logout') return { ok: true };
   if (url === '/api/password' && method === 'POST') return { ok: true };
-  if (url === '/health') return { ok: true, version: '1.1.1' };
+  if (url === '/health') return { ok: true, version: '1.1.2' };
   if (url === '/api/hosts' && method === 'GET') return { hosts: demoHosts };
   if (url === '/api/tasks') return { tasks: demoTaskList };
 

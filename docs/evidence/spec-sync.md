@@ -39,3 +39,13 @@ HOST-150与ACCEPTANCE的首版记录已添加历史标记；v1.1迁移前快照�
 - 版本统一为 1.1.1，最终三运行时 97 项单元的证据指向 `static-internet-unit-summary.json`；实机部署、外网 HTTPS、表单与旧环境保护的最终状态见 `docs/ACCEPTANCE-1.1.1.md` 及其证据索引。
 
 本轮修正了配置表遗漏与 demo 夹具说明；历史 1.0／1.1 验收和节点快照保留。
+
+## 1.1.2增量核对
+
+本轮新增 `ipdiscovery.py`、可选配置 `bridge_ip_discovery` 和兼容的地址来源／状态字段，沿用现有接口与 Unix socket 通道，不新增管理监听。AGENT、IMPLEMENTATION、NETWORKS、UI、DEPLOY、README 与 CHANGELOG 已登记 v1.1.2；精简 agent 安装必须包含新模块。
+
+地址发现仅使用宿主机实际网桥的 /24–/30 本地 IPv4，单轮至多 253 个 ARP 请求且不超过 3 秒、每桥最短 30 秒、正缓存 120 秒、阴性缓存 30 秒，按当前运行 VM 的 bridge+MAC 隔离；不读取 seed 或改 guest 网络。列表自动刷新并区分探测中／未探测到，切换主机和退出登录仍隔离旧响应。
+
+此前按用户后续授权清空 `.30` 的14台只读名单，当前两主机保护项均为0；本轮保留这个状态，旧版本验收中的保护名单仅描述当时快照，不再作为当前部署要求。真实回归以本轮 `ip-discovery-baseline.json` 为基线，不使用 node150 为空的旧脚本。
+
+真实与独立 UI 回归脚本分别为 `tests/e2e_ip_discovery.py` 和 `tests/e2e_ip_discovery_ui.py`。最终三运行时单元各157/157、真实生命周期11/11、显式 demo UI 8/8均通过，两端部署与 `/health` 为1.1.2，原15台 VM 状态／XML及空保护名单保持一致；实际结果及证据索引已填入 `docs/ACCEPTANCE-1.1.2.md`。单元快照与最终实机脚本的断言适配差异、历史失败和部署末尾空行规范化均单独记录，不把 demo UI 或 IP 可见性视为生产登录／联网证明。
